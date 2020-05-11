@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Export on Phrozen</title>
+    <link>https://www.phrozen.io/tags/export/</link>
+    <description>Recent content in Export on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 18 Mar 2020 10:50:50 +0100</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/tags/export/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>GetProcAddress API Alternative</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/getprocaddress-alternative/</link>
+      <pubDate>Sat, 14 Mar 2020 10:48:41 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/getprocaddress-alternative/</guid>
+      <description>In the past two days, I released examples about how to enumerate DLL export table through the PE Header.
+We will see one concreate example of using the UntEnumDLLExport.pas library to dynamically load API without using the famous Windows API &amp;gt; GetProcAddress()
+This technique is quite known and often used by some Malware, to mask which API&amp;rsquo;s they are dynamically loading and avoid Antivirus detection.
+To do so, we still need to use LoadLibrary() first to load a DLL in memory and retrieve it address, then iterate through loaded DLL export table and catch target function address.</description>
+    </item>
+    
+    <item>
+      <title>Enum DLL Exported Functions</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/enum-dll-exported-functions/</link>
+      <pubDate>Thu, 12 Mar 2020 15:51:22 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/enum-dll-exported-functions/</guid>
+      <description>This unit demonstrate how to enumerate DLL exported functions through PE Header manipulation.
+Features  Support both 32 and 64bit DLL&amp;rsquo;s. Identify exported function names. Identify exported function ordinal value. Support and resolve forwarded function. Identify export function address and relative address.  Unit Code (******************************************************************************* Author: -&amp;gt; Jean-Pierre LESUEUR (@DarkCoderSc) https://github.com/DarkCoderSc https://gist.github.com/DarkCoderSc https://www.phrozen.io/ License: -&amp;gt; MIT *******************************************************************************) unit UntEnumDLLExport; interface uses Classes, Windows, Generics.Collections, SysUtils; type TExportEntry = class private FName : String; FForwarded : Boolean; FForwardName : String; FRelativeAddr : Cardinal; FAddress : Int64; FOrdinal : Word; {@M} function GetFormatedAddress() : String; function GetFormatedRelativeAddr() : String; public {@C} constructor Create(); {@G/S} property Name : String read FName write FName; property Forwarded : Boolean read FForwarded write FForwarded; property ForwardName : String read FForwardName write FForwardName; property Address : Int64 read FAddress write FAddress; property RelativeAddr : Cardinal read FRelativeAddr write FRelativeAddr; property Ordinal : Word read FOrdinal write FOrdinal; {@G} property FormatedAddress : String read GetFormatedAddress; property FormatedRelativeAddress : String read GetFormatedRelativeAddr; end; TEnumDLLExport = class private FItems : TObjectList&amp;lt;TExportEntry&amp;gt;; FFileName : String; {@M} public {@C} constructor Create(AFileName : String); destructor Destroy(); override; {@M} function Enum() : Integer; {@G} property Items : TObjectList&amp;lt;TExportEntry&amp;gt; read FItems; property FileName : String read FFileName; end; implementation {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Local Functions +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++} function IntToHexF(AValue : Int64; APad : Word = 0 {0=Auto}) : String; begin if (APad = 0) then begin if (AValue &amp;lt;= High(Word)) then APad := 2 else if (AValue &amp;lt;= High(DWORD)) and (AValue &amp;gt; High(Word)) then APad := 8 else if (AValue &amp;lt;= High(Int64)) and (AValue &amp;gt; High(DWORD)) then APad := 16; end; result := &#39;0x&#39; + IntToHex(AValue, APad); end; {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ TExportEntry +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++} constructor TExportEntry.</description>
+    </item>
+    
+  </channel>
+</rss>

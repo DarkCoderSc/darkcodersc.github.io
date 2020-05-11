@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Above snippet demonstrate how to enumerate files openned by running programs on Windows.
+Some file unlocker use that technique to find where a specific file is attached and then force processes using that file to release it handle (via code injection techniques). I will write an example in a future snippet thread.
+Notice: At the bottom of that page, you will see a concreate example about how to use that unit."><meta property="og:title" content="Enum Attached Files" />
+<meta property="og:description" content="Above snippet demonstrate how to enumerate files openned by running programs on Windows.
+Some file unlocker use that technique to find where a specific file is attached and then force processes using that file to release it handle (via code injection techniques). I will write an example in a future snippet thread.
+Notice: At the bottom of that page, you will see a concreate example about how to use that unit." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/windows/snippets/delphi/enum-attached-files/" />
+<meta property="article:published_time" content="2020-03-24T14:29:21+01:00" />
+<meta property="article:modified_time" content="2020-03-24T14:29:21+01:00" />
+<title>Enum Attached Files | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.118b26275fec7a27ee379aa176d7c2698670b88b26aa4588f90b91db89d5bbc0.js" integrity="sha256-EYsmJ1/seifuN5qhdtfCaYZwuIsmqkWI&#43;QuR24nVu8A="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Microsoft Windows</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/projects/" class="collapsed ">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/" class="collapsed ">Snippets</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/" class="collapsed ">Delphi</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-registry-key-security-descriptor/" class="">Get Registry Key DACL Security Descriptor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-4-getprocessimagefilename/" class="">Get Process Name Method 4 GetProcessImageFileName</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-3-ntqueryinformationprocess/" class="">Get Process Name Method 3 NtQueryInformationProcess</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-2-getmappedfilename/" class="">Get Process Name Method 2 GetMappedFilename</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-attached-files/" class="active">Enum Attached Files</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-dll-exported-function-address-from-mem/" class="">Get DLL Exported Function Address From Memory</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-dll-exported-function-address/" class="">Get DLL Exported Function Address</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/getprocaddress-alternative/" class="">GetProcAddress API Alternative</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-dll-exported-functions/" class="">Enum DLL Exported Functions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-1/" class="">Get Process Name Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-modules-method-1/" class="">Enum Modules Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/terminate-process-techniques/" class="">Terminate Process Techniques</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/update-peb-debug/" class="">Update PEB Debug Flag</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-process-method-1/" class="">Enum Process Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/is-process-64/" class="">Is Process 64bit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/eof/" class="">Manipulation and Detection of EOF</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/python/" class="collapsed ">Python</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Linux</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/" class="collapsed ">SLAE32</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Enum Attached Files</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><p>Above snippet demonstrate how to enumerate files openned by running programs on Windows.</p>
+<p>Some file unlocker use that technique to find where a specific file is attached and then force processes using that file to release it handle (via code injection techniques). I will write an example in a future snippet thread.</p>
+<blockquote class="book-hint info">
+  Notice: At the bottom of that page, you will see a concreate example about how to use that unit.
+</blockquote>
+
+<h2 id="features">Features</h2>
+<ul>
+<li>Support both 32 and 64bit process.</li>
+<li>Doesn&rsquo;t require any additional libraries than native Delphi libraries.</li>
+<li>Support scanning : All process ; Single process; List of process.</li>
+</ul>
+<h2 id="code">Code</h2>
+<pre><code class="language-Pascal" data-lang="Pascal">////////////////////////////////////////////////////////////////////////////////
+//                                                                            //
+//  Author:                                                                   //
+//    -&gt;  Jean-Pierre LESUEUR (@DarkCoderSc)                                  //
+//        https://github.com/DarkCoderSc                                      //
+//        https://gist.github.com/DarkCoderSc                                 //
+//        https://www.phrozen.io/                                             //
+//  License:                                                                  //
+//    -&gt; MIT                                                                  //
+//                                                                            //
+////////////////////////////////////////////////////////////////////////////////
+
+unit UntEnumAttachedFiles;
+
+interface
+
+{$ALIGN ON}
+{$MINENUMSIZE 4}
+
+uses Windows, Classes, SysUtils, Generics.Collections, tlHelp32;
+
+type
+  TSystemHandleInformation = record
+    ProcessId: ULONG;
+    ObjectTypeNumber: UCHAR;
+    Flags: UCHAR;
+    Handle: USHORT;
+    Object_: PVOID;
+    GrantedAccess: ACCESS_MASK;
+  end;
+  PSystemHandleInformation = ^TSystemHandleInformation;
+
+  TSystemHandleInformations = record
+    HandleCount : ULONG;
+    Handles     : array[0..0] of TSystemHandleInformation;
+  end;
+  PSystemHandleInformations = ^TSystemHandleInformations;
+
+  TUnicodeString = record
+    Length: USHORT;
+    MaximumLength: USHORT;
+    Buffer: PWideChar;
+  end;
+
+  OBJECT_TYPE_INFORMATION = record
+    Name: TUnicodeString;
+    ObjectCount: ULONG;
+    HandleCount: ULONG;
+    Reserved1: array[0..3] of ULONG;
+    PeakObjectCount: ULONG;
+    PeakHandleCount: ULONG;
+    Reserved2: array[0..3] of ULONG;
+    InvalidAttributes: ULONG;
+    GenericMapping: GENERIC_MAPPING;
+    ValidAccess: ULONG;
+    Unknown: UCHAR;
+    MaintainHandleDatabase: ByteBool;
+    Reserved3: array[0..1] of UCHAR;
+    PoolType: Byte;
+    PagedPoolUsage: ULONG;
+    NonPagedPoolUsage: ULONG;
+  end;
+  POBJECT_TYPE_INFORMATION = ^OBJECT_TYPE_INFORMATION;
+
+  OBJECT_NAME_INFORMATION = record
+    Name: TUnicodeString;
+  end;
+  POBJECT_NAME_INFORMATION = ^OBJECT_NAME_INFORMATION;
+
+type
+  TFileInfo = class
+  private
+    FFileName : String;
+    FHandle   : THandle;
+    FFileSize : Int64;
+
+    {@M}
+    procedure SetFileName(AValue : String);
+  public
+    {@C}
+    constructor Create();
+
+    {@G/S}
+    property FileName : String  read FFileName write SetFileName;
+    property Handle   : THandle read FHandle   write FHandle;
+
+    {@G}
+    property FileSize : Int64 read FFileSize;
+  end;
+
+  TEnumAttachedFiles = class
+  private
+    FItems : TObjectDictionary&lt;Cardinal, TObjectList&lt;TFileInfo&gt;&gt;;
+    FNTDLL : THandle; // Required Library
+
+    // https://docs.microsoft.com/en-us/windows/win32/api/winternl/nf-winternl-ntquerysysteminformation
+    NtQuerySystemInformation : function (
+                                          SystemInformationClass : Cardinal;
+                                          SystemInformation : PVOID;
+                                          SystemInformationLength : ULONG;
+                                          ReturnLength : PULONG): ULONG; stdcall;
+
+    // https://docs.microsoft.com/en-us/windows/win32/api/winternl/nf-winternl-ntqueryobject
+    NtQueryObject : function (
+                                ObjectHandle : THandle;
+                                ObjectInformationClass : Cardinal;
+                                ObjectInformation : PVOID;
+                                ObjectInformationLength : ULONG;
+                                ReturnLength : PULONG
+                              ): ULONG; stdcall;
+
+    // https://undocumented.ntinternals.net/index.html?page=UserMode%2FUndocumented%20Functions%2FNT%20Objects%2FType%20independed%2FNtDuplicateObject.html
+    NtDuplicateObject : function (
+                                    SourceProcessHandle : THandle;
+                                    SourceHandle : THandle;
+                                    TargetProcessHandle : THandle;
+                                    TargetHandle : PHANDLE;
+                                    DesiredAccess : ACCESS_MASK;
+                                    Attributes : ULONG;
+                                    Options : ULONG
+                                  ): ULONG; stdcall;
+
+    {@M}
+    function ReadHandleInformationByProcessBundle(AProcessId : Cardinal; var AHandles : TList&lt;THandle&gt;) : TObjectList&lt;TFileInfo&gt;;
+    function EnumProcess(AFilterSameArch : Boolean = False) : TList&lt;Cardinal&gt;;
+
+    function GetCount() : Cardinal;
+  public
+    {@C}
+    constructor Create();
+    destructor Destroy(); override;
+
+    {@M}
+    function Enum(AProcessList : TList&lt;Cardinal&gt;) : Integer; overload;
+    function Enum(AProcessId : Cardinal) : Boolean; overload;
+    function Enum() : Integer; overload;
+
+    {@G}
+    property Items : TObjectDictionary&lt;Cardinal, TObjectList&lt;TFileInfo&gt;&gt; read FItems;
+    property TotalCount : Cardinal read GetCount;
+  end;
+
+implementation
+
+{+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  ___Local___
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
+
+function GetFileSize(AFileName : String) : Int64;
+var AFileInfo : TWin32FileAttributeData;
+begin
+  result := 0;
+
+  if NOT FileExists(AFileName) then begin
+    exit;
+  end;
+
+  if NOT GetFileAttributesEx(PWideChar(AFileName), GetFileExInfoStandard, @AFileInfo) then begin
+    exit;
+  end;
+
+  ///
+  result := Int64(AFileInfo.nFileSizeLow) or Int64(AFileInfo.nFileSizeHigh shl 32);
+end;
+
+function IsProcessX64(AProcessId : Cardinal) : Boolean;
+var AProcHandle   : THandle;
+    AWow64Process : bool;
+
+const PROCESS_QUERY_LIMITED_INFORMATION = $1000;
+begin
+  result := false;
+  ///
+
+  {
+    If we are not in a 64Bit system then we are for sure in a 32Bit system
+  }
+  if (TOSVersion.Architecture = arIntelX86) then
+    Exit();
+  ///
+
+  AProcHandle := OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, False, AProcessId);
+  if AProcHandle = 0 then
+    Exit;
+  try
+    isWow64Process(AProcHandle, AWow64Process);
+    ///
+
+    result := (NOT AWow64Process);
+  finally
+    CloseHandle(AProcHandle);
+  end;
+end;
+
+function PhysicalToVirtualPath(APath : String) : String;
+var i          : integer;
+    ADrive     : String;
+    ABuffer    : array[0..MAX_PATH-1] of Char;
+    ACandidate : String;
+begin
+  {$I-}
+  for I := 0 to 25 do begin
+    ADrive := Format('%s:', [Chr(Ord('A') + i)]);
+    ///
+
+    if (QueryDosDevice(PWideChar(ADrive), ABuffer, MAX_PATH) = 0) then
+      continue;
+
+    ACandidate := String(ABuffer).ToLower();
+
+    if String(Copy(APath, 1, Length(ACandidate))).ToLower() = ACandidate then begin
+      Delete(APath, 1, Length(ACandidate));
+
+      result := Format('%s%s', [ADrive, APath]);
+    end;
+  end;
+  {$I+}
+end;
+
+{+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  TEnumAttachedFiles
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
+
+{-------------------------------------------------------------------------------
+  ___constructor
+-------------------------------------------------------------------------------}
+constructor TEnumAttachedFiles.Create();
+begin
+  inherited Create();
+  ///
+
+  FItems := TObjectDictionary&lt;Cardinal, TObjectList&lt;TFileInfo&gt;&gt;.Create([doOwnsValues]);
+
+  FNTDLL := LoadLibrary('NTDLL.DLL');
+
+  {
+    Acquire required API's from NTDLL.DLL
+  }
+  NtQuerySystemInformation := nil;
+  NtQueryObject := nil;
+  NtDuplicateObject := nil;
+  if (FNTDLL &lt;&gt; 0) then begin
+    @NtQuerySystemInformation := GetProcAddress(FNTDLL, 'NtQuerySystemInformation');
+    @NtQueryObject := GetProcAddress(FNTDLL, 'NtQueryObject');
+    @NtDuplicateObject := GetProcAddress(FNTDLL, 'NtDuplicateObject');
+  end;
+end;
+
+{-------------------------------------------------------------------------------
+  ___destroy
+-------------------------------------------------------------------------------}
+destructor TEnumAttachedFiles.Destroy();
+begin
+  if (FNTDLL &lt;&gt; 0) then
+    FreeLibrary(FNTDLL);
+  ///
+
+  NtQuerySystemInformation := nil;
+  NtQueryObject := nil;
+  NtDuplicateObject := nil;
+
+  if Assigned(FItems) then
+    FreeAndNil(FItems);
+
+  ///
+  inherited Destroy();
+end;
+
+{-------------------------------------------------------------------------------
+  Retrieve Information about each handles per owner process
+-------------------------------------------------------------------------------}
+function TEnumAttachedFiles.ReadHandleInformationByProcessBundle(AProcessId : Cardinal; var AHandles : TList&lt;THandle&gt;) : TObjectList&lt;TFileInfo&gt;;
+var i                      : integer;
+    AObjectHandle          : THandle;
+    pObjectTypeInformation : POBJECT_TYPE_INFORMATION;
+    pObjectNameInformation : POBJECT_NAME_INFORMATION;
+    AObjectName            : String;
+    ARet                   : Cardinal;
+    AProcessHandle         : THandle;
+    AQueryHandle           : THandle;
+    AFileInfo              : TFileInfo;
+    ARequiredSize          : DWORD;
+    AFileName              : String;
+begin
+  result := nil;
+  ///
+
+  if NOT Assigned(AHandles) then
+    Exit();
+
+  AObjectHandle := 0;
+
+  AProcessHandle := OpenProcess(
+                                  (PROCESS_DUP_HANDLE or PROCESS_QUERY_INFORMATION or PROCESS_VM_READ),
+                                  False,
+                                  AProcessId
+  );
+
+  if (AProcessHandle = INVALID_HANDLE_VALUE) then
+    Exit();
+
+  try
+    result := TObjectList&lt;TFileInfo&gt;.Create(True);
+    ///
+
+    for I := 0 to AHandles.Count -1 do begin
+      ARet := NTDuplicateObject(
+                                  AProcessHandle,
+                                  AHandles.Items[I], // Current Handle
+                                  GetCurrentProcess(),
+                                  @AObjectHandle,
+                                  0,
+                                  0,
+                                  0
+      );
+
+      if (ARet &lt;&gt; 0) then
+        Continue;
+
+      ///
+      try
+        // Get Required Length before doing memory allocation
+        AQueryHandle := NtQueryObject(AObjectHandle, 2 {ObjectTypeInformation}, nil, 0, @ARequiredSize);
+        if (ARequiredSize &lt;= 0) then
+          continue;
+        ///
+
+        GetMem(pObjectTypeInformation, ARequiredSize);
+        try
+          {
+            Query Object Type
+          }
+          AQueryHandle := NtQueryObject(
+                                          AObjectHandle,
+                                          2 {ObjectTypeInformation},
+                                          pObjectTypeInformation,
+                                          ARequiredSize,
+                                          nil
+          );
+
+          if (AQueryHandle &lt;&gt; 0) then
+            Continue;
+
+          {
+            Filter for files handles only
+          }
+          if NOT String(pObjectTypeInformation^.Name.Buffer).ToUpper.StartsWith('FILE') then
+            continue;
+
+        finally
+          FreeMem(pObjectTypeInformation, ARequiredSize);
+        end;
+
+        {
+          Query Object Name (Should be Sizeof(TObjectNameInformation));
+        }
+        pObjectNameInformation := nil;
+
+        AQueryHandle := NTQueryObject(
+                                        AObjectHandle,
+                                        1 {ObjectNameInformation},
+                                        nil,
+                                        0,
+                                        @ARequiredSize
+        );
+
+        if (ARequiredSize &lt;= 0) then
+          continue;
+
+        pObjectNameInformation := AllocMem(ARequiredSize);
+        try
+          AQueryHandle := NTQueryObject(
+                                          AObjectHandle,
+                                          1 {ObjectNameInformation},
+                                          pObjectNameInformation,
+                                          ARequiredSize,
+                                          NIL
+          );
+
+
+          if (AQueryHandle &lt;&gt; 0) then
+            Continue;
+
+          AObjectName := String(pObjectNameInformation^.Name.Buffer).Trim();
+          if (length(AObjectName) &lt;= 0) then
+            Continue;
+
+          AFileName := PhysicalToVirtualPath(AObjectName);
+
+          if NOT FileExists(AFileName) then
+            continue;
+
+          {
+            Register new file information object
+          }
+          AFileInfo := TFileInfo.Create();
+
+          AFileInfo.FileName := AFileName;
+          AFileInfo.Handle   := AHandles.Items[I];
+
+          {
+            Push
+          }
+          result.Add(AFileInfo);
+        finally
+          FreeMem(pObjectNameInformation, ARequiredSize);
+        end;
+      finally
+        CloseHandle(AObjectHandle);
+      end;
+    end;
+  finally
+    CloseHandle(AProcessHandle);
+  end;
+end;
+
+{-------------------------------------------------------------------------------
+  Enumerate Open Handles (Type = Open Files)
+-------------------------------------------------------------------------------}
+function TEnumAttachedFiles.Enum(AProcessList : TList&lt;Cardinal&gt;) : Integer;
+var AQueryHandle              : THandle;
+    pHandleInformations       : PSystemHandleInformations;
+    pCurrentHandleInformation : PSystemHandleInformation;
+    ARequiredSize             : DWORD;
+    I                         : Integer;
+    ARet                      : Cardinal;
+    AHandles                  : TObjectDictionary&lt;Cardinal, TList&lt;THandle&gt;&gt;;
+    AHandleList               : TList&lt;THandle&gt;;
+    AFileInfoList             : TObjectList&lt;TFileInfo&gt;;
+
+const BASE_SIZE = 1024;
+begin
+  result := -99; // Unknwon
+  ///
+
+  self.FItems.Clear();
+
+  {
+    We must have access to those API's
+  }
+  if (NOT Assigned(NtQuerySystemInformation)) or
+      (NOT Assigned(NtQueryObject)) or
+      (NOT Assigned(NtDuplicateObject))
+  then
+    Exit();
+  ///
+
+  ARequiredSize := 0;
+
+  ARequiredSize := BASE_SIZE;
+
+  pHandleInformations := AllocMem(ARequiredSize);
+  try
+    {
+      Retrieve open handles informations.
+      Notice: Between two NTQuerySystemInformation calls, required size could increase
+      resulting to another STATUS_INFO_LENGTH_MISMATCH error. Multiple NTQuerySystemInformation
+      call could be required until we succeed.
+    }
+    while true do begin
+      AQueryHandle := NTQuerySystemInformation(
+                                                  16 {SystemHandleInformation},
+                                                  pHandleInformations,
+                                                  ARequiredSize,
+                                                  @ARequiredSize
+      );
+
+      case AQueryHandle of
+        ULONG($C0000004) {STATUS_INFO_LENGTH_MISMATCH} : begin
+          ReallocMem(pHandleInformations, ARequiredSize);
+        end;
+
+        0 :
+          break;
+
+        else
+          Exit(-1);
+      end;
+    end;
+
+    {
+      Enumerate handle, and sort them by it owner process ID
+    }
+    AHandles := TObjectDictionary&lt;Cardinal, TList&lt;THandle&gt;&gt;.Create([doOwnsValues]);
+    try
+      for I := 0 to (pHandleInformations^.HandleCount -1) do begin
+        {$IFNDEF WIN64}
+          pCurrentHandleInformation := pointer(Integer(@pHandleInformations^.Handles) + (I * SizeOf(TSystemHandleInformation)));
+        {$ELSE}
+          pCurrentHandleInformation := pointer(Int64(@pHandleInformations^.Handles) + (I * SizeOf(TSystemHandleInformation)));
+        {$ENDIF}
+
+        {
+          Ignore out of scope processes
+        }
+        if NOT AProcessList.Contains(pCurrentHandleInformation.ProcessId) then
+          continue;
+
+        {
+          Filter some access value and file types which was identified as causing problems
+        }
+        ARet := GetFileType(pCurrentHandleInformation^.Handle);
+
+        if (ARet &lt;&gt; FILE_TYPE_DISK) and (ARet &lt;&gt; FILE_TYPE_UNKNOWN) then
+          Continue;
+
+        if (pCurrentHandleInformation^.GrantedAccess = $0012019F) or
+           (pCurrentHandleInformation^.GrantedAccess = $001A019F) or
+           (pCurrentHandleInformation^.GrantedAccess = $00120189) or
+           (pCurrentHandleInformation^.GrantedAccess = $00100000) then
+              continue;
+
+        AHandleList := nil;
+
+        if AHandles.ContainsKey(pCurrentHandleInformation^.ProcessId) then begin
+          if NOT AHandles.TryGetValue(pCurrentHandleInformation^.ProcessId, AHandleList) then
+            continue;
+        end else begin
+          AHandleList := TList&lt;THandle&gt;.Create();
+
+          AHandles.Add(pCurrentHandleInformation^.ProcessId, AHandleList);
+        end;
+
+        if Assigned(AHandleList) then
+          AHandleList.Add(pCurrentHandleInformation^.Handle);
+      end;
+
+      {
+        Final Step is to retrieve additional information about each captured handle
+        per owner process ID
+      }
+      for I in AHandles.Keys do begin
+        if NOT AHandles.TryGetValue(I {Process ID}, AHandleList) then
+            continue;
+        ///
+
+        AFileInfoList := ReadHandleInformationByProcessBundle(I, AHandleList);
+
+        if Assigned(AFileInfoList) then begin
+          if (AFileInfoList.Count &gt; 0) then
+            FItems.Add(I, AFileInfoList);
+        end;
+      end;
+
+      ///
+      result := 0; // Error Success
+    finally
+      if Assigned(AHandles) then
+        FreeAndNil(AHandles);
+    end;
+  finally
+    FreeMem(pHandleInformations, ARequiredSize);
+  end;
+end;
+
+{-------------------------------------------------------------------------------
+  Enumerate All Process for Open / Attached Files
+-------------------------------------------------------------------------------}
+function TEnumAttachedFiles.Enum() : Integer; // Result = Number of scanned Process
+var AList : TList&lt;Cardinal&gt;;
+begin
+  AList := EnumProcess(True);
+  if Assigned(AList) then begin
+    try
+      if (AList.Count &gt; 0) then
+        Enum(AList);
+    finally
+      FreeAndNil(AList);
+    end;
+  end;
+end;
+
+{-------------------------------------------------------------------------------
+  Enumerate a single process
+-------------------------------------------------------------------------------}
+function TEnumAttachedFiles.Enum(AProcessId : Cardinal) : Boolean;
+var AList : TList&lt;Cardinal&gt;;
+begin
+  AList := TList&lt;Cardinal&gt;.Create();
+  try
+    AList.Add(AProcessId);
+
+    result := (self.Enum(AList) = 0);
+  finally
+    if Assigned(AList) then
+      FreeAndNil(AList);
+  end;
+end;
+
+{-------------------------------------------------------------------------------
+  Get Total Attached Files Count
+-------------------------------------------------------------------------------}
+function TEnumAttachedFiles.GetCount() : Cardinal;
+var AProcessId : Cardinal;
+    AFiles     : TObjectList&lt;TFileInfo&gt;;
+begin
+  result := 0;
+  ///
+
+  for AProcessId in FItems.Keys do begin
+    if NOT FItems.TryGetValue(AProcessId, AFiles) then
+      continue;
+    ///
+
+    if Assigned(AFiles) then
+      Inc(result, AFiles.Count);
+  end;
+end;
+
+{-------------------------------------------------------------------------------
+  Enumerate Running Process (Compatible for Enum(ProcessList))
+-------------------------------------------------------------------------------}
+function TEnumAttachedFiles.EnumProcess(AFilterSameArch : Boolean = False) : TList&lt;Cardinal&gt;;
+var ASnap         : THandle;
+    AProcessEntry : TProcessEntry32;
+    AProcessName  : String;
+
+    procedure AppendEntry();
+    begin
+      if AFilterSameArch and ((IsProcessX64(GetCurrentProcessId())) &lt;&gt; (IsProcessX64(AProcessEntry.th32ProcessID))) then
+        Exit();
+//      ///
+
+      result.Add(AProcessEntry.th32ProcessID);
+    end;
+
+begin
+  result := TList&lt;Cardinal&gt;.Create();
+  ///
+
+  ASnap := CreateToolHelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  if ASnap = INVALID_HANDLE_VALUE then
+    Exit();
+  try
+    ZeroMemory(@AProcessEntry, SizeOf(TProcessEntry32));
+    ///
+
+    AProcessEntry.dwSize := SizeOf(TProcessEntry32);
+
+    if NOT Process32First(ASnap, AProcessEntry) then
+      Exit();
+
+    AppendEntry();
+
+    while True do begin
+      ZeroMemory(@AProcessEntry, SizeOf(TProcessEntry32));
+      ///
+
+      AProcessEntry.dwSize := SizeOf(TProcessEntry32);
+
+      if NOT Process32Next(ASnap, AProcessEntry) then
+        break;
+
+      AppendEntry();
+    end;
+  finally
+    CloseHandle(ASnap);
+  end;
+end;
+
+{+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  TFileInfo
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
+
+constructor TFileInfo.Create();
+begin
+  inherited Create();
+  ///
+
+  FFileName := '';
+  FHandle   := INVALID_HANDLE_VALUE;
+  FFileSize := 0;
+end;
+
+procedure TFileInfo.SetFileName(AValue: string);
+begin
+  FFileName := AValue;
+
+  FFileSize := GetFileSize(AValue);
+end;
+
+end.
+</code></pre><h2 id="usage-example-console-application">Usage Example (Console Application)</h2>
+<pre><code class="language-Pascal" data-lang="Pascal">////////////////////////////////////////////////////////////////////////////////
+//                                                                            //
+//  Author:                                                                   //
+//    -&gt;  Jean-Pierre LESUEUR (@DarkCoderSc)                                  //
+//        https://github.com/DarkCoderSc                                      //
+//        https://www.phrozen.io/                                             //
+//  License:                                                                  //
+//    -&gt; MIT                                                                  //
+//                                                                            //
+//  Description:                                                              //
+//    -&gt; Demonstrate how to use UntEnumAttachedFiles.pas                      //
+//                                                                            //
+////////////////////////////////////////////////////////////////////////////////
+
+program ListAttachedFiles;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses
+  Windows, System.SysUtils, UntEnumAttachedFiles, Generics.Collections;
+
+var AEnum      : TEnumAttachedFiles;
+    AProcessId : Integer;
+    AFiles     : TObjectList&lt;TFileInfo&gt;;
+    I          : Integer;
+    AFileInfo  : TFileInfo;
+
+{-------------------------------------------------------------------------------
+  Get Process Name (&gt;= Vista)
+
+  https://www.phrozen.io/snippets/2020/03/get-process-name-method-1-delphi/
+-------------------------------------------------------------------------------}
+function GetProcessName(AProcessID : Cardinal) : String;
+var hProc      : THandle;
+    ALength    : DWORD;
+    hDLL       : THandle;
+
+    QueryFullProcessImageNameW : function(
+                                            AProcess: THANDLE;
+                                            AFlags: DWORD;
+                                            AFileName: PWideChar;
+                                            var ASize: DWORD): BOOL; stdcall;
+
+const PROCESS_QUERY_LIMITED_INFORMATION = $00001000;
+begin
+  result := '';
+  ///
+
+  if (TOSVersion.Major &lt; 6) then
+    Exit();
+  ///
+
+  QueryFullProcessImageNameW := nil;
+
+  hDLL := LoadLibrary('kernel32.dll');
+  if hDLL = 0 then
+    Exit();
+  try
+    @QueryFullProcessImageNameW := GetProcAddress(hDLL, 'QueryFullProcessImageNameW');
+    ///
+
+    if Assigned(QueryFullProcessImageNameW) then begin
+      hProc := OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, false, AProcessID);
+      if hProc = 0 then exit;
+      try
+        ALength := (MAX_PATH * 2);
+
+        SetLength(result, ALength);
+
+        if NOT QueryFullProcessImageNameW(hProc, 0, @result[1], ALength) then
+          Exit();
+
+        SetLength(result, ALength); // Get rid of extra junk
+      finally
+        CloseHandle(hProc);
+      end;
+    end;
+  finally
+    FreeLibrary(hDLL);
+  end;
+end;
+
+{-------------------------------------------------------------------------------
+  Display Program Help banner and optionally an error message.
+-------------------------------------------------------------------------------}
+procedure ShowHelp(AErrorMessage : String = '');
+begin
+  if Length(AErrorMessage) &gt; 0 then begin
+    WriteLn('');
+    WriteLn('Error: ' + AErrorMessage);
+  end;
+
+  WriteLn('');
+  WriteLn('Usage:');
+  WriteLn('-a : List all attached files (System Wide).');
+  WriteLn('-p &lt;pid&gt; : List all attached files from target process id.');
+  WriteLn('');
+end;
+
+begin
+  try
+    if (ParamCount &lt;= 0) or (ParamCount &gt; 2) then begin
+      raise Exception.Create('');
+    end else begin
+      AEnum := TEnumAttachedFiles.Create();
+      try
+        if (ParamCount = 1) and (ParamStr(1) = '-a') then
+          AEnum.Enum() // Enumerate All
+        else if (ParamStr(1) = '-p') then begin
+          if TryStrToInt(ParamStr(2), AProcessId) then
+            AEnum.Enum(AProcessId)
+          else
+            raise Exception.Create('Invalid Process Id (Must be numerical and &gt;= 0).');
+        end else
+          raise Exception.Create('Invalid option.');
+
+        {
+          Display Grabbed Files
+        }
+        for AProcessId in AEnum.Items.Keys do begin
+          if NOT AEnum.Items.TryGetValue(AProcessId, AFiles) then
+            continue;
+          ///
+
+          Writeln('----------------------------------------------------------');
+          Writeln(Format('%s (%d)', [ExtractFileName(GetProcessName(AProcessId)), AProcessId]));
+          Writeln(ExtractFilePath(GetProcessName(AProcessId)));
+          Writeln(Format('File Count : %d', [AFiles.Count]));
+          Writeln('----------------------------------------------------------');
+
+          for I := 0 to AFiles.Count -1 do begin
+            AFileInfo := AFiles.Items[I];
+
+            if NOT Assigned(AFileInfo) then
+              continue;
+
+            Writeln(Format('* [%s] %s', [IntToHex(AFileInfo.Handle, 8), AFileInfo.FileName]));
+          end;
+
+          Writeln('----------------------------------------------------------');
+          Writeln('');
+        end;
+      finally
+        if Assigned(AEnum) then
+          FreeAndNil(AEnum);
+      end;
+    end;
+  except
+    on E: Exception do
+      ShowHelp(E.Message);
+  end;
+end.
+</code></pre><h3 id="how-it-looks-like">How it looks like</h3>
+<p><img src="/images/202003/Screenshot-2020-03-24-at-14.40.06.png" alt="Screenshot" /></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

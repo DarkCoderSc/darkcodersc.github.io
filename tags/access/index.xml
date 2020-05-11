@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Access on Phrozen</title>
+    <link>https://www.phrozen.io/tags/access/</link>
+    <description>Recent content in Access on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://www.phrozen.io/tags/access/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Get Registry Key DACL Security Descriptor</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-registry-key-security-descriptor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-registry-key-security-descriptor/</guid>
+      <description>Below code snippet demonstrate how to get DACL Security Descriptor in SDDL format for a targeted registry key.
+You need to parse the output SDDL string in order to understand access properties for desired keys, there are plenty of articles arround explaining how to understand an SDDL string format.
+You can also play with flags associated to ConvertSecurityDescriptorToStringSecurityDescriptor call to extract even more information from captured Security Descriptor Pointer after RegGetKeySecurity call.</description>
+    </item>
+    
+  </channel>
+</rss>

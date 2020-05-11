@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>API on Phrozen</title>
+    <link>https://www.phrozen.io/tags/api/</link>
+    <description>Recent content in API on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 13 Apr 2020 18:18:44 +0200</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/tags/api/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Get Process Name Method 2 GetMappedFilename</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-2-getmappedfilename/</link>
+      <pubDate>Mon, 13 Apr 2020 18:18:44 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-2-getmappedfilename/</guid>
+      <description>Bellow code demonstrate our to retrieve both current and target process full image path. This technique is very uncommon but works perfectly.
+Notice for both techniques you muse translate its physical path to virtual path using this tiny function  // Jean-Pierre LESUEUR (@DarkCoderSc) function PhysicalToVirtualPath(APath : String) : String; var i : integer; ADrive : String; ABuffer : array[0..MAX_PATH-1] of Char; ACandidate : String; begin {$I-} for I := 0 to 25 do begin ADrive := Format(&#39;%s:&#39;, [Chr(Ord(&#39;A&#39;) + i)]); /// if (QueryDosDevice(PWideChar(ADrive), ABuffer, MAX_PATH) = 0) then continue; ACandidate := String(ABuffer).</description>
+    </item>
+    
+  </channel>
+</rss>

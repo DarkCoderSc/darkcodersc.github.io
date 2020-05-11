@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="As promised, we will adapt our previous code grab an exported function directly from memory.
+Serious advantage of this technique:
+ We don&rsquo;t have to use CreateToolHelp32Snapshot anymore to enumerate modules and catch target module base address. We don&rsquo;t need to parse PE Header from disk anymore, we will parse PE Header directly from memory.  Notice, it is still necessary to use LoadLibrary API to load desired DLL in memory."><meta property="og:title" content="Get DLL Exported Function Address From Memory" />
+<meta property="og:description" content="As promised, we will adapt our previous code grab an exported function directly from memory.
+Serious advantage of this technique:
+ We don&rsquo;t have to use CreateToolHelp32Snapshot anymore to enumerate modules and catch target module base address. We don&rsquo;t need to parse PE Header from disk anymore, we will parse PE Header directly from memory.  Notice, it is still necessary to use LoadLibrary API to load desired DLL in memory." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/windows/snippets/delphi/get-dll-exported-function-address-from-mem/" />
+<meta property="article:published_time" content="2020-03-18T10:50:50+01:00" />
+<meta property="article:modified_time" content="2020-03-18T10:50:50+01:00" />
+<title>Get DLL Exported Function Address From Memory | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.118b26275fec7a27ee379aa176d7c2698670b88b26aa4588f90b91db89d5bbc0.js" integrity="sha256-EYsmJ1/seifuN5qhdtfCaYZwuIsmqkWI&#43;QuR24nVu8A="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Microsoft Windows</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/projects/" class="collapsed ">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/" class="collapsed ">Snippets</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/" class="collapsed ">Delphi</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-registry-key-security-descriptor/" class="">Get Registry Key DACL Security Descriptor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-4-getprocessimagefilename/" class="">Get Process Name Method 4 GetProcessImageFileName</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-3-ntqueryinformationprocess/" class="">Get Process Name Method 3 NtQueryInformationProcess</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-2-getmappedfilename/" class="">Get Process Name Method 2 GetMappedFilename</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-attached-files/" class="">Enum Attached Files</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-dll-exported-function-address-from-mem/" class="active">Get DLL Exported Function Address From Memory</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-dll-exported-function-address/" class="">Get DLL Exported Function Address</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/getprocaddress-alternative/" class="">GetProcAddress API Alternative</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-dll-exported-functions/" class="">Enum DLL Exported Functions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-1/" class="">Get Process Name Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-modules-method-1/" class="">Enum Modules Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/terminate-process-techniques/" class="">Terminate Process Techniques</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/update-peb-debug/" class="">Update PEB Debug Flag</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-process-method-1/" class="">Enum Process Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/is-process-64/" class="">Is Process 64bit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/eof/" class="">Manipulation and Detection of EOF</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/python/" class="collapsed ">Python</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Linux</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/" class="collapsed ">SLAE32</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Get DLL Exported Function Address From Memory</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><p>As promised, we will adapt our previous code grab an exported function directly from memory.</p>
+<p>Serious advantage of this technique:</p>
+<ul>
+<li>We don&rsquo;t have to use <a href="https://docs.microsoft.com/en-us/windows/win32/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot"><code>CreateToolHelp32Snapshot</code></a> anymore to enumerate modules and catch target module base address.</li>
+<li>We don&rsquo;t need to parse PE Header from disk anymore, we will parse PE Header directly from memory.</li>
+</ul>
+<blockquote class="book-hint info">
+  Notice, it is still necessary to use <a href="https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryw"><code>LoadLibrary</code></a> API to load desired DLL in memory. An alternative of <code>LoadLibrary</code> would be to create our own PE Loader. We will cover that subject in a near future.
+</blockquote>
+
+<pre><code class="language-Pascal" data-lang="Pascal">// Jean-Pierre LESUEUR (@DarkCoderSc)
+
+//...
+uses Windows;
+//...
+
+function GetExportAddressFromMemory(ALoadedModule : THandle {Returned by LoadLibrary(...)}; AFuncName : String) : Cardinal;
+var dwBytesRead             : SIZE_T;
+    AImageDosHeader         : TImageDosHeader;
+    AImageNtHeaderSignature : DWORD;
+    x64Binary               : Boolean;
+    AImageFileHeader        : TImageFileHeader;
+
+    AImageOptionalHeader32  : TImageOptionalHeader32;
+    AImageOptionalHeader64  : TImageOptionalHeader64;
+
+    AExportAddr             : TImageDataDirectory;
+    AExportDir              : TImageExportDirectory;
+
+    I                       : Integer;
+    ACanCatchSection        : Boolean;
+    AOffset                 : Cardinal;
+
+    pOffset                 : Pointer;
+
+    AExportName             : AnsiString;
+    ALen                    : Cardinal;
+    AOrdinal                : Word;
+    AFuncAddress            : Cardinal;
+
+    hProcess                : THandle;
+
+    function GetStringLength(AStartAtPos : Pointer) : Cardinal;
+    var ADummy : Byte;
+    begin
+      result := 0;
+      ///
+
+      pOffset := Pointer(ALoadedModule + NativeUInt(AStartAtPos));
+      while True do begin
+        if NOT ReadProcessMemory(hProcess, Pointer(NativeUInt(pOffset) + result), @ADummy, SizeOf(Byte), dwBytesRead) then
+          Exit();
+
+        if (ADummy = 0) then
+          break;
+
+        Inc(result);
+      end;
+    end;
+
+    // Ripped from SysUtils.pas
+    function LowerCase(const S: string): string;
+    var
+      I, Len: Integer;
+      DstP, SrcP: PChar;
+      Ch: Char;
+    begin
+      Len := Length(S);
+      SetLength(Result, Len);
+      if Len &gt; 0 then
+      begin
+        DstP := PChar(Pointer(Result));
+        SrcP := PChar(Pointer(S));
+        for I := Len downto 1 do
+        begin
+          Ch := SrcP^;
+          case Ch of
+            'A'..'Z':
+              Ch := Char(Word(Ch) or $0020);
+          end;
+          DstP^ := Ch;
+          Inc(DstP);
+          Inc(SrcP);
+        end;
+      end;
+    end;
+begin
+  result := 0;
+  ///
+
+  if (ALoadedModule &lt;= 0) then
+    Exit();
+  ///
+
+  ACanCatchSection := False;
+
+  AFuncName := LowerCase(AFuncName);
+
+  hProcess := GetCurrentProcess();
+
+  pOffset := Pointer(ALoadedModule);
+  if NOT ReadProcessMemory(hProcess, pOffset, @AImageDosHeader, SizeOf(TImageDosHeader), dwBytesRead) then
+    Exit();
+
+  if (AImageDosHeader.e_magic &lt;&gt; IMAGE_DOS_SIGNATURE) then
+    Exit;
+  ///
+
+  pOffset := Pointer(ALoadedModule + AImageDosHeader._lfanew);
+  if NOT ReadProcessMemory(hProcess, pOffset, @AImageNtHeaderSignature, SizeOf(DWORD), dwBytesRead) then
+    Exit();
+
+  if (AImageNTHeaderSignature &lt;&gt; IMAGE_NT_SIGNATURE) then
+    Exit;
+  ///
+
+  pOffset := Pointer(ALoadedModule + AImageDosHeader._lfanew + sizeOf(DWORD));
+  if NOT ReadProcessMemory(hProcess, pOffset, @AImageFileHeader, SizeOf(TImageFileHeader), dwBytesRead) then
+    Exit();
+
+  ACanCatchSection := True;
+
+  x64Binary := (AImageFileHeader.Machine = IMAGE_FILE_MACHINE_AMD64);
+
+  pOffset := Pointer(NativeUInt(pOffset) + SizeOf(TImageFileHeader));
+
+  if x64Binary then begin
+    if NOT ReadProcessMemory(hProcess, pOffset, @AImageOptionalHeader64, AImageFileHeader.SizeOfOptionalHeader, dwBytesRead) then
+      Exit();
+  end else begin
+    if NOT ReadProcessMemory(hProcess, pOffset, @AImageOptionalHeader32, AImageFileHeader.SizeOfOptionalHeader, dwBytesRead) then
+      Exit();
+  end;
+  ///
+
+  AExportAddr.VirtualAddress := 0;
+  AExportAddr.Size := 0;
+
+  if x64Binary then
+    AExportAddr := AImageOptionalHeader64.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT]
+  else
+    AExportAddr := AImageOptionalHeader32.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT];
+
+  pOffset := Pointer(ALoadedModule + AExportAddr.VirtualAddress);
+  if NOT Assigned(pOffset) then
+    Exit;
+
+  if NOT ReadProcessMemory(hProcess, pOffset, @AExportDir, SizeOf(TImageExportDirectory), dwBytesRead) then
+      Exit();
+
+  if (AExportDir.NumberOfFunctions &lt;= 0) then
+    Exit;
+  ///
+
+  {
+    Enumerate Named Exported Functions
+  }
+  for I := 0 to AExportDir.NumberOfNames - 1 do begin
+    // Function Name
+    pOffset := Pointer(ALoadedModule + (AExportDir.AddressOfNames + (I * SizeOf(Cardinal))));
+
+    if NOT ReadProcessMemory(hProcess, pOffset, @AOffset, SizeOf(Cardinal), dwBytesRead) then
+      Exit();
+
+    pOffset := Pointer(AOffset);
+
+    ALen := GetStringLength(pOffset);
+
+    SetLength(AExportName, ALen);
+
+    if NOT ReadProcessMemory(hProcess, pOffset, @AExportName[1], ALen, dwBytesRead) then
+      Exit();
+
+    {
+      Checking if we found requested function
+    }
+    if LowerCase(AExportName) &lt;&gt; AFuncName then
+      continue;
+
+    // Ordinal
+    pOffset := Pointer(ALoadedModule + (AExportDir.AddressOfNameOrdinals) + (I * SizeOf(Word)));
+
+    if NOT ReadProcessMemory(hProcess, pOffset, @AOrdinal, SizeOf(Word), dwBytesRead) then
+      Exit();
+
+    // Function Address
+    pOffset := Pointer(ALoadedModule + (AExportDir.AddressOfFunctions) + (AOrdinal * SizeOf(Cardinal)));
+
+    if NOT ReadProcessMemory(hProcess, pOffset, @AFuncAddress, SizeOf(Cardinal), dwBytesRead) then
+      Exit();
+
+    ///
+    result := AFuncAddress;
+  end;
+end;
+</code></pre><p>Bellow code doesn&rsquo;t change (GetProcAddress_ALT)</p>
+<pre><code class="language-pascal" data-lang="pascal">function GetProcAddress_ALT(hModule : HMODULE; lpProcName : LPCSTR) : Pointer;
+var AFuncAddress : Cardinal;
+begin
+  result := nil;
+  ///
+
+  AFuncAddress := GetExportAddressFromMemory(hModule, lpProcName);
+
+  if (AFuncAddress &gt; 0) then
+    result := Pointer(hModule + AFuncAddress);
+end;
+</code></pre><p>Finally, you can trigger your MessageBoxW :-)</p>
+<pre><code class="language-Pascal" data-lang="Pascal">//...
+
+var hUser32 : THandle;
+    _MessageBoxW : function(hWnd: HWND; lpText, lpCaption: LPCWSTR; uType: UINT): Integer; stdcall;
+
+//...
+begin
+  hUser32 := LoadLibrary('user32.dll');
+  if (hUser32 = 0) then
+    Exit();
+  try
+    @_MessageBoxW := GetProcAddress_ALT(hUser32, 'MessageBoxW');
+
+    _MessageBoxW(0, 'Hello World', 'Hey', 0);
+  finally
+    FreeLibrary(hUser32);
+  end;
+//...
+</code></pre></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

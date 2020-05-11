@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="You will find below 4 different techniques to close/kill/terminate Windows process in pure WinAPI.
+Techniques  TerminateProcess() : Classic method. ExitProcess() : via Code Injection (32bit to 32bit ; 64bit to 64bit). Crash Process : Inject code that will crash the process (32bit to 32bit ; 64bit to 64bit). CTRL_CLOSE_EVENT / WM_CLOSE : Send &ldquo;close&rdquo; messages to target process windows.  TerminateAProcess() Method Kill target process id following desired method : tmpAll, tpmTerminateProcess, tpmExitProcess, tpmCrash, tpmMessage"><meta property="og:title" content="Terminate Process Techniques" />
+<meta property="og:description" content="You will find below 4 different techniques to close/kill/terminate Windows process in pure WinAPI.
+Techniques  TerminateProcess() : Classic method. ExitProcess() : via Code Injection (32bit to 32bit ; 64bit to 64bit). Crash Process : Inject code that will crash the process (32bit to 32bit ; 64bit to 64bit). CTRL_CLOSE_EVENT / WM_CLOSE : Send &ldquo;close&rdquo; messages to target process windows.  TerminateAProcess() Method Kill target process id following desired method : tmpAll, tpmTerminateProcess, tpmExitProcess, tpmCrash, tpmMessage" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/windows/snippets/delphi/terminate-process-techniques/" />
+<meta property="article:published_time" content="2020-03-06T14:44:08+01:00" />
+<meta property="article:modified_time" content="2020-03-06T14:44:08+01:00" />
+<title>Terminate Process Techniques | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.118b26275fec7a27ee379aa176d7c2698670b88b26aa4588f90b91db89d5bbc0.js" integrity="sha256-EYsmJ1/seifuN5qhdtfCaYZwuIsmqkWI&#43;QuR24nVu8A="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Microsoft Windows</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/projects/" class="collapsed ">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/" class="collapsed ">Snippets</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/" class="collapsed ">Delphi</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-registry-key-security-descriptor/" class="">Get Registry Key DACL Security Descriptor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-4-getprocessimagefilename/" class="">Get Process Name Method 4 GetProcessImageFileName</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-3-ntqueryinformationprocess/" class="">Get Process Name Method 3 NtQueryInformationProcess</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-2-getmappedfilename/" class="">Get Process Name Method 2 GetMappedFilename</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-attached-files/" class="">Enum Attached Files</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-dll-exported-function-address-from-mem/" class="">Get DLL Exported Function Address From Memory</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-dll-exported-function-address/" class="">Get DLL Exported Function Address</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/getprocaddress-alternative/" class="">GetProcAddress API Alternative</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-dll-exported-functions/" class="">Enum DLL Exported Functions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-1/" class="">Get Process Name Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-modules-method-1/" class="">Enum Modules Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/terminate-process-techniques/" class="active">Terminate Process Techniques</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/update-peb-debug/" class="">Update PEB Debug Flag</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-process-method-1/" class="">Enum Process Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/is-process-64/" class="">Is Process 64bit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/eof/" class="">Manipulation and Detection of EOF</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/python/" class="collapsed ">Python</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Linux</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/" class="collapsed ">SLAE32</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Terminate Process Techniques</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><p>You will find below 4 different techniques to close/kill/terminate Windows process in pure WinAPI.</p>
+<h2 id="techniques">Techniques</h2>
+<ul>
+<li><code>TerminateProcess()</code> : Classic method.</li>
+<li><code>ExitProcess()</code> : via Code Injection (32bit to 32bit ; 64bit to 64bit).</li>
+<li><code>Crash Process</code> : Inject code that will crash the process (32bit to 32bit ; 64bit to 64bit).</li>
+<li><code>CTRL_CLOSE_EVENT</code> / <code>WM_CLOSE</code> : Send &ldquo;close&rdquo; messages to target process windows.</li>
+</ul>
+<h2 id="terminateaprocess-method"><code>TerminateAProcess()</code> Method</h2>
+<p>Kill target process id following desired method : <code>tmpAll</code>, <code>tpmTerminateProcess</code>, <code>tpmExitProcess</code>, <code>tpmCrash</code>, <code>tpmMessage</code></p>
+<p><code>tmpAll</code> attempt to kill process from cleanest way to dirtiest way until it succeed.</p>
+<h2 id="code">Code</h2>
+<pre><code class="language-pascal" data-lang="pascal">{
+    Jean-Pierre LESUEUR (@DarkCoderSc)
+}
+
+/// ...
+uses Windows, SysUtils, tlhelp32;
+/// ...
+
+type
+  TTerminateProcessMethod = (
+                                tmpAll,
+                                tpmTerminateProcess,
+                                tpmExitProcess,
+                                tpmCrash,
+                                tpmMessage
+  );
+
+{
+  Detect if a process id exists using the CreateToolHelp32Snapshot method from
+  tlhelp32 lib.
+}
+function TLHelp32_ProcessIdExists(AProcessId : Cardinal) : Boolean;
+var ASnapshot     : THandle;
+    AProcessEntry : TProcessEntry32;
+begin
+  result := false;
+  ///
+
+  ASnapshot := CreateToolHelp32Snapshot(TH32CS_SNAPALL, 0);
+  if ASnapshot = INVALID_HANDLE_VALUE then
+    Exit();
+  try
+    ZeroMemory(@AProcessEntry, sizeOf(TProcessEntry32));
+    AProcessEntry.dwSize := sizeOf(TProcessEntry32);
+
+    if NOT Process32First(ASnapshot, AProcessEntry) then
+      Exit();
+
+    if (AProcessId = AProcessEntry.th32ProcessID) then begin
+      result := true;
+    end else begin
+      while true do begin
+        ZeroMemory(@AProcessEntry, sizeOf(TProcessEntry32));
+        AProcessEntry.dwSize := sizeOf(TProcessEntry32);
+
+        if NOT Process32Next(ASnapshot, AProcessEntry) then
+          break;
+
+        if (AProcessId = AProcessEntry.th32ProcessID) then begin
+          result := true;
+
+          break;
+        end;
+      end;
+    end;
+  finally
+    CloseHandle(ASnapshot);
+  end;
+end;
+
+{
+  Method 1 : Terminate a process through TerminateProcess API. IMOO the cleanest
+             way if it isn't a graphical application.
+}
+function TerminateProcess_TerminateProcess(AProcessID : Cardinal) : Boolean;
+var hProc : THandle;
+begin
+  result := false;
+
+  hProc := OpenProcess(PROCESS_TERMINATE, false, AProcessID);
+  if (hProc = 0) then
+    Exit();
+  try
+    if NOT WinAPI.Windows.TerminateProcess(hProc, 0) then
+      Exit();
+
+    result := true;
+  finally
+    CloseHandle(hProc);
+  end;
+end;
+
+{
+  Method 2 : Terminate Process through code injection on target process.
+             This method works if both process (injecter and target) are using
+             same process architecture.
+}
+function TerminateProcess_ExitProcess(AProcessID : Cardinal) : Boolean;
+var hProc         : THandle;
+    pExitProcess  : Pointer;
+    hRemoteThread : THandle;
+    dwThreadId    : Cardinal;
+    Arg           : Integer;
+begin
+  result := false;
+  ///
+  SetLastError(0);
+  pExitProcess := GetProcAddress(LoadLibrary('kernel32.dll'), 'ExitProcess');
+  if (GetLastError() &lt;&gt; 0) then begin
+    exit;
+  end;
+
+  hProc := OpenProcess(PROCESS_CREATE_THREAD  or
+                       PROCESS_VM_OPERATION   or
+                       PROCESS_VM_WRITE,
+                       false, AProcessID);
+  if (hProc = 0) then
+    Exit();
+  try
+    Arg := 0; // EXIT VALUE
+
+    hRemoteThread := CreateRemoteThread(hProc, nil, 0, pExitProcess, @Arg, 0, dwThreadId);
+    if (hRemoteThread = 0) then
+      Exit();
+
+    WaitForSingleObject(hRemoteThread, INFINITE); // WAIT UNTIL REMOTE THREAD HAS END
+
+    result := true;
+  finally
+    CloseHandle(hProc);
+  end;
+end;
+
+{
+  Method 3 : Terminate process by crashing target process with an access violation.
+             This is not a recommended solution but still worth testing.
+}
+function TerminateProcess_Crash(AProcessID : Cardinal) : Boolean;
+var hProc         : THandle;
+    dwThreadId    : Cardinal;
+    hRemoteThread : THandle;
+begin
+  hProc := OpenProcess(PROCESS_CREATE_THREAD  or
+                       PROCESS_VM_OPERATION   or
+                       PROCESS_VM_WRITE,
+                       false, AProcessID);
+  if (hProc = 0) then
+    Exit;
+  try
+    hRemoteThread := CreateRemoteThread(hProc, nil, 0, Pointer(-1), nil, 0, dwThreadId);
+    if (hRemoteThread = 0) then
+      Exit();
+
+    result := true;
+  finally
+    CloseHandle(hProc);
+  end;
+end;
+
+{
+  Method 4 : Terminate process via sending close event messages. IMOO the best
+             method for process with GUI.
+}
+function _EnumWindowProc(AHwnd : HWND; param : LParam): BOOL; stdcall;
+var AProcessID : Cardinal;
+begin
+  result := true;
+  ///
+
+  if AHwnd = 0 then
+    Exit();
+
+  GetWindowThreadProcessId(AHwnd, @AProcessID);
+
+  if PCardinal(param)^ &lt;&gt; AProcessID then
+     Exit();
+
+  SendMessage(AHwnd, CTRL_CLOSE_EVENT, 0, 0);
+
+  SendMessage(AHwnd, WM_CLOSE, 0, 0);
+end;
+
+function TerminateProcess_SendMessage(AProcessID : Cardinal) : boolean;
+begin
+  result := false;
+  ///
+
+  SetLastError(0);
+
+  if NOT EnumWindows(@_EnumWindowProc, LPARAM(@AProcessID)) then begin
+    exit;
+  end;
+
+  if TLHelp32_ProcessIdExists(AProcessID) then
+    Exit;
+
+  ///
+  result := true;
+end;
+
+{
+  Dispatach desired terminate process method.
+}
+function TerminateProcess(AProcessID : Cardinal; AMethod : TTerminateProcessMethod = tpmTerminateProcess) : Boolean;
+begin
+  result := false;
+  ///
+
+  if NOT TLHelp32_ProcessIdExists(AProcessID) then
+    Exit();
+
+  case AMethod of
+    tmpAll : begin
+      TerminateProcess_SendMessage(AProcessID);
+
+      if NOT result then
+        TerminateProcess_TerminateProcess(AProcessID);
+
+      if NOT result then
+        TerminateProcess_ExitProcess(AProcessID);
+
+      if NOT result then
+        TerminateProcess_Crash(AProcessID);
+    end;
+
+    tpmTerminateProcess : result := TerminateProcess_TerminateProcess(AProcessID);
+    tpmExitProcess      : result := TerminateProcess_ExitProcess(AProcessID);
+    tpmCrash            : result := TerminateProcess_Crash(AProcessID);
+    tpmMessage          : result := TerminateProcess_SendMessage(AProcessID);
+  end;
+end;
+</code></pre></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

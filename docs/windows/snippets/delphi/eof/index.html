@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Description This Delphi unit demonstrate how to manipulate EOF Data of a Valid Microsoft Windows Portable Executable (PE) File.
+EOF (End Of File) is often used by Malware authors to offer their Malware users a way to edit Malware payload configuration (Ex: C2 informations) without having access to source code.
+You often encounter such techniques in:
+ Remote Access Tool/Trojan (RAT) File Wrapper / Binder Downloader Loader / Botnets  But not only."><meta property="og:title" content="Manipulation and Detection of EOF" />
+<meta property="og:description" content="Description This Delphi unit demonstrate how to manipulate EOF Data of a Valid Microsoft Windows Portable Executable (PE) File.
+EOF (End Of File) is often used by Malware authors to offer their Malware users a way to edit Malware payload configuration (Ex: C2 informations) without having access to source code.
+You often encounter such techniques in:
+ Remote Access Tool/Trojan (RAT) File Wrapper / Binder Downloader Loader / Botnets  But not only." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/windows/snippets/delphi/eof/" />
+<meta property="article:published_time" content="2020-03-02T12:21:49+01:00" />
+<meta property="article:modified_time" content="2020-03-02T12:21:49+01:00" />
+<title>Manipulation and Detection of EOF | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.118b26275fec7a27ee379aa176d7c2698670b88b26aa4588f90b91db89d5bbc0.js" integrity="sha256-EYsmJ1/seifuN5qhdtfCaYZwuIsmqkWI&#43;QuR24nVu8A="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Microsoft Windows</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/projects/" class="collapsed ">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/" class="collapsed ">Snippets</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/" class="collapsed ">Delphi</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-registry-key-security-descriptor/" class="">Get Registry Key DACL Security Descriptor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-4-getprocessimagefilename/" class="">Get Process Name Method 4 GetProcessImageFileName</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-3-ntqueryinformationprocess/" class="">Get Process Name Method 3 NtQueryInformationProcess</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-2-getmappedfilename/" class="">Get Process Name Method 2 GetMappedFilename</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-attached-files/" class="">Enum Attached Files</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-dll-exported-function-address-from-mem/" class="">Get DLL Exported Function Address From Memory</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-dll-exported-function-address/" class="">Get DLL Exported Function Address</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/getprocaddress-alternative/" class="">GetProcAddress API Alternative</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-dll-exported-functions/" class="">Enum DLL Exported Functions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/get-process-name-method-1/" class="">Get Process Name Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-modules-method-1/" class="">Enum Modules Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/terminate-process-techniques/" class="">Terminate Process Techniques</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/update-peb-debug/" class="">Update PEB Debug Flag</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/enum-process-method-1/" class="">Enum Process Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/is-process-64/" class="">Is Process 64bit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/delphi/eof/" class="active">Manipulation and Detection of EOF</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/python/" class="collapsed ">Python</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Linux</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/" class="collapsed ">SLAE32</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Manipulation and Detection of EOF</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="description">Description</h2>
+<p>This Delphi unit demonstrate how to manipulate EOF Data of a Valid Microsoft Windows Portable Executable (PE) File.</p>
+<p>EOF (End Of File) is often used by Malware authors to offer their Malware users a way to edit Malware payload configuration (Ex: C2 informations) without having access to source code.</p>
+<p>You often encounter such techniques in:</p>
+<ul>
+<li>Remote Access Tool/Trojan (RAT)</li>
+<li>File Wrapper / Binder</li>
+<li>Downloader</li>
+<li>Loader / Botnets</li>
+</ul>
+<p>But not only.</p>
+<h3 id="supported-features-32bit-and-64bit">Supported Features (32bit and 64bit)</h3>
+<ul>
+<li>Write EOF Data to Valid PE File.</li>
+<li>Read EOF Data from Valid PE File.</li>
+<li>Clear EOF Data if Present in Valid PE File .</li>
+<li>Retrieve EOF Data Size if Present in Valid PE File.</li>
+<li>Detect EOF Data presence in Valid PE File.</li>
+</ul>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://gist.github.com/DarkCoderSc/33314f50f5199cf49dbdf7a29a7f4a69">https://gist.github.com/DarkCoderSc/33314f50f5199cf49dbdf7a29a7f4a69</a></li>
+</ul>
+<h3 id="cc-implementation-read--extract">C/C++ Implementation (Read / Extract)</h3>
+<p><a href="https://github.com/DarkCoderSc/eof-reader">https://github.com/DarkCoderSc/eof-reader</a></p>
+<h2 id="code">Code</h2>
+<pre><code class="language-Pascal" data-lang="Pascal">(*******************************************************************************
+	Author:
+		-&gt;  Jean-Pierre LESUEUR (@DarkCoderSc)
+        https://github.com/DarkCoderSc
+        https://gist.github.com/DarkCoderSc
+        https://www.phrozen.io/
+	Description:
+		-&gt; Unit for EOF manipulation on Portable Executable Files (x86/x64).
+		-&gt; Detection and Removal of EOF Data (Often used by Malware to store configuration / files etc..).
+	Category:
+		-&gt; Malware Research &amp; Detection
+  License:
+		-&gt; MIT
+	Functions:
+		-&gt; WritePEOF()     : Write extra data at the end of a PE File.
+		-&gt; ReadPEOF()      : Read extra data stored at the end of a PE File.
+		-&gt; FileIsValidPE() : Check whether or not a file is a valid Portable Executable File.
+		-&gt; ClearPEOF()     : Remove / Sanitize / Disinfect a PE File from any extra data stored at it end.
+		-&gt; GetPEOFSize()   : Get the size of the extra data stored at the end of a PE File.
+		-&gt; GetFileSize()   : Get the expected file size of a PE File following PE Header description.
+		-&gt; ContainPEOF()   : Return True if some extra data is detected at the end of a PE File.
+*******************************************************************************)
+
+unit UntEOF;
+
+interface
+
+uses WinAPI.Windows, System.SysUtils, Classes;
+
+type
+  TBasicPEInfo = record
+    Valid : Boolean;     // True = Valid PE; False = Invalid PE
+    Arch64 : Boolean;    // True = 64bit Image; False = 32bit Image
+    ImageSize : Int64;
+  end;
+
+function WritePEOF(APEFile : String; ABuffer : PVOID; ABufferSize : Integer) : Boolean;
+function ReadPEOF(APEFile : String; ABuffer : PVOID; ABufferSize : Integer; ABufferPos : Integer = 0) : Boolean;
+function FileIsValidPE(AFileName : String) : Boolean;
+function ClearPEOF(APEFile : String) : Boolean;
+function GetPEOFSize(APEFile : String) : Int64;
+function GetFileSize(AFileName : String) : Int64;
+function ContainPEOF(APEFile : String) : Boolean;
+
+implementation
+
+{-------------------------------------------------------------------------------
+  Get File Size (Nothing more to say)
+-------------------------------------------------------------------------------}
+function GetFileSize(AFileName : String) : Int64;
+var AFileInfo : TWin32FileAttributeData;
+begin
+  result := 0;
+
+  if NOT FileExists(AFileName) then
+    Exit();
+
+  if NOT GetFileAttributesEx(
+                              PWideChar(AFileName),
+                              GetFileExInfoStandard,
+                              @AFileInfo)
+  then
+    Exit();
+
+  ///
+  result := (Int64(AFileInfo.nFileSizeLow) or Int64(AFileInfo.nFileSizeHigh shl 32));
+end;
+
+{-------------------------------------------------------------------------------
+  Is target file a 64bit PE file
+-------------------------------------------------------------------------------}
+function GetBasicPEInfo(APEFile : String; var ABasicPEInfo : TBasicPEInfo) : Boolean;
+var hFile : THandle;
+    AImageDosHeader : TImageDosHeader;
+    dwBytesRead : DWORD;
+    AImageFileHeader : TImageFileHeader;
+    AImageNtHeaderSignature : DWORD;
+    AOptionalHeader32 : TImageOptionalHeader32;
+    AOptionalHeader64 : TimageOptionalHeader64;
+    I : Integer;
+    AImageSectionHeader : TimageSectionHeader;
+begin
+  result := False;
+
+  ABasicPEInfo.Valid     := False;
+  ABasicPEInfo.Arch64    := False;
+  ABasicPEInfo.ImageSize := 0;
+
+  // Open Target File (Must Exists)
+  hFile := CreateFile(
+                        PChar(APEFile),
+                        GENERIC_READ,
+                        FILE_SHARE_READ,
+                        nil,
+                        OPEN_EXISTING,
+                        0,
+                        0
+  );
+  if hFile = INVALID_HANDLE_VALUE then
+    Exit;
+
+  try
+    SetFilePointer(hFile, 0, nil, FILE_BEGIN);
+
+    // Read the Image Dos Header
+    if NOT ReadFile(
+                      hFile,
+                      AImageDosHeader,
+                      SizeOf(TImageDosHeader),
+                      dwBytesRead,
+                      nil
+    ) then
+      Exit();
+
+    // To be considered as a valid PE file, e_magic must be $5A4D (MZ)
+    if (AImageDosHeader.e_magic &lt;&gt; IMAGE_DOS_SIGNATURE) then
+      Exit();
+
+    // Move the cursor to Image NT Signature
+    SetFilePointer(hFile, AImageDosHeader._lfanew, nil, FILE_BEGIN);
+
+    // Read the Image NT Signature
+    if NOT ReadFile(
+                      hFile,
+                      AImageNtHeaderSignature,
+                      SizeOf(DWORD),
+                      dwBytesRead,
+                      nil
+    ) then
+      Exit();
+
+    // To be considered as a valid PE file, Image NT Signature must be $00004550 (PE00)
+    if (AImageNtHeaderSignature &lt;&gt; IMAGE_NT_SIGNATURE) then
+      Exit();
+
+
+    ABasicPEInfo.Valid := True;
+
+    // Read the Image File Header
+    if NOT ReadFile(
+                      hFile,
+                      AImageFileHeader,
+                      sizeOf(TImageFileHeader),
+                      dwBytesRead,
+                      0
+    ) then
+      Exit();
+
+    // TImageDosHeader.Machine contains the architecture of the file
+    ABasicPEInfo.Arch64 := (AImageFileHeader.Machine = IMAGE_FILE_MACHINE_AMD64);
+
+    if ABasicPEInfo.Arch64 then begin
+      // For 64bit Image
+      if NOT ReadFile(
+                        hFile,
+                        AOptionalHeader64,
+                        sizeOf(TImageOptionalHeader64),
+                        dwBytesRead,
+                        0
+      ) then
+        Exit();
+
+      Inc(ABasicPEInfo.ImageSize, AOptionalHeader64.SizeOfHeaders);
+
+      Inc(ABasicPEInfo.ImageSize, AOptionalHeader64.DataDirectory[IMAGE_DIRECTORY_ENTRY_SECURITY].Size);
+    end else begin
+      // For 32bit Image
+      if NOT ReadFile(
+                        hFile,
+                        AOptionalHeader32,
+                        sizeOf(TImageOptionalHeader32),
+                        dwBytesRead,
+                        0
+      ) then
+        Exit();
+
+      Inc(ABasicPEInfo.ImageSize, AOptionalHeader32.SizeOfHeaders);
+
+      Inc(ABasicPEInfo.ImageSize, AOptionalHeader32.DataDirectory[IMAGE_DIRECTORY_ENTRY_SECURITY].Size);
+    end;
+
+    // Iterate through each section to get the size of each for ImageSize calculation
+    for I := 0 to AImageFileHeader.NumberOfSections -1 do begin
+      if NOT ReadFile(
+                        hFile,
+                        AImageSectionHeader,
+                        SizeOf(TImageSectionHeader),
+                        dwBytesRead, 0
+      ) then
+        Exit(); // Fatal
+
+      Inc(ABasicPEInfo.ImageSize, AImageSectionHeader.SizeOfRawData);
+    end;
+
+    // All steps successfully passed
+    result := True;
+  finally
+    CloseHandle(hFile);
+  end;
+end;
+
+{-------------------------------------------------------------------------------
+  Is target file a valid Portable Executable
+-------------------------------------------------------------------------------}
+function FileIsValidPE(AFileName : String) : Boolean;
+var ABasicPEInfo : TBasicPEInfo;
+begin
+  result := False;
+  ///
+
+  GetBasicPEInfo(AFileName, ABasicPEInfo);
+
+  result := ABasicPEInfo.Valid;
+end;
+
+{-------------------------------------------------------------------------------
+   Write Data to the End of a PE File.
+-------------------------------------------------------------------------------}
+function WritePEOF(APEFile : String; ABuffer : PVOID; ABufferSize : Integer) : Boolean;
+var hFile : THandle;
+    ABytesWritten : Cardinal;
+begin
+  result := false;
+
+  if NOT FileIsValidPE(APEFile) then
+    Exit();
+
+  hFile := CreateFile(
+                      PWideChar(APEFile),
+                      GENERIC_WRITE,
+                      0,
+                      nil,
+                      OPEN_EXISTING,
+                      FILE_ATTRIBUTE_NORMAL,
+                      0
+  );
+
+  if hFile = INVALID_HANDLE_VALUE then
+    Exit;
+
+  try
+    SetFilePointer(hFile, 0, nil, FILE_END);
+
+    if NOT WriteFile(
+                      hFile,
+                      ABuffer^,
+                      ABufferSize,
+                      ABytesWritten,
+                      0
+    ) then
+      Exit();
+
+    result := true;
+  finally
+    CloseHandle(hFile);
+  end;
+end;
+
+{-------------------------------------------------------------------------------
+   Read Data from the End of a PE File.
+-------------------------------------------------------------------------------}
+function ReadPEOF(APEFile : String; ABuffer : PVOID; ABufferSize : Integer; ABufferPos : Integer = 0) : Boolean;
+var hFile : THandle;
+    ABytesRead : Cardinal;
+begin
+  result := false;
+
+  if NOT FileIsValidPE(APEFile) then
+    Exit();
+
+  hFile := CreateFile(
+                        PWideChar(APEFile),
+                        GENERIC_READ,
+                        0,
+                        nil,
+                        OPEN_EXISTING,
+                        FILE_ATTRIBUTE_NORMAL,
+                        0
+  );
+
+  if hFile = INVALID_HANDLE_VALUE then
+    Exit();
+
+  try
+    SetFilePointer(
+                    hFile,
+                    (-ABufferSize + ABufferPos),
+                    nil,
+                    FILE_END
+    );
+
+    if NOT ReadFile(
+                      hFile,
+                      ABuffer^,
+                      ABufferSize,
+                      ABytesRead,
+                      0
+    ) then
+      Exit();
+
+    result := true;
+  finally
+    CloseHandle(hFile);
+  end;
+end;
+
+{-------------------------------------------------------------------------------
+  Get Target PE File EOF Size
+  return codes:
+  -------------
+  -1   : Error
+  &gt;= 0 : The length of EOF data found
+-------------------------------------------------------------------------------}
+function GetPEOFSize(APEFile : String) : Int64;
+var ABasicPEInfo : TBasicPEInfo;
+begin
+  result := -1;
+
+  if NOT GetBasicPEInfo(APEFile, ABasicPEInfo) then
+    raise Exception.Create('Error: Invalid PE File');
+
+  result := (GetFileSize(APEFile) - ABasicPEInfo.ImageSize);
+end;
+
+{-------------------------------------------------------------------------------
+  Clear unexpected data at the end of a PE File
+-------------------------------------------------------------------------------}
+function ClearPEOF(APEFile : String) : Boolean;
+var ABasicPEInfo : TBasicPEInfo;
+    AFileStream : TMemoryStream;
+    AFileSize : Int64;
+    AImageSize : Int64;
+begin
+  result := False;
+
+  if NOT GetBasicPEInfo(APEFile, ABasicPEInfo) then
+    raise Exception.Create('Error: Invalid PE File');
+
+  AFileSize := GetFileSize(APEFile);
+  AImageSize := ABasicPEInfo.ImageSize;
+
+  // No EOF but no error so far so we return true
+  if (AFileSize - AImageSize) = 0 then begin
+    Exit(True);
+  end;
+
+  {
+    One technique to patch the file. Ignore content after the ImageSize
+    grabbed from PE info.
+  }
+  AFileStream := TMemoryStream.Create();
+  try
+    AFileStream.LoadFromFile(APEFile);
+
+    AFileStream.Position := 0;
+    AFileStream.SetSize(AImageSize);
+
+    AFileStream.SaveToFile(APEFile);
+  finally
+    AFileStream.Free;
+  end;
+
+  result := True;
+end;
+
+{-------------------------------------------------------------------------------
+  Detect if a PE file contain some data at the end of the file
+-------------------------------------------------------------------------------}
+function ContainPEOF(APEFile : String) : Boolean;
+begin
+  result := (GetPEOFSize(APEFile) &gt; 0);
+end;
+
+end.
+</code></pre></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NASM on Phrozen</title>
+    <link>https://www.phrozen.io/tags/nasm/</link>
+    <description>Recent content in NASM on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 13 Mar 2020 11:57:00 +0100</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/tags/nasm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Exercise N°1 - Bindshell (NASM)</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/</guid>
+      <description>Exercise Goal This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each exercise by yourself.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Phrozen</title>
+    <link>https://www.phrozen.io/docs/windows/snippets/delphi/</link>
+    <description>Recent content on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 13 Apr 2020 18:35:13 +0200</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/docs/windows/snippets/delphi/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Get Registry Key DACL Security Descriptor</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-registry-key-security-descriptor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-registry-key-security-descriptor/</guid>
+      <description>Below code snippet demonstrate how to get DACL Security Descriptor in SDDL format for a targeted registry key.
+You need to parse the output SDDL string in order to understand access properties for desired keys, there are plenty of articles arround explaining how to understand an SDDL string format.
+You can also play with flags associated to ConvertSecurityDescriptorToStringSecurityDescriptor call to extract even more information from captured Security Descriptor Pointer after RegGetKeySecurity call.</description>
+    </item>
+    
+    <item>
+      <title>Get Process Name Method 4 GetProcessImageFileName</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-4-getprocessimagefilename/</link>
+      <pubDate>Mon, 13 Apr 2020 18:35:13 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-4-getprocessimagefilename/</guid>
+      <description>This time we will use a quite well known API to get the full process image path GetProcessImageFileName documented here.
+Nothing very complex and this technique works from 32bit to 64bit / 64bit to 32bit processes.
+// Jean-Pierre LESUEUR (@DarkCoderSc) function PhysicalToVirtualPath(APath : String) : String; var i : integer; ADrive : String; ABuffer : array[0..MAX_PATH-1] of Char; ACandidate : String; begin {$I-} for I := 0 to 25 do begin ADrive := Format(&#39;%s:&#39;, [Chr(Ord(&#39;A&#39;) + i)]); /// if (QueryDosDevice(PWideChar(ADrive), ABuffer, MAX_PATH) = 0) then continue; ACandidate := String(ABuffer).</description>
+    </item>
+    
+    <item>
+      <title>Get Process Name Method 3 NtQueryInformationProcess</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-3-ntqueryinformationprocess/</link>
+      <pubDate>Mon, 13 Apr 2020 18:29:45 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-3-ntqueryinformationprocess/</guid>
+      <description>Yet another technique to get the full image path of a target process using the NtQueryInformationProcess API documented Here
+This technique from 32bit to 64bit / 64bit to 32bit.
+// Jean-Pierre LESUEUR (@DarkCoderSc) function PhysicalToVirtualPath(APath : String) : String; var i : integer; ADrive : String; ABuffer : array[0..MAX_PATH-1] of Char; ACandidate : String; begin {$I-} for I := 0 to 25 do begin ADrive := Format(&#39;%s:&#39;, [Chr(Ord(&#39;A&#39;) + i)]); /// if (QueryDosDevice(PWideChar(ADrive), ABuffer, MAX_PATH) = 0) then continue; ACandidate := String(ABuffer).</description>
+    </item>
+    
+    <item>
+      <title>Get Process Name Method 2 GetMappedFilename</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-2-getmappedfilename/</link>
+      <pubDate>Mon, 13 Apr 2020 18:18:44 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-2-getmappedfilename/</guid>
+      <description>Bellow code demonstrate our to retrieve both current and target process full image path. This technique is very uncommon but works perfectly.
+Notice for both techniques you muse translate its physical path to virtual path using this tiny function  // Jean-Pierre LESUEUR (@DarkCoderSc) function PhysicalToVirtualPath(APath : String) : String; var i : integer; ADrive : String; ABuffer : array[0..MAX_PATH-1] of Char; ACandidate : String; begin {$I-} for I := 0 to 25 do begin ADrive := Format(&#39;%s:&#39;, [Chr(Ord(&#39;A&#39;) + i)]); /// if (QueryDosDevice(PWideChar(ADrive), ABuffer, MAX_PATH) = 0) then continue; ACandidate := String(ABuffer).</description>
+    </item>
+    
+    <item>
+      <title>Enum Attached Files</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/enum-attached-files/</link>
+      <pubDate>Tue, 24 Mar 2020 14:29:21 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/enum-attached-files/</guid>
+      <description>Above snippet demonstrate how to enumerate files openned by running programs on Windows.
+Some file unlocker use that technique to find where a specific file is attached and then force processes using that file to release it handle (via code injection techniques). I will write an example in a future snippet thread.
+Notice: At the bottom of that page, you will see a concreate example about how to use that unit.</description>
+    </item>
+    
+    <item>
+      <title>Get DLL Exported Function Address From Memory</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-dll-exported-function-address-from-mem/</link>
+      <pubDate>Wed, 18 Mar 2020 10:50:50 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-dll-exported-function-address-from-mem/</guid>
+      <description>As promised, we will adapt our previous code grab an exported function directly from memory.
+Serious advantage of this technique:
+ We don&amp;rsquo;t have to use CreateToolHelp32Snapshot anymore to enumerate modules and catch target module base address. We don&amp;rsquo;t need to parse PE Header from disk anymore, we will parse PE Header directly from memory.  Notice, it is still necessary to use LoadLibrary API to load desired DLL in memory.</description>
+    </item>
+    
+    <item>
+      <title>Get DLL Exported Function Address</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-dll-exported-function-address/</link>
+      <pubDate>Sun, 15 Mar 2020 11:01:36 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-dll-exported-function-address/</guid>
+      <description>This very small snippet is an adaptation of the previously released unit &amp;gt; UntEnumDLLExport.pas with just one goal, retrieve an exported function address by its name from any DLL (both 32 and 64bit).
+This adaptation is also interesting because it remove the need of having both heavy units Generics.Collections and SysUtils to have a smaller binary.
+Finally it is also quite interesting for tweaking our GetProcAddress alternative (you will find here) and only have the necesarry code.</description>
+    </item>
+    
+    <item>
+      <title>GetProcAddress API Alternative</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/getprocaddress-alternative/</link>
+      <pubDate>Sat, 14 Mar 2020 10:48:41 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/getprocaddress-alternative/</guid>
+      <description>In the past two days, I released examples about how to enumerate DLL export table through the PE Header.
+We will see one concreate example of using the UntEnumDLLExport.pas library to dynamically load API without using the famous Windows API &amp;gt; GetProcAddress()
+This technique is quite known and often used by some Malware, to mask which API&amp;rsquo;s they are dynamically loading and avoid Antivirus detection.
+To do so, we still need to use LoadLibrary() first to load a DLL in memory and retrieve it address, then iterate through loaded DLL export table and catch target function address.</description>
+    </item>
+    
+    <item>
+      <title>Enum DLL Exported Functions</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/enum-dll-exported-functions/</link>
+      <pubDate>Thu, 12 Mar 2020 15:51:22 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/enum-dll-exported-functions/</guid>
+      <description>This unit demonstrate how to enumerate DLL exported functions through PE Header manipulation.
+Features  Support both 32 and 64bit DLL&amp;rsquo;s. Identify exported function names. Identify exported function ordinal value. Support and resolve forwarded function. Identify export function address and relative address.  Unit Code (******************************************************************************* Author: -&amp;gt; Jean-Pierre LESUEUR (@DarkCoderSc) https://github.com/DarkCoderSc https://gist.github.com/DarkCoderSc https://www.phrozen.io/ License: -&amp;gt; MIT *******************************************************************************) unit UntEnumDLLExport; interface uses Classes, Windows, Generics.Collections, SysUtils; type TExportEntry = class private FName : String; FForwarded : Boolean; FForwardName : String; FRelativeAddr : Cardinal; FAddress : Int64; FOrdinal : Word; {@M} function GetFormatedAddress() : String; function GetFormatedRelativeAddr() : String; public {@C} constructor Create(); {@G/S} property Name : String read FName write FName; property Forwarded : Boolean read FForwarded write FForwarded; property ForwardName : String read FForwardName write FForwardName; property Address : Int64 read FAddress write FAddress; property RelativeAddr : Cardinal read FRelativeAddr write FRelativeAddr; property Ordinal : Word read FOrdinal write FOrdinal; {@G} property FormatedAddress : String read GetFormatedAddress; property FormatedRelativeAddress : String read GetFormatedRelativeAddr; end; TEnumDLLExport = class private FItems : TObjectList&amp;lt;TExportEntry&amp;gt;; FFileName : String; {@M} public {@C} constructor Create(AFileName : String); destructor Destroy(); override; {@M} function Enum() : Integer; {@G} property Items : TObjectList&amp;lt;TExportEntry&amp;gt; read FItems; property FileName : String read FFileName; end; implementation {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Local Functions +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++} function IntToHexF(AValue : Int64; APad : Word = 0 {0=Auto}) : String; begin if (APad = 0) then begin if (AValue &amp;lt;= High(Word)) then APad := 2 else if (AValue &amp;lt;= High(DWORD)) and (AValue &amp;gt; High(Word)) then APad := 8 else if (AValue &amp;lt;= High(Int64)) and (AValue &amp;gt; High(DWORD)) then APad := 16; end; result := &#39;0x&#39; + IntToHex(AValue, APad); end; {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ TExportEntry +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++} constructor TExportEntry.</description>
+    </item>
+    
+    <item>
+      <title>Get Process Name Method 1</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-1/</link>
+      <pubDate>Thu, 12 Mar 2020 15:46:57 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-1/</guid>
+      <description>This one possible technique (through QueryFullProcessImageNameW) to get process image path from it id.
+This example support Windows Vista to latest Windows version (Actually Windows 10)
+I will cover other example progressively and compatible with Windows XP and below.
+// Jean-Pierre LESUEUR (@DarkCoderSc) //... uses Windows, SysUtils; //... function GetProcessName(AProcessID : Cardinal) : String; var hProc : THandle; ALength : DWORD; hDLL : THandle; QueryFullProcessImageNameW : function( AProcess: THANDLE; AFlags: DWORD; AFileName: PWideChar; var ASize: DWORD): BOOL; stdcall; const PROCESS_QUERY_LIMITED_INFORMATION = $00001000; begin result := &#39;&#39;; /// if (TOSVersion.</description>
+    </item>
+    
+    <item>
+      <title>Enum Modules Method 1</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/enum-modules-method-1/</link>
+      <pubDate>Thu, 12 Mar 2020 15:40:35 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/enum-modules-method-1/</guid>
+      <description>You will find below an example of how to enumerate process modules using the well known Windows API CreateToolHelp32Snapshot(), I will cover additional methods soon.
+You may notice that when using CreateToolHelp32Snapshot(), first result (row) is generally the Image Path of the process owning module. I ignore that row by checking the value of szExePath with owner process image path.
+GetProcessName() is compatible since Windows Vista. It is possible to support Windows XP and below but not in this example.</description>
+    </item>
+    
+    <item>
+      <title>Terminate Process Techniques</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/terminate-process-techniques/</link>
+      <pubDate>Fri, 06 Mar 2020 14:44:08 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/terminate-process-techniques/</guid>
+      <description>You will find below 4 different techniques to close/kill/terminate Windows process in pure WinAPI.
+Techniques  TerminateProcess() : Classic method. ExitProcess() : via Code Injection (32bit to 32bit ; 64bit to 64bit). Crash Process : Inject code that will crash the process (32bit to 32bit ; 64bit to 64bit). CTRL_CLOSE_EVENT / WM_CLOSE : Send &amp;ldquo;close&amp;rdquo; messages to target process windows.  TerminateAProcess() Method Kill target process id following desired method : tmpAll, tpmTerminateProcess, tpmExitProcess, tpmCrash, tpmMessage</description>
+    </item>
+    
+    <item>
+      <title>Update PEB Debug Flag</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/update-peb-debug/</link>
+      <pubDate>Tue, 03 Mar 2020 14:40:19 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/update-peb-debug/</guid>
+      <description>Tiny delphi unit to get and update debug flag from PEB (Process Environment Block).
+This unit was created while working on a friend project called Unprotect (@fr0gger_), https://github.com/fr0gger/unprotect
+Indeed, some Malware often check the value of Debug flag to know whether or not they are getting debugged and apply anti debug techniques if this is the case.
+Example of implementation can be found there
+(******************************************************************************* Author: -&amp;gt; Jean-Pierre LESUEUR (@DarkCoderSc) https://github.</description>
+    </item>
+    
+    <item>
+      <title>Enum Process Method 1</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/enum-process-method-1/</link>
+      <pubDate>Tue, 03 Mar 2020 14:32:22 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/enum-process-method-1/</guid>
+      <description>This is one of the most famous method to enumerate running process on Windows.
+If AFilterSameArch is set to True, only processes running with same architecture as current process will be listed.
+{ Jean-Pierre LESUEUR (@DarkCoderSc) Example: ... var AProcessName : String; AProcessId : Cardinal; AProcessList : TDictionary&amp;lt;Integer, String&amp;gt;; begin AProcessList := EnumProcess(True); try for AProcessId in AProcessList.Keys do begin if NOT AProcessList.TryGetValue(AProcessId, AProcessName) then continue; /// ... end; finally if Assigned(AProcessList) then FreeAndNil(AProcessList); end; end; } //.</description>
+    </item>
+    
+    <item>
+      <title>Is Process 64bit</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/is-process-64/</link>
+      <pubDate>Tue, 03 Mar 2020 12:58:16 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/is-process-64/</guid>
+      <description>Tiny snippet to know whether or not target process id is running under 32bit or 64bit architecture.
+If result is True, target process is running under 64bit architecture.
+If result is False, target process is running under 32bit architecture.
+// // Jean-Pierre LESUEUR @DarkCoderSc // // ... uses Windows, SysUtils; // ... type TArchitecture = (x86, x64, xUnknown); // ... function IsProcessX64(AProcessId : Cardinal) : TArchitecture; var AProcHandle : THandle; AWow64Process : bool; begin result := xUnknown; /// { If we are not in a 64Bit system then we are for sure in a 32Bit system } if (TOSVersion.</description>
+    </item>
+    
+    <item>
+      <title>Manipulation and Detection of EOF</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/eof/</link>
+      <pubDate>Mon, 02 Mar 2020 12:21:49 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/eof/</guid>
+      <description>Description This Delphi unit demonstrate how to manipulate EOF Data of a Valid Microsoft Windows Portable Executable (PE) File.
+EOF (End Of File) is often used by Malware authors to offer their Malware users a way to edit Malware payload configuration (Ex: C2 informations) without having access to source code.
+You often encounter such techniques in:
+ Remote Access Tool/Trojan (RAT) File Wrapper / Binder Downloader Loader / Botnets  But not only.</description>
+    </item>
+    
+  </channel>
+</rss>

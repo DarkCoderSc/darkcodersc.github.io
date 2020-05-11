@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>LoadLibrary on Phrozen</title>
+    <link>https://www.phrozen.io/tags/loadlibrary/</link>
+    <description>Recent content in LoadLibrary on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Mar 2020 10:48:41 +0100</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/tags/loadlibrary/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>GetProcAddress API Alternative</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/getprocaddress-alternative/</link>
+      <pubDate>Sat, 14 Mar 2020 10:48:41 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/getprocaddress-alternative/</guid>
+      <description>In the past two days, I released examples about how to enumerate DLL export table through the PE Header.
+We will see one concreate example of using the UntEnumDLLExport.pas library to dynamically load API without using the famous Windows API &amp;gt; GetProcAddress()
+This technique is quite known and often used by some Malware, to mask which API&amp;rsquo;s they are dynamically loading and avoid Antivirus detection.
+To do so, we still need to use LoadLibrary() first to load a DLL in memory and retrieve it address, then iterate through loaded DLL export table and catch target function address.</description>
+    </item>
+    
+  </channel>
+</rss>

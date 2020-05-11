@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Open Source on Phrozen</title>
+    <link>https://www.phrozen.io/docs/windows/projects/opensource/</link>
+    <description>Recent content in Open Source on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 13 Mar 2020 11:57:00 +0100</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/docs/windows/projects/opensource/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DLL Export Enum v1.0 (Open Source &#43; Signed Binary)</title>
+      <link>https://www.phrozen.io/docs/windows/projects/opensource/dll-export-enum/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/projects/opensource/dll-export-enum/</guid>
+      <description>This project is mainly created to demonstrate how to use the previously released unit UntEnumDLLExport.pas available &amp;gt; Here
+The project is open source (see below for github link) and for those who don&amp;rsquo;t have Delphi installed, you can download the compiled and code signed application (both 32 and 64bit).
+Available Features  Enumerate Exported Functions From DLL.  Support Ordinal Value Only. Display Function Address and Relative Address. Support Forwarded Function.</description>
+    </item>
+    
+    <item>
+      <title>Update PEB Debug Flag (Delphi)</title>
+      <link>https://www.phrozen.io/docs/windows/projects/opensource/update-peb-debug-delphi/</link>
+      <pubDate>Tue, 03 Mar 2020 14:52:51 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/projects/opensource/update-peb-debug-delphi/</guid>
+      <description>This project implement the unit UntPEBDebug.pas with a concreate example.
+Features Include  List process and their Debug status. (ReadProcessMemory / PEB method) Update process Debug flag. (WriteProcessMemory / PEB method) Support both 32bit and 64bit. Notice.  Notice regarding architecture:
+ To target 32bit process, you must use the project compiled as 32bit executable. To target 64bit process, you must use the project compiled as 64bit executable.  Repository git clone https://github.</description>
+    </item>
+    
+    <item>
+      <title>EOF Reader (C&#43;&#43;)</title>
+      <link>https://www.phrozen.io/docs/windows/projects/opensource/eof-reader/</link>
+      <pubDate>Mon, 02 Mar 2020 17:18:20 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/projects/opensource/eof-reader/</guid>
+      <description>EOF Reader is a tiny Visual C++ project designed to detect the presence of EOF (End Of File) data on both 32bit and 64bit valid Portable Executable Files.
+After creating a similar project in Pascal/Delphi, I decided to port the code in C++.
+Some Antivirus Software using similar technique to flag some Malware generically. There are very few if no legitimate reason at all to append data at the end of a PE File.</description>
+    </item>
+    
+  </channel>
+</rss>

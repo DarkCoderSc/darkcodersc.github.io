@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Exported Function on Phrozen</title>
+    <link>https://www.phrozen.io/tags/exported-function/</link>
+    <description>Recent content in Exported Function on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 18 Mar 2020 10:50:50 +0100</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/tags/exported-function/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Get DLL Exported Function Address From Memory</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-dll-exported-function-address-from-mem/</link>
+      <pubDate>Wed, 18 Mar 2020 10:50:50 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-dll-exported-function-address-from-mem/</guid>
+      <description>As promised, we will adapt our previous code grab an exported function directly from memory.
+Serious advantage of this technique:
+ We don&amp;rsquo;t have to use CreateToolHelp32Snapshot anymore to enumerate modules and catch target module base address. We don&amp;rsquo;t need to parse PE Header from disk anymore, we will parse PE Header directly from memory.  Notice, it is still necessary to use LoadLibrary API to load desired DLL in memory.</description>
+    </item>
+    
+  </channel>
+</rss>

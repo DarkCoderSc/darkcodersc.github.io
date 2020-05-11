@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CreateToolHelp32Snapshot on Phrozen</title>
+    <link>https://www.phrozen.io/tags/createtoolhelp32snapshot/</link>
+    <description>Recent content in CreateToolHelp32Snapshot on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 03 Mar 2020 14:32:22 +0100</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/tags/createtoolhelp32snapshot/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Enum Process Method 1</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/enum-process-method-1/</link>
+      <pubDate>Tue, 03 Mar 2020 14:32:22 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/enum-process-method-1/</guid>
+      <description>This is one of the most famous method to enumerate running process on Windows.
+If AFilterSameArch is set to True, only processes running with same architecture as current process will be listed.
+{ Jean-Pierre LESUEUR (@DarkCoderSc) Example: ... var AProcessName : String; AProcessId : Cardinal; AProcessList : TDictionary&amp;lt;Integer, String&amp;gt;; begin AProcessList := EnumProcess(True); try for AProcessId in AProcessList.Keys do begin if NOT AProcessList.TryGetValue(AProcessId, AProcessName) then continue; /// ... end; finally if Assigned(AProcessList) then FreeAndNil(AProcessList); end; end; } //.</description>
+    </item>
+    
+  </channel>
+</rss>

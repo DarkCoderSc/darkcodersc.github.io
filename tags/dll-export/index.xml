@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DLL Export on Phrozen</title>
+    <link>https://www.phrozen.io/tags/dll-export/</link>
+    <description>Recent content in DLL Export on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 13 Mar 2020 11:57:00 +0100</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/tags/dll-export/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DLL Export Enum v1.0 (Open Source &#43; Signed Binary)</title>
+      <link>https://www.phrozen.io/docs/windows/projects/opensource/dll-export-enum/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/projects/opensource/dll-export-enum/</guid>
+      <description>This project is mainly created to demonstrate how to use the previously released unit UntEnumDLLExport.pas available &amp;gt; Here
+The project is open source (see below for github link) and for those who don&amp;rsquo;t have Delphi installed, you can download the compiled and code signed application (both 32 and 64bit).
+Available Features  Enumerate Exported Functions From DLL.  Support Ordinal Value Only. Display Function Address and Relative Address. Support Forwarded Function.</description>
+    </item>
+    
+  </channel>
+</rss>

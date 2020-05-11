@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Exported Address on Phrozen</title>
+    <link>https://www.phrozen.io/tags/exported-address/</link>
+    <description>Recent content in Exported Address on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 15 Mar 2020 11:01:36 +0100</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/tags/exported-address/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Get DLL Exported Function Address</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-dll-exported-function-address/</link>
+      <pubDate>Sun, 15 Mar 2020 11:01:36 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-dll-exported-function-address/</guid>
+      <description>This very small snippet is an adaptation of the previously released unit &amp;gt; UntEnumDLLExport.pas with just one goal, retrieve an exported function address by its name from any DLL (both 32 and 64bit).
+This adaptation is also interesting because it remove the need of having both heavy units Generics.Collections and SysUtils to have a smaller binary.
+Finally it is also quite interesting for tweaking our GetProcAddress alternative (you will find here) and only have the necesarry code.</description>
+    </item>
+    
+  </channel>
+</rss>

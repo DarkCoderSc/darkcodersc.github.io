@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Detect process architecture on Phrozen</title>
+    <link>https://www.phrozen.io/tags/detect-process-architecture/</link>
+    <description>Recent content in Detect process architecture on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 03 Mar 2020 12:58:16 +0100</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/tags/detect-process-architecture/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Is Process 64bit</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/is-process-64/</link>
+      <pubDate>Tue, 03 Mar 2020 12:58:16 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/is-process-64/</guid>
+      <description>Tiny snippet to know whether or not target process id is running under 32bit or 64bit architecture.
+If result is True, target process is running under 64bit architecture.
+If result is False, target process is running under 32bit architecture.
+// // Jean-Pierre LESUEUR @DarkCoderSc // // ... uses Windows, SysUtils; // ... type TArchitecture = (x86, x64, xUnknown); // ... function IsProcessX64(AProcessId : Cardinal) : TArchitecture; var AProcHandle : THandle; AWow64Process : bool; begin result := xUnknown; /// { If we are not in a 64Bit system then we are for sure in a 32Bit system } if (TOSVersion.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Phrozen</title>
+    <link>https://www.phrozen.io/tags/</link>
+    <description>Recent content in Tags on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 13 Apr 2020 18:35:13 +0200</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Delphi</title>
+      <link>https://www.phrozen.io/tags/delphi/</link>
+      <pubDate>Mon, 13 Apr 2020 18:35:13 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/delphi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Full Path</title>
+      <link>https://www.phrozen.io/tags/full-path/</link>
+      <pubDate>Mon, 13 Apr 2020 18:35:13 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/full-path/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GetProcessImageFileName</title>
+      <link>https://www.phrozen.io/tags/getprocessimagefilename/</link>
+      <pubDate>Mon, 13 Apr 2020 18:35:13 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/getprocessimagefilename/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Image Path</title>
+      <link>https://www.phrozen.io/tags/image-path/</link>
+      <pubDate>Mon, 13 Apr 2020 18:35:13 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/image-path/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Process Name</title>
+      <link>https://www.phrozen.io/tags/process-name/</link>
+      <pubDate>Mon, 13 Apr 2020 18:35:13 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/process-name/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>https://www.phrozen.io/tags/windows/</link>
+      <pubDate>Mon, 13 Apr 2020 18:35:13 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows API</title>
+      <link>https://www.phrozen.io/tags/windows-api/</link>
+      <pubDate>Mon, 13 Apr 2020 18:35:13 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/windows-api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>NtQueryInformationProcess</title>
+      <link>https://www.phrozen.io/tags/ntqueryinformationprocess/</link>
+      <pubDate>Mon, 13 Apr 2020 18:29:45 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/ntqueryinformationprocess/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>API</title>
+      <link>https://www.phrozen.io/tags/api/</link>
+      <pubDate>Mon, 13 Apr 2020 18:18:44 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GetMappedFileName</title>
+      <link>https://www.phrozen.io/tags/getmappedfilename/</link>
+      <pubDate>Mon, 13 Apr 2020 18:18:44 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/getmappedfilename/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Directory</title>
+      <link>https://www.phrozen.io/tags/directory/</link>
+      <pubDate>Sat, 11 Apr 2020 12:48:31 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/directory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fuzzer</title>
+      <link>https://www.phrozen.io/tags/fuzzer/</link>
+      <pubDate>Sat, 11 Apr 2020 12:48:31 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/fuzzer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://www.phrozen.io/tags/python/</link>
+      <pubDate>Sat, 11 Apr 2020 12:48:31 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web</title>
+      <link>https://www.phrozen.io/tags/web/</link>
+      <pubDate>Sat, 11 Apr 2020 12:48:31 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Attached Files</title>
+      <link>https://www.phrozen.io/tags/attached-files/</link>
+      <pubDate>Tue, 24 Mar 2020 14:29:21 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/attached-files/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Enumerate</title>
+      <link>https://www.phrozen.io/tags/enumerate/</link>
+      <pubDate>Tue, 24 Mar 2020 14:29:21 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/enumerate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Open Files</title>
+      <link>https://www.phrozen.io/tags/open-files/</link>
+      <pubDate>Tue, 24 Mar 2020 14:29:21 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/open-files/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Open Handles</title>
+      <link>https://www.phrozen.io/tags/open-handles/</link>
+      <pubDate>Tue, 24 Mar 2020 14:29:21 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/open-handles/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Alternative</title>
+      <link>https://www.phrozen.io/tags/alternative/</link>
+      <pubDate>Wed, 18 Mar 2020 10:50:50 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/alternative/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DLL</title>
+      <link>https://www.phrozen.io/tags/dll/</link>
+      <pubDate>Wed, 18 Mar 2020 10:50:50 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/dll/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Export</title>
+      <link>https://www.phrozen.io/tags/export/</link>
+      <pubDate>Wed, 18 Mar 2020 10:50:50 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/export/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exported Function</title>
+      <link>https://www.phrozen.io/tags/exported-function/</link>
+      <pubDate>Wed, 18 Mar 2020 10:50:50 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/exported-function/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GetProcAddress</title>
+      <link>https://www.phrozen.io/tags/getprocaddress/</link>
+      <pubDate>Wed, 18 Mar 2020 10:50:50 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/getprocaddress/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Memory</title>
+      <link>https://www.phrozen.io/tags/memory/</link>
+      <pubDate>Wed, 18 Mar 2020 10:50:50 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/memory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exported Address</title>
+      <link>https://www.phrozen.io/tags/exported-address/</link>
+      <pubDate>Sun, 15 Mar 2020 11:01:36 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/exported-address/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Library</title>
+      <link>https://www.phrozen.io/tags/library/</link>
+      <pubDate>Sun, 15 Mar 2020 11:01:36 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/library/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LoadLibrary</title>
+      <link>https://www.phrozen.io/tags/loadlibrary/</link>
+      <pubDate>Sat, 14 Mar 2020 10:48:41 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/loadlibrary/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PE Header</title>
+      <link>https://www.phrozen.io/tags/pe-header/</link>
+      <pubDate>Sat, 14 Mar 2020 10:48:41 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/pe-header/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Assembly</title>
+      <link>https://www.phrozen.io/tags/assembly/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/assembly/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bindshell</title>
+      <link>https://www.phrozen.io/tags/bindshell/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/bindshell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DLL Export</title>
+      <link>https://www.phrozen.io/tags/dll-export/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/dll-export/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Enumerator</title>
+      <link>https://www.phrozen.io/tags/enumerator/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/enumerator/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Functions</title>
+      <link>https://www.phrozen.io/tags/functions/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/functions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>List</title>
+      <link>https://www.phrozen.io/tags/list/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/list/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>NASM</title>
+      <link>https://www.phrozen.io/tags/nasm/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/nasm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shellcode</title>
+      <link>https://www.phrozen.io/tags/shellcode/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/shellcode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SLAE32</title>
+      <link>https://www.phrozen.io/tags/slae32/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/slae32/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>x86</title>
+      <link>https://www.phrozen.io/tags/x86/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/x86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>x86-32</title>
+      <link>https://www.phrozen.io/tags/x86-32/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/x86-32/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exported Functions</title>
+      <link>https://www.phrozen.io/tags/exported-functions/</link>
+      <pubDate>Thu, 12 Mar 2020 15:51:22 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/exported-functions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Process Id</title>
+      <link>https://www.phrozen.io/tags/process-id/</link>
+      <pubDate>Thu, 12 Mar 2020 15:46:57 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/process-id/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Libraries</title>
+      <link>https://www.phrozen.io/tags/libraries/</link>
+      <pubDate>Thu, 12 Mar 2020 15:40:35 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/libraries/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Modules</title>
+      <link>https://www.phrozen.io/tags/modules/</link>
+      <pubDate>Thu, 12 Mar 2020 15:40:35 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/modules/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Injection</title>
+      <link>https://www.phrozen.io/tags/injection/</link>
+      <pubDate>Fri, 06 Mar 2020 14:44:08 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/injection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kill Process</title>
+      <link>https://www.phrozen.io/tags/kill-process/</link>
+      <pubDate>Fri, 06 Mar 2020 14:44:08 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/kill-process/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Techniques</title>
+      <link>https://www.phrozen.io/tags/techniques/</link>
+      <pubDate>Fri, 06 Mar 2020 14:44:08 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/techniques/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Terminate Process</title>
+      <link>https://www.phrozen.io/tags/terminate-process/</link>
+      <pubDate>Fri, 06 Mar 2020 14:44:08 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/terminate-process/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Anti Debug</title>
+      <link>https://www.phrozen.io/tags/anti-debug/</link>
+      <pubDate>Tue, 03 Mar 2020 14:52:51 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/anti-debug/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Debug</title>
+      <link>https://www.phrozen.io/tags/debug/</link>
+      <pubDate>Tue, 03 Mar 2020 14:52:51 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/debug/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Malware</title>
+      <link>https://www.phrozen.io/tags/malware/</link>
+      <pubDate>Tue, 03 Mar 2020 14:52:51 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/malware/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PEB</title>
+      <link>https://www.phrozen.io/tags/peb/</link>
+      <pubDate>Tue, 03 Mar 2020 14:52:51 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/peb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Process Environment Block</title>
+      <link>https://www.phrozen.io/tags/process-environment-block/</link>
+      <pubDate>Tue, 03 Mar 2020 14:52:51 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/process-environment-block/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CreateToolHelp32Snapshot</title>
+      <link>https://www.phrozen.io/tags/createtoolhelp32snapshot/</link>
+      <pubDate>Tue, 03 Mar 2020 14:32:22 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/createtoolhelp32snapshot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>List Process</title>
+      <link>https://www.phrozen.io/tags/list-process/</link>
+      <pubDate>Tue, 03 Mar 2020 14:32:22 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/list-process/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Process Enum</title>
+      <link>https://www.phrozen.io/tags/process-enum/</link>
+      <pubDate>Tue, 03 Mar 2020 14:32:22 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/process-enum/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Process32First</title>
+      <link>https://www.phrozen.io/tags/process32first/</link>
+      <pubDate>Tue, 03 Mar 2020 14:32:22 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/process32first/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TProcessEntry32</title>
+      <link>https://www.phrozen.io/tags/tprocessentry32/</link>
+      <pubDate>Tue, 03 Mar 2020 14:32:22 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/tprocessentry32/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Detect process architecture</title>
+      <link>https://www.phrozen.io/tags/detect-process-architecture/</link>
+      <pubDate>Tue, 03 Mar 2020 12:58:16 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/detect-process-architecture/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>x64</title>
+      <link>https://www.phrozen.io/tags/x64/</link>
+      <pubDate>Tue, 03 Mar 2020 12:58:16 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/x64/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Malware Detection</title>
+      <link>https://www.phrozen.io/tags/malware-detection/</link>
+      <pubDate>Mon, 02 Mar 2020 19:56:33 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/malware-detection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Microsoft</title>
+      <link>https://www.phrozen.io/tags/microsoft/</link>
+      <pubDate>Mon, 02 Mar 2020 19:56:33 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/microsoft/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Uploader</title>
+      <link>https://www.phrozen.io/tags/uploader/</link>
+      <pubDate>Mon, 02 Mar 2020 19:56:33 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/uploader/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VirusTotal</title>
+      <link>https://www.phrozen.io/tags/virustotal/</link>
+      <pubDate>Mon, 02 Mar 2020 19:56:33 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/virustotal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Winja</title>
+      <link>https://www.phrozen.io/tags/winja/</link>
+      <pubDate>Mon, 02 Mar 2020 19:56:33 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/winja/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>End Of File</title>
+      <link>https://www.phrozen.io/tags/end-of-file/</link>
+      <pubDate>Mon, 02 Mar 2020 17:18:20 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/end-of-file/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EOF</title>
+      <link>https://www.phrozen.io/tags/eof/</link>
+      <pubDate>Mon, 02 Mar 2020 17:18:20 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/eof/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Access</title>
+      <link>https://www.phrozen.io/tags/access/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/access/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ACL</title>
+      <link>https://www.phrozen.io/tags/acl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/acl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Registry</title>
+      <link>https://www.phrozen.io/tags/registry/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/registry/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SDDL</title>
+      <link>https://www.phrozen.io/tags/sddl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/sddl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Security Descriptor</title>
+      <link>https://www.phrozen.io/tags/security-descriptor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/security-descriptor/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

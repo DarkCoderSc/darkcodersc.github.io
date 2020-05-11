@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>VirusTotal on Phrozen</title>
+    <link>https://www.phrozen.io/tags/virustotal/</link>
+    <description>Recent content in VirusTotal on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 02 Mar 2020 19:56:33 +0100</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/tags/virustotal/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Winja (VirusTotal Uploader) - Binary</title>
+      <link>https://www.phrozen.io/docs/windows/projects/freeware/winja/</link>
+      <pubDate>Mon, 02 Mar 2020 19:56:33 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/projects/freeware/winja/</guid>
+      <description>Winja is a free application for Microsoft Windows that lets you find potential malware on your system. It uses the scanning engine of virtually all antivirus products in the market to give you a very precise idea of the risk posed by a particular file.
+Two concrete examples of using Winja:  You have downloaded a file from the Internet, you want to remove as many doubts as possible. Drag this file onto the main window and wait for the results that will appear on your desktop.</description>
+    </item>
+    
+  </channel>
+</rss>

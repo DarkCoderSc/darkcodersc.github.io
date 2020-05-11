@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Open Files on Phrozen</title>
+    <link>https://www.phrozen.io/tags/open-files/</link>
+    <description>Recent content in Open Files on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 24 Mar 2020 14:29:21 +0100</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/tags/open-files/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Enum Attached Files</title>
+      <link>https://www.phrozen.io/docs/windows/snippets/delphi/enum-attached-files/</link>
+      <pubDate>Tue, 24 Mar 2020 14:29:21 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/enum-attached-files/</guid>
+      <description>Above snippet demonstrate how to enumerate files openned by running programs on Windows.
+Some file unlocker use that technique to find where a specific file is attached and then force processes using that file to release it handle (via code injection techniques). I will write an example in a future snippet thread.
+Notice: At the bottom of that page, you will see a concreate example about how to use that unit.</description>
+    </item>
+    
+  </channel>
+</rss>
