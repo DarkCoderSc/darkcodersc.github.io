@@ -17,7 +17,7 @@
       <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
       
       <guid>https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/</guid>
-      <description>Exercise Goal This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+      <description>Exercise Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
 If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
 Why? the goal of that certification is to practice and learn how to solve each exercise by yourself.</description>
     </item>

@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Exercise Goal This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+<meta name="description" content="Exercise Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
 If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
 Why? the goal of that certification is to practice and learn how to solve each exercise by yourself."><meta property="og:title" content="Exercise N°1 - Bindshell (NASM)" />
-<meta property="og:description" content="Exercise Goal This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+<meta property="og:description" content="Exercise Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
 If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
 Why? the goal of that certification is to practice and learn how to solve each exercise by yourself." />
 <meta property="og:type" content="article" />
@@ -17,7 +17,7 @@ Why? the goal of that certification is to practice and learn how to solve each e
 <title>Exercise N°1 - Bindshell (NASM) | Phrozen</title>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
-<script defer src="/en.search.min.75493407ebc34f8246846b0faa4b36cda5c83c14013401d058ad9187af68cee9.js" integrity="sha256-dUk0B&#43;vDT4JGhGsPqks2zaXIPBQBNAHQWK2Rh69ozuk="></script>
+<script defer src="/en.search.min.17623026988954fd8c747f181aa0250a03a8fab2ab8b3d47e8c8934f82a28a65.js" integrity="sha256-F2IwJpiJVP2MdH8YGqAlCgOo&#43;rKriz1H6MiTT4KiimU="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -214,7 +214,7 @@ if (!doNotTrack) {
   </li>
   
   <li>
-    <a href="https://github.io/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-github'></i>
+    <a href="https://github.com/DarkCoderSc" target="_blank" rel="noopener"><i class='fa fa-github'></i>
         Github
       </a>
   </li>
@@ -271,7 +271,7 @@ if (!doNotTrack) {
 
       
       
-  <article class="markdown"><h1 id="exercise-goal">Exercise Goal</h1>
+  <article class="markdown"><h1 id="exercise-goals">Exercise Goals</h1>
 <blockquote class="book-hint warning">
   <p>This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.</p>
 <p>If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.</p>
@@ -290,9 +290,6 @@ if (!doNotTrack) {
 <p>Bonus if getting referenced in <a href="https://www.exploit-db.com">exploit-db</a> or <a href="http://shell-storm.org/">shell-storm</a>.</p>
 </li>
 </ol>
-<h1 id="exercise-solution-github-repository">Exercise Solution Github Repository</h1>
-<p><a href="https://github.com/DarkCoderSc/tcp-bindshell-shellcode-slae32">https://github.com/DarkCoderSc/tcp-bindshell-shellcode-slae32</a></p>
-<p><code>git clone https://github.com/DarkCoderSc/tcp-bindshell-shellcode-slae32.git</code></p>
 <h1 id="tcp-bindshell-principle">TCP Bindshell Principle</h1>
 <p>In few words, a TCP Bindshell is a tiny server program that waits for new clients on a specific port.</p>
 <p>When a new client connects to the server it will spawn a new shell (Ex: <code>/bin/bash</code> or <code>/bin/sh</code>) and &ldquo;binds&rdquo; its file descriptors <code>stdin</code>(0) <code>stdout</code>(1) <code>stderr</code>(2) to the new client socket.</p>
@@ -1048,6 +1045,9 @@ else:
 <p>user@local:$ <code>chmod +x gen_bindshell.py &amp;&amp; ./gen_bindshell.py 1403</code></p>
 <p><img src="/images/202005/Screenshot-2020-05-07-at-14.39.52.png" alt="Bindshell Generator" /></p>
 <p>Replace output content to SLAE32 C shellcode.c template and see what happens when varying port number.</p>
+<h1 id="exercise-solution-github-repository">Exercise Solution Github Repository</h1>
+<p><a href="https://github.com/DarkCoderSc/tcp-bindshell-shellcode-slae32">https://github.com/DarkCoderSc/tcp-bindshell-shellcode-slae32</a></p>
+<p><code>git clone https://github.com/DarkCoderSc/tcp-bindshell-shellcode-slae32.git</code></p>
 <h1 id="conclusion">Conclusion</h1>
 <p>Creating a TCP bindshell shellcode is straightforward but not an easy task.</p>
 <p>It requires a solid comprehension of shellcoding and assembly throughout all steps. On the 7th exercises for passing the SLAE32 certification this is probably the most exausting part both for solving the challenge and explaning through this paper.</p>
