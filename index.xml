@@ -133,6 +133,17 @@ Why? the goal of that certification is to practice and learn how to solve each e
     </item>
     
     <item>
+      <title>Exercise N°2 - Reverse Shell (NASM)</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</guid>
+      <description>Exercise Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each exercise by yourself.</description>
+    </item>
+    
+    <item>
       <title>Enum DLL Exported Functions</title>
       <link>https://www.phrozen.io/docs/windows/snippets/delphi/enum-dll-exported-functions/</link>
       <pubDate>Thu, 12 Mar 2020 15:51:22 +0100</pubDate>

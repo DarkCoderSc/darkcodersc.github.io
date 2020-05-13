@@ -257,6 +257,11 @@
   </url>
   
   <url>
+    <loc>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</loc>
+    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.phrozen.io/tags/functions/</loc>
     <lastmod>2020-03-13T11:57:00+01:00</lastmod>
   </url>
@@ -278,6 +283,11 @@
   
   <url>
     <loc>https://www.phrozen.io/docs/windows/projects/opensource/</loc>
+    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/reverse-shell/</loc>
     <lastmod>2020-03-13T11:57:00+01:00</lastmod>
   </url>
   
