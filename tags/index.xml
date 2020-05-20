@@ -6,10 +6,82 @@
     <description>Recent content in Tags on Phrozen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Apr 2020 18:35:13 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 15 May 2020 11:57:00 +0100</lastBuildDate>
     
 	<atom:link href="https://www.phrozen.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bruteforce</title>
+      <link>https://www.phrozen.io/tags/bruteforce/</link>
+      <pubDate>Fri, 15 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/bruteforce/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Crack</title>
+      <link>https://www.phrozen.io/tags/crack/</link>
+      <pubDate>Fri, 15 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/crack/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exploit</title>
+      <link>https://www.phrozen.io/tags/exploit/</link>
+      <pubDate>Fri, 15 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/exploit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Logon</title>
+      <link>https://www.phrozen.io/tags/logon/</link>
+      <pubDate>Fri, 15 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/logon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Password</title>
+      <link>https://www.phrozen.io/tags/password/</link>
+      <pubDate>Fri, 15 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/password/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>User</title>
+      <link>https://www.phrozen.io/tags/user/</link>
+      <pubDate>Fri, 15 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/user/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vulnerability</title>
+      <link>https://www.phrozen.io/tags/vulnerability/</link>
+      <pubDate>Fri, 15 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/vulnerability/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>https://www.phrozen.io/tags/windows/</link>
+      <pubDate>Fri, 15 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/windows/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Delphi</title>
@@ -53,15 +125,6 @@
       <pubDate>Mon, 13 Apr 2020 18:35:13 +0200</pubDate>
       
       <guid>https://www.phrozen.io/tags/process-name/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Windows</title>
-      <link>https://www.phrozen.io/tags/windows/</link>
-      <pubDate>Mon, 13 Apr 2020 18:35:13 +0200</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/windows/</guid>
       <description></description>
     </item>
     

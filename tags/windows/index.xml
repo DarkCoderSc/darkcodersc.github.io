@@ -6,10 +6,21 @@
     <description>Recent content in Windows on Phrozen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Apr 2020 18:35:13 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 15 May 2020 11:57:00 +0100</lastBuildDate>
     
 	<atom:link href="https://www.phrozen.io/tags/windows/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bruteforce Windows Logon (PoC)</title>
+      <link>https://www.phrozen.io/docs/windows/poc/bruteforce-windows-logon/</link>
+      <pubDate>Fri, 15 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/poc/bruteforce-windows-logon/</guid>
+      <description>Weakness Description Microsoft Windows suffer from a serious lack of protection in their authentication mechanism which could led in privilege escalation.
+Indeed, in default installation of Windows (all version), the account lockdown policy is disabled plus authentication API&amp;rsquo;s doesn&amp;rsquo;t limit number of attempts per seconds which could led to a medium to fast brute-force attacks.
+Using our PoC and depending of the number of cores available in the target system you could test from few thousands to dozen of thousands of password per second.</description>
+    </item>
     
     <item>
       <title>Enum Attached Files</title>

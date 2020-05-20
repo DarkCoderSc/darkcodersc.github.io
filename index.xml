@@ -6,7 +6,7 @@
     <description>Recent content in Introduction on Phrozen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Apr 2020 18:35:13 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 15 May 2020 11:57:00 +0100</lastBuildDate>
     
 	<atom:link href="https://www.phrozen.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -20,6 +20,17 @@
       <description>Below code snippet demonstrate how to get DACL Security Descriptor in SDDL format for a targeted registry key.
 You need to parse the output SDDL string in order to understand access properties for desired keys, there are plenty of articles arround explaining how to understand an SDDL string format.
 You can also play with flags associated to ConvertSecurityDescriptorToStringSecurityDescriptor call to extract even more information from captured Security Descriptor Pointer after RegGetKeySecurity call.</description>
+    </item>
+    
+    <item>
+      <title>Bruteforce Windows Logon (PoC)</title>
+      <link>https://www.phrozen.io/docs/windows/poc/bruteforce-windows-logon/</link>
+      <pubDate>Fri, 15 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/poc/bruteforce-windows-logon/</guid>
+      <description>Weakness Description Microsoft Windows suffer from a serious lack of protection in their authentication mechanism which could led in privilege escalation.
+Indeed, in default installation of Windows (all version), the account lockdown policy is disabled plus authentication API&amp;rsquo;s doesn&amp;rsquo;t limit number of attempts per seconds which could led to a medium to fast brute-force attacks.
+Using our PoC and depending of the number of cores available in the target system you could test from few thousands to dozen of thousands of password per second.</description>
     </item>
     
     <item>

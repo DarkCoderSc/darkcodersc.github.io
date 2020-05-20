@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bruteforce on Phrozen</title>
+    <link>https://www.phrozen.io/tags/bruteforce/</link>
+    <description>Recent content in Bruteforce on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 May 2020 11:57:00 +0100</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/tags/bruteforce/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bruteforce Windows Logon (PoC)</title>
+      <link>https://www.phrozen.io/docs/windows/poc/bruteforce-windows-logon/</link>
+      <pubDate>Fri, 15 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/windows/poc/bruteforce-windows-logon/</guid>
+      <description>Weakness Description Microsoft Windows suffer from a serious lack of protection in their authentication mechanism which could led in privilege escalation.
+Indeed, in default installation of Windows (all version), the account lockdown policy is disabled plus authentication API&amp;rsquo;s doesn&amp;rsquo;t limit number of attempts per seconds which could led to a medium to fast brute-force attacks.
+Using our PoC and depending of the number of cores available in the target system you could test from few thousands to dozen of thousands of password per second.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Weakness Description Microsoft Windows suffer from a serious lack of protection in their authentication mechanism which could led in privilege escalation.
+Indeed, in default installation of Windows (all version), the account lockdown policy is disabled plus authentication API&rsquo;s doesn&rsquo;t limit number of attempts per seconds which could led to a medium to fast brute-force attacks.
+Using our PoC and depending of the number of cores available in the target system you could test from few thousands to dozen of thousands of password per second."><meta property="og:title" content="Bruteforce Windows Logon (PoC)" />
+<meta property="og:description" content="Weakness Description Microsoft Windows suffer from a serious lack of protection in their authentication mechanism which could led in privilege escalation.
+Indeed, in default installation of Windows (all version), the account lockdown policy is disabled plus authentication API&rsquo;s doesn&rsquo;t limit number of attempts per seconds which could led to a medium to fast brute-force attacks.
+Using our PoC and depending of the number of cores available in the target system you could test from few thousands to dozen of thousands of password per second." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/windows/poc/bruteforce-windows-logon/" />
+<meta property="article:published_time" content="2020-05-15T11:57:00+01:00" />
+<meta property="article:modified_time" content="2020-05-15T11:57:00+01:00" />
+<title>Bruteforce Windows Logon (PoC) | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.62c18f36dbfd1b99c5a9078b6c4fbbac7b3403f81107ccba0902d1e29f7a14ac.js" integrity="sha256-YsGPNtv9G5nFqQeLbE&#43;7rHs0A/gRB8y6CQLR4p96FKw="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Microsoft Windows</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/projects/" class="collapsed ">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/" class="collapsed ">Snippets</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/poc/" class="collapsed ">PoC</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/poc/bruteforce-windows-logon/" class="active">Bruteforce Windows Logon (PoC)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Linux</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/" class="collapsed ">SLAE32</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/DarkCoderSc" target="_blank" rel="noopener"><i class='fa fa-github'></i>
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Bruteforce Windows Logon (PoC)</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="weakness-description">Weakness Description</h1>
+<p>Microsoft Windows suffer from a serious lack of protection in their authentication mechanism which could led in privilege escalation.</p>
+<p>Indeed, in default installation of Windows (all version), the account lockdown policy is disabled plus authentication API&rsquo;s doesn&rsquo;t limit number of attempts per seconds which could led to a medium to fast brute-force attacks.</p>
+<p>Using our PoC and depending of the number of cores available in the target system you could test from few thousands to dozen of thousands of password per second.</p>
+<p>Considering that those kind of authentication API&rsquo;s could be used by any Windows account, even a Guest user could use the PoC to recover / crack the password of any local user and escalate his privilege.</p>
+<h1 id="mitigation">Mitigation</h1>
+<p>It is not sure that Microsoft will patch this problem. The best solution would be to implement account lockdown policy in all Microsoft Windows installations with a fine tuned threshold by default plus limiting the number of authentication API&rsquo;s call per seconds.</p>
+<h2 id="disabled-guest-account">Disabled Guest Account</h2>
+<p>If it is not absolutely necessary, disable the Guest account. By default, Guest account is not activated.</p>
+<h2 id="implement-lockdown-policy">Implement Lockdown Policy</h2>
+<p>By default Lockdown Policy is not activated. If you have access to &ldquo;Local Security Policy&rdquo; application you can enable account lockdown easily.</p>
+<blockquote class="book-hint danger">
+  Import notice: Account lockdown policy wont affect Administrator user account. The only known mitigation for Administrator account if enabled is to use a complex password.
+</blockquote>
+
+<h3 id="enable-account-lockdown-policy">Enable Account Lockdown Policy</h3>
+<p>Open &ldquo;Local Security Policy&rdquo; manager using <code>secpol.msc</code> command.</p>
+<p><img src="/images/202005/Screenshot-2020-05-19-at-10.55.54.png" alt="Run" /></p>
+<p>Then browse to <code>Security Settings</code> &gt; <code>Account Policies</code> &gt; <code>Account Lockout Policy</code></p>
+<p><img src="/images/202005/Screenshot-2020-05-19-at-10.59.11.png" alt="Local Security Policy" /></p>
+<p>Finally double click on <code>Account lockout threshold</code> item and set the <code>Account will lock out after</code> spin edit with desired value from (<code>1</code> to <code>999</code>).</p>
+<p><img src="/images/202005/Screenshot-2020-05-19-at-11.01.17.png" alt="Local Security Policy Rule" /></p>
+<blockquote class="book-hint warning">
+  <p>In Windows Home edition you might not found the <code>secpol.msc</code> management console. You can access to security settings through <code>gpedit.msc</code> and <code>Local Computer Policy</code> &gt; <code>Computer Configuration</code> &gt; <code>Windows Settings</code> &gt; <code>Security Settings</code> &gt; <code>Account Policy</code> &gt; <code>Account Lockout Policy</code>.</p>
+<p><img src="/images/202005/Screenshot-2020-05-19-at-11.08.23.png" alt="Secpol Alternative"></p>
+
+</blockquote>
+
+<h2 id="use-complex-password">Use complex password</h2>
+<p>This is the most important thing to take in consideration and the best way to mitiage this problem.</p>
+<p>Using a complex password will prevent brute-forcing attacks to succeed. Follow guidelines about how to create a tough password.</p>
+<h1 id="poc-source-code-32bit-and-64bit">PoC Source Code (32bit and 64bit)</h1>
+<p>The full Proof Of Concept code is available on Github : <a href="https://github.com/DarkCoderSc/win-brute-logon">https://github.com/DarkCoderSc/win-brute-logon</a></p>
+<p><code>git clone https://github.com/DarkCoderSc/win-brute-logon.git</code></p>
+<p>It was build with Delphi 10.3 Rio. (No additional libraries or dependencies are required)</p>
+<h2 id="usage">Usage</h2>
+<ul>
+<li><code>-u</code> : Target username (Required).</li>
+<li><code>-w</code> : Wordlist file (Required).</li>
+<li><code>-d</code> : Specify domain name (Default : %USERDOMAIN% environment variable).</li>
+<li><code>-v</code> : Enable verbosity.</li>
+</ul>
+<p>Example: <code>WinBruteLogon.exe -u &quot;Jean-Pierre LESUEUR&quot; -w &quot;c:\tmp\test.txt&quot; -v</code></p>
+<h2 id="result">Result</h2>
+<p><img src="/images/202005/Screenshot-2020-05-19-at-1.30.41.png" alt="Example" /></p>
+<h1 id="scenario-n1">Scenario N°1</h1>
+<p>Lets imagine an Hacker having an existing reverse shell to a remote Windows machine as a low privileged user (Guest account in our example, but it could be another user).</p>
+<p>Fortunately for him account policy lockdown is not enabled and target user <code>HackMe</code> might have been lazy and chose a password present in a wordlist.</p>
+<p>From his Netcat session and using <code>WinBruteLogon</code>, the Hacker could easily find the password of target account <code>HackMe</code> and escalate his privileges using another tool (in our case, <code>RunAsAttached.exe</code>). Still from his Netcat session he would be now logged as user <code>HackMe</code> and continue his path with his desired objectives.</p>
+<p>You can find both application on our Github page:</p>
+<ul>
+<li><code>WinBruteLogon</code> : <a href="https://github.com/DarkCoderSc/win-brute-logon">https://github.com/DarkCoderSc/win-brute-logon</a></li>
+<li><code>RunAsAttached</code> : <a href="https://github.com/DarkCoderSc/run-as-attached-local">https://github.com/DarkCoderSc/run-as-attached-local</a></li>
+</ul>
+<h2 id="scenario-in-video">Scenario in Video</h2>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/rmCJqpT3pRo" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h1 id="scenario-n2">Scenario N°2</h1>
+<p>In this scenario account policy lockdown is enabled and configured to lock account after 10 failed attempt. We are likely protected against brute-force attack using <code>WinBruteLogon.exe</code>.</p>
+<p>But what if Administrator account is used and enabled?</p>
+<p>Administrator account isn&rsquo;t concerned by the account lockdown policy, if an Hacker enter as a low privileged user and if Administrator account password is weak or present in a dictionary, the Hacker could still brute-force the account and escalate his privilege.</p>
+<blockquote class="book-hint danger">
+  Using a complex password is THE mitigation for such attack. In this specific case account lockdown policy would be useless.
+</blockquote>
+
+<h2 id="scenario-in-video-1">Scenario in Video</h2>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/AMqrTzdRENA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h1 id="conclusion-in-three-points">Conclusion in three points</h1>
+<ul>
+<li>
+<p>Ensure to use complex password for all your user and ensure that account lockdown policy is enabled.</p>
+</li>
+<li>
+<p>Be careful while testing this attack, it will surely be very noisy.</p>
+</li>
+<li>
+<p>Be sure to have all required authorization.</p>
+</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
