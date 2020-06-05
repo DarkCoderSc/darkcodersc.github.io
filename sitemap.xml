@@ -277,6 +277,16 @@
   </url>
   
   <url>
+    <loc>https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/</loc>
+    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</loc>
+    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.phrozen.io/tags/bindshell/</loc>
     <lastmod>2020-03-13T11:57:00+01:00</lastmod>
   </url>
@@ -293,16 +303,6 @@
   
   <url>
     <loc>https://www.phrozen.io/tags/enumerator/</loc>
-    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/</loc>
-    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</loc>
     <lastmod>2020-03-13T11:57:00+01:00</lastmod>
   </url>
   
@@ -565,7 +565,39 @@
   </url>
   
   <url>
+    <loc>https://www.phrozen.io/docs/linux/slae32/ex3-egghunter/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/linux/slae32/ex4-encoder/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/bad-chars/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/buffer-overflow/</loc>
+  </url>
+  
+  <url>
     <loc>https://www.phrozen.io/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/egg-hunter/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/encoder/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/metasploit/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/msfvenom/</loc>
   </url>
   
   <url>
@@ -578,6 +610,10 @@
   
   <url>
     <loc>https://www.phrozen.io/tags/security-descriptor/</loc>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/xor/</loc>
   </url>
   
 </urlset>
