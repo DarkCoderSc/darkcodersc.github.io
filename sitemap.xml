@@ -17,6 +17,101 @@
   </url>
   
   <url>
+    <loc>https://www.phrozen.io/tags/analyzing/</loc>
+    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/linux/slae32/ex5-shellcode-analyzing/</loc>
+    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/</loc>
+    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/gdb/</loc>
+    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/</loc>
+    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/libemu/</loc>
+    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/linux/</loc>
+    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/nasm/</loc>
+    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/reverse/</loc>
+    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/shellcode/</loc>
+    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/slae32/</loc>
+    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/linux/slae32/</loc>
+    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/</loc>
+    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/linux/slae32/ex4-encoder/</loc>
+    <lastmod>2020-05-29T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/bad-chars/</loc>
+    <lastmod>2020-05-29T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/encoder/</loc>
+    <lastmod>2020-05-29T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/x86/</loc>
+    <lastmod>2020-05-29T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/x86-32/</loc>
+    <lastmod>2020-05-29T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/xor/</loc>
+    <lastmod>2020-05-29T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.phrozen.io/tags/bruteforce/</loc>
     <lastmod>2020-05-15T11:57:00+01:00</lastmod>
   </url>
@@ -32,17 +127,7 @@
   </url>
   
   <url>
-    <loc>https://www.phrozen.io/docs/</loc>
-    <lastmod>2020-05-15T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.phrozen.io/tags/exploit/</loc>
-    <lastmod>2020-05-15T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/</loc>
     <lastmod>2020-05-15T11:57:00+01:00</lastmod>
   </url>
   
@@ -67,11 +152,6 @@
   </url>
   
   <url>
-    <loc>https://www.phrozen.io/tags/</loc>
-    <lastmod>2020-05-15T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.phrozen.io/tags/user/</loc>
     <lastmod>2020-05-15T11:57:00+01:00</lastmod>
   </url>
@@ -84,6 +164,31 @@
   <url>
     <loc>https://www.phrozen.io/tags/windows/</loc>
     <lastmod>2020-05-15T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/linux/slae32/ex3-egghunter/</loc>
+    <lastmod>2020-04-29T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/buffer-overflow/</loc>
+    <lastmod>2020-04-29T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/egg-hunter/</loc>
+    <lastmod>2020-04-29T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/metasploit/</loc>
+    <lastmod>2020-04-29T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/msfvenom/</loc>
+    <lastmod>2020-04-29T11:57:00+01:00</lastmod>
   </url>
   
   <url>
@@ -257,6 +362,21 @@
   </url>
   
   <url>
+    <loc>https://www.phrozen.io/tags/assembly/</loc>
+    <lastmod>2020-03-14T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</loc>
+    <lastmod>2020-03-14T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/reverse-shell/</loc>
+    <lastmod>2020-03-14T11:57:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.phrozen.io/docs/windows/snippets/delphi/getprocaddress-alternative/</loc>
     <lastmod>2020-03-14T10:48:41+01:00</lastmod>
   </url>
@@ -272,17 +392,7 @@
   </url>
   
   <url>
-    <loc>https://www.phrozen.io/tags/assembly/</loc>
-    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/</loc>
-    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</loc>
     <lastmod>2020-03-13T11:57:00+01:00</lastmod>
   </url>
   
@@ -312,52 +422,12 @@
   </url>
   
   <url>
-    <loc>https://www.phrozen.io/docs/linux/</loc>
-    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.phrozen.io/tags/list/</loc>
     <lastmod>2020-03-13T11:57:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.phrozen.io/tags/nasm/</loc>
-    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.phrozen.io/docs/windows/projects/opensource/</loc>
-    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/reverse-shell/</loc>
-    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/shellcode/</loc>
-    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/slae32/</loc>
-    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/docs/linux/slae32/</loc>
-    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/x86/</loc>
-    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/x86-32/</loc>
     <lastmod>2020-03-13T11:57:00+01:00</lastmod>
   </url>
   
@@ -565,39 +635,7 @@
   </url>
   
   <url>
-    <loc>https://www.phrozen.io/docs/linux/slae32/ex3-egghunter/</loc>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/docs/linux/slae32/ex4-encoder/</loc>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/bad-chars/</loc>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/buffer-overflow/</loc>
-  </url>
-  
-  <url>
     <loc>https://www.phrozen.io/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/egg-hunter/</loc>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/encoder/</loc>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/metasploit/</loc>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/msfvenom/</loc>
   </url>
   
   <url>
@@ -610,10 +648,6 @@
   
   <url>
     <loc>https://www.phrozen.io/tags/security-descriptor/</loc>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/xor/</loc>
   </url>
   
 </urlset>

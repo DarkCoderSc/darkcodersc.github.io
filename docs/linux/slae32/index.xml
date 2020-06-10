@@ -6,39 +6,17 @@
     <description>Recent content in SLAE32 on Phrozen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 13 Mar 2020 11:57:00 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2020 14:00:44 +0200</lastBuildDate>
     
 	<atom:link href="https://www.phrozen.io/docs/linux/slae32/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Assignment N°1 - Bindshell (NASM)</title>
-      <link>https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/</link>
-      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      <title>Assignment N°5 - Shellcode Analyzing / Dissecting</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex5-shellcode-analyzing/</link>
+      <pubDate>Tue, 09 Jun 2020 14:00:44 +0200</pubDate>
       
-      <guid>https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/</guid>
-      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
-If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
-Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
-    </item>
-    
-    <item>
-      <title>Assignment N°2 - Reverse Shell (NASM)</title>
-      <link>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</link>
-      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
-      
-      <guid>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</guid>
-      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
-If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
-Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
-    </item>
-    
-    <item>
-      <title>Assignment N°3 - Egg Hunter (C)</title>
-      <link>https://www.phrozen.io/docs/linux/slae32/ex3-egghunter/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.phrozen.io/docs/linux/slae32/ex3-egghunter/</guid>
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex5-shellcode-analyzing/</guid>
       <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
 If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
 Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
@@ -47,9 +25,42 @@ Why? the goal of that certification is to practice and learn how to solve each a
     <item>
       <title>Assignment N°4 - Shellcode Encoder (NASM)</title>
       <link>https://www.phrozen.io/docs/linux/slae32/ex4-encoder/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 29 May 2020 11:57:00 +0100</pubDate>
       
       <guid>https://www.phrozen.io/docs/linux/slae32/ex4-encoder/</guid>
+      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
+    </item>
+    
+    <item>
+      <title>Assignment N°3 - Egg Hunter (C)</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex3-egghunter/</link>
+      <pubDate>Wed, 29 Apr 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex3-egghunter/</guid>
+      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
+    </item>
+    
+    <item>
+      <title>Assignment N°2 - Reverse Shell (NASM)</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</link>
+      <pubDate>Sat, 14 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</guid>
+      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
+    </item>
+    
+    <item>
+      <title>Assignment N°1 - Bindshell (NASM)</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/</link>
+      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/</guid>
       <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
 If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
 Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>

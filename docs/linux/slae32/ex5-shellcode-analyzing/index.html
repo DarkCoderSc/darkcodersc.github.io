@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself."><meta property="og:title" content="Assignment N°5 - Shellcode Analyzing / Dissecting" />
+<meta property="og:description" content="Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/linux/slae32/ex5-shellcode-analyzing/" />
+<meta property="article:published_time" content="2020-06-09T14:00:44+02:00" />
+<meta property="article:modified_time" content="2020-06-09T14:00:44+02:00" />
+<title>Assignment N°5 - Shellcode Analyzing / Dissecting | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.73663f031401bc656f22812d435bb85443b0f1911847f1b461e5b87b8b430ce4.js" integrity="sha256-c2Y/AxQBvGVvIoEtQ1u4VEOw8ZEYR/G0YeW4e4tDDOQ="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Linux</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/" class="collapsed ">SLAE32</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex5-shellcode-analyzing/" class="active">Assignment N°5 - Shellcode Analyzing / Dissecting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex4-encoder/" class="">Assignment N°4 - Shellcode Encoder (NASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex3-egghunter/" class="">Assignment N°3 - Egg Hunter (C)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex2-reverseshell/" class="">Assignment N°2 - Reverse Shell (NASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex1-bindshell/" class="">Assignment N°1 - Bindshell (NASM)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Microsoft Windows</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/projects/" class="collapsed ">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/" class="collapsed ">Snippets</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/poc/" class="collapsed ">PoC</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/DarkCoderSc" target="_blank" rel="noopener"><i class='fa fa-github'></i>
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Assignment N°5 - Shellcode Analyzing / Dissecting</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="assignment-goals">Assignment Goals</h1>
+<p><img src="/images/202005/slae32-banner.png" alt="SLAE32" /></p>
+<blockquote class="book-hint warning">
+  <p>This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.</p>
+<p>If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.</p>
+<p>Why? the goal of that certification is to practice and learn how to solve each assignment by yourself. If you read this paper you will get spoiled and seriously oriented to my personal solution and take the risk to abuse of some shortcuts.</p>
+
+</blockquote>
+
+<ul>
+<li>
+<p>Take up at least 3 shellcode samples created using Msfpayload for Linux/x86.</p>
+</li>
+<li>
+<p>Use GDB/Ndisasm/Libemu to dissect the functionality of the shellcode.</p>
+</li>
+<li>
+<p>Present your analysis.</p>
+</li>
+</ul>
+<h1 id="shellcode-candidates">Shellcode Candidates</h1>
+<p>We will use <code>Msfvenom</code> from Metasploit Framework to generate three different payloads for Linux x86-32.</p>
+<p>We can easily enumerate payloads for this architecture and operating system using the following command:</p>
+<p>local@user:$ <code>msfvenom -l payloads | grep &quot;linux/x86&quot;</code></p>
+<p>We decided to use the three following payloads:</p>
+<ol>
+<li><code>linux/x86/read_file</code></li>
+<li><code>linux/x86/chmod</code></li>
+<li><code>linux/x86/exec</code></li>
+</ol>
+<h1 id="shellcode-n1---linuxx86read_file-ndisasm">Shellcode N°1 - <code>linux/x86/read_file</code> (Ndisasm)</h1>
+<h2 id="generate-payload">Generate Payload</h2>
+<p>To generate our shellcode, let&rsquo;s first understand which parameters are expected for this payload.</p>
+<p>local@user:$ <code>msfvenom -p linux/x86/read_file -a x86 --platform Linux --list-options</code></p>
+<pre><code>Name  Current Setting  Required  Description
+----  ---------------  --------  -----------
+FD    1                yes       The file descriptor to write output to
+PATH                   yes       The file path to read
+</code></pre><p>By default output file content is appended to File Descriptor 1 (<code>stdout</code>), we will keep it as is.</p>
+<p>We need however to specify the file to be read by the payload. We will choose <code>/etc/passwd</code> file. This file can be read by any user.</p>
+<p>We can now generate our final payload to local disk as binary file <code>payload1.bin</code>.</p>
+<p>local@user:$ <code>msfvenom -p linux/x86/read_file -a x86 --platform Linux PATH=/etc/passwd -f RAW &gt; payload1.bin</code></p>
+<h2 id="static-analysis-ndisasm">Static Analysis (Ndisasm)</h2>
+<p>Let&rsquo;s use Ndisasm to retrieve as close as possible assembly instructions that compose this payload.</p>
+<p>local@user:$ <code>cat payload1.bin | ndisasm -p intel -b32 -</code></p>
+<h3 id="output-assembly-analysis">Output Assembly Analysis</h3>
+<pre><code>;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Jump Call Pop Begin.
+; #JUMP.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+00000000  EB36              jmp short 0x38 ; Jump to 0x38 offset.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Open File.
+; Syscall n°5 (0x5)
+; open(const char *filename, int flags, umode_t mode)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+00000002  B805000000        mov eax,0x5    ; syscall_open()
+00000007  5B                pop ebx        ; #POP. &quot;filename&quot; parameter points to `/etc/passwd` 
+00000008  31C9              xor ecx,ecx    ; &quot;flags&quot; equal to zero.
+0000000A  CD80              int 0x80       ; call syscall.
+0000000C  89C3              mov ebx,eax    ; save returned value to ebx. returned value is file handle.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Read File.
+; Syscall n°3 (0x3)
+; read(unsigned int fd, char *buf, size_t count)
+; -- REGISTERS --
+; ebx = File descriptor obtained via &quot;open&quot; syscall.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+0000000E  B803000000        mov eax,0x3    ; syscall_read()
+00000013  89E7              mov edi,esp    ; copy current stack address to edi register.
+00000015  89F9              mov ecx,edi    ; copy edi register to ecx register;
+                                           ; this is where file content will be placed (buff)
+00000017  BA00100000        mov edx,0x1000 ; &quot;count&quot; equal to 4096 bytes. Number of bytes to read
+0000001C  CD80              int 0x80       ; call syscall.
+0000001E  89C2              mov edx,eax    ; save returned value to ebx. returned value is the number of bytes read.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Write File.
+; Syscall n°4 (0x4)
+; write(unsigned int fd, const char *buf, size_t count)
+; -- REGISTERS --
+; ecx = Stack address used to read file content (&quot;buff&quot;) via &quot;read&quot; syscall.
+; edx = bytes read from &quot;read&quot; syscall.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+00000020  B804000000        mov eax,0x4     ; syscall_write()
+00000025  BB01000000        mov ebx,0x1     ; write to file descriptor 0x1 (stdout)
+0000002A  CD80              int 0x80        ; call syscall.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Exit Gracefully.
+; Syscall n°1 (0x1)
+; exit(int error_code)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+0000002C  B801000000        mov eax,0x1     ; syscall_exit()
+00000031  BB00000000        mov ebx,0x0     ; error_code equal to zero.
+00000036  CD80              int 0x80        ; call syscall.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; #CALL
+; Next address 0x3D is pushed on stack by &quot;call&quot; instruction.
+; 0x3D contains target file to read (/etc/passwd)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+00000038  E8C5FFFFFF        call 0x2        ; Go to 0x00000002 offset. 
+                                        
+0000003D  2F                das             ; /
+0000003E  657463            gs jz 0xa4      ; etc
+00000041  2F                das             ; /
+00000042  7061              jo 0xa5         ; pa
+00000044  7373              jnc 0xb9        ; ss
+00000046  7764              ja 0xac         ; wd
+00000048  00                db 0x00         ; NULL
+</code></pre><p>Using static analysis was sufficient to understand every payload actions:</p>
+<ul>
+<li>Use Jump Call Pop technique to get address of target file (<code>/etc/passwd</code>).</li>
+<li>Open the target file. File handle / descriptor is stored in <code>ebx</code>.</li>
+<li>Read first 4096 Bytes to stack. Bytes read is stored in <code>edx</code>.</li>
+<li>Write those 4096 Bytes to file descriptor <code>0x1</code>.</li>
+<li>Exit gracefully.</li>
+</ul>
+<h1 id="shellcode-n2---linuxx86chmod-gdb">Shellcode N°2 - <code>linux/x86/chmod</code> (GDB)</h1>
+<p>This time, instead of using Ndisasm to conduct a static analysis we will use GDB to  understand what next payload is doing.</p>
+<h2 id="generate-payload-1">Generate Payload</h2>
+<p>To generate our shellcode, let&rsquo;s first understand which parameters are expected for this payload.</p>
+<p>local@user:$ <code>msfvenom -p linux/x86/chmod -a x86 --platform Linux --list-options</code></p>
+<pre><code>Name  Current Setting  Required  Description
+----  ---------------  --------  -----------
+FILE  /etc/shadow      yes       Filename to chmod
+MODE  0666             yes       File mode (octal)
+</code></pre><p>Both required parameters are already set. Since we are going to execute this payload we will set <code>FILE</code> to a harmless value.</p>
+<p>We will create a dummy file:</p>
+<p>local@user:$ <code>touch /tmp/test</code></p>
+<p>Then we will generate our payload and set output format to C.</p>
+<p>local@user:$ <code>msfvenom -p linux/x86/chmod -a x86 --platform Linux -f C FILE=/tmp/test</code></p>
+<pre><code>unsigned char buf[] = 
+&quot;\x99\x6a\x0f\x58\x52\xe8\x0a\x00\x00\x00\x2f\x74\x6d\x70\x2f&quot;
+&quot;\x74\x65\x73\x74\x00\x5b\x68\xb6\x01\x00\x00\x59\xcd\x80\x6a&quot;
+&quot;\x01\x58\xcd\x80&quot;;
+</code></pre><p>We will now place this array in our C template for shellcoding.</p>
+<pre><code>#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+
+unsigned char buf[] = 
+&quot;\x99\x6a\x0f\x58\x52\xe8\x0a\x00\x00\x00\x2f\x74\x6d\x70\x2f&quot;
+&quot;\x74\x65\x73\x74\x00\x5b\x68\xb6\x01\x00\x00\x59\xcd\x80\x6a&quot;
+&quot;\x01\x58\xcd\x80&quot;;
+
+main()
+{
+        printf(&quot;Shellcode Length:  %d\n&quot;, strlen(buf));
+
+        int (*ret)() = (int(*)())buf;
+
+        ret();
+}
+</code></pre><p>We can compile our shellcode using the following command:</p>
+<p>local@user:$ <code>gcc shellcode.c -o shellcode -z execstack</code></p>
+<h2 id="analyzing-shellcode-with-gdb">Analyzing Shellcode with GDB</h2>
+<p>local@user:$ <code>gdb ./shellcode</code></p>
+<p>First step is to breakpoint to the shellcode itself.</p>
+<p>GDB&gt; <code>b *&amp;buf</code></p>
+<pre><code>Breakpoint 1 at 0x2020
+</code></pre><p>We can now run the program</p>
+<p>GDB&gt; <code>r</code></p>
+<p>GDB will break when it reachs our shellcode location.</p>
+<p>We can see the assembly code of our shellocde using the <code>disassemble</code> command.</p>
+<p>GDB&gt; <code>disassemble</code></p>
+<pre><code>=&gt; 0x00402020 &lt;+0&gt;:     cdq    
+   0x00402021 &lt;+1&gt;:     push   0xf
+   0x00402023 &lt;+3&gt;:     pop    eax
+   0x00402024 &lt;+4&gt;:     push   edx 
+   0x00402025 &lt;+5&gt;:     call   0x402034 &lt;buf+20&gt;
+   0x0040202a &lt;+10&gt;:    das    
+   0x0040202b &lt;+11&gt;:    je     0x40209a
+   0x0040202d &lt;+13&gt;:    jo     0x40205e
+   0x0040202f &lt;+15&gt;:    je     0x402096
+   0x00402031 &lt;+17&gt;:    jae    0x4020a7
+   0x00402033 &lt;+19&gt;:    add    BYTE PTR [ebx+0x68],bl
+   0x00402036 &lt;+22&gt;:    mov    dh,0x1
+   0x00402038 &lt;+24&gt;:    add    BYTE PTR [eax],al
+   0x0040203a &lt;+26&gt;:    pop    ecx
+   0x0040203b &lt;+27&gt;:    int    0x80
+   0x0040203d &lt;+29&gt;:    push   0x1
+   0x0040203f &lt;+31&gt;:    pop    eax
+   0x00402040 &lt;+32&gt;:    int    0x80
+   0x00402042 &lt;+34&gt;:    add    BYTE PTR [eax],al
+</code></pre><p>At first glance it seems that some instruction are broken.</p>
+<p>Lets also dump registers values to trace future changes.</p>
+<p>GDB&gt; <code>info register</code></p>
+<pre><code>eax            0x402020 0x402020
+ecx            0x0      0x0
+edx            0x40064a 0x40064a
+ebx            0x401fd4 0x401fd4
+esp            0xbfffefbc       0xbfffefbc
+&lt;...snip...&gt;
+</code></pre><p>It is important to monitor registers between each instructions especially when you don&rsquo;t know what a specific instruction is used for.</p>
+<p>Let&rsquo;s continue to next instruction.</p>
+<p>GDB&gt; <code>n</code></p>
+<p>Our <code>edx</code> register is now equal to zero.</p>
+<p>GDB&gt; <code>print/x $edx</code></p>
+<p>It seems that <code>cdq</code> instruction was used to clear the <code>edx</code> register.</p>
+<p>GDB&gt; <code>n</code></p>
+<p>GDB&gt; <code>n</code></p>
+<p>GDB&gt; <code>n</code></p>
+<p>Last three instructions was used to respectively place value <code>0xf</code> to <code>eax</code> register and push a new zero to the top of the stack.</p>
+<p>Interestingly, the call instruction attempts to reach an invalid instruction location <code>0x402034</code>.</p>
+<p>Lets add a new breakpoint to this address and continue execution.</p>
+<p>GDB&gt;<code>b *0x402034</code></p>
+<p>GDB&gt;<code>c</code></p>
+<p><code>esp</code> register now points to a new location. This is perfectly normal, when <code>call</code> instruction is called, the next instruction offset is pushed on the top of the stack.</p>
+<p>The next instruction after the <code>call</code> was at offset <code>0x40202a</code>. This offset contains what seems to be our target file name. We can confirm that using following commands:</p>
+<p>GDB&gt; <code>x/x $esp</code></p>
+<pre><code>0xbfffefb4:     0x0040202a
+</code></pre><p>GDB&gt; <code>x/s *(char**)$esp</code> or <code>x/s 0x40202a</code></p>
+<pre><code>0x40202a &lt;buf+10&gt;:      &quot;/tmp/test&quot;
+</code></pre><p>This trick was used to place our target file name in memory and retrieve it location using the <code>call</code> instruction. It is a variant of the Jump Call Pop technique but without the Jump.</p>
+<p>GDB&gt; <code>n</code></p>
+<p>File name location was placed on <code>ebx</code> register using the <code>pop</code> instruction.</p>
+<p>GDB&gt; <code>n</code></p>
+<p>GDB&gt; <code>n</code></p>
+<p>Last two instructions was used to place on <code>ecx</code> the value <code>0x1b6</code></p>
+<p>We are currently stopped at a syscall call instruction.</p>
+<pre><code>=&gt; 0x40203b &lt;buf+27&gt;:   int    0x80
+</code></pre><p>Let&rsquo;s dump our registers</p>
+<p>GDB&gt; <code>info register</code></p>
+<pre><code>eax            0xf      0xf
+ecx            0x1b6    0x1b6
+edx            0x0      0x0
+ebx            0x40202a 0x40202a
+&lt;...snip...&gt;
+</code></pre><ul>
+<li><code>eax</code> register contains <code>0xf</code> which is the syscall number of <code>chmod(const char *filename, umode_t mode)</code>.</li>
+<li><code>ebx</code> register contains <code>0x40202a</code> which is the address of our file name <code>/etc/test</code>.</li>
+<li><code>ecx</code> register contains <code>0x1b6</code> which represent the chmod mode <code>666</code>.</li>
+</ul>
+<p>GDB&gt; <code>n</code></p>
+<p>chmod syscall was successfully triggered, we are sure of that because <code>eax</code> register contains <code>0x00</code> which means chmod function succeed.</p>
+<p>We can verify if our target file permissions have changed:</p>
+<p>GDB&gt; <code>!ls -l /tmp/test</code></p>
+<pre><code>-rw-rw-rw- 1 phrozen phrozen 0 Jun  9 07:48 /tmp/test
+</code></pre><p>GDB&gt; <code>n</code></p>
+<p>GDB&gt; <code>n</code></p>
+<p>Last two instructions was used to place on <code>eax</code> the value <code>0x1</code></p>
+<p>GDB&gt; <code>n</code></p>
+<p>We are currently stopped at a syscall call instruction.</p>
+<pre><code>=&gt; 0x402040 &lt;buf+32&gt;:   int    0x80
+</code></pre><ul>
+<li><code>eax</code> register contains <code>0x1</code> which is the syscall number of <code>exit(int error_code)</code></li>
+</ul>
+<p>GDB&gt; <code>n</code></p>
+<p>We&rsquo;ve now reached the end of our shellcode and gracefully exit our host program.</p>
+<p>Using GDB we were able to understand what the actual shellcode was doing, if we had used Ndisasm we would have been confused by the <code>call</code> instruction.</p>
+<h1 id="shellcode-n3---linuxx86exec-libemu">Shellcode N°3 - <code>linux/x86/exec</code> (Libemu)</h1>
+<p>For our last payload we will use Libemu to analyze what our shellcode is doing.</p>
+<p>You can find instructions about how to download and install Libemu on their <a href="http://libemu.carnivore.it/documentation/">official website</a>.</p>
+<p>In our guest machine, Libemu was installed on <code>/opt/libemu</code> path.</p>
+<p>In some Linux distributions you may install Libemu via aptitude:</p>
+<p>local@user:$ <code>apt install libemu-dev</code></p>
+<h2 id="generate-payload-2">Generate Payload</h2>
+<p>To generate our shellcode, let’s first understand which parameters are expected for this payload.</p>
+<p>local@user:$ <code>msfvenom -p linux/x86/exec -a x86 --platform Linux --list-options</code></p>
+<pre><code>Name  Current Setting  Required  Description                                                                                                                                          
+----  ---------------  --------  -----------                                                                                                                                          
+CMD                    yes       The command string to execute 
+</code></pre><p>Only one parameter is mandatory, the command to execute. We will set <code>/bin/ls</code> as command.</p>
+<p>local@user:$ <code>msfvenom -p linux/x86/exec -a x86 --platform Linux CMD=/bin/ls -f raw | /opt/libemu/bin/sctest -vvv -Ss 100000</code></p>
+<h2 id="analyzing-shellcode-with-libemu">Analyzing Shellcode with Libemu</h2>
+<p>After few seconds we should see the following output</p>
+<p><img src="/images/202006/Screenshot-2020-06-10-at-17.16.34.png" alt="Libemu" /></p>
+<p>This screenshot contains the &ldquo;registry dump&rdquo; after each instructions. This is very useful to trace what the shellcode is doing instruction by instruction.</p>
+<p>At the end of the analysis, when this is possible, Libemu generate some pseudocode to have a clear idea of what the shellcode is doing without spending to much time in understanding each assembly instructions.</p>
+<pre><code>int execve (
+     const char * dateiname = 0x00416fc0 =&gt;
+           = &quot;/bin/sh&quot;;
+     const char * argv[] = [
+           = 0x00416fb0 =&gt;
+               = 0x00416fc0 =&gt;
+                   = &quot;/bin/sh&quot;;
+           = 0x00416fb4 =&gt;
+               = 0x00416fc8 =&gt;
+                   = &quot;-c&quot;;
+           = 0x00416fb8 =&gt;
+               = 0x0041701d =&gt;
+                   = &quot;/bin/ls&quot;;
+           = 0x00000000 =&gt;
+             none;
+     ];
+     const char * envp[] = 0x00000000 =&gt;
+         none;
+) =  0;
+</code></pre><p>From above pseudocode, it is clear that Libemu has detected that the shellcode was using <code>execve</code> syscall to execute a new command via the <code>/bin/sh</code> program.</p>
+<p>The full command is: <code>/bin/sh -c &quot;/bin/sh -c /bin/ls&quot;</code></p>
+<p>We can even generate a graph of what shellcode is doing in dot format.</p>
+<p>local@user:$ <code>msfvenom -p linux/x86/exec -a x86 --platform Linux CMD=/bin/ls -f raw | /opt/libemu/bin/sctest -vvv -Ss 100000 -G exec.dot</code></p>
+<p>We can easily convert the dot file format to any compatible image format using the <code>dot</code> utility.</p>
+<p>local@user:$ <code>dot exec.dot -Tpng -o exec.png</code></p>
+<p><img src="/images/202006/libemu-exec.png" alt="Libemu Graph" /></p>
+<p>This comes very handy when it comes include further detail in our report analysis.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

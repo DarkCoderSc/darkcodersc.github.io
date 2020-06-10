@@ -6,10 +6,118 @@
     <description>Recent content in Tags on Phrozen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 May 2020 11:57:00 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2020 14:00:44 +0200</lastBuildDate>
     
 	<atom:link href="https://www.phrozen.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>analyzing</title>
+      <link>https://www.phrozen.io/tags/analyzing/</link>
+      <pubDate>Tue, 09 Jun 2020 14:00:44 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/analyzing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GDB</title>
+      <link>https://www.phrozen.io/tags/gdb/</link>
+      <pubDate>Tue, 09 Jun 2020 14:00:44 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/gdb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>libemu</title>
+      <link>https://www.phrozen.io/tags/libemu/</link>
+      <pubDate>Tue, 09 Jun 2020 14:00:44 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/libemu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>NASM</title>
+      <link>https://www.phrozen.io/tags/nasm/</link>
+      <pubDate>Tue, 09 Jun 2020 14:00:44 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/nasm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reverse</title>
+      <link>https://www.phrozen.io/tags/reverse/</link>
+      <pubDate>Tue, 09 Jun 2020 14:00:44 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/reverse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shellcode</title>
+      <link>https://www.phrozen.io/tags/shellcode/</link>
+      <pubDate>Tue, 09 Jun 2020 14:00:44 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/shellcode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SLAE32</title>
+      <link>https://www.phrozen.io/tags/slae32/</link>
+      <pubDate>Tue, 09 Jun 2020 14:00:44 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/slae32/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bad chars</title>
+      <link>https://www.phrozen.io/tags/bad-chars/</link>
+      <pubDate>Fri, 29 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/bad-chars/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Encoder</title>
+      <link>https://www.phrozen.io/tags/encoder/</link>
+      <pubDate>Fri, 29 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/encoder/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>x86</title>
+      <link>https://www.phrozen.io/tags/x86/</link>
+      <pubDate>Fri, 29 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/x86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>x86-32</title>
+      <link>https://www.phrozen.io/tags/x86-32/</link>
+      <pubDate>Fri, 29 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/x86-32/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>XOR</title>
+      <link>https://www.phrozen.io/tags/xor/</link>
+      <pubDate>Fri, 29 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/xor/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Bruteforce</title>
@@ -80,6 +188,42 @@
       <pubDate>Fri, 15 May 2020 11:57:00 +0100</pubDate>
       
       <guid>https://www.phrozen.io/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Buffer Overflow</title>
+      <link>https://www.phrozen.io/tags/buffer-overflow/</link>
+      <pubDate>Wed, 29 Apr 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/buffer-overflow/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Egg Hunter</title>
+      <link>https://www.phrozen.io/tags/egg-hunter/</link>
+      <pubDate>Wed, 29 Apr 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/egg-hunter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Metasploit</title>
+      <link>https://www.phrozen.io/tags/metasploit/</link>
+      <pubDate>Wed, 29 Apr 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/metasploit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Msfvenom</title>
+      <link>https://www.phrozen.io/tags/msfvenom/</link>
+      <pubDate>Wed, 29 Apr 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/msfvenom/</guid>
       <description></description>
     </item>
     
@@ -309,6 +453,24 @@
     </item>
     
     <item>
+      <title>Assembly</title>
+      <link>https://www.phrozen.io/tags/assembly/</link>
+      <pubDate>Sat, 14 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/assembly/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reverse Shell</title>
+      <link>https://www.phrozen.io/tags/reverse-shell/</link>
+      <pubDate>Sat, 14 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/reverse-shell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>LoadLibrary</title>
       <link>https://www.phrozen.io/tags/loadlibrary/</link>
       <pubDate>Sat, 14 Mar 2020 10:48:41 +0100</pubDate>
@@ -323,15 +485,6 @@
       <pubDate>Sat, 14 Mar 2020 10:48:41 +0100</pubDate>
       
       <guid>https://www.phrozen.io/tags/pe-header/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Assembly</title>
-      <link>https://www.phrozen.io/tags/assembly/</link>
-      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/assembly/</guid>
       <description></description>
     </item>
     
@@ -377,60 +530,6 @@
       <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
       
       <guid>https://www.phrozen.io/tags/list/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>NASM</title>
-      <link>https://www.phrozen.io/tags/nasm/</link>
-      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/nasm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Reverse Shell</title>
-      <link>https://www.phrozen.io/tags/reverse-shell/</link>
-      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/reverse-shell/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Shellcode</title>
-      <link>https://www.phrozen.io/tags/shellcode/</link>
-      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/shellcode/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>SLAE32</title>
-      <link>https://www.phrozen.io/tags/slae32/</link>
-      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/slae32/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>x86</title>
-      <link>https://www.phrozen.io/tags/x86/</link>
-      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/x86/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>x86-32</title>
-      <link>https://www.phrozen.io/tags/x86-32/</link>
-      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/x86-32/</guid>
       <description></description>
     </item>
     
@@ -696,60 +795,6 @@
     </item>
     
     <item>
-      <title>Bad chars</title>
-      <link>https://www.phrozen.io/tags/bad-chars/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/bad-chars/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Buffer Overflow</title>
-      <link>https://www.phrozen.io/tags/buffer-overflow/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/buffer-overflow/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Egg Hunter</title>
-      <link>https://www.phrozen.io/tags/egg-hunter/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/egg-hunter/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Encoder</title>
-      <link>https://www.phrozen.io/tags/encoder/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/encoder/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Metasploit</title>
-      <link>https://www.phrozen.io/tags/metasploit/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/metasploit/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Msfvenom</title>
-      <link>https://www.phrozen.io/tags/msfvenom/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/msfvenom/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Registry</title>
       <link>https://www.phrozen.io/tags/registry/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -773,15 +818,6 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://www.phrozen.io/tags/security-descriptor/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>XOR</title>
-      <link>https://www.phrozen.io/tags/xor/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/xor/</guid>
       <description></description>
     </item>
     

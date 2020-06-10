@@ -6,7 +6,7 @@
     <description>Recent content in Introduction on Phrozen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 May 2020 11:57:00 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2020 14:00:44 +0200</lastBuildDate>
     
 	<atom:link href="https://www.phrozen.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -23,6 +23,28 @@ You can also play with flags associated to ConvertSecurityDescriptorToStringSecu
     </item>
     
     <item>
+      <title>Assignment N°5 - Shellcode Analyzing / Dissecting</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex5-shellcode-analyzing/</link>
+      <pubDate>Tue, 09 Jun 2020 14:00:44 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex5-shellcode-analyzing/</guid>
+      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
+    </item>
+    
+    <item>
+      <title>Assignment N°4 - Shellcode Encoder (NASM)</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex4-encoder/</link>
+      <pubDate>Fri, 29 May 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex4-encoder/</guid>
+      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
+    </item>
+    
+    <item>
       <title>Bruteforce Windows Logon (PoC)</title>
       <link>https://www.phrozen.io/docs/windows/poc/bruteforce-windows-logon/</link>
       <pubDate>Fri, 15 May 2020 11:57:00 +0100</pubDate>
@@ -31,6 +53,17 @@ You can also play with flags associated to ConvertSecurityDescriptorToStringSecu
       <description>Weakness Description Microsoft Windows suffer from a serious lack of protection in their authentication mechanism which could led in privilege escalation.
 Indeed, in default installation of Windows (all version), the account lockdown policy is disabled plus authentication API&amp;rsquo;s doesn&amp;rsquo;t limit number of attempts per seconds which could led to a medium to fast brute-force attacks.
 Using our PoC and depending of the number of cores available in the target system you could test from few thousands to dozen of thousands of password per second.</description>
+    </item>
+    
+    <item>
+      <title>Assignment N°3 - Egg Hunter (C)</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex3-egghunter/</link>
+      <pubDate>Wed, 29 Apr 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex3-egghunter/</guid>
+      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
     </item>
     
     <item>
@@ -110,6 +143,17 @@ Finally it is also quite interesting for tweaking our GetProcAddress alternative
     </item>
     
     <item>
+      <title>Assignment N°2 - Reverse Shell (NASM)</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</link>
+      <pubDate>Sat, 14 Mar 2020 11:57:00 +0100</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</guid>
+      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
+    </item>
+    
+    <item>
       <title>GetProcAddress API Alternative</title>
       <link>https://www.phrozen.io/docs/windows/snippets/delphi/getprocaddress-alternative/</link>
       <pubDate>Sat, 14 Mar 2020 10:48:41 +0100</pubDate>
@@ -127,17 +171,6 @@ To do so, we still need to use LoadLibrary() first to load a DLL in memory and r
       <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
       
       <guid>https://www.phrozen.io/docs/linux/slae32/ex1-bindshell/</guid>
-      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
-If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
-Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
-    </item>
-    
-    <item>
-      <title>Assignment N°2 - Reverse Shell (NASM)</title>
-      <link>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</link>
-      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
-      
-      <guid>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</guid>
       <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
 If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
 Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
@@ -275,28 +308,6 @@ Some Antivirus Software using similar technique to flag some Malware generically
 EOF (End Of File) is often used by Malware authors to offer their Malware users a way to edit Malware payload configuration (Ex: C2 informations) without having access to source code.
 You often encounter such techniques in:
  Remote Access Tool/Trojan (RAT) File Wrapper / Binder Downloader Loader / Botnets  But not only.</description>
-    </item>
-    
-    <item>
-      <title>Assignment N°3 - Egg Hunter (C)</title>
-      <link>https://www.phrozen.io/docs/linux/slae32/ex3-egghunter/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.phrozen.io/docs/linux/slae32/ex3-egghunter/</guid>
-      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
-If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
-Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
-    </item>
-    
-    <item>
-      <title>Assignment N°4 - Shellcode Encoder (NASM)</title>
-      <link>https://www.phrozen.io/docs/linux/slae32/ex4-encoder/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.phrozen.io/docs/linux/slae32/ex4-encoder/</guid>
-      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
-If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
-Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
     </item>
     
   </channel>

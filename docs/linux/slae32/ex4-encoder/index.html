@@ -12,11 +12,12 @@ If you are willing to pass the certification I really suggest you to wait until 
 Why? the goal of that certification is to practice and learn how to solve each assignment by yourself." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.phrozen.io/docs/linux/slae32/ex4-encoder/" />
-
+<meta property="article:published_time" content="2020-05-29T11:57:00+01:00" />
+<meta property="article:modified_time" content="2020-05-29T11:57:00+01:00" />
 <title>Assignment N°4 - Shellcode Encoder (NASM) | Phrozen</title>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
-<script defer src="/en.search.min.e5c252cb1d9b09f8f6439728cc7cb1f3da0dcaf7ddae7a8298ef0c23b4612cff.js" integrity="sha256-5cJSyx2bCfj2Q5cozHyx89oNyvfdrnqCmO8MI7RhLP8="></script>
+<script defer src="/en.search.min.73663f031401bc656f22812d435bb85443b0f1911847f1b461e5b87b8b430ce4.js" integrity="sha256-c2Y/AxQBvGVvIoEtQ1u4VEOw8ZEYR/G0YeW4e4tDDOQ="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -70,6 +71,98 @@ if (!doNotTrack) {
 
   
   <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Linux</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/" class="collapsed ">SLAE32</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex5-shellcode-analyzing/" class="">Assignment N°5 - Shellcode Analyzing / Dissecting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex4-encoder/" class="active">Assignment N°4 - Shellcode Encoder (NASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex3-egghunter/" class="">Assignment N°3 - Egg Hunter (C)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex2-reverseshell/" class="">Assignment N°2 - Reverse Shell (NASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex1-bindshell/" class="">Assignment N°1 - Bindshell (NASM)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
     
       
         <li class="book-section-flat" >
@@ -132,88 +225,6 @@ if (!doNotTrack) {
   
   
 
-  
-
-        </li>
-      
-    
-  </ul>
-  
-
-        </li>
-      
-    
-      
-        <li class="book-section-flat" >
-          
-  
-    <span>Linux</span>
-  
-
-          
-  
-  
-  
-
-  
-  <ul>
-    
-      
-        <li>
-          
-  
-    <a href="/docs/linux/slae32/" class="collapsed ">SLAE32</a>
-  
-
-          
-  
-  
-  
-
-  
-  <ul>
-    
-      
-        <li>
-          
-  
-    <a href="/docs/linux/slae32/ex1-bindshell/" class="">Assignment N°1 - Bindshell (NASM)</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-    <a href="/docs/linux/slae32/ex2-reverseshell/" class="">Assignment N°2 - Reverse Shell (NASM)</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-    <a href="/docs/linux/slae32/ex3-egghunter/" class="">Assignment N°3 - Egg Hunter (C)</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-    <a href="/docs/linux/slae32/ex4-encoder/" class="active">Assignment N°4 - Shellcode Encoder (NASM)</a>
-  
-
-        </li>
-      
-    
-  </ul>
   
 
         </li>
@@ -423,9 +434,9 @@ get_shellcode:
 </code></pre><h4 id="identified-white-chars">Identified White Chars</h4>
 <p>Each OpCode present in this decoder is designated as a whitelisted char. Since it is required for decoding process it can&rsquo;t be avoided.</p>
 <p>To identify white chars we can compile the Decoder template then use objdump.</p>
-<p>local@user:# <code>nasm -f elf32 -o xor-decoder.o xor-decoder.nasm</code></p>
-<p>local@user:# <code>ld -o xor-decoder xor-decoder.o</code></p>
-<p>local@users:# <code>objdump -d xor-decoder -M intel</code></p>
+<p>local@user:$ <code>nasm -f elf32 -o xor-decoder.o xor-decoder.nasm</code></p>
+<p>local@user:$ <code>ld -o xor-decoder xor-decoder.o</code></p>
+<p>local@users:$ <code>objdump -d xor-decoder -M intel</code></p>
 <pre><code>xor-decoder:     file format elf32-i386
 
 
@@ -837,7 +848,7 @@ success(f&quot;Shellcode successfully encoded, payload size: {size}&quot;)
 </ul>
 <h3 id="example">Example</h3>
 <p>We will use <code>execve-stack</code> as shellcode to encode.</p>
-<p>local@user:# <code>./xor-encoder.py -s &quot;\xeb\x1a\x5e\x31\xdb\x88\x5e\x07\x89\x76\x08\x89\x5e\x0c\x8d\x1e\x8d\x4e\x08\x8d\x56\x0c\x31\xc0\xb0\x0b\xcd\x80\xe8\xe1\xff\xff\xff\x2f\x62\x69\x6e\x2f\x73\x68\x41\x42\x42\x42\x42\x43\x43\x43\x43&quot; -b &quot;\x0a\x0d&quot; -v -p</code></p>
+<p>local@user:$ <code>./xor-encoder.py -s &quot;\xeb\x1a\x5e\x31\xdb\x88\x5e\x07\x89\x76\x08\x89\x5e\x0c\x8d\x1e\x8d\x4e\x08\x8d\x56\x0c\x31\xc0\xb0\x0b\xcd\x80\xe8\xe1\xff\xff\xff\x2f\x62\x69\x6e\x2f\x73\x68\x41\x42\x42\x42\x42\x43\x43\x43\x43&quot; -b &quot;\x0a\x0d&quot; -v -p</code></p>
 <p><img src="/images/202006/Screenshot-2020-06-05-at-17.16.38.png" alt="Example Picture" /></p>
 <h4 id="test-encoded-shellcode">Test encoded shellcode</h4>
 <pre><code>#include&lt;stdio.h&gt;
@@ -863,7 +874,7 @@ main()
 
 	ret();
 }
-</code></pre><p>local@user:# <code>gcc shellcode.c -o shellcode -z execstack &amp;&amp; ./shellcode</code></p>
+</code></pre><p>local@user:$ <code>gcc shellcode.c -o shellcode -z execstack &amp;&amp; ./shellcode</code></p>
 <p><img src="/images/202006/Screenshot-2020-06-05-at-17.18.14.png" alt="Shellcode Exec" /></p>
 <h1 id="afterword">Afterword</h1>
 <p>Encoder is available in the following Github repository : <a href="https://github.com/DarkCoderSc/slae32-xor-encoder">https://github.com/DarkCoderSc/slae32-xor-encoder</a></p>

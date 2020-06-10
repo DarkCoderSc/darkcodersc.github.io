@@ -6,6 +6,7 @@
     <description>Recent content in Bad chars on Phrozen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Fri, 29 May 2020 11:57:00 +0100</lastBuildDate>
     
 	<atom:link href="https://www.phrozen.io/tags/bad-chars/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,7 +14,7 @@
     <item>
       <title>Assignment N°4 - Shellcode Encoder (NASM)</title>
       <link>https://www.phrozen.io/docs/linux/slae32/ex4-encoder/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 29 May 2020 11:57:00 +0100</pubDate>
       
       <guid>https://www.phrozen.io/docs/linux/slae32/ex4-encoder/</guid>
       <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
