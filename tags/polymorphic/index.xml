@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Polymorphic on Phrozen</title>
+    <link>https://www.phrozen.io/tags/polymorphic/</link>
+    <description>Recent content in Polymorphic on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 Jun 2020 16:36:31 +0200</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/tags/polymorphic/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Assignment N°6 - Polymorphism</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex6-polymorphism/</link>
+      <pubDate>Fri, 12 Jun 2020 16:36:31 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex6-polymorphism/</guid>
+      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
+    </item>
+    
+  </channel>
+</rss>

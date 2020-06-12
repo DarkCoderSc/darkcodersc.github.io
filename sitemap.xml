@@ -17,6 +17,66 @@
   </url>
   
   <url>
+    <loc>https://www.phrozen.io/tags/assembly/</loc>
+    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/linux/slae32/ex6-polymorphism/</loc>
+    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/</loc>
+    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/</loc>
+    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/linux/</loc>
+    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/polymorphic/</loc>
+    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/polymorphism/</loc>
+    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/shellcode/</loc>
+    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/slae32/</loc>
+    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/linux/slae32/</loc>
+    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/</loc>
+    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/x86/</loc>
+    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.phrozen.io/tags/analyzing/</loc>
     <lastmod>2020-06-09T14:00:44+02:00</lastmod>
   </url>
@@ -27,27 +87,12 @@
   </url>
   
   <url>
-    <loc>https://www.phrozen.io/docs/</loc>
-    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.phrozen.io/tags/gdb/</loc>
     <lastmod>2020-06-09T14:00:44+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://www.phrozen.io/</loc>
-    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.phrozen.io/tags/libemu/</loc>
-    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/docs/linux/</loc>
     <lastmod>2020-06-09T14:00:44+02:00</lastmod>
   </url>
   
@@ -58,26 +103,6 @@
   
   <url>
     <loc>https://www.phrozen.io/tags/reverse/</loc>
-    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/shellcode/</loc>
-    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/slae32/</loc>
-    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/docs/linux/slae32/</loc>
-    <lastmod>2020-06-09T14:00:44+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/</loc>
     <lastmod>2020-06-09T14:00:44+02:00</lastmod>
   </url>
   
@@ -93,11 +118,6 @@
   
   <url>
     <loc>https://www.phrozen.io/tags/encoder/</loc>
-    <lastmod>2020-05-29T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/x86/</loc>
     <lastmod>2020-05-29T11:57:00+01:00</lastmod>
   </url>
   
@@ -359,11 +379,6 @@
   <url>
     <loc>https://www.phrozen.io/tags/library/</loc>
     <lastmod>2020-03-15T11:01:36+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/assembly/</loc>
-    <lastmod>2020-03-14T11:57:00+01:00</lastmod>
   </url>
   
   <url>

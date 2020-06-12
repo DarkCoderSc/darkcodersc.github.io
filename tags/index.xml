@@ -6,10 +6,64 @@
     <description>Recent content in Tags on Phrozen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 09 Jun 2020 14:00:44 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 12 Jun 2020 16:36:31 +0200</lastBuildDate>
     
 	<atom:link href="https://www.phrozen.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Assembly</title>
+      <link>https://www.phrozen.io/tags/assembly/</link>
+      <pubDate>Fri, 12 Jun 2020 16:36:31 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/assembly/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Polymorphic</title>
+      <link>https://www.phrozen.io/tags/polymorphic/</link>
+      <pubDate>Fri, 12 Jun 2020 16:36:31 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/polymorphic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Polymorphism</title>
+      <link>https://www.phrozen.io/tags/polymorphism/</link>
+      <pubDate>Fri, 12 Jun 2020 16:36:31 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/polymorphism/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shellcode</title>
+      <link>https://www.phrozen.io/tags/shellcode/</link>
+      <pubDate>Fri, 12 Jun 2020 16:36:31 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/shellcode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SLAE32</title>
+      <link>https://www.phrozen.io/tags/slae32/</link>
+      <pubDate>Fri, 12 Jun 2020 16:36:31 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/slae32/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>x86</title>
+      <link>https://www.phrozen.io/tags/x86/</link>
+      <pubDate>Fri, 12 Jun 2020 16:36:31 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/x86/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>analyzing</title>
@@ -57,24 +111,6 @@
     </item>
     
     <item>
-      <title>Shellcode</title>
-      <link>https://www.phrozen.io/tags/shellcode/</link>
-      <pubDate>Tue, 09 Jun 2020 14:00:44 +0200</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/shellcode/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>SLAE32</title>
-      <link>https://www.phrozen.io/tags/slae32/</link>
-      <pubDate>Tue, 09 Jun 2020 14:00:44 +0200</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/slae32/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Bad chars</title>
       <link>https://www.phrozen.io/tags/bad-chars/</link>
       <pubDate>Fri, 29 May 2020 11:57:00 +0100</pubDate>
@@ -89,15 +125,6 @@
       <pubDate>Fri, 29 May 2020 11:57:00 +0100</pubDate>
       
       <guid>https://www.phrozen.io/tags/encoder/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>x86</title>
-      <link>https://www.phrozen.io/tags/x86/</link>
-      <pubDate>Fri, 29 May 2020 11:57:00 +0100</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/x86/</guid>
       <description></description>
     </item>
     
@@ -449,15 +476,6 @@
       <pubDate>Sun, 15 Mar 2020 11:01:36 +0100</pubDate>
       
       <guid>https://www.phrozen.io/tags/library/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Assembly</title>
-      <link>https://www.phrozen.io/tags/assembly/</link>
-      <pubDate>Sat, 14 Mar 2020 11:57:00 +0100</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/assembly/</guid>
       <description></description>
     </item>
     
