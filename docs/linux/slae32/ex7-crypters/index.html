@@ -17,7 +17,7 @@ Why? the goal of that certification is to practice and learn how to solve each a
 <title>Assignment N°7 - Crypters (Delphi/ASM) | Phrozen</title>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
-<script defer src="/en.search.min.f5a774bb99e5899c2f49274cb42d30d4df4b13cc4569fe9543f1fd30d80bffca.js" integrity="sha256-9ad0u5nliZwvSSdMtC0w1N9LE8xFaf6VQ/H9MNgL/8o="></script>
+<script defer src="/en.search.min.09e944cdccf5e552f30d10c0944357ab798bf309f2606fe8c6a7f75b29dcb435.js" integrity="sha256-CelEzcz15VLzDRDAlENXq3mL8wnyYG/oxqf3WynctDU="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -372,7 +372,7 @@ if (!doNotTrack) {
 <h1 id="what-is-the-purpose-of-a-crypter">What is the purpose of a Crypter</h1>
 <p>A <strong>crypter</strong> is very close to encoders. It is a tiny application designed to encrypt a payload and decrypt the payload at runtime.</p>
 <p>The payload is encrypted and embedded inside a host program often called a <strong>stub</strong>, when the stub is executed, it will decrypt the encrypted payload and redirect execution flow at decrypted payload address. Sometimes execution flow is not redirected but instead a new thread or a new process is created to host the payload execution.</p>
-<p>Conversely to encoders, crypters uses complexes encryptions schema (RC4, AES, Blowfish, Camelia etc&hellip;) to keep the payload obfuscated. Each time a stub is generated, the encrypted payload will look completely different, it is a good solution to bit signature based detection systems.</p>
+<p>Conversely to encoders, crypters uses complexes encryptions schema (RC4, AES, Blowfish, Camelia etc&hellip;) to keep the payload obfuscated. Each time a stub is generated, the encrypted payload will look completely different, it is a good solution to beat signature based detection systems.</p>
 <p>Because of their complexity, crypters are often coded with higher level language such as C/C++, Delphi, .NET etc..</p>
 <h1 id="creating-our-custom-crypter">Creating our custom Crypter</h1>
 <h2 id="programming-language-used">Programming Language Used</h2>
