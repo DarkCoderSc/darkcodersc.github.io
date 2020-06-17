@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself."><meta property="og:title" content="Assigment N°7 - Crypters (Delphi/ASM)" />
+<meta property="og:description" content="Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/linux/slae32/ex7-crypters/" />
+<meta property="article:published_time" content="2020-06-17T12:32:50+02:00" />
+<meta property="article:modified_time" content="2020-06-17T12:32:50+02:00" />
+<title>Assigment N°7 - Crypters (Delphi/ASM) | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.835a621502cb725dd2237251a39a81587eb88d78f241a87ede7fe52885929b3d.js" integrity="sha256-g1piFQLLcl3SI3JRo5qBWH64jXjyQah&#43;3n/lKIWSmz0="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Linux</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/" class="collapsed ">SLAE32</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex7-crypters/" class="active">Assigment N°7 - Crypters (Delphi/ASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex6-polymorphism/" class="">Assignment N°6 - Polymorphism</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex5-shellcode-analyzing/" class="">Assignment N°5 - Shellcode Analyzing / Dissecting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex4-encoder/" class="">Assignment N°4 - Encoder (NASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex3-egghunter/" class="">Assignment N°3 - Egg Hunter (C)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex2-reverseshell/" class="">Assignment N°2 - Reverse Shell (NASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex1-bindshell/" class="">Assignment N°1 - Bindshell (NASM)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <span>Microsoft Windows</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/projects/" class="collapsed ">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/snippets/" class="collapsed ">Snippets</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/windows/poc/" class="collapsed ">PoC</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/DarkCoderSc" target="_blank" rel="noopener"><i class='fa fa-github'></i>
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Assigment N°7 - Crypters (Delphi/ASM)</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="assignment-goals">Assignment Goals</h1>
+<p><img src="/images/202005/slae32-banner.png" alt="SLAE32" /></p>
+<blockquote class="book-hint warning">
+  <p>This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.</p>
+<p>If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.</p>
+<p>Why? the goal of that certification is to practice and learn how to solve each assignment by yourself. If you read this paper you will get spoiled and seriously oriented to my personal solution and take the risk to abuse of some shortcuts.</p>
+
+</blockquote>
+
+<ul>
+<li>
+<p>Create a custom crypter like the one shown in the &ldquo;crypters&rdquo; video</p>
+</li>
+<li>
+<p>Free to use any existing encryption schema</p>
+</li>
+<li>
+<p>Can use any programming language</p>
+</li>
+</ul>
+<h1 id="what-is-the-purpose-of-a-crypter">What is the purpose of a Crypter</h1>
+<p>A <strong>crypter</strong> is very close to encoders. It is a tiny application designed to encrypt a payload and decrypt the payload at runtime.</p>
+<p>The payload is encrypted and embedded inside a host program often called a <strong>stub</strong>, when the stub is executed, it will decrypt the encrypted payload and redirect execution flow at decrypted payload address. Sometimes execution flow is not redirected but instead a new thread or a new process is created to host the payload execution.</p>
+<p>Conversely to encoders, crypters uses complexes encryptions schema (RC4, AES, Blowfish, Camelia etc&hellip;) to keep the payload obfuscated. Each time a stub is generated, the encrypted payload will look completely different, it is a good solution to bit signature based detection systems.</p>
+<p>Because of their complexity, crypters are often coded with higher level language such as C/C++, Delphi, .NET etc..</p>
+<h1 id="creating-our-custom-crypter">Creating our custom Crypter</h1>
+<h2 id="programming-language-used">Programming Language Used</h2>
+<p>We will use an uncommon language to create our Linux x86-32 crypter. We will use Delphi compiled with Freepascal (Lazarus IDE).</p>
+<p>It free, open-source and cross-platform.</p>
+<p>You can install <strong>Lazarus</strong> on Ubuntu with aptitude using the following command line:</p>
+<p>local@user:$ <code>sudo apt install lazarus</code></p>
+<p>Most of the crypter code will be in Delphi except a small part in Assembly.</p>
+<h2 id="encryption-schema">Encryption Schema</h2>
+<p>We will use the RC4 cipher to encrypt and decrypt our payload. This cipher strength is far enough for our needs and is sufficiently easy to implement.</p>
+<p>RC4 specifications is well explained on <a href="https://en.wikipedia.org/wiki/RC4">Wikipedia</a>.</p>
+<p>We will implement RC4 specifications in a Delphi object to be more convenient.</p>
+<p>To implement RC4 to Delphi, we need to translate two main methods:</p>
+<h3 id="ksa-key-scheduling-algorithm">KSA (Key-scheduling algorithm)</h3>
+<p>Quoted from Wikipedia</p>
+<pre><code>for i from 0 to 255
+    S[i] := i
+endfor
+j := 0
+for i from 0 to 255
+    j := (j + S[i] + key[i mod keylength]) mod 256
+    swap values of S[i] and S[j]
+endfor
+</code></pre><h3 id="prga-pseudo-random-generation-algorithm">PRGA (Pseudo-random generation algorithm)</h3>
+<p>Quoted from Wikipedia</p>
+<pre><code>i := 0
+j := 0
+while GeneratingOutput:
+    i := (i + 1) mod 256
+    j := (j + S[i]) mod 256
+    swap values of S[i] and S[j]
+    K := S[(S[i] + S[j]) mod 256]
+    output K
+endwhile
+</code></pre><p>Before doing payload encryption, we first need to call our <strong>KSA</strong> method to initialize our RC4 cipher then we can call our <strong>PRGA</strong> method for each payload bytes. The PRGA method will return for each payload byte a new pseudo random number we will use to <code>xor</code> with the current payload byte to encrypt.</p>
+<h3 id="key-format">Key Format</h3>
+<p>In above example, the key is defined as a byte array. We could generate random keys as byte array directly but instead initial key format will be string.</p>
+<p>The key string is called a passphrase and requires to be translated to byte array before getting used by our RC4 cipher.</p>
+<p>We need to take care of that before calling KSA method.</p>
+<p>Finally, in our future Delphi RC4 cipher object, we must take care of updating passphrase. This will be required by our crypter (see later in this paper).</p>
+<h3 id="encryption--decryption">Encryption / Decryption</h3>
+<p>In classic RC4 cipher, both Encryption and Decryption process is using the same method.</p>
+<p><code>PLAIN xor KEY = CIPHERED_MESSAGE xor KEY = PLAIN</code></p>
+<p>The main issue is the lack of decryption control, how to be sure our payload was successfully decrypted? for example in the case our passphrase was wrong.</p>
+<p>To solve this problem we <strong>will</strong> implement two distinct method: <code>Encrypt()</code> and <code>Decrypt()</code>:</p>
+<p>First method will first &ldquo;sign&rdquo; plain text, encrypt and return content + the plain-text signature.</p>
+<p>Second method will first decrypt cipher text, then check for decrypted content signature (plain-text candidate), if both original signature and decrypted content signature matched, then we likely have original plain text.</p>
+<p>To sign our plain-text we will use CRC32 - <a href="https://en.wikipedia.org/wiki/Cyclic_redundancy_check">Cyclic redundancy check</a> algorithm. We will use CRC32 for it ease of implementation and speed.</p>
+<p>CRC32 is very prone to collision so it is not the ideal solution when it comes to cryptography but it is sufficient for our crypter needs. We could have used SHA1 or SHA2 for more robustness.</p>
+<h4 id="process">Process</h4>
+<p>Encryption / Decryption process will except a memory address (Pointer) and data size. We prefer to work directly on memory, we don&rsquo;t have to take care of what is the underlying type of data, we encrypt memory content on the fly.</p>
+<h2 id="crc32-implementation">CRC32 Implementation</h2>
+<p>Few words about implementing CRC32 to Delphi, we will use the following resources</p>
+<h3 id="wikipedia">Wikipedia</h3>
+<p>The following <a href="https://en.wikipedia.org/wiki/Cyclic_redundancy_check">Wikipedia page</a> perfectly describe CRC32 principle.</p>
+<p>We will take care of translating the following pseudo-code (quoted from Wikipedia) in Delphi.</p>
+<pre><code>Function CRC32
+   Input:
+      data:  Bytes     //Array of bytes
+   Output:
+      crc32: UInt32    //32-bit unsigned crc-32 value
+
+//Initialize crc-32 to starting value
+crc32 ← 0xFFFFFFFF
+
+for each byte in data do
+   nLookupIndex ← (crc32 xor byte) and 0xFF;
+   crc32 ← (crc32 shr 8) xor CRCTable[nLookupIndex] //CRCTable is an array of 256 32-bit constants
+
+//Finalize the CRC-32 value by inverting all the bits
+crc32 ← crc32 xor 0xFFFFFFFF
+return crc32
+</code></pre><p>Above method requires to have a CRC Table, we will grab the CRC32 Table from <a href="https://wiki.osdev.org/CRC32">osdev.org</a> and implement this array of 256 items in our Delphi unit.</p>
+<h2 id="passphrase-generation-principle">Passphrase Generation Principle</h2>
+<p>At this point we know we will use both RC4 and CRC32 together.</p>
+<p>Instead of having a static key embedded inside the stub for decryption, our stub generator will generate a random key of four bytes (or more).</p>
+<p>This random key will be sent through our CRC32 method to generate a 8 bytes passphrase (CRC32 generate a 32bit unsigned integer, but we will output this number as an hexadecimal string) thus having a stronger key while keeping something voluntarily easy to brute-force.</p>
+<p>Both stub generator (crypter program) and stub are not aware of the passphrase, passphrase is completely random and wiped from generator&rsquo;s &ldquo;mind&rdquo;.</p>
+<p>At run-time the stub will then brute-force the 4 bytes length passphrase until he find the correct plain-text.</p>
+<p>Remember, we know plain-text <strong>signatures</strong>, stub will need to know that signature to verify decrypted content.</p>
+<p>A four bytes length passphrase will take few seconds to be brute-forced, be aware that increasing key length exponentially increase the duration of payload recovery.</p>
+<h2 id="embed-stub-application-template-in-generator">Embed Stub Application Template in Generator</h2>
+<p>Our stub generator will be designed to be portable (distributed as a standalone program) thus requiring the stub to be embedded inside the stub generator.</p>
+<p>When we generate a new stub, we first extract the stub &ldquo;template&rdquo; from our generator application memory.</p>
+<p>We will store the stub application as an array of byte inside a special Delphi unit. It means each time we generate a new version of our stub, we need to patch that unit.</p>
+<p>We will write a tiny Python script to take care of that.</p>
+<p>This python script will compile both stub and generator using the FPC compiler offered with Lazarus, then translate the raw stub program as a Delphi byte array code instruction to be placed inside a unit designed to host and extract that array.</p>
+<p>It means that we <strong>MUST</strong> use that Python script each time we update stub code.</p>
+<h2 id="payload-and-payload-information-storage-on-stub">Payload and Payload Information storage on stub</h2>
+<p>When generator extract a new stub template, the stub is completely free of payload. We need to patch the binary stub (which is a compiled Linux application) with encrypted payload and additional information.</p>
+<p>Multiple techniques exists to patch an already compiled binary, we will use the EOF (End Of File) technique.</p>
+<p>Indeed, appending data at the end of an application doesn&rsquo;t change it execution behavior. Each application is described by what we call an <strong>header</strong>, this header describe how each section of the binary needs to be considered and mounted in memory. If we append data at the end of an executable, the header wont be aware of that data so it wont take care of it.</p>
+<p>EOF data needs to be structured. The EOF structuring method is up to the programmer. We will structure the EOF as follows:</p>
+<p><code>EOF_SEGMENT_N|SIZE_OF_SEGMENT_N|...|EOF_SEGMENT2|SIZE_OF_SEGMENT2|EOF_SEGMENT1|SIZE_OF_SEGMENT1</code></p>
+<p>An EOF segment can contain any kind of data.</p>
+<p>For our crypter, we must implement three segments:</p>
+<ol>
+<li>The encrypted payload</li>
+<li>The plain-text payload signature (CRC32)</li>
+<li>The key length, required for brute-forcing.</li>
+</ol>
+<p>On stub runtime, it will retrieve above three segments for his tasks.</p>
+<h2 id="payload-execution-method">Payload Execution Method</h2>
+<p>When payload is decrypted at stub runtime, our final task is to redirect execution flow to payload memory address.</p>
+<p>To do so we will use inline assembly offered by Delphi.</p>
+<p>To execute code on memory we must be sure memory region that contains that code is set executable otherwise we will receive a seg fault.</p>
+<p>We will use the <code>mmap2()</code> syscall to create a new executable region, we will then move our payload content to that new region and finally redirect execution flow.</p>
+<h3 id="initialize-registers-delphi-inline-asm">Initialize Registers (Delphi inline ASM)</h3>
+<p>First we initialize first four registers, mostly for debugging purpose.</p>
+<pre><code>xor ecx, ecx
+xor ebx, ebx
+mul ecx
+</code></pre><h3 id="create-a-new-executable-memory-region-delphi-inline-asm">Create a new executable memory region (Delphi inline ASM)</h3>
+<p>The size of that region is our payload size</p>
+<pre><code>mov eax, $c0           // mmap2() syscall
+mov ecx, [ADataSize]   // payload length
+mov edx, $7            // PROT_READ | PROT_WRITE | PROT_EXEC
+mov esi, $22           // MAP_PRIVATE | MAP_ANONYMOUS
+mov edi, $ffffffff 
+</code></pre><h3 id="copy-decrypted-payload-to-new-region-delphi-inline-asm">Copy decrypted payload to new region (Delphi inline ASM)</h3>
+<pre><code>mov esi, pShellcode    // decrypted shellcode address
+mov edi, eax           // eax contains new executable region address
+xor eax, eax
+
+@mem_copy:
+    mov al, [esi]
+    mov [edi], al
+
+    inc si
+    inc di
+
+    loop @mem_copy
+</code></pre><h3 id="execute-shellcode-delphi-inline-asm">Execute shellcode (Delphi inline ASM)</h3>
+<pre><code>sub edi, [ADataSize]  // subtract shellcode length to go back to memory region start address
+call edi              // execute shellcode
+</code></pre><h2 id="final-project">Final Project</h2>
+<p>The final project is available at this Github address: <a href="https://github.com/DarkCoderSc/slae32-crypters/">https://github.com/DarkCoderSc/slae32-crypters/</a></p>
+<p>local@user:$ <code>git clone https://github.com/DarkCoderSc/slae32-crypters.git</code></p>
+<p>It is structured as follows:</p>
+<h3 id="crypter-folder"><code>crypter</code> Folder</h3>
+<p>Contains the builder / stub generator source code.</p>
+<h3 id="stub-folder"><code>stub</code> Folder</h3>
+<p>Contains the stub source code.</p>
+<h3 id="shared-folder"><code>shared</code> Folder</h3>
+<p>Contains shared unit between both builder and stub</p>
+<h3 id="dist-folder"><code>dist</code> Folder</h3>
+<p>Contains standalone version of the builder (stub embedded and ready for production use)</p>
+<h3 id="buildpy"><code>build.py</code></h3>
+<p>Python script used to build a new standalone version of the builder.</p>
+<p>It will compile new version of stub binary then embed stub binary inside builder stub unit before final compilation.</p>
+<p>Very last step of the build is to move compiled standalone builder in dist folder and clean the workspace.</p>
+<h4 id="build-usage">Build Usage</h4>
+<p>local@user:$ <code>python3 build.py</code></p>
+<h2 id="crypter-usage">Crypter Usage</h2>
+<p>local@user:$ <code>Crypter/dist/crypter &lt;shellcode&gt; &lt;outputfile&gt;</code></p>
+<h3 id="example">Example</h3>
+<p>In this example we used our <code>cat /etc/passwd</code> shellcode.</p>
+<pre><code>local@user:$ Crypter/dist/crypter &quot;\x31\xc0\x50\x68\x62\x61\x73\x68\x68\x69\x6e\x2f\x2f\x68\x2f\x2f\x2f\x62\x89\xe3\x66\xb8\x2d\x63\x50\x31\xc0\x89\xe2\x50\x68\x73\x73\x77\x64\x68\x63\x2f\x70\x61\x68\x20\x2f\x65\x74\x68\x2f\x63\x61\x74\x68\x2f\x62\x69\x6e\x89\xe6\x50\x56\x52\x53\x89\xe1\x50\x89\xe2\xb0\x0b\xcd\x80&quot; /tmp/encrypted_payload
+</code></pre><p><img src="https://i.ibb.co/XjX2Wm3/Screenshot-2020-06-16-at-17-51-39.png" alt="Command Result" /></p>
+<p>local@user:$ <code>/tmp/encrypted_payload</code></p>
+<p><img src="https://i.ibb.co/t888tNH/Screenshot-2020-06-16-at-17-52-13.png" alt="Command Result" /></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

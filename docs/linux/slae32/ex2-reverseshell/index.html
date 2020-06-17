@@ -17,7 +17,7 @@ Why? the goal of that certification is to practice and learn how to solve each a
 <title>Assignment N°2 - Reverse Shell (NASM) | Phrozen</title>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
-<script defer src="/en.search.min.ff87ae88cd199f0ca7be58bdbf8c457992255d3af8925a72343a1ad1e36aa5be.js" integrity="sha256-/4euiM0Znwynvli9v4xFeZIlXTr4klpyNDoa0eNqpb4="></script>
+<script defer src="/en.search.min.835a621502cb725dd2237251a39a81587eb88d78f241a87ede7fe52885929b3d.js" integrity="sha256-g1piFQLLcl3SI3JRo5qBWH64jXjyQah&#43;3n/lKIWSmz0="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -101,6 +101,16 @@ if (!doNotTrack) {
 
   
   <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex7-crypters/" class="">Assigment N°7 - Crypters (Delphi/ASM)</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -363,10 +373,10 @@ if (!doNotTrack) {
 </ol>
 <h1 id="tcp-reverse-shell-principle">TCP Reverse Shell Principle</h1>
 <p>In first exercise we learnt how to create our own TCP Bindshell shellcode using few syscalls (<code>socketcall()</code>, <code>dup2()</code> and <code>execve()</code>).</p>
-<p>A reverse shell is almost identital to a classic bindshell, this time instead of having a shellcode that listen for new clients, we will create a shellcode that will connect back to a remote server.</p>
+<p>A reverse shell is almost identical to a classic bindshell, this time instead of having a shellcode that listen for new clients, we will create a shellcode that will connect back to a remote server.</p>
 <p>Fortunately, on Linux by default, we do not have any restrictions to manage sockets in client mode.</p>
 <blockquote class="book-hint info">
-  I invite you to read the first <a href="/docs/linux/slae32/ex1-bindshell/">paper</a> before this one. Many things are similiar between the two shellcodes and we will only point main differences.
+  I invite you to read the first <a href="/docs/linux/slae32/ex1-bindshell/">paper</a> before this one. Many things are similar between the two shellcodes and we will only point main differences.
 </blockquote>
 
 <p>On Linux (in bellow example Ubuntu 18.04), it is easy to create a simple reverse shell connection only using a single command.</p>
@@ -383,7 +393,7 @@ if (!doNotTrack) {
 <p>In real life, we will most of the time face reverse shell shellcodes using one of the two first methods brievly introduced bellow.</p>
 <p>Since the two first methods are very similar to our first paper, we decided to think out of the box and use a completely different approach.</p>
 <p>Indeed, we will spawn a new reverse shell only running a specially crafted command with <code>execve()</code> syscall.</p>
-<p>Method 1 and Method 2 chapter will only brievly introduce required steps for creating a reverse shell using different syscalls.</p>
+<p>Method 1 and Method 2 chapter will only briefly introduce required steps for creating a reverse shell using different syscalls.</p>
 <p>Method 3 is the subject of our paper and will describe the whole process in detail.</p>
 <h2 id="method-1---classic">Method 1 - Classic</h2>
 <h3 id="required-syscalls">Required Syscalls</h3>
@@ -513,8 +523,8 @@ phrozen@ubuntu:/home/phrozen/SLAE32/SLAE-Exam/Level2$
 </blockquote>
 
 <p>Since we are facing a Little Endian architecture, the pushed string must be stored in reverse order.</p>
-<p>To prevent extra instructions we also need to take care of alignement. x86-32 address are 4 bytes long so string length must be a multiple of 4.</p>
-<p>Since <code>/bin/bash</code> is 9 bytes long, we must add 3 extra <code>/</code> =&gt; : <code>////bin/bash</code> to fit alignement.</p>
+<p>To prevent extra instructions we also need to take care of alignment. x86-32 address are 4 bytes long so string length must be a multiple of 4.</p>
+<p>Since <code>/bin/bash</code> is 9 bytes long, we must add 3 extra <code>/</code> =&gt; : <code>////bin/bash</code> to fit alignment.</p>
 <h6 id="example-stack-dump">Example Stack Dump</h6>
 <table>
 <thead>
@@ -546,7 +556,7 @@ phrozen@ubuntu:/home/phrozen/SLAE32/SLAE-Exam/Level2$
 <hr>
 <h5 id="2---push-argv">2 - Push <code>*argv[]</code></h5>
 <p>This part is the most tricky part so far, <code>ecx</code> register needs to point to a NULL terminated array of addresses. Each address need to point to a NULL terminated string address with the argument value.</p>
-<p>We still need to take care of alignement and Endianness.</p>
+<p>We still need to take care of alignment and Endianness.</p>
 <p>We will push three different arguments.</p>
 <h6 id="argv0">Argv[0]</h6>
 <p>The first argument by convention contains the pathname (<code>/bin/bash</code>).
@@ -639,7 +649,7 @@ Finally third argument contains our reverse shell payload string: <code>/bin/bas
 <p>Following above stack dump <code>ecx</code> register would be set to <code>0x000000014</code></p>
 <hr>
 <h5 id="3---push-envp">3 - Push <code>*envp[]</code></h5>
-<p>Lastely we need to set the <code>edx</code> register to an address that points to NULL.</p>
+<p>Lastly we need to set the <code>edx</code> register to an address that points to NULL.</p>
 <p>The easiest way is to simply push a new NULL to the top of the stack then assign top address of the stack (<code>esp</code>) to <code>edx</code>.</p>
 <table>
 <thead>

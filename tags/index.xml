@@ -6,10 +6,73 @@
     <description>Recent content in Tags on Phrozen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Jun 2020 16:36:31 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jun 2020 12:32:50 +0200</lastBuildDate>
     
 	<atom:link href="https://www.phrozen.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CRC32</title>
+      <link>https://www.phrozen.io/tags/crc32/</link>
+      <pubDate>Wed, 17 Jun 2020 12:32:50 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/crc32/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Delphi</title>
+      <link>https://www.phrozen.io/tags/delphi/</link>
+      <pubDate>Wed, 17 Jun 2020 12:32:50 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/delphi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lazarus</title>
+      <link>https://www.phrozen.io/tags/lazarus/</link>
+      <pubDate>Wed, 17 Jun 2020 12:32:50 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/lazarus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>RC4</title>
+      <link>https://www.phrozen.io/tags/rc4/</link>
+      <pubDate>Wed, 17 Jun 2020 12:32:50 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/rc4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shellcode</title>
+      <link>https://www.phrozen.io/tags/shellcode/</link>
+      <pubDate>Wed, 17 Jun 2020 12:32:50 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/shellcode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SLAE32</title>
+      <link>https://www.phrozen.io/tags/slae32/</link>
+      <pubDate>Wed, 17 Jun 2020 12:32:50 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/slae32/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>x86</title>
+      <link>https://www.phrozen.io/tags/x86/</link>
+      <pubDate>Wed, 17 Jun 2020 12:32:50 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/tags/x86/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Assembly</title>
@@ -35,33 +98,6 @@
       <pubDate>Fri, 12 Jun 2020 16:36:31 +0200</pubDate>
       
       <guid>https://www.phrozen.io/tags/polymorphism/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Shellcode</title>
-      <link>https://www.phrozen.io/tags/shellcode/</link>
-      <pubDate>Fri, 12 Jun 2020 16:36:31 +0200</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/shellcode/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>SLAE32</title>
-      <link>https://www.phrozen.io/tags/slae32/</link>
-      <pubDate>Fri, 12 Jun 2020 16:36:31 +0200</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/slae32/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>x86</title>
-      <link>https://www.phrozen.io/tags/x86/</link>
-      <pubDate>Fri, 12 Jun 2020 16:36:31 +0200</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/x86/</guid>
       <description></description>
     </item>
     
@@ -251,15 +287,6 @@
       <pubDate>Wed, 29 Apr 2020 11:57:00 +0100</pubDate>
       
       <guid>https://www.phrozen.io/tags/msfvenom/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Delphi</title>
-      <link>https://www.phrozen.io/tags/delphi/</link>
-      <pubDate>Mon, 13 Apr 2020 18:35:13 +0200</pubDate>
-      
-      <guid>https://www.phrozen.io/tags/delphi/</guid>
       <description></description>
     </item>
     

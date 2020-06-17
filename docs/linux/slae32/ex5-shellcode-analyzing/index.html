@@ -17,7 +17,7 @@ Why? the goal of that certification is to practice and learn how to solve each a
 <title>Assignment N°5 - Shellcode Analyzing / Dissecting | Phrozen</title>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
-<script defer src="/en.search.min.ff87ae88cd199f0ca7be58bdbf8c457992255d3af8925a72343a1ad1e36aa5be.js" integrity="sha256-/4euiM0Znwynvli9v4xFeZIlXTr4klpyNDoa0eNqpb4="></script>
+<script defer src="/en.search.min.835a621502cb725dd2237251a39a81587eb88d78f241a87ede7fe52885929b3d.js" integrity="sha256-g1piFQLLcl3SI3JRo5qBWH64jXjyQah&#43;3n/lKIWSmz0="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -101,6 +101,16 @@ if (!doNotTrack) {
 
   
   <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex7-crypters/" class="">Assigment N°7 - Crypters (Delphi/ASM)</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -503,8 +513,8 @@ main()
 <pre><code>Breakpoint 1 at 0x2020
 </code></pre><p>We can now run the program</p>
 <p>GDB&gt; <code>r</code></p>
-<p>GDB will break when it reachs our shellcode location.</p>
-<p>We can see the assembly code of our shellocde using the <code>disassemble</code> command.</p>
+<p>GDB will break when it reaches our shellcode location.</p>
+<p>We can see the assembly code of our shellcode using the <code>disassemble</code> command.</p>
 <p>GDB&gt; <code>disassemble</code></p>
 <pre><code>=&gt; 0x00402020 &lt;+0&gt;:     cdq    
    0x00402021 &lt;+1&gt;:     push   0xf
@@ -609,7 +619,7 @@ CMD                    yes       The command string to execute
 <p>After few seconds we should see the following output</p>
 <p><img src="/images/202006/Screenshot-2020-06-10-at-17.16.34.png" alt="Libemu" /></p>
 <p>This screenshot contains the &ldquo;registry dump&rdquo; after each instructions. This is very useful to trace what the shellcode is doing instruction by instruction.</p>
-<p>At the end of the analysis, when this is possible, Libemu generate some pseudocode to have a clear idea of what the shellcode is doing without spending to much time in understanding each assembly instructions.</p>
+<p>At the end of the analysis, when this is possible, Libemu generate some pseudo-code to have a clear idea of what the shellcode is doing without spending to much time in understanding each assembly instructions.</p>
 <pre><code>int execve (
      const char * dateiname = 0x00416fc0 =&gt;
            = &quot;/bin/sh&quot;;
@@ -629,7 +639,7 @@ CMD                    yes       The command string to execute
      const char * envp[] = 0x00000000 =&gt;
          none;
 ) =  0;
-</code></pre><p>From above pseudocode, it is clear that Libemu has detected that the shellcode was using <code>execve</code> syscall to execute a new command via the <code>/bin/sh</code> program.</p>
+</code></pre><p>From above pseudo-code, it is clear that Libemu has detected that the shellcode was using <code>execve</code> syscall to execute a new command via the <code>/bin/sh</code> program.</p>
 <p>The full command is: <code>/bin/sh -c &quot;/bin/sh -c /bin/ls&quot;</code></p>
 <p>We can even generate a graph of what shellcode is doing in dot format.</p>
 <p>local@user:$ <code>msfvenom -p linux/x86/exec -a x86 --platform Linux CMD=/bin/ls -f raw | /opt/libemu/bin/sctest -vvv -Ss 100000 -G exec.dot</code></p>

@@ -6,7 +6,7 @@
     <description>Recent content in Introduction on Phrozen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Jun 2020 16:36:31 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jun 2020 12:32:50 +0200</lastBuildDate>
     
 	<atom:link href="https://www.phrozen.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -20,6 +20,17 @@
       <description>Below code snippet demonstrate how to get DACL Security Descriptor in SDDL format for a targeted registry key.
 You need to parse the output SDDL string in order to understand access properties for desired keys, there are plenty of articles arround explaining how to understand an SDDL string format.
 You can also play with flags associated to ConvertSecurityDescriptorToStringSecurityDescriptor call to extract even more information from captured Security Descriptor Pointer after RegGetKeySecurity call.</description>
+    </item>
+    
+    <item>
+      <title>Assigment N°7 - Crypters (Delphi/ASM)</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex7-crypters/</link>
+      <pubDate>Wed, 17 Jun 2020 12:32:50 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex7-crypters/</guid>
+      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
     </item>
     
     <item>

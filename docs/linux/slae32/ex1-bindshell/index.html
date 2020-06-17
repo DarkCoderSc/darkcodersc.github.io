@@ -17,7 +17,7 @@ Why? the goal of that certification is to practice and learn how to solve each a
 <title>Assignment N°1 - Bindshell (NASM) | Phrozen</title>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
-<script defer src="/en.search.min.ff87ae88cd199f0ca7be58bdbf8c457992255d3af8925a72343a1ad1e36aa5be.js" integrity="sha256-/4euiM0Znwynvli9v4xFeZIlXTr4klpyNDoa0eNqpb4="></script>
+<script defer src="/en.search.min.835a621502cb725dd2237251a39a81587eb88d78f241a87ede7fe52885929b3d.js" integrity="sha256-g1piFQLLcl3SI3JRo5qBWH64jXjyQah&#43;3n/lKIWSmz0="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -101,6 +101,16 @@ if (!doNotTrack) {
 
   
   <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/linux/slae32/ex7-crypters/" class="">Assigment N°7 - Crypters (Delphi/ASM)</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -464,7 +474,7 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table>
-<p>Steps are exactly the same as for classical method (see above) but this time only with three disctinct syscalls to achieve the same result.</p>
+<p>Steps are exactly the same as for classical method (see above) but this time only with three distinct syscalls to achieve the same result.</p>
 <p>We will replace <code>socket()</code>, <code>setsockopt()</code>, <code>bind()</code>, <code>listen()</code> and <code>accept()</code> only with <code>socketcall()</code> calls.</p>
 <blockquote class="book-hint warning">
   <p>Quote from : <a href="http://man7.org/linux/man-pages/man2/socketcall.2.html">socketcall man page</a></p>
@@ -528,12 +538,12 @@ if (!doNotTrack) {
 <p>We will only use push instruction one time in our code for preparing memory (nil memory). We will work manually on stack throughout the building of our shellcode.</p>
 <p>Finally last objective is to enjoy building that exercise and prepare ourself to abuse of GDB ☕</p>
 <h4 id="part-i---prepare-memory">Part I - Prepare Memory</h4>
-<p>The very first step of our code is to prepare the memory. We will makes sure that a bunch of lower stack addresses are initialized with zero (arround 30 is far enough) to ensure the stack is clean before doing manual memory manipulations.</p>
+<p>The very first step of our code is to prepare the memory. We will makes sure that a bunch of lower stack addresses are initialized with zero (around 30 is far enough) to ensure the stack is clean before doing manual memory manipulations.</p>
 <p>Some benefits include:</p>
 <ul>
 <li>Avoiding NULL characters in our final shellcode.</li>
 <li>Limiting instructions count (when working with parameters set to zero/NULL).</li>
-<li>Be freed of unexcepted behaviors when setting a single byte or word to a specific stack location.</li>
+<li>Be freed of unexpected behaviors when setting a single byte or word to a specific stack location.</li>
 </ul>
 <h4 id="part-ii---create-our-server">Part II - Create our Server</h4>
 <p>We now safely work on stack addresses, we can continue on building our server. Five steps are required so far.</p>
@@ -624,7 +634,7 @@ if (!doNotTrack) {
 </table>
 <pre><code>*Debugging* : return value (eax register) must be zero.
 </code></pre>
-<h5 id="step-4--listen-for-incomming-connections">Step 4 : Listen for incomming connections</h5>
+<h5 id="step-4--listen-for-incoming-connections">Step 4 : Listen for incoming connections</h5>
 <p>Syscall <code>socketcall()</code> will be used with <code>ebx</code> set to <code>0x2</code> = <code>SYS_LISTEN</code>.</p>
 <p>Additional parameters needs to be set on stack:</p>
 <table>
@@ -723,7 +733,7 @@ On success value is equal to value placed in `ecx` register.
 </tbody>
 </table>
 <hr>
-<p>Our receipe is now finished we can &ldquo;safely&rdquo; enter in the best part as fun as frustrating.</p>
+<p>Our recipe is now finished we can &ldquo;safely&rdquo; enter in the best part as fun as frustrating.</p>
 <blockquote class="book-hint info">
   If we were expected to create a regular program, we would take care of closing both server and client socket before gracefully exiting our program. When creating shellcode we are not always excepted to do that unless we want to be sure we would not crash the whole vulnerable application.
 </blockquote>
@@ -948,7 +958,7 @@ _dup2:
 \x02\x7e\xf3\x31\xc0\x31\xdb\x31\xc9\xc7\x44\x24\xf8\x2f\x2f\x73
 \x68\xc7\x44\x24\xf4\x2f\x62\x69\x6e\x83\xec\x0c\x89\xe3\x83\xec
 \x04\x89\xe2\x89\x5c\x24\xfc\x83\xec\x04\x89\xe1\xb0\x0b\xcd\x80
-</code></pre><p>To ensure our shellcode is working when embeeded inside a willingly vulnerable program, we will paste it inside our SLAE32 shellcode.c template file.</p>
+</code></pre><p>To ensure our shellcode is working when embedded inside a willingly vulnerable program, we will paste it inside our SLAE32 shellcode.c template file.</p>
 <pre><code>#include&lt;stdio.h&gt;
 #include&lt;string.h&gt;
 
@@ -986,7 +996,7 @@ main()
 <h1 id="shellcode-builder-python3">Shellcode Builder (Python3)</h1>
 <p>Last and not mandatory exercise goal is to propose a way to replace default TCP port number (in our case 443) with any ports from <code>0</code> to <code>65535</code>.</p>
 <p>This part is quite hard to explain so I wont promise it will be the clearer possible. Forgive me in advance.</p>
-<p>We abolutely need to take care of two important things:</p>
+<p>We absolutely need to take care of two important things:</p>
 <div class="book-columns flex flex-wrap">
   
   <div class="flex-even markdown-inner">

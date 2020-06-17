@@ -6,10 +6,21 @@
     <description>Recent content in Shellcode on Phrozen</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Jun 2020 16:36:31 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jun 2020 12:32:50 +0200</lastBuildDate>
     
 	<atom:link href="https://www.phrozen.io/tags/shellcode/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Assigment N°7 - Crypters (Delphi/ASM)</title>
+      <link>https://www.phrozen.io/docs/linux/slae32/ex7-crypters/</link>
+      <pubDate>Wed, 17 Jun 2020 12:32:50 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/linux/slae32/ex7-crypters/</guid>
+      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
+    </item>
     
     <item>
       <title>Assignment N°6 - Polymorphism</title>

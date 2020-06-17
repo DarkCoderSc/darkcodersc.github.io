@@ -17,6 +17,71 @@
   </url>
   
   <url>
+    <loc>https://www.phrozen.io/docs/linux/slae32/ex7-crypters/</loc>
+    <lastmod>2020-06-17T12:32:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/crc32/</loc>
+    <lastmod>2020-06-17T12:32:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/delphi/</loc>
+    <lastmod>2020-06-17T12:32:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/</loc>
+    <lastmod>2020-06-17T12:32:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/</loc>
+    <lastmod>2020-06-17T12:32:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/lazarus/</loc>
+    <lastmod>2020-06-17T12:32:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/linux/</loc>
+    <lastmod>2020-06-17T12:32:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/rc4/</loc>
+    <lastmod>2020-06-17T12:32:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/shellcode/</loc>
+    <lastmod>2020-06-17T12:32:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/slae32/</loc>
+    <lastmod>2020-06-17T12:32:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/linux/slae32/</loc>
+    <lastmod>2020-06-17T12:32:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/</loc>
+    <lastmod>2020-06-17T12:32:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/tags/x86/</loc>
+    <lastmod>2020-06-17T12:32:50+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.phrozen.io/tags/assembly/</loc>
     <lastmod>2020-06-12T16:36:31+02:00</lastmod>
   </url>
@@ -27,52 +92,12 @@
   </url>
   
   <url>
-    <loc>https://www.phrozen.io/docs/</loc>
-    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/</loc>
-    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/docs/linux/</loc>
-    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.phrozen.io/tags/polymorphic/</loc>
     <lastmod>2020-06-12T16:36:31+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.phrozen.io/tags/polymorphism/</loc>
-    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/shellcode/</loc>
-    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/slae32/</loc>
-    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/docs/linux/slae32/</loc>
-    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/</loc>
-    <lastmod>2020-06-12T16:36:31+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/x86/</loc>
     <lastmod>2020-06-12T16:36:31+02:00</lastmod>
   </url>
   
@@ -213,11 +238,6 @@
   
   <url>
     <loc>https://www.phrozen.io/docs/windows/snippets/delphi/</loc>
-    <lastmod>2020-04-13T18:35:13+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/delphi/</loc>
     <lastmod>2020-04-13T18:35:13+02:00</lastmod>
   </url>
   
