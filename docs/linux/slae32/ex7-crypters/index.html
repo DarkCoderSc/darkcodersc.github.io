@@ -17,7 +17,7 @@ Why? the goal of that certification is to practice and learn how to solve each a
 <title>Assignment N°7 - Crypters (Delphi/ASM) | Phrozen</title>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
-<script defer src="/en.search.min.09e944cdccf5e552f30d10c0944357ab798bf309f2606fe8c6a7f75b29dcb435.js" integrity="sha256-CelEzcz15VLzDRDAlENXq3mL8wnyYG/oxqf3WynctDU="></script>
+<script defer src="/en.search.min.5d889f8c03e2bdac4efe4f80c135032a39b858ee5b4730f15ff2554be583b0a1.js" integrity="sha256-XYifjAPivaxO/k&#43;AwTUDKjm4WO5bRzDxX/JVS&#43;WDsKE="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -412,7 +412,7 @@ endwhile
 <p>In above example, the key is defined as a byte array. We could generate random keys as byte array directly but instead initial key format will be string.</p>
 <p>The key string is called a passphrase and requires to be translated to byte array before getting used by our RC4 cipher.</p>
 <p>We need to take care of that before calling KSA method.</p>
-<p>Finally, in our future Delphi RC4 cipher object, we must take care of updating passphrase. This will be required by our crypter (see later in this paper).</p>
+<p>Finally, in our future Delphi RC4 cipher object, we must take care of updating passphrase. This will be required by our crypter for brute-forcing key (seen later in this paper).</p>
 <h3 id="encryption--decryption">Encryption / Decryption</h3>
 <p>In classic RC4 cipher, both Encryption and Decryption process is using the same method.</p>
 <p><code>PLAIN xor KEY = CIPHERED_MESSAGE xor KEY = PLAIN</code></p>
