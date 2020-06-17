@@ -17,7 +17,7 @@ Why? the goal of that certification is to practice and learn how to solve each a
 <title>Assignment N°7 - Crypters (Delphi/ASM) | Phrozen</title>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
-<script defer src="/en.search.min.5d889f8c03e2bdac4efe4f80c135032a39b858ee5b4730f15ff2554be583b0a1.js" integrity="sha256-XYifjAPivaxO/k&#43;AwTUDKjm4WO5bRzDxX/JVS&#43;WDsKE="></script>
+<script defer src="/en.search.min.77f25cad75b9e018fb246865cebfd777982afc4915d6af32a231d211cb9695e3.js" integrity="sha256-d/JcrXW54Bj7JGhlzr/Xd5gq/EkV1q8yojHSEcuWleM="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -415,7 +415,7 @@ endwhile
 <p>Finally, in our future Delphi RC4 cipher object, we must take care of updating passphrase. This will be required by our crypter for brute-forcing key (seen later in this paper).</p>
 <h3 id="encryption--decryption">Encryption / Decryption</h3>
 <p>In classic RC4 cipher, both Encryption and Decryption process is using the same method.</p>
-<p><code>PLAIN xor KEY = CIPHERED_MESSAGE xor KEY = PLAIN</code></p>
+<p><code>PLAIN rc4 KEY = CIPHERED_MESSAGE rc4 KEY = PLAIN</code></p>
 <p>The main issue is the lack of decryption control, how to be sure our payload was successfully decrypted? for example in the case our passphrase was wrong.</p>
 <p>To solve this problem we <strong>will</strong> implement two distinct method: <code>Encrypt()</code> and <code>Decrypt()</code>:</p>
 <p>First method will first &ldquo;sign&rdquo; plain text, encrypt and return content + the plain-text signature.</p>
