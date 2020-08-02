@@ -13,10 +13,10 @@
     
     <item>
       <title>Enum Modules Method 1</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/enum-modules-method-1/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/enum-modules-method-1/</link>
       <pubDate>Thu, 12 Mar 2020 15:40:35 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/enum-modules-method-1/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/enum-modules-method-1/</guid>
       <description>You will find below an example of how to enumerate process modules using the well known Windows API CreateToolHelp32Snapshot(), I will cover additional methods soon.
 You may notice that when using CreateToolHelp32Snapshot(), first result (row) is generally the Image Path of the process owning module. I ignore that row by checking the value of szExePath with owner process image path.
 GetProcessName() is compatible since Windows Vista. It is possible to support Windows XP and below but not in this example.</description>

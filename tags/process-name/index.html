@@ -12,7 +12,7 @@
 <title>Process Name | Phrozen</title>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
-<script defer src="/en.search.min.b2076e0261e5a9d8317b3ad67e3b9de204bfd9b7e70b4e7d06c400d4e56d7df9.js" integrity="sha256-sgduAmHlqdgxezrWfjud4gS/2bfnC059BsQA1OVtffk="></script>
+<script defer src="/en.search.min.86e3cb1d1d29ddd8a3d2600962708437dcff21fc53cbdb40ba7f1f89e3ae2043.js" integrity="sha256-huPLHR0p3dij0mAJYnCEN9z/IfxTy9tAun8fieOuIEM="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -72,7 +72,7 @@ if (!doNotTrack) {
         <li class="book-section-flat" >
           
   
-    <span>Linux</span>
+    <a href="/docs/projects/" class="">Projects</a>
   
 
           
@@ -87,7 +87,7 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/linux/slae32/" class="collapsed ">SLAE32</a>
+    <a href="/docs/projects/windows/" class="collapsed ">Windows</a>
   
 
           
@@ -110,7 +110,7 @@ if (!doNotTrack) {
         <li class="book-section-flat" >
           
   
-    <span>Microsoft Windows</span>
+    <a href="/docs/infosec/" class="">InfoSec</a>
   
 
           
@@ -125,7 +125,7 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/windows/projects/" class="collapsed ">Projects</a>
+    <a href="/docs/infosec/linux/" class="collapsed ">Linux</a>
   
 
           
@@ -142,7 +142,45 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/windows/snippets/" class="collapsed ">Snippets</a>
+    <a href="/docs/infosec/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/programming/" class="">Programming</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/" class="collapsed ">Windows</a>
   
 
           
@@ -159,7 +197,7 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/windows/poc/" class="collapsed ">PoC</a>
+    <a href="/docs/programming/general/" class="collapsed ">General</a>
   
 
           
@@ -273,7 +311,7 @@ if (!doNotTrack) {
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/get-process-name-method-4-getprocessimagefilename/">Get Process Name Method 4 GetProcessImageFileName</a>
+      <a href="/docs/programming/windows/delphi/get-process-name-method-4-getprocessimagefilename/">Get Process Name Method 4 GetProcessImageFileName</a>
     </h2>
     
   <h5>April 13, 2020</h5>
@@ -298,14 +336,14 @@ if (!doNotTrack) {
     <p>This time we will use a quite well known API to get the full process image path GetProcessImageFileName documented here.
 Nothing very complex and this technique works from 32bit to 64bit / 64bit to 32bit processes.
 // Jean-Pierre LESUEUR (@DarkCoderSc) function PhysicalToVirtualPath(APath : String) : String; var i : integer; ADrive : String; ABuffer : array[0..MAX_PATH-1] of Char; ACandidate : String; begin {$I-} for I := 0 to 25 do begin ADrive := Format('%s:', [Chr(Ord('A') + i)]); /// if (QueryDosDevice(PWideChar(ADrive), ABuffer, MAX_PATH) = 0) then continue; ACandidate := String(ABuffer).
-        <a href="/docs/windows/snippets/delphi/get-process-name-method-4-getprocessimagefilename/">...</a>
+        <a href="/docs/programming/windows/delphi/get-process-name-method-4-getprocessimagefilename/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/get-process-name-method-3-ntqueryinformationprocess/">Get Process Name Method 3 NtQueryInformationProcess</a>
+      <a href="/docs/programming/windows/delphi/get-process-name-method-3-ntqueryinformationprocess/">Get Process Name Method 3 NtQueryInformationProcess</a>
     </h2>
     
   <h5>April 13, 2020</h5>
@@ -330,14 +368,14 @@ Nothing very complex and this technique works from 32bit to 64bit / 64bit to 32b
     <p>Yet another technique to get the full image path of a target process using the NtQueryInformationProcess API documented Here
 This technique from 32bit to 64bit / 64bit to 32bit.
 // Jean-Pierre LESUEUR (@DarkCoderSc) function PhysicalToVirtualPath(APath : String) : String; var i : integer; ADrive : String; ABuffer : array[0..MAX_PATH-1] of Char; ACandidate : String; begin {$I-} for I := 0 to 25 do begin ADrive := Format('%s:', [Chr(Ord('A') + i)]); /// if (QueryDosDevice(PWideChar(ADrive), ABuffer, MAX_PATH) = 0) then continue; ACandidate := String(ABuffer).
-        <a href="/docs/windows/snippets/delphi/get-process-name-method-3-ntqueryinformationprocess/">...</a>
+        <a href="/docs/programming/windows/delphi/get-process-name-method-3-ntqueryinformationprocess/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/get-process-name-method-2-getmappedfilename/">Get Process Name Method 2 GetMappedFilename</a>
+      <a href="/docs/programming/windows/delphi/get-process-name-method-2-getmappedfilename/">Get Process Name Method 2 GetMappedFilename</a>
     </h2>
     
   <h5>April 13, 2020</h5>
@@ -360,14 +398,14 @@ This technique from 32bit to 64bit / 64bit to 32bit.
 
     <p>Bellow code demonstrate our to retrieve both current and target process full image path. This technique is very uncommon but works perfectly.
 Notice for both techniques you muse translate its physical path to virtual path using this tiny function  // Jean-Pierre LESUEUR (@DarkCoderSc) function PhysicalToVirtualPath(APath : String) : String; var i : integer; ADrive : String; ABuffer : array[0..MAX_PATH-1] of Char; ACandidate : String; begin {$I-} for I := 0 to 25 do begin ADrive := Format('%s:', [Chr(Ord('A') + i)]); /// if (QueryDosDevice(PWideChar(ADrive), ABuffer, MAX_PATH) = 0) then continue; ACandidate := String(ABuffer).
-        <a href="/docs/windows/snippets/delphi/get-process-name-method-2-getmappedfilename/">...</a>
+        <a href="/docs/programming/windows/delphi/get-process-name-method-2-getmappedfilename/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/get-process-name-method-1/">Get Process Name Method 1</a>
+      <a href="/docs/programming/windows/delphi/get-process-name-method-1/">Get Process Name Method 1</a>
     </h2>
     
   <h5>March 12, 2020</h5>
@@ -392,7 +430,7 @@ Notice for both techniques you muse translate its physical path to virtual path 
 This example support Windows Vista to latest Windows version (Actually Windows 10)
 I will cover other example progressively and compatible with Windows XP and below.
 // Jean-Pierre LESUEUR (@DarkCoderSc) //... uses Windows, SysUtils; //... function GetProcessName(AProcessID : Cardinal) : String; var hProc : THandle; ALength : DWORD; hDLL : THandle; QueryFullProcessImageNameW : function( AProcess: THANDLE; AFlags: DWORD; AFileName: PWideChar; var ASize: DWORD): BOOL; stdcall; const PROCESS_QUERY_LIMITED_INFORMATION = $00001000; begin result := ''; /// if (TOSVersion.
-        <a href="/docs/windows/snippets/delphi/get-process-name-method-1/">...</a>
+        <a href="/docs/programming/windows/delphi/get-process-name-method-1/">...</a>
       
     </p>
   </article>

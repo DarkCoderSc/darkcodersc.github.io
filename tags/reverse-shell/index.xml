@@ -13,10 +13,10 @@
     
     <item>
       <title>Assignment N°2 - Reverse Shell (NASM)</title>
-      <link>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</link>
+      <link>https://www.phrozen.io/docs/infosec/linux/slae32/ex2-reverseshell/</link>
       <pubDate>Sat, 14 Mar 2020 11:57:00 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/linux/slae32/ex2-reverseshell/</guid>
+      <guid>https://www.phrozen.io/docs/infosec/linux/slae32/ex2-reverseshell/</guid>
       <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
 If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
 Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>

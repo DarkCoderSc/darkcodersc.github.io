@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EOF Reader is a tiny Visual C&#43;&#43; project designed to detect the presence of EOF (End Of File) data on both 32bit and 64bit valid Portable Executable Files.
+After creating a similar project in Pascal/Delphi, I decided to port the code in C&#43;&#43;.
+Some Antivirus Software using similar technique to flag some Malware generically. There are very few if no legitimate reason at all to append data at the end of a PE File."><meta property="og:title" content="EOF Reader (C&#43;&#43;)" />
+<meta property="og:description" content="EOF Reader is a tiny Visual C&#43;&#43; project designed to detect the presence of EOF (End Of File) data on both 32bit and 64bit valid Portable Executable Files.
+After creating a similar project in Pascal/Delphi, I decided to port the code in C&#43;&#43;.
+Some Antivirus Software using similar technique to flag some Malware generically. There are very few if no legitimate reason at all to append data at the end of a PE File." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/projects/windows/opensource/eof-reader/" />
+<meta property="article:published_time" content="2020-03-02T17:18:20+01:00" />
+<meta property="article:modified_time" content="2020-03-02T17:18:20+01:00" />
+<title>EOF Reader (C&#43;&#43;) | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.86e3cb1d1d29ddd8a3d2600962708437dcff21fc53cbdb40ba7f1f89e3ae2043.js" integrity="sha256-huPLHR0p3dij0mAJYnCEN9z/IfxTy9tAun8fieOuIEM="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/projects/" class="">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/opensource/" class="collapsed ">Open Source</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/opensource/dll-export-enum/" class="">DLL Export Enum v1.0 (Open Source &#43; Signed Binary)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/opensource/update-peb-debug-delphi/" class="">Update PEB Debug Flag (Delphi)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/opensource/eof-reader/" class="active">EOF Reader (C&#43;&#43;)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/freeware/" class="collapsed ">Freeware</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/infosec/" class="">InfoSec</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/" class="collapsed ">Linux</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/programming/" class="">Programming</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/general/" class="collapsed ">General</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/DarkCoderSc" target="_blank" rel="noopener"><i class='fa fa-github'></i>
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>EOF Reader (C&#43;&#43;)</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><p><img src="/images/202003/eof-reader-vs-screenshot.jpeg" alt="Project Image" /></p>
+<p>EOF Reader is a tiny Visual C++ project designed to detect the presence of EOF (End Of File) data on both 32bit and 64bit valid Portable Executable Files.</p>
+<p>After creating a similar project in Pascal/Delphi, I decided to port the code in C++.</p>
+<p>Some Antivirus Software using similar technique to flag some Malware generically. There are very few if no legitimate reason at all to append data at the end of a PE File.</p>
+<h2 id="features-support-both-32bit-and-64bit-pe-files">Features (Support both 32bit and 64bit PE Files)</h2>
+<ul>
+<li>Detect presence of EOF Data from valid PE Files.</li>
+<li>If present, dump EOF Data to console.</li>
+<li>Possibility to write extracted EOF Data to file.</li>
+</ul>
+<h2 id="get-the-project-code">Get the project code</h2>
+<p><code>git clone https://github.com/DarkCoderSc/eof-reader.git</code></p>
+<p>Successfully compiled with Visual Studio 2019.</p>
+<h2 id="main-source-file">Main source file</h2>
+<pre><code>/*
+	-----------------------------------------------------------------------------
+	Jean-Pierre LESUEUR (@DarkCoderSc)
+	jplesueur@phrozen.io
+	License : MIT
+	Read EOF (End Of File) Data from PE File.
+	Based on my previous work : https://github.com/DarkCoderSc/peof-detector/blob/master/UntEOF.pas
+	Compiled with : Visual Studio 2019 (Community)
+	Notice :
+	   	If you have any advices for improving the code or if you have any issues, feel free to contact me.	
+		C++ is not yet my main language, always willing to learn ;-)
+	-----------------------------------------------------------------------------
+*/
+
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &quot;windows.h&quot;
+#include &lt;iomanip&gt;
+#include &lt;sstream&gt;
+#include &quot;termcolor/termcolor.hpp&quot;
+
+using namespace std;
+
+/*
+	Log functions
+*/
+void log_error(const string &amp;message) {
+	cerr &lt;&lt; &quot; &quot; &lt;&lt; termcolor::bloodred &lt;&lt; &quot;x&quot; &lt;&lt; termcolor::reset &lt;&lt; &quot; &quot; &lt;&lt; message &lt;&lt; endl;
+}
+
+void log_debug(const string &amp;message) {
+	cout &lt;&lt; &quot; &quot; &lt;&lt; &quot;*&quot; &lt;&lt; &quot; &quot; &lt;&lt; message &lt;&lt; endl;
+}
+
+void log_success(const string &amp;message) {
+	cout &lt;&lt; &quot; &quot; &lt;&lt; termcolor::lime &lt;&lt; &quot;*&quot; &lt;&lt; termcolor::reset &lt;&lt; &quot; &quot; &lt;&lt; message &lt;&lt; endl;
+}
+
+void log_warn(const string &amp;message = &quot;&quot;) {
+	cout &lt;&lt; &quot; &quot; &lt;&lt; termcolor::yellow &lt;&lt; &quot;!&quot; &lt;&lt; termcolor::reset &lt;&lt; &quot; &quot; &lt;&lt; message &lt;&lt; endl;
+}
+
+/*
+	Dump memory data to console.
+*/
+void HexDumpBufferToConsole(PVOID pBuffer, __int64 ABufferSize) {
+	cout &lt;&lt; &quot;| ------------------------------------------------|------------------|&quot; &lt;&lt; endl;
+	cout &lt;&lt; &quot;| 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F |                  |&quot; &lt;&lt; endl;
+	cout &lt;&lt; &quot;| ------------------------------------------------|------------------|&quot; &lt;&lt; endl;
+
+	for (int j = 0; j &lt; ceil(ABufferSize / 16); j++) {
+		char AsciiColumns[17];
+
+		stringstream ARow;
+
+		for (int i = 0; i &lt; 16; i++) {
+			unsigned char AChar = ((char*)pBuffer)[(j * 16) + i];
+
+			if (!isprint(AChar)) {
+				AChar = 46; // .
+			}
+
+			ARow &lt;&lt; setfill('0') &lt;&lt; setw(2) &lt;&lt; hex &lt;&lt; static_cast&lt;unsigned int&gt;(AChar) &lt;&lt; &quot; &quot;;
+
+			AsciiColumns[i] = AChar;
+		}
+
+		AsciiColumns[16] = 0; // Add null terminated character.
+
+		cout &lt;&lt; &quot;| &quot; &lt;&lt; ARow.rdbuf() &lt;&lt; &quot;| &quot; &lt;&lt; AsciiColumns &lt;&lt; &quot; |&quot; &lt;&lt; endl;
+	}
+
+	cout &lt;&lt; &quot;| ------------------------------------------------|------------------|&quot; &lt;&lt; endl &lt;&lt; endl;
+}
+
+/*
+	Dump memory data to file.
+*/
+bool WriteBufferToFile(PVOID pBuffer, __int64 ABufferSize, wstring ADestFile, PDWORD AErrorCode) {
+	SetLastError(0);
+
+	HANDLE hFile = CreateFile(ADestFile.c_str(), GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+	if (hFile == INVALID_HANDLE_VALUE) {
+		*AErrorCode = GetLastError();
+
+		return false;
+	}
+
+	DWORD dwBytesWritten = 0;
+
+	if (!WriteFile(hFile, pBuffer, ABufferSize, &amp;dwBytesWritten, nullptr)) {
+		*AErrorCode = GetLastError();
+
+		CloseHandle(hFile);
+
+		return false;
+	}
+
+	CloseHandle(hFile);
+
+	return true;
+}
+
+/*
+	Basic way to read file size from disk
+*/
+__int64 GetFileSize(wchar_t AFileName[MAX_PATH]) {
+	LARGE_INTEGER AFileSize;
+
+	AFileSize.LowPart = 0;
+	AFileSize.HighPart = 0;
+	
+	ifstream ifile(AFileName);
+	if (ifile) {		
+		WIN32_FILE_ATTRIBUTE_DATA lpFileInfo;
+
+		if (GetFileAttributesExW(AFileName, GetFileExInfoStandard, &amp;lpFileInfo)) {			
+			AFileSize.HighPart = lpFileInfo.nFileSizeHigh;
+			AFileSize.LowPart = lpFileInfo.nFileSizeLow;
+		}
+	}
+	
+	return AFileSize.QuadPart;
+}
+
+int main(int argc, char* argv[]) {
+	if (argc != 2) {
+		cout &lt;&lt; &quot;Usage : readeof.exe \&quot;C:\\suspicious.exe\&quot;&quot; &lt;&lt; endl;
+
+		return 0;
+	}
+
+	wchar_t AFileName[MAX_PATH] = { 0 };
+
+	for (int i = 0; i &lt; strlen(argv[1]); i++) {
+		AFileName[i] = argv[1][i];
+	}
+
+	//GetModuleFileNameW(0, AFileName, MAX_PATH);	
+
+	wcout &lt;&lt; &quot;Working on \&quot;&quot; &lt;&lt; AFileName &lt;&lt; &quot;\&quot; : &quot; &lt;&lt; endl &lt;&lt; endl;
+
+	/*
+		Get target file size on disk.
+	*/
+	__int64 AFileSize = GetFileSize(AFileName);
+	if (AFileSize &lt;= 0) {
+		log_error(&quot;Could not get target file size on disk. Abort.&quot;);
+
+		return 0;
+	}
+
+	log_success(&quot;File size on disk : &quot; + to_string(AFileSize) + &quot; bytes&quot;);
+
+	/*
+		Now we will compare with image size described by the PE Header.
+	*/
+	DWORD dwBytesRead = 0;	
+
+	HANDLE hFile = CreateFile(AFileName, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, 0, 0);
+	if (hFile == INVALID_HANDLE_VALUE) {
+		log_error(&quot;Could not open target file.&quot;);
+
+		return 0;
+	}
+
+	SetFilePointer(hFile, 0, nullptr, FILE_BEGIN);		
+
+	/*
+		Read IMAGE_DOS_HEADER
+	*/
+	IMAGE_DOS_HEADER AImageDosHeader;
+
+	if (!ReadFile(hFile, &amp;AImageDosHeader, sizeof(IMAGE_DOS_HEADER), &amp;dwBytesRead, nullptr)) {
+		log_error(&quot;Could not read IMAGE_DOS_HEADER.&quot;);
+
+		CloseHandle(hFile);
+
+		return 0;
+	}
+
+	if (AImageDosHeader.e_magic != IMAGE_DOS_SIGNATURE) {
+		log_error(&quot;Not a valid PE File.&quot;);
+
+		CloseHandle(hFile);
+
+		return 0;
+	}
+
+	SetFilePointer(hFile, AImageDosHeader.e_lfanew, nullptr, FILE_BEGIN);
+
+	/*
+		Verify if if we match IMAGE_NT_SIGNATURE (0x4550)
+	*/
+
+	DWORD AImageNTSignature;
+
+	if (!ReadFile(hFile, &amp;AImageNTSignature, sizeof(DWORD), &amp;dwBytesRead, nullptr)) {
+		log_error(&quot;Could not read IMAGE_NT_SIGNATURE.&quot;);
+
+		CloseHandle(hFile);
+
+		return 0;
+	}
+
+	if (AImageNTSignature != IMAGE_NT_SIGNATURE) {
+		log_error(&quot;IMAGE_NT_SIGNATURE Doesn't match.&quot;);
+
+		CloseHandle(hFile);
+
+		return 0;
+	}
+
+	log_success(&quot;The file is likely a valid PE File.&quot;);
+
+	/*
+		At this point, we are enough sure we are facing a valid PE File.
+		Reading IMAGE_FILE_HEADER
+	*/
+	IMAGE_FILE_HEADER AImageFileHeader;
+
+	if (!ReadFile(hFile, &amp;AImageFileHeader, sizeof(IMAGE_FILE_HEADER), &amp;dwBytesRead, nullptr)) {
+		cout &lt;&lt; &quot;Could not read IMAGE_FILE_HEADER.&quot; &lt;&lt; endl;
+
+		CloseHandle(hFile);
+
+		return 0;
+	}
+
+	// Checking if we are facing a x64 or x86 PE File.
+	bool x64 = (AImageFileHeader.Machine == IMAGE_FILE_MACHINE_AMD64);
+
+	log_debug(string(&quot;Facing &quot;) + (x64 ? &quot;64&quot; : &quot;32&quot;) + string(&quot;bit PE File.&quot;));
+
+	__int64 AImageSize = 0;
+
+	/*
+		Reading IMAGE_OPTIONAL_HEADER. Support both x64 and x64.
+	*/
+	if (x64) {
+		IMAGE_OPTIONAL_HEADER64 AOptionalHeader;
+
+		if (!ReadFile(hFile, &amp;AOptionalHeader, sizeof(IMAGE_OPTIONAL_HEADER64), &amp;dwBytesRead, nullptr)) {
+			log_error(&quot;Could not read IMAGE_OPTIONAL_HEADER64&quot;);
+
+			CloseHandle(hFile);
+
+			return 0;
+		}
+
+		/*
+			We don't forget to add the IMAGE_DIRERCTORY_ENTRY_SECURITY if target application is signed otherwise
+			the full image size wont match.
+		*/
+		AImageSize += (__int64(AOptionalHeader.SizeOfHeaders) + __int64(AOptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_SECURITY].Size));
+	}
+	else {
+		IMAGE_OPTIONAL_HEADER32 AOptionalHeader;
+
+		if (!ReadFile(hFile, &amp;AOptionalHeader, sizeof(IMAGE_OPTIONAL_HEADER32), &amp;dwBytesRead, nullptr)) {
+			log_error(&quot;Could not read IMAGE_OPTIONAL_HEADER32&quot;);
+
+			CloseHandle(hFile);
+
+			return 0;
+		}
+
+		// Same as above
+		AImageSize += (__int64(AOptionalHeader.SizeOfHeaders) + __int64(AOptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_SECURITY].Size));
+	}
+
+
+	/*
+		Enumerate each sections, and append to our current mesured image size.
+	*/
+	for (int i = 0; i &lt; AImageFileHeader.NumberOfSections; i++) {
+		IMAGE_SECTION_HEADER AImageSectionHeader;
+
+		if (!ReadFile(hFile, &amp;AImageSectionHeader, sizeof(IMAGE_SECTION_HEADER), &amp;dwBytesRead, nullptr)) {
+			log_error(&quot;Fail to read section n°&quot; + to_string(i));
+
+			CloseHandle(hFile);
+
+			return 0; // If one section fail to be read, then we loose.
+		}
+
+		AImageSize += AImageSectionHeader.SizeOfRawData;
+	}
+
+	log_success(&quot;Image Size successfully calculated : &quot; + to_string(AImageSize) + &quot; bytes&quot;);
+
+	/*
+		Checking if some EOF data is present in target file.
+	*/
+	unsigned AEOFSize = (AFileSize - AImageSize);
+	
+	if (AEOFSize &gt; 0) {
+		log_warn(to_string(AEOFSize) + &quot; bytes of EOF Data detected.&quot;);
+
+		/*
+			Read EOF Data
+		*/
+		log_debug(&quot;Extracting / Printing EOF Data:&quot;);
+		cout &lt;&lt; endl;
+
+		SetFilePointer(hFile, (AFileSize - AEOFSize), nullptr, FILE_BEGIN); // Could also use FILE_END
+
+		PVOID pBuffer = malloc(AEOFSize);
+
+		if (!ReadFile(hFile, pBuffer, AEOFSize, &amp;dwBytesRead, nullptr)) {
+			log_error(&quot;Could not read EOF data.&quot;);
+		}
+		else {
+			/*
+				Print EOF data.
+			*/
+			HexDumpBufferToConsole(pBuffer, AEOFSize);						
+		}
+
+		/*
+			Offering user to dump EOF Data to file
+		*/
+		cout &lt;&lt; &quot;Do you want to dump the content of EOF Data ? (y/n) : &quot;;
+
+		string s = &quot;&quot;;
+		cin.width(1); // we only take care of first character.
+		cin &gt;&gt; s;
+
+		if (s == &quot;y&quot;) { 
+			cout &lt;&lt; &quot;Output file path : &quot;;
+
+			wstring AOutputPath;
+
+			cin.width(MAX_PATH);
+
+			wcin &gt;&gt; AOutputPath;
+
+			/*
+				Write EOF data to file
+			*/
+			DWORD AErrorCode = 0;
+			if (!WriteBufferToFile(pBuffer, AEOFSize, AOutputPath, &amp;AErrorCode)) {
+				log_error(&quot;Could no write EOF data to file with error &quot; + to_string(AErrorCode));
+			} 
+			else
+			{
+				log_success(&quot;EOF data successfully dumped.&quot;);
+			};
+		}
+
+		free(pBuffer);
+	}
+	else {
+		log_success(&quot;No EOF data detected so far.&quot;);
+	}
+
+	CloseHandle(hFile);
+
+	return 0;
+}
+</code></pre></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

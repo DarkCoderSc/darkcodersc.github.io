@@ -13,10 +13,10 @@
     
     <item>
       <title>EOF Reader (C&#43;&#43;)</title>
-      <link>https://www.phrozen.io/docs/windows/projects/opensource/eof-reader/</link>
+      <link>https://www.phrozen.io/docs/projects/windows/opensource/eof-reader/</link>
       <pubDate>Mon, 02 Mar 2020 17:18:20 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/projects/opensource/eof-reader/</guid>
+      <guid>https://www.phrozen.io/docs/projects/windows/opensource/eof-reader/</guid>
       <description>EOF Reader is a tiny Visual C++ project designed to detect the presence of EOF (End Of File) data on both 32bit and 64bit valid Portable Executable Files.
 After creating a similar project in Pascal/Delphi, I decided to port the code in C++.
 Some Antivirus Software using similar technique to flag some Malware generically. There are very few if no legitimate reason at all to append data at the end of a PE File.</description>
@@ -24,10 +24,10 @@ Some Antivirus Software using similar technique to flag some Malware generically
     
     <item>
       <title>Manipulation and Detection of EOF</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/eof/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/eof/</link>
       <pubDate>Mon, 02 Mar 2020 12:21:49 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/eof/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/eof/</guid>
       <description>Description This Delphi unit demonstrate how to manipulate EOF Data of a Valid Microsoft Windows Portable Executable (PE) File.
 EOF (End Of File) is often used by Malware authors to offer their Malware users a way to edit Malware payload configuration (Ex: C2 informations) without having access to source code.
 You often encounter such techniques in:

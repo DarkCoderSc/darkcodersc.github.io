@@ -13,10 +13,10 @@
     
     <item>
       <title>Terminate Process Techniques</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/terminate-process-techniques/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/terminate-process-techniques/</link>
       <pubDate>Fri, 06 Mar 2020 14:44:08 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/terminate-process-techniques/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/terminate-process-techniques/</guid>
       <description>You will find below 4 different techniques to close/kill/terminate Windows process in pure WinAPI.
 Techniques  TerminateProcess() : Classic method. ExitProcess() : via Code Injection (32bit to 32bit ; 64bit to 64bit). Crash Process : Inject code that will crash the process (32bit to 32bit ; 64bit to 64bit). CTRL_CLOSE_EVENT / WM_CLOSE : Send &amp;ldquo;close&amp;rdquo; messages to target process windows.  TerminateAProcess() Method Kill target process id following desired method : tmpAll, tpmTerminateProcess, tpmExitProcess, tpmCrash, tpmMessage</description>
     </item>

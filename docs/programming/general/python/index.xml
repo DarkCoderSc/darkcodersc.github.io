@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Phrozen</title>
+    <link>https://www.phrozen.io/docs/programming/general/python/</link>
+    <description>Recent content on Phrozen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 11 Apr 2020 12:48:31 +0200</lastBuildDate>
+    
+	<atom:link href="https://www.phrozen.io/docs/programming/general/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Just a Web Fuzzer Example</title>
+      <link>https://www.phrozen.io/docs/programming/general/python/just-a-web-fuzzer-example/</link>
+      <pubDate>Sat, 11 Apr 2020 12:48:31 +0200</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/programming/general/python/just-a-web-fuzzer-example/</guid>
+      <description>Bellow script demonstrate how to create a very basic multithreaded web file and directory fuzzer.
+It is far from being as fast as other famous web fuzzers (wfuzz, dirb, gobuster etc..) but it is at least a good start to understand how to create yours.
+#!/bin/python3 &#39;&#39;&#39; -= Just a web fuzzer example =- (@DarkCoderSc) Dependencies: - pip install progressbar2 &#39;&#39;&#39; import requests import progressbar from multiprocessing import Pool from multiprocessing.</description>
+    </item>
+    
+  </channel>
+</rss>

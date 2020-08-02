@@ -13,10 +13,10 @@
     
     <item>
       <title>Get Process Name Method 3 NtQueryInformationProcess</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-3-ntqueryinformationprocess/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/get-process-name-method-3-ntqueryinformationprocess/</link>
       <pubDate>Mon, 13 Apr 2020 18:29:45 +0200</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-3-ntqueryinformationprocess/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/get-process-name-method-3-ntqueryinformationprocess/</guid>
       <description>Yet another technique to get the full image path of a target process using the NtQueryInformationProcess API documented Here
 This technique from 32bit to 64bit / 64bit to 32bit.
 // Jean-Pierre LESUEUR (@DarkCoderSc) function PhysicalToVirtualPath(APath : String) : String; var i : integer; ADrive : String; ABuffer : array[0..MAX_PATH-1] of Char; ACandidate : String; begin {$I-} for I := 0 to 25 do begin ADrive := Format(&#39;%s:&#39;, [Chr(Ord(&#39;A&#39;) + i)]); /// if (QueryDosDevice(PWideChar(ADrive), ABuffer, MAX_PATH) = 0) then continue; ACandidate := String(ABuffer).</description>

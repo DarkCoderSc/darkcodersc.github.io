@@ -12,7 +12,7 @@
 <title>Delphi | Phrozen</title>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
-<script defer src="/en.search.min.b2076e0261e5a9d8317b3ad67e3b9de204bfd9b7e70b4e7d06c400d4e56d7df9.js" integrity="sha256-sgduAmHlqdgxezrWfjud4gS/2bfnC059BsQA1OVtffk="></script>
+<script defer src="/en.search.min.86e3cb1d1d29ddd8a3d2600962708437dcff21fc53cbdb40ba7f1f89e3ae2043.js" integrity="sha256-huPLHR0p3dij0mAJYnCEN9z/IfxTy9tAun8fieOuIEM="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -72,7 +72,7 @@ if (!doNotTrack) {
         <li class="book-section-flat" >
           
   
-    <span>Linux</span>
+    <a href="/docs/projects/" class="">Projects</a>
   
 
           
@@ -87,7 +87,7 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/linux/slae32/" class="collapsed ">SLAE32</a>
+    <a href="/docs/projects/windows/" class="collapsed ">Windows</a>
   
 
           
@@ -110,7 +110,7 @@ if (!doNotTrack) {
         <li class="book-section-flat" >
           
   
-    <span>Microsoft Windows</span>
+    <a href="/docs/infosec/" class="">InfoSec</a>
   
 
           
@@ -125,7 +125,7 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/windows/projects/" class="collapsed ">Projects</a>
+    <a href="/docs/infosec/linux/" class="collapsed ">Linux</a>
   
 
           
@@ -142,7 +142,45 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/windows/snippets/" class="collapsed ">Snippets</a>
+    <a href="/docs/infosec/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/programming/" class="">Programming</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/" class="collapsed ">Windows</a>
   
 
           
@@ -159,7 +197,7 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/windows/poc/" class="collapsed ">PoC</a>
+    <a href="/docs/programming/general/" class="collapsed ">General</a>
   
 
           
@@ -273,7 +311,7 @@ if (!doNotTrack) {
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/enum-modules-method-1/">Enum Modules Method 1</a>
+      <a href="/docs/programming/windows/delphi/enum-modules-method-1/">Enum Modules Method 1</a>
     </h2>
     
   <h5>March 12, 2020</h5>
@@ -298,14 +336,14 @@ if (!doNotTrack) {
     <p>You will find below an example of how to enumerate process modules using the well known Windows API CreateToolHelp32Snapshot(), I will cover additional methods soon.
 You may notice that when using CreateToolHelp32Snapshot(), first result (row) is generally the Image Path of the process owning module. I ignore that row by checking the value of szExePath with owner process image path.
 GetProcessName() is compatible since Windows Vista. It is possible to support Windows XP and below but not in this example.
-        <a href="/docs/windows/snippets/delphi/enum-modules-method-1/">...</a>
+        <a href="/docs/programming/windows/delphi/enum-modules-method-1/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/terminate-process-techniques/">Terminate Process Techniques</a>
+      <a href="/docs/programming/windows/delphi/terminate-process-techniques/">Terminate Process Techniques</a>
     </h2>
     
   <h5>March 6, 2020</h5>
@@ -329,14 +367,14 @@ GetProcessName() is compatible since Windows Vista. It is possible to support Wi
 
     <p>You will find below 4 different techniques to close/kill/terminate Windows process in pure WinAPI.
 Techniques  TerminateProcess() : Classic method. ExitProcess() : via Code Injection (32bit to 32bit ; 64bit to 64bit). Crash Process : Inject code that will crash the process (32bit to 32bit ; 64bit to 64bit). CTRL_CLOSE_EVENT / WM_CLOSE : Send &ldquo;close&rdquo; messages to target process windows.  TerminateAProcess() Method Kill target process id following desired method : tmpAll, tpmTerminateProcess, tpmExitProcess, tpmCrash, tpmMessage
-        <a href="/docs/windows/snippets/delphi/terminate-process-techniques/">...</a>
+        <a href="/docs/programming/windows/delphi/terminate-process-techniques/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/projects/opensource/update-peb-debug-delphi/">Update PEB Debug Flag (Delphi)</a>
+      <a href="/docs/projects/windows/opensource/update-peb-debug-delphi/">Update PEB Debug Flag (Delphi)</a>
     </h2>
     
   <h5>March 3, 2020</h5>
@@ -361,14 +399,14 @@ Techniques  TerminateProcess() : Classic method. ExitProcess() : via Code Inject
     <p>This project implement the unit UntPEBDebug.pas with a concreate example.
 Features Include  List process and their Debug status. (ReadProcessMemory / PEB method) Update process Debug flag. (WriteProcessMemory / PEB method) Support both 32bit and 64bit. Notice.  Notice regarding architecture:
  To target 32bit process, you must use the project compiled as 32bit executable. To target 64bit process, you must use the project compiled as 64bit executable.  Repository git clone https://github.
-        <a href="/docs/windows/projects/opensource/update-peb-debug-delphi/">...</a>
+        <a href="/docs/projects/windows/opensource/update-peb-debug-delphi/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/enum-process-method-1/">Enum Process Method 1</a>
+      <a href="/docs/programming/windows/delphi/enum-process-method-1/">Enum Process Method 1</a>
     </h2>
     
   <h5>March 3, 2020</h5>
@@ -393,14 +431,14 @@ Features Include  List process and their Debug status. (ReadProcessMemory / PEB 
     <p>This is one of the most famous method to enumerate running process on Windows.
 If AFilterSameArch is set to True, only processes running with same architecture as current process will be listed.
 { Jean-Pierre LESUEUR (@DarkCoderSc) Example: ... var AProcessName : String; AProcessId : Cardinal; AProcessList : TDictionary&lt;Integer, String&gt;; begin AProcessList := EnumProcess(True); try for AProcessId in AProcessList.Keys do begin if NOT AProcessList.TryGetValue(AProcessId, AProcessName) then continue; /// ... end; finally if Assigned(AProcessList) then FreeAndNil(AProcessList); end; end; } //.
-        <a href="/docs/windows/snippets/delphi/enum-process-method-1/">...</a>
+        <a href="/docs/programming/windows/delphi/enum-process-method-1/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/is-process-64/">Is Process 64bit</a>
+      <a href="/docs/programming/windows/delphi/is-process-64/">Is Process 64bit</a>
     </h2>
     
   <h5>March 3, 2020</h5>
@@ -424,14 +462,14 @@ If AFilterSameArch is set to True, only processes running with same architecture
 If result is True, target process is running under 64bit architecture.
 If result is False, target process is running under 32bit architecture.
 // // Jean-Pierre LESUEUR @DarkCoderSc // // ... uses Windows, SysUtils; // ... type TArchitecture = (x86, x64, xUnknown); // ... function IsProcessX64(AProcessId : Cardinal) : TArchitecture; var AProcHandle : THandle; AWow64Process : bool; begin result := xUnknown; /// { If we are not in a 64Bit system then we are for sure in a 32Bit system } if (TOSVersion.
-        <a href="/docs/windows/snippets/delphi/is-process-64/">...</a>
+        <a href="/docs/programming/windows/delphi/is-process-64/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/eof/">Manipulation and Detection of EOF</a>
+      <a href="/docs/programming/windows/delphi/eof/">Manipulation and Detection of EOF</a>
     </h2>
     
   <h5>March 2, 2020</h5>
@@ -456,7 +494,7 @@ If result is False, target process is running under 32bit architecture.
 EOF (End Of File) is often used by Malware authors to offer their Malware users a way to edit Malware payload configuration (Ex: C2 informations) without having access to source code.
 You often encounter such techniques in:
  Remote Access Tool/Trojan (RAT) File Wrapper / Binder Downloader Loader / Botnets  But not only.
-        <a href="/docs/windows/snippets/delphi/eof/">...</a>
+        <a href="/docs/programming/windows/delphi/eof/">...</a>
       
     </p>
   </article>

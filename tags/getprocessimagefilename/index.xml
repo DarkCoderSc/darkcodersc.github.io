@@ -13,10 +13,10 @@
     
     <item>
       <title>Get Process Name Method 4 GetProcessImageFileName</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-4-getprocessimagefilename/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/get-process-name-method-4-getprocessimagefilename/</link>
       <pubDate>Mon, 13 Apr 2020 18:35:13 +0200</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-4-getprocessimagefilename/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/get-process-name-method-4-getprocessimagefilename/</guid>
       <description>This time we will use a quite well known API to get the full process image path GetProcessImageFileName documented here.
 Nothing very complex and this technique works from 32bit to 64bit / 64bit to 32bit processes.
 // Jean-Pierre LESUEUR (@DarkCoderSc) function PhysicalToVirtualPath(APath : String) : String; var i : integer; ADrive : String; ABuffer : array[0..MAX_PATH-1] of Char; ACandidate : String; begin {$I-} for I := 0 to 25 do begin ADrive := Format(&#39;%s:&#39;, [Chr(Ord(&#39;A&#39;) + i)]); /// if (QueryDosDevice(PWideChar(ADrive), ABuffer, MAX_PATH) = 0) then continue; ACandidate := String(ABuffer).</description>

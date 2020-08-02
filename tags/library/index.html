@@ -12,7 +12,7 @@
 <title>Library | Phrozen</title>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
-<script defer src="/en.search.min.b2076e0261e5a9d8317b3ad67e3b9de204bfd9b7e70b4e7d06c400d4e56d7df9.js" integrity="sha256-sgduAmHlqdgxezrWfjud4gS/2bfnC059BsQA1OVtffk="></script>
+<script defer src="/en.search.min.86e3cb1d1d29ddd8a3d2600962708437dcff21fc53cbdb40ba7f1f89e3ae2043.js" integrity="sha256-huPLHR0p3dij0mAJYnCEN9z/IfxTy9tAun8fieOuIEM="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -72,7 +72,7 @@ if (!doNotTrack) {
         <li class="book-section-flat" >
           
   
-    <span>Linux</span>
+    <a href="/docs/projects/" class="">Projects</a>
   
 
           
@@ -87,7 +87,7 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/linux/slae32/" class="collapsed ">SLAE32</a>
+    <a href="/docs/projects/windows/" class="collapsed ">Windows</a>
   
 
           
@@ -110,7 +110,7 @@ if (!doNotTrack) {
         <li class="book-section-flat" >
           
   
-    <span>Microsoft Windows</span>
+    <a href="/docs/infosec/" class="">InfoSec</a>
   
 
           
@@ -125,7 +125,7 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/windows/projects/" class="collapsed ">Projects</a>
+    <a href="/docs/infosec/linux/" class="collapsed ">Linux</a>
   
 
           
@@ -142,7 +142,45 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/windows/snippets/" class="collapsed ">Snippets</a>
+    <a href="/docs/infosec/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/programming/" class="">Programming</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/" class="collapsed ">Windows</a>
   
 
           
@@ -159,7 +197,7 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/windows/poc/" class="collapsed ">PoC</a>
+    <a href="/docs/programming/general/" class="collapsed ">General</a>
   
 
           
@@ -273,7 +311,7 @@ if (!doNotTrack) {
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/get-dll-exported-function-address/">Get DLL Exported Function Address</a>
+      <a href="/docs/programming/windows/delphi/get-dll-exported-function-address/">Get DLL Exported Function Address</a>
     </h2>
     
   <h5>March 15, 2020</h5>
@@ -298,14 +336,14 @@ if (!doNotTrack) {
     <p>This very small snippet is an adaptation of the previously released unit &gt; UntEnumDLLExport.pas with just one goal, retrieve an exported function address by its name from any DLL (both 32 and 64bit).
 This adaptation is also interesting because it remove the need of having both heavy units Generics.Collections and SysUtils to have a smaller binary.
 Finally it is also quite interesting for tweaking our GetProcAddress alternative (you will find here) and only have the necesarry code.
-        <a href="/docs/windows/snippets/delphi/get-dll-exported-function-address/">...</a>
+        <a href="/docs/programming/windows/delphi/get-dll-exported-function-address/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/enum-dll-exported-functions/">Enum DLL Exported Functions</a>
+      <a href="/docs/programming/windows/delphi/enum-dll-exported-functions/">Enum DLL Exported Functions</a>
     </h2>
     
   <h5>March 12, 2020</h5>
@@ -330,7 +368,7 @@ Finally it is also quite interesting for tweaking our GetProcAddress alternative
 
     <p>This unit demonstrate how to enumerate DLL exported functions through PE Header manipulation.
 Features  Support both 32 and 64bit DLL&rsquo;s. Identify exported function names. Identify exported function ordinal value. Support and resolve forwarded function. Identify export function address and relative address.  Unit Code (******************************************************************************* Author: -&gt; Jean-Pierre LESUEUR (@DarkCoderSc) https://github.com/DarkCoderSc https://gist.github.com/DarkCoderSc https://www.phrozen.io/ License: -&gt; MIT *******************************************************************************) unit UntEnumDLLExport; interface uses Classes, Windows, Generics.Collections, SysUtils; type TExportEntry = class private FName : String; FForwarded : Boolean; FForwardName : String; FRelativeAddr : Cardinal; FAddress : Int64; FOrdinal : Word; {@M} function GetFormatedAddress() : String; function GetFormatedRelativeAddr() : String; public {@C} constructor Create(); {@G/S} property Name : String read FName write FName; property Forwarded : Boolean read FForwarded write FForwarded; property ForwardName : String read FForwardName write FForwardName; property Address : Int64 read FAddress write FAddress; property RelativeAddr : Cardinal read FRelativeAddr write FRelativeAddr; property Ordinal : Word read FOrdinal write FOrdinal; {@G} property FormatedAddress : String read GetFormatedAddress; property FormatedRelativeAddress : String read GetFormatedRelativeAddr; end; TEnumDLLExport = class private FItems : TObjectList&lt;TExportEntry&gt;; FFileName : String; {@M} public {@C} constructor Create(AFileName : String); destructor Destroy(); override; {@M} function Enum() : Integer; {@G} property Items : TObjectList&lt;TExportEntry&gt; read FItems; property FileName : String read FFileName; end; implementation {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Local Functions +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++} function IntToHexF(AValue : Int64; APad : Word = 0 {0=Auto}) : String; begin if (APad = 0) then begin if (AValue &lt;= High(Word)) then APad := 2 else if (AValue &lt;= High(DWORD)) and (AValue &gt; High(Word)) then APad := 8 else if (AValue &lt;= High(Int64)) and (AValue &gt; High(DWORD)) then APad := 16; end; result := '0x' + IntToHex(AValue, APad); end; {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ TExportEntry +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++} constructor TExportEntry.
-        <a href="/docs/windows/snippets/delphi/enum-dll-exported-functions/">...</a>
+        <a href="/docs/programming/windows/delphi/enum-dll-exported-functions/">...</a>
       
     </p>
   </article>

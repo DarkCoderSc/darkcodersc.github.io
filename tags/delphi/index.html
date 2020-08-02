@@ -12,7 +12,7 @@
 <title>Delphi | Phrozen</title>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
-<script defer src="/en.search.min.b2076e0261e5a9d8317b3ad67e3b9de204bfd9b7e70b4e7d06c400d4e56d7df9.js" integrity="sha256-sgduAmHlqdgxezrWfjud4gS/2bfnC059BsQA1OVtffk="></script>
+<script defer src="/en.search.min.86e3cb1d1d29ddd8a3d2600962708437dcff21fc53cbdb40ba7f1f89e3ae2043.js" integrity="sha256-huPLHR0p3dij0mAJYnCEN9z/IfxTy9tAun8fieOuIEM="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -72,7 +72,7 @@ if (!doNotTrack) {
         <li class="book-section-flat" >
           
   
-    <span>Linux</span>
+    <a href="/docs/projects/" class="">Projects</a>
   
 
           
@@ -87,7 +87,7 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/linux/slae32/" class="collapsed ">SLAE32</a>
+    <a href="/docs/projects/windows/" class="collapsed ">Windows</a>
   
 
           
@@ -110,7 +110,7 @@ if (!doNotTrack) {
         <li class="book-section-flat" >
           
   
-    <span>Microsoft Windows</span>
+    <a href="/docs/infosec/" class="">InfoSec</a>
   
 
           
@@ -125,7 +125,7 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/windows/projects/" class="collapsed ">Projects</a>
+    <a href="/docs/infosec/linux/" class="collapsed ">Linux</a>
   
 
           
@@ -142,7 +142,45 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/windows/snippets/" class="collapsed ">Snippets</a>
+    <a href="/docs/infosec/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/programming/" class="">Programming</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/" class="collapsed ">Windows</a>
   
 
           
@@ -159,7 +197,7 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/windows/poc/" class="collapsed ">PoC</a>
+    <a href="/docs/programming/general/" class="collapsed ">General</a>
   
 
           
@@ -273,7 +311,7 @@ if (!doNotTrack) {
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/get-registry-key-security-descriptor/">Get Registry Key DACL Security Descriptor</a>
+      <a href="/docs/programming/windows/delphi/get-registry-key-security-descriptor/">Get Registry Key DACL Security Descriptor</a>
     </h2>
     
 
@@ -296,14 +334,14 @@ if (!doNotTrack) {
     <p>Below code snippet demonstrate how to get DACL Security Descriptor in SDDL format for a targeted registry key.
 You need to parse the output SDDL string in order to understand access properties for desired keys, there are plenty of articles arround explaining how to understand an SDDL string format.
 You can also play with flags associated to ConvertSecurityDescriptorToStringSecurityDescriptor call to extract even more information from captured Security Descriptor Pointer after RegGetKeySecurity call.
-        <a href="/docs/windows/snippets/delphi/get-registry-key-security-descriptor/">...</a>
+        <a href="/docs/programming/windows/delphi/get-registry-key-security-descriptor/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/linux/slae32/ex7-crypters/">Assignment N°7 - Crypters (Delphi/ASM)</a>
+      <a href="/docs/infosec/linux/slae32/ex7-crypters/">Assignment N°7 - Crypters (Delphi/ASM)</a>
     </h2>
     
   <h5>June 17, 2020</h5>
@@ -329,14 +367,14 @@ You can also play with flags associated to ConvertSecurityDescriptorToStringSecu
     <p>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
 If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
 Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.
-        <a href="/docs/linux/slae32/ex7-crypters/">...</a>
+        <a href="/docs/infosec/linux/slae32/ex7-crypters/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/get-process-name-method-4-getprocessimagefilename/">Get Process Name Method 4 GetProcessImageFileName</a>
+      <a href="/docs/programming/windows/delphi/get-process-name-method-4-getprocessimagefilename/">Get Process Name Method 4 GetProcessImageFileName</a>
     </h2>
     
   <h5>April 13, 2020</h5>
@@ -361,14 +399,14 @@ Why? the goal of that certification is to practice and learn how to solve each a
     <p>This time we will use a quite well known API to get the full process image path GetProcessImageFileName documented here.
 Nothing very complex and this technique works from 32bit to 64bit / 64bit to 32bit processes.
 // Jean-Pierre LESUEUR (@DarkCoderSc) function PhysicalToVirtualPath(APath : String) : String; var i : integer; ADrive : String; ABuffer : array[0..MAX_PATH-1] of Char; ACandidate : String; begin {$I-} for I := 0 to 25 do begin ADrive := Format('%s:', [Chr(Ord('A') + i)]); /// if (QueryDosDevice(PWideChar(ADrive), ABuffer, MAX_PATH) = 0) then continue; ACandidate := String(ABuffer).
-        <a href="/docs/windows/snippets/delphi/get-process-name-method-4-getprocessimagefilename/">...</a>
+        <a href="/docs/programming/windows/delphi/get-process-name-method-4-getprocessimagefilename/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/get-process-name-method-3-ntqueryinformationprocess/">Get Process Name Method 3 NtQueryInformationProcess</a>
+      <a href="/docs/programming/windows/delphi/get-process-name-method-3-ntqueryinformationprocess/">Get Process Name Method 3 NtQueryInformationProcess</a>
     </h2>
     
   <h5>April 13, 2020</h5>
@@ -393,14 +431,14 @@ Nothing very complex and this technique works from 32bit to 64bit / 64bit to 32b
     <p>Yet another technique to get the full image path of a target process using the NtQueryInformationProcess API documented Here
 This technique from 32bit to 64bit / 64bit to 32bit.
 // Jean-Pierre LESUEUR (@DarkCoderSc) function PhysicalToVirtualPath(APath : String) : String; var i : integer; ADrive : String; ABuffer : array[0..MAX_PATH-1] of Char; ACandidate : String; begin {$I-} for I := 0 to 25 do begin ADrive := Format('%s:', [Chr(Ord('A') + i)]); /// if (QueryDosDevice(PWideChar(ADrive), ABuffer, MAX_PATH) = 0) then continue; ACandidate := String(ABuffer).
-        <a href="/docs/windows/snippets/delphi/get-process-name-method-3-ntqueryinformationprocess/">...</a>
+        <a href="/docs/programming/windows/delphi/get-process-name-method-3-ntqueryinformationprocess/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/enum-attached-files/">Enum Attached Files</a>
+      <a href="/docs/programming/windows/delphi/enum-attached-files/">Enum Attached Files</a>
     </h2>
     
   <h5>March 24, 2020</h5>
@@ -425,14 +463,14 @@ This technique from 32bit to 64bit / 64bit to 32bit.
     <p>Above snippet demonstrate how to enumerate files openned by running programs on Windows.
 Some file unlocker use that technique to find where a specific file is attached and then force processes using that file to release it handle (via code injection techniques). I will write an example in a future snippet thread.
 Notice: At the bottom of that page, you will see a concreate example about how to use that unit.
-        <a href="/docs/windows/snippets/delphi/enum-attached-files/">...</a>
+        <a href="/docs/programming/windows/delphi/enum-attached-files/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/get-dll-exported-function-address-from-mem/">Get DLL Exported Function Address From Memory</a>
+      <a href="/docs/programming/windows/delphi/get-dll-exported-function-address-from-mem/">Get DLL Exported Function Address From Memory</a>
     </h2>
     
   <h5>March 18, 2020</h5>
@@ -457,14 +495,14 @@ Notice: At the bottom of that page, you will see a concreate example about how t
     <p>As promised, we will adapt our previous code grab an exported function directly from memory.
 Serious advantage of this technique:
  We don&rsquo;t have to use CreateToolHelp32Snapshot anymore to enumerate modules and catch target module base address. We don&rsquo;t need to parse PE Header from disk anymore, we will parse PE Header directly from memory.  Notice, it is still necessary to use LoadLibrary API to load desired DLL in memory.
-        <a href="/docs/windows/snippets/delphi/get-dll-exported-function-address-from-mem/">...</a>
+        <a href="/docs/programming/windows/delphi/get-dll-exported-function-address-from-mem/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/getprocaddress-alternative/">GetProcAddress API Alternative</a>
+      <a href="/docs/programming/windows/delphi/getprocaddress-alternative/">GetProcAddress API Alternative</a>
     </h2>
     
   <h5>March 14, 2020</h5>
@@ -490,14 +528,14 @@ Serious advantage of this technique:
 We will see one concreate example of using the UntEnumDLLExport.pas library to dynamically load API without using the famous Windows API &gt; GetProcAddress()
 This technique is quite known and often used by some Malware, to mask which API&rsquo;s they are dynamically loading and avoid Antivirus detection.
 To do so, we still need to use LoadLibrary() first to load a DLL in memory and retrieve it address, then iterate through loaded DLL export table and catch target function address.
-        <a href="/docs/windows/snippets/delphi/getprocaddress-alternative/">...</a>
+        <a href="/docs/programming/windows/delphi/getprocaddress-alternative/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/projects/opensource/dll-export-enum/">DLL Export Enum v1.0 (Open Source &#43; Signed Binary)</a>
+      <a href="/docs/projects/windows/opensource/dll-export-enum/">DLL Export Enum v1.0 (Open Source &#43; Signed Binary)</a>
     </h2>
     
   <h5>March 13, 2020</h5>
@@ -522,14 +560,14 @@ To do so, we still need to use LoadLibrary() first to load a DLL in memory and r
     <p>This project is mainly created to demonstrate how to use the previously released unit UntEnumDLLExport.pas available &gt; Here
 The project is open source (see below for github link) and for those who don&rsquo;t have Delphi installed, you can download the compiled and code signed application (both 32 and 64bit).
 Available Features  Enumerate Exported Functions From DLL.  Support Ordinal Value Only. Display Function Address and Relative Address. Support Forwarded Function.
-        <a href="/docs/windows/projects/opensource/dll-export-enum/">...</a>
+        <a href="/docs/projects/windows/opensource/dll-export-enum/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/enum-dll-exported-functions/">Enum DLL Exported Functions</a>
+      <a href="/docs/programming/windows/delphi/enum-dll-exported-functions/">Enum DLL Exported Functions</a>
     </h2>
     
   <h5>March 12, 2020</h5>
@@ -554,14 +592,14 @@ Available Features  Enumerate Exported Functions From DLL.  Support Ordinal Valu
 
     <p>This unit demonstrate how to enumerate DLL exported functions through PE Header manipulation.
 Features  Support both 32 and 64bit DLL&rsquo;s. Identify exported function names. Identify exported function ordinal value. Support and resolve forwarded function. Identify export function address and relative address.  Unit Code (******************************************************************************* Author: -&gt; Jean-Pierre LESUEUR (@DarkCoderSc) https://github.com/DarkCoderSc https://gist.github.com/DarkCoderSc https://www.phrozen.io/ License: -&gt; MIT *******************************************************************************) unit UntEnumDLLExport; interface uses Classes, Windows, Generics.Collections, SysUtils; type TExportEntry = class private FName : String; FForwarded : Boolean; FForwardName : String; FRelativeAddr : Cardinal; FAddress : Int64; FOrdinal : Word; {@M} function GetFormatedAddress() : String; function GetFormatedRelativeAddr() : String; public {@C} constructor Create(); {@G/S} property Name : String read FName write FName; property Forwarded : Boolean read FForwarded write FForwarded; property ForwardName : String read FForwardName write FForwardName; property Address : Int64 read FAddress write FAddress; property RelativeAddr : Cardinal read FRelativeAddr write FRelativeAddr; property Ordinal : Word read FOrdinal write FOrdinal; {@G} property FormatedAddress : String read GetFormatedAddress; property FormatedRelativeAddress : String read GetFormatedRelativeAddr; end; TEnumDLLExport = class private FItems : TObjectList&lt;TExportEntry&gt;; FFileName : String; {@M} public {@C} constructor Create(AFileName : String); destructor Destroy(); override; {@M} function Enum() : Integer; {@G} property Items : TObjectList&lt;TExportEntry&gt; read FItems; property FileName : String read FFileName; end; implementation {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Local Functions +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++} function IntToHexF(AValue : Int64; APad : Word = 0 {0=Auto}) : String; begin if (APad = 0) then begin if (AValue &lt;= High(Word)) then APad := 2 else if (AValue &lt;= High(DWORD)) and (AValue &gt; High(Word)) then APad := 8 else if (AValue &lt;= High(Int64)) and (AValue &gt; High(DWORD)) then APad := 16; end; result := '0x' + IntToHex(AValue, APad); end; {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ TExportEntry +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++} constructor TExportEntry.
-        <a href="/docs/windows/snippets/delphi/enum-dll-exported-functions/">...</a>
+        <a href="/docs/programming/windows/delphi/enum-dll-exported-functions/">...</a>
       
     </p>
   </article>
   
   <article class="markdown book-post">
     <h2>
-      <a href="/docs/windows/snippets/delphi/get-process-name-method-1/">Get Process Name Method 1</a>
+      <a href="/docs/programming/windows/delphi/get-process-name-method-1/">Get Process Name Method 1</a>
     </h2>
     
   <h5>March 12, 2020</h5>
@@ -586,7 +624,7 @@ Features  Support both 32 and 64bit DLL&rsquo;s. Identify exported function name
 This example support Windows Vista to latest Windows version (Actually Windows 10)
 I will cover other example progressively and compatible with Windows XP and below.
 // Jean-Pierre LESUEUR (@DarkCoderSc) //... uses Windows, SysUtils; //... function GetProcessName(AProcessID : Cardinal) : String; var hProc : THandle; ALength : DWORD; hDLL : THandle; QueryFullProcessImageNameW : function( AProcess: THANDLE; AFlags: DWORD; AFileName: PWideChar; var ASize: DWORD): BOOL; stdcall; const PROCESS_QUERY_LIMITED_INFORMATION = $00001000; begin result := ''; /// if (TOSVersion.
-        <a href="/docs/windows/snippets/delphi/get-process-name-method-1/">...</a>
+        <a href="/docs/programming/windows/delphi/get-process-name-method-1/">...</a>
       
     </p>
   </article>

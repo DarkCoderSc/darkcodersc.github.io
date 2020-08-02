@@ -13,10 +13,10 @@
     
     <item>
       <title>Get Process Name Method 4 GetProcessImageFileName</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-4-getprocessimagefilename/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/get-process-name-method-4-getprocessimagefilename/</link>
       <pubDate>Mon, 13 Apr 2020 18:35:13 +0200</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-4-getprocessimagefilename/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/get-process-name-method-4-getprocessimagefilename/</guid>
       <description>This time we will use a quite well known API to get the full process image path GetProcessImageFileName documented here.
 Nothing very complex and this technique works from 32bit to 64bit / 64bit to 32bit processes.
 // Jean-Pierre LESUEUR (@DarkCoderSc) function PhysicalToVirtualPath(APath : String) : String; var i : integer; ADrive : String; ABuffer : array[0..MAX_PATH-1] of Char; ACandidate : String; begin {$I-} for I := 0 to 25 do begin ADrive := Format(&#39;%s:&#39;, [Chr(Ord(&#39;A&#39;) + i)]); /// if (QueryDosDevice(PWideChar(ADrive), ABuffer, MAX_PATH) = 0) then continue; ACandidate := String(ABuffer).</description>
@@ -24,10 +24,10 @@ Nothing very complex and this technique works from 32bit to 64bit / 64bit to 32b
     
     <item>
       <title>Get Process Name Method 3 NtQueryInformationProcess</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-3-ntqueryinformationprocess/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/get-process-name-method-3-ntqueryinformationprocess/</link>
       <pubDate>Mon, 13 Apr 2020 18:29:45 +0200</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-3-ntqueryinformationprocess/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/get-process-name-method-3-ntqueryinformationprocess/</guid>
       <description>Yet another technique to get the full image path of a target process using the NtQueryInformationProcess API documented Here
 This technique from 32bit to 64bit / 64bit to 32bit.
 // Jean-Pierre LESUEUR (@DarkCoderSc) function PhysicalToVirtualPath(APath : String) : String; var i : integer; ADrive : String; ABuffer : array[0..MAX_PATH-1] of Char; ACandidate : String; begin {$I-} for I := 0 to 25 do begin ADrive := Format(&#39;%s:&#39;, [Chr(Ord(&#39;A&#39;) + i)]); /// if (QueryDosDevice(PWideChar(ADrive), ABuffer, MAX_PATH) = 0) then continue; ACandidate := String(ABuffer).</description>
@@ -35,20 +35,20 @@ This technique from 32bit to 64bit / 64bit to 32bit.
     
     <item>
       <title>Get Process Name Method 2 GetMappedFilename</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-2-getmappedfilename/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/get-process-name-method-2-getmappedfilename/</link>
       <pubDate>Mon, 13 Apr 2020 18:18:44 +0200</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-2-getmappedfilename/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/get-process-name-method-2-getmappedfilename/</guid>
       <description>Bellow code demonstrate our to retrieve both current and target process full image path. This technique is very uncommon but works perfectly.
 Notice for both techniques you muse translate its physical path to virtual path using this tiny function  // Jean-Pierre LESUEUR (@DarkCoderSc) function PhysicalToVirtualPath(APath : String) : String; var i : integer; ADrive : String; ABuffer : array[0..MAX_PATH-1] of Char; ACandidate : String; begin {$I-} for I := 0 to 25 do begin ADrive := Format(&#39;%s:&#39;, [Chr(Ord(&#39;A&#39;) + i)]); /// if (QueryDosDevice(PWideChar(ADrive), ABuffer, MAX_PATH) = 0) then continue; ACandidate := String(ABuffer).</description>
     </item>
     
     <item>
       <title>Get Process Name Method 1</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-1/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/get-process-name-method-1/</link>
       <pubDate>Thu, 12 Mar 2020 15:46:57 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-1/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/get-process-name-method-1/</guid>
       <description>This one possible technique (through QueryFullProcessImageNameW) to get process image path from it id.
 This example support Windows Vista to latest Windows version (Actually Windows 10)
 I will cover other example progressively and compatible with Windows XP and below.

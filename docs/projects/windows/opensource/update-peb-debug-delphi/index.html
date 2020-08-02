@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="This project implement the unit UntPEBDebug.pas with a concreate example.
+Features Include  List process and their Debug status. (ReadProcessMemory / PEB method) Update process Debug flag. (WriteProcessMemory / PEB method) Support both 32bit and 64bit. Notice.  Notice regarding architecture:
+ To target 32bit process, you must use the project compiled as 32bit executable. To target 64bit process, you must use the project compiled as 64bit executable.  Repository git clone https://github."><meta property="og:title" content="Update PEB Debug Flag (Delphi)" />
+<meta property="og:description" content="This project implement the unit UntPEBDebug.pas with a concreate example.
+Features Include  List process and their Debug status. (ReadProcessMemory / PEB method) Update process Debug flag. (WriteProcessMemory / PEB method) Support both 32bit and 64bit. Notice.  Notice regarding architecture:
+ To target 32bit process, you must use the project compiled as 32bit executable. To target 64bit process, you must use the project compiled as 64bit executable.  Repository git clone https://github." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/projects/windows/opensource/update-peb-debug-delphi/" />
+<meta property="article:published_time" content="2020-03-03T14:52:51+01:00" />
+<meta property="article:modified_time" content="2020-03-03T14:52:51+01:00" />
+<title>Update PEB Debug Flag (Delphi) | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.86e3cb1d1d29ddd8a3d2600962708437dcff21fc53cbdb40ba7f1f89e3ae2043.js" integrity="sha256-huPLHR0p3dij0mAJYnCEN9z/IfxTy9tAun8fieOuIEM="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/projects/" class="">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/opensource/" class="collapsed ">Open Source</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/opensource/dll-export-enum/" class="">DLL Export Enum v1.0 (Open Source &#43; Signed Binary)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/opensource/update-peb-debug-delphi/" class="active">Update PEB Debug Flag (Delphi)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/opensource/eof-reader/" class="">EOF Reader (C&#43;&#43;)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/freeware/" class="collapsed ">Freeware</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/infosec/" class="">InfoSec</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/" class="collapsed ">Linux</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/programming/" class="">Programming</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/general/" class="collapsed ">General</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/DarkCoderSc" target="_blank" rel="noopener"><i class='fa fa-github'></i>
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Update PEB Debug Flag (Delphi)</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><p>This project implement the unit <a href="/docs/windows/snippets/delphi/update-peb-debug/">UntPEBDebug.pas</a> with a concreate example.</p>
+<h2 id="features-include">Features Include</h2>
+<ul>
+<li>List process and their Debug status. (<code>ReadProcessMemory</code> / PEB method)</li>
+<li>Update process Debug flag. (<code>WriteProcessMemory</code> / PEB method)</li>
+<li>Support both 32bit and 64bit. Notice.</li>
+</ul>
+<p>Notice regarding architecture:</p>
+<ul>
+<li>To target 32bit process, you must use the project compiled as 32bit executable.</li>
+<li>To target 64bit process, you must use the project compiled as 64bit executable.</li>
+</ul>
+<h2 id="repository">Repository</h2>
+<p><code>git clone https://github.com/DarkCoderSc/peb-update-debug-flag.git</code></p>
+<p>Project available at : <a href="https://github.com/DarkCoderSc/peb-update-debug-flag">https://github.com/DarkCoderSc/peb-update-debug-flag</a></p>
+<h2 id="screenshot">Screenshot</h2>
+<p><img src="/images/202003/update-peb-project.png" alt="Main Window" /></p>
+<h2 id="main-code-preview">Main Code Preview</h2>
+<pre><code class="language-Pascal" data-lang="Pascal">(*******************************************************************************
+  Author:
+    -&gt;  Jean-Pierre LESUEUR (@DarkCoderSc)
+        https://github.com/DarkCoderSc
+        https://gist.github.com/DarkCoderSc
+        https://www.phrozen.io/
+  License:
+    -&gt; MIT
+*******************************************************************************)
+
+program PEBDebug;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses
+  System.SysUtils,
+  Windows,
+  tlHelp32,
+  Generics.Collections,
+  UntPEBDebug in 'UntPEBDebug.pas';
+
+type
+  TArchitecture = (x86, x64, xUnknown);
+
+{
+  Detect target process architecture.
+}
+function IsProcessX64(AProcessId : Cardinal) : TArchitecture;
+var AProcHandle   : THandle;
+    AWow64Process : bool;
+begin
+  result := xUnknown;
+  ///
+
+  {
+    If we are not in a 64Bit system then we are for sure in a 32Bit system
+  }
+  if (TOSVersion.Architecture = arIntelX86) then
+    Exit();
+  ///
+
+  AProcHandle := OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, False, AProcessId);
+  if AProcHandle = 0 then
+    Exit;
+  try
+    isWow64Process(AProcHandle, AWow64Process);
+    ///
+
+    if AWow64Process then
+      result := x86
+    else
+      result := x64;
+  finally
+    CloseHandle(AProcHandle);
+  end;
+end;
+
+{
+  Retrieve the list of running process for scanning PEB value.
+}
+function EnumProcess(AFilterSameArch : Boolean = False) : TDictionary&lt;Integer {Process Id}, String {Process Name}&gt;;
+var ASnap         : THandle;
+    AProcessEntry : TProcessEntry32;
+    AProcessName  : String;
+
+    procedure AppendEntry();
+    begin
+      if AFilterSameArch and ((IsProcessX64(GetCurrentProcessId())) &lt;&gt; (IsProcessX64(AProcessEntry.th32ProcessID))) then
+        Exit();
+      ///
+
+      result.Add(AProcessEntry.th32ProcessID, AProcessEntry.szExeFile);
+    end;
+
+begin
+  result := TDictionary&lt;Integer, String&gt;.Create();
+  ///
+
+  ASnap := CreateToolHelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  if ASnap = INVALID_HANDLE_VALUE then
+    Exit();
+  try
+    ZeroMemory(@AProcessEntry, SizeOf(TProcessEntry32));
+    ///
+
+    AProcessEntry.dwSize := SizeOf(TProcessEntry32);
+
+    if NOT Process32First(ASnap, AProcessEntry) then
+      Exit();
+
+    AppendEntry();
+
+    while True do begin
+      ZeroMemory(@AProcessEntry, SizeOf(TProcessEntry32));
+      ///
+
+      AProcessEntry.dwSize := SizeOf(TProcessEntry32);
+
+      if NOT Process32Next(ASnap, AProcessEntry) then
+        break;
+
+      AppendEntry();
+    end;
+  finally
+    CloseHandle(ASnap);
+  end;
+end;
+
+{
+  Display Process Debug Status Feature.
+}
+procedure DoListProcessDebugStatus();
+var ADebugStatus    : Boolean;
+    AProcessName    : String;
+    AProcessId      : Cardinal;
+    AProcessList    : TDictionary&lt;Integer, String&gt;;
+    ADebugStatusStr : String;
+begin
+  WriteLn('Process List (Only with same architecture) :');
+  ///
+
+  AProcessList := EnumProcess(True);
+  try
+    for AProcessId in AProcessList.Keys do begin
+      if NOT AProcessList.TryGetValue(AProcessId, AProcessName) then
+        continue;
+      ///
+
+      if GetProcessDebugStatus(AProcessId, ADebugStatus) then begin
+        if ADebugStatus then
+          ADebugStatusStr := 'True'
+        else
+          ADebugStatusStr := 'False';
+
+        writeln(#09 + Format('* Debug=[%s], %s(%d)', [ADebugStatusStr, AProcessName, AProcessId]));
+      end;
+    end;
+  finally
+    if Assigned(AProcessList) then
+      FreeAndNil(AProcessList);
+  end;
+
+  Writeln(#13#10);
+end;
+
+{
+  Show different option of that tool
+}
+function DisplayMenu() : Integer;
+var AChoice : String;
+begin
+  result := 0;
+  ///
+
+  WriteLn('Choose an option:');
+  WriteLn('--------------------------------------------' + #13#10);
+
+  WriteLn(#09 + '* [1] : List process debug flag');
+  WriteLn(#09 + '* [2] : Set process debug flag to true');
+  WriteLn(#09 + '* [3] : Set process debug flag to false');
+  WriteLn(#09 + '* [4] : Quit');
+
+  Writeln(#13#10);
+
+  Write('Option : ');
+
+  ReadLn(AChoice);
+
+  Writeln(#13#10);
+
+  if NOT TryStrToInt(AChoice, result) then
+    result := 0;
+end;
+
+{
+  Update Target Process Debug Flag
+}
+procedure UpdateTargetProcessDebugFlag(ADebugStatus : Boolean);
+var AChoice    : String;
+    AProcessId : Integer;
+begin
+  Write('Enter target process id :');
+
+  ReadLn(AChoice);
+
+  if NOT TryStrToInt(AChoice, AProcessId) then
+    WriteLn('Invalid Process Id')
+  else begin
+    if AProcessId &lt;= 0 then
+      WriteLn('Invalid Process Id')
+    else begin
+      if SetProcessDebugStatus(AProcessId, ADebugStatus) then begin
+        WriteLn('Done.');
+      end else begin
+        WriteLn('Failed. Possible reasons: &quot;Non existing process id&quot;, &quot;Not enough privilege&quot;, &quot;Wrong architecture&quot;');
+      end;
+    end;
+  end;
+
+  WriteLn('');
+end;
+
+var AChoice : Byte;
+
+begin
+  try
+    while True do begin
+      AChoice := DisplayMenu();
+      ///
+
+      case AChoice of
+        1 : begin
+          DoListProcessDebugStatus();
+        end;
+
+        2 : begin
+          UpdateTargetProcessDebugFlag(True);
+        end;
+
+        3 : begin
+          UpdateTargetProcessDebugFlag(False);
+        end;
+
+        4 : begin
+          Break;
+        end;
+      end;
+    end;
+  except
+    on E: Exception do
+      Writeln(E.ClassName, ': ', E.Message);
+  end;
+end.
+</code></pre></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

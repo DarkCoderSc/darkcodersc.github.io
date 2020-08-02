@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="This one possible technique (through QueryFullProcessImageNameW) to get process image path from it id.
+This example support Windows Vista to latest Windows version (Actually Windows 10)
+I will cover other example progressively and compatible with Windows XP and below.
+// Jean-Pierre LESUEUR (@DarkCoderSc) //... uses Windows, SysUtils; //... function GetProcessName(AProcessID : Cardinal) : String; var hProc : THandle; ALength : DWORD; hDLL : THandle; QueryFullProcessImageNameW : function( AProcess: THANDLE; AFlags: DWORD; AFileName: PWideChar; var ASize: DWORD): BOOL; stdcall; const PROCESS_QUERY_LIMITED_INFORMATION = $00001000; begin result := &#39;&#39;; /// if (TOSVersion."><meta property="og:title" content="Get Process Name Method 1" />
+<meta property="og:description" content="This one possible technique (through QueryFullProcessImageNameW) to get process image path from it id.
+This example support Windows Vista to latest Windows version (Actually Windows 10)
+I will cover other example progressively and compatible with Windows XP and below.
+// Jean-Pierre LESUEUR (@DarkCoderSc) //... uses Windows, SysUtils; //... function GetProcessName(AProcessID : Cardinal) : String; var hProc : THandle; ALength : DWORD; hDLL : THandle; QueryFullProcessImageNameW : function( AProcess: THANDLE; AFlags: DWORD; AFileName: PWideChar; var ASize: DWORD): BOOL; stdcall; const PROCESS_QUERY_LIMITED_INFORMATION = $00001000; begin result := &#39;&#39;; /// if (TOSVersion." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/programming/windows/delphi/get-process-name-method-1/" />
+<meta property="article:published_time" content="2020-03-12T15:46:57+01:00" />
+<meta property="article:modified_time" content="2020-03-12T15:46:57+01:00" />
+<title>Get Process Name Method 1 | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.86e3cb1d1d29ddd8a3d2600962708437dcff21fc53cbdb40ba7f1f89e3ae2043.js" integrity="sha256-huPLHR0p3dij0mAJYnCEN9z/IfxTy9tAun8fieOuIEM="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/projects/" class="">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/infosec/" class="">InfoSec</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/" class="collapsed ">Linux</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/programming/" class="">Programming</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/" class="collapsed ">Delphi</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-registry-key-security-descriptor/" class="">Get Registry Key DACL Security Descriptor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-process-name-method-4-getprocessimagefilename/" class="">Get Process Name Method 4 GetProcessImageFileName</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-process-name-method-3-ntqueryinformationprocess/" class="">Get Process Name Method 3 NtQueryInformationProcess</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-process-name-method-2-getmappedfilename/" class="">Get Process Name Method 2 GetMappedFilename</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/enum-attached-files/" class="">Enum Attached Files</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-dll-exported-function-address-from-mem/" class="">Get DLL Exported Function Address From Memory</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-dll-exported-function-address/" class="">Get DLL Exported Function Address</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/getprocaddress-alternative/" class="">GetProcAddress API Alternative</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/enum-dll-exported-functions/" class="">Enum DLL Exported Functions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-process-name-method-1/" class="active">Get Process Name Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/enum-modules-method-1/" class="">Enum Modules Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/terminate-process-techniques/" class="">Terminate Process Techniques</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/update-peb-debug/" class="">Update PEB Debug Flag</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/enum-process-method-1/" class="">Enum Process Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/is-process-64/" class="">Is Process 64bit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/eof/" class="">Manipulation and Detection of EOF</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/general/" class="collapsed ">General</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/DarkCoderSc" target="_blank" rel="noopener"><i class='fa fa-github'></i>
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Get Process Name Method 1</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><p>This one possible technique (through <code>QueryFullProcessImageNameW</code>) to get process image path from it id.</p>
+<p>This example support Windows Vista to latest Windows version (Actually Windows 10)</p>
+<p>I will cover other example progressively and compatible with Windows XP and below.</p>
+<pre><code class="language-Pascal" data-lang="Pascal">// Jean-Pierre LESUEUR (@DarkCoderSc)
+
+//...
+uses Windows, SysUtils;
+//...
+
+function GetProcessName(AProcessID : Cardinal) : String;
+var hProc      : THandle;
+    ALength    : DWORD;
+    hDLL       : THandle;
+
+    QueryFullProcessImageNameW : function(
+                                            AProcess: THANDLE;
+                                            AFlags: DWORD;
+                                            AFileName: PWideChar;
+                                            var ASize: DWORD): BOOL; stdcall;
+
+const PROCESS_QUERY_LIMITED_INFORMATION = $00001000;
+begin
+  result := '';
+  ///
+
+  if (TOSVersion.Major &lt; 6) then  
+    Exit();
+  ///
+  
+  QueryFullProcessImageNameW := nil;
+  
+  hDLL := LoadLibrary('kernel32.dll');
+  if hDLL = 0 then
+    Exit();  
+  try
+    @QueryFullProcessImageNameW := GetProcAddress(hDLL, 'QueryFullProcessImageNameW');
+    ///
+    
+    if Assigned(QueryFullProcessImageNameW) then begin
+      hProc := OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, false, AProcessID);
+      if hProc = 0 then exit;
+      try
+        ALength := (MAX_PATH * 2);
+        
+        SetLength(result, ALength);
+        
+        if NOT QueryFullProcessImageNameW(hProc, 0, @result[1], ALength) then 
+          Exit();
+
+        SetLength(result, ALength); // Get rid of extra junk
+      finally
+        CloseHandle(hProc);
+      end;
+    end;
+  finally
+    FreeLibrary(hDLL);
+  end;
+end;
+</code></pre></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

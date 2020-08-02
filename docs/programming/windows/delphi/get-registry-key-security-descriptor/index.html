@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Below code snippet demonstrate how to get DACL Security Descriptor in SDDL format for a targeted registry key.
+You need to parse the output SDDL string in order to understand access properties for desired keys, there are plenty of articles arround explaining how to understand an SDDL string format.
+You can also play with flags associated to ConvertSecurityDescriptorToStringSecurityDescriptor call to extract even more information from captured Security Descriptor Pointer after RegGetKeySecurity call."><meta property="og:title" content="Get Registry Key DACL Security Descriptor" />
+<meta property="og:description" content="Below code snippet demonstrate how to get DACL Security Descriptor in SDDL format for a targeted registry key.
+You need to parse the output SDDL string in order to understand access properties for desired keys, there are plenty of articles arround explaining how to understand an SDDL string format.
+You can also play with flags associated to ConvertSecurityDescriptorToStringSecurityDescriptor call to extract even more information from captured Security Descriptor Pointer after RegGetKeySecurity call." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/programming/windows/delphi/get-registry-key-security-descriptor/" />
+
+<title>Get Registry Key DACL Security Descriptor | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.86e3cb1d1d29ddd8a3d2600962708437dcff21fc53cbdb40ba7f1f89e3ae2043.js" integrity="sha256-huPLHR0p3dij0mAJYnCEN9z/IfxTy9tAun8fieOuIEM="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/projects/" class="">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/infosec/" class="">InfoSec</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/" class="collapsed ">Linux</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/programming/" class="">Programming</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/" class="collapsed ">Delphi</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-registry-key-security-descriptor/" class="active">Get Registry Key DACL Security Descriptor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-process-name-method-4-getprocessimagefilename/" class="">Get Process Name Method 4 GetProcessImageFileName</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-process-name-method-3-ntqueryinformationprocess/" class="">Get Process Name Method 3 NtQueryInformationProcess</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-process-name-method-2-getmappedfilename/" class="">Get Process Name Method 2 GetMappedFilename</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/enum-attached-files/" class="">Enum Attached Files</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-dll-exported-function-address-from-mem/" class="">Get DLL Exported Function Address From Memory</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-dll-exported-function-address/" class="">Get DLL Exported Function Address</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/getprocaddress-alternative/" class="">GetProcAddress API Alternative</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/enum-dll-exported-functions/" class="">Enum DLL Exported Functions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-process-name-method-1/" class="">Get Process Name Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/enum-modules-method-1/" class="">Enum Modules Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/terminate-process-techniques/" class="">Terminate Process Techniques</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/update-peb-debug/" class="">Update PEB Debug Flag</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/enum-process-method-1/" class="">Enum Process Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/is-process-64/" class="">Is Process 64bit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/eof/" class="">Manipulation and Detection of EOF</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/general/" class="collapsed ">General</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/DarkCoderSc" target="_blank" rel="noopener"><i class='fa fa-github'></i>
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Get Registry Key DACL Security Descriptor</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><p>Below code snippet demonstrate how to get DACL Security Descriptor in <a href="https://docs.microsoft.com/en-us/windows/win32/secauthz/security-descriptor-string-format">SDDL format</a> for a targeted registry key.</p>
+<blockquote class="book-hint info">
+  <p>You need to parse the output SDDL string in order to understand access properties for desired keys, there are plenty of articles arround explaining how to understand an SDDL string format.</p>
+<p>You can also play with flags associated to <code>ConvertSecurityDescriptorToStringSecurityDescriptor</code> call to extract even more information from captured Security Descriptor Pointer after <code>RegGetKeySecurity</code> call.</p>
+
+</blockquote>
+
+<pre><code>{-------------------------------------------------------------------------------
+  Check if target registry key have write access.
+
+  Return Code:
+    0 : Success.
+    1 : Could not open registry key.
+    2 : Could not get registry key security requirements.
+    3 : Could not get registry key security information.
+    4 : Could not translate security descriptor.
+
+    99 : Unknown
+-------------------------------------------------------------------------------}
+function GetRegKeySecurityDescriptor(AKeyHive : HKEY; AKeyPath : String; var ASDDL : String) : Cardinal;
+var AKey                   : HKEY;
+    pSecDesc               : PSecurityDescriptor;
+    ASize                  : DWORD;
+    ARet                   : Cardinal;
+    AFlags                 : Cardinal;
+    AToken                 : THandle;
+    APrivilegeSet          : TPrivilegeSet;
+    AGenericMapping        : TGenericMapping;
+    AGrantedAccess         : DWORD;
+    AResult                : BOOL;
+    AMask                  : DWORD;
+    hADVAPI                : THandle;
+    ASecurityDescriptorStr : PWideChar;
+    AReturnedLength        : ULONG;
+    APos                   : Integer;
+
+    // https://docs.microsoft.com/en-us/windows/win32/api/sddl/nf-sddl-convertsecuritydescriptortostringsecuritydescriptorw
+    ConvertSecurityDescriptorToStringSecurityDescriptor : function(
+                                                                    SecurityDescriptor : PSECURITY_DESCRIPTOR;
+                                                                    RequestedStringSDRevision : DWORD;
+                                                                    SecurityInformation : SECURITY_INFORMATION;
+                                                                    var StringSecurityDescriptor : LPWSTR;
+                                                                    StringSecurityDescriptorLen : PULONG
+                                                          ) : BOOL; stdcall;
+const SDDL_REVISION_1     = 1;
+begin
+  result := 99;
+  ASDDL := '';
+  ///
+
+  ARet := RegOpenKeyExW(AKeyHive, PWideChar(AKeyPath), 0, KEY_READ, AKey);
+  if (ARet &lt;&gt; ERROR_SUCCESS) then
+    Exit(1);
+  try
+    ASize := 0;
+    AFlags := (
+                DACL_SECURITY_INFORMATION  or
+                OWNER_SECURITY_INFORMATION or
+                GROUP_SECURITY_INFORMATION
+    );
+    ///
+
+    ARet := RegGetKeySecurity(AKey, AFlags, nil, ASize);
+    if (ARet = ERROR_INSUFFICIENT_BUFFER) and (ASize &gt; 0) then begin
+      GetMem(pSecDesc, ASize);
+      try
+        ARet := RegGetKeySecurity(AKey, AFlags, pSecDesc, ASize);
+        if (ARet &lt;&gt; ERROR_SUCCESS) then
+          Exit(3);
+        ///
+
+        hADVAPI := LoadLibrary('ADVAPI32.DLL');
+        if (hADVAPI = 0) then
+          Exit();
+        try
+          @ConvertSecurityDescriptorToStringSecurityDescriptor := GetProcAddress(hADVAPI, 'ConvertSecurityDescriptorToStringSecurityDescriptorW');
+          if Assigned(ConvertSecurityDescriptorToStringSecurityDescriptor) then begin
+
+            if NOT ConvertSecurityDescriptorToStringSecurityDescriptor(
+                                                                  pSecDesc,
+                                                                  SDDL_REVISION_1,
+                                                                  DACL_SECURITY_INFORMATION,
+                                                                  ASecurityDescriptorStr,
+                                                                  @AReturnedLength
+            ) then
+              Exit(4);
+
+            ///
+            ASDDL := UnicodeString(ASecurityDescriptorStr);
+          end;
+        finally
+          FreeLibrary(hADVAPI);
+        end;
+      finally
+        FreeMem(pSecDesc, ASize);
+      end;
+    end else
+      Exit(2);
+  finally
+    RegCloseKey(AKey);
+  end;
+end;
+</code></pre><h2 id="example-of-usage">Example of usage</h2>
+<pre><code>//...
+var ASDDLOut : String;
+//...
+GetRegKeySecurityDescriptor(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Services\arcsas\', ASDDLOut);
+
+WriteLn(ASDDLOut);
+</code></pre><p>Will output something similar to this</p>
+<pre><code>D:AI(A;;KA;;;BA)(A;CI;KR;;;S-1-5-21-1216997795-677674728-3816802077-1001)(A;CIID;KR;;;BU)(A;CIID;KA;;;BA)(A;CIID;KA;;;SY)(A;CIIOID;KA;;;CO)(A;CIID;KR;;;AC)(A;CIID;KR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)
+</code></pre><h2 id="parser">Parser</h2>
+<p>I will probably in a near future work on a delphi parser for SDDL Format (Some probably already exists).</p>
+<p>Here is a tiny example using only basic delphi string manipulation techniques (Not the cleanest way) to extract the six properties.</p>
+<pre><code>function ParseSDDL_DACL(ASDDL : String) : Boolean;
+var APos, APosEnd : Integer;
+    AChunk        : String;
+    AF1, AF2, AF3 : String;
+    AF4, AF5, AF6 : String;
+
+    function GetNextChunkProperty() : String;
+    begin
+      result := Copy(AChunk, 1, Pos(';', AChunk)-1);
+      Delete(AChunk, 1, Pos(';', AChunk));
+    end;
+
+begin
+  ASDDL := UpperCase(ASDDL);
+  APos := 0;
+  while true do begin
+    if (APos &gt; 0) then
+      Delete(ASDDL, 1, APos);
+
+    APos := Pos(':', ASDDL);
+
+    if (APos = 0) then
+      break;
+
+    {
+      Attempt to find DACL Security Descriptor
+    }
+    if (Copy(ASDDL, (APos -1), 1) = 'D') then
+      break;
+  end;
+
+  {
+    Read DACL Security Descriptor
+  }
+  if (APos &gt; 0) then begin
+    Delete(ASDDL, 1, APos);
+
+    // Clean other Security Descriptor
+    APos := Pos(':', ASDDL);
+    if (APos &gt; 0) then
+      Delete(ASDDL, (APos -1), Length(ASDDL));
+
+    {
+      Iterate through each descriptor items
+    }
+    while True do begin
+      if (Length(ASDDL) = 0) then
+        break;
+
+      APos := Pos('(', ASDDL);
+      APosEnd := Pos(')', ASDDL);
+
+      if (APos = 0) or (APosEnd = 0) then
+        break;
+      try
+        Inc(APos);
+        AChunk := Copy(ASDDL, APos, (APosEnd - APos));
+
+        {
+          Parse chunk
+        }
+        AF1 := GetNextChunkProperty(); // ACE Type
+        AF2 := GetNextChunkProperty(); // ACE Flags
+        AF3 := GetNextChunkProperty(); // Permissions
+        AF4 := GetNextChunkProperty(); // Object Type (GUID)
+        AF5 := GetNextChunkProperty(); // Object Type (GUID)
+        AF6 := GetNextChunkProperty(); // Trustee (SID)
+
+        {
+          ...
+
+          ...
+        }
+      finally
+        Delete(ASDDL, 1, APosEnd); // Clean
+      end;
+    end;
+  end;
+end;
+</code></pre><h2 id="alternative">Alternative</h2>
+<p>I recently worked on parsing SDDL string from a bunch of registry keys to solve a <a href="https://hackthebox.eu/">HackTheBox</a> box without using third part tools (such as AccessChk.exe from SysInternals)</p>
+<p>Parsing SDDL string is a very complex task, there is a lot of things to take in consideration in some cases.</p>
+<p>If for example you want to know if current user have <code>Write Access</code> to a target registry key, instead of using above function and parse output SDDL string (and take in consideration all attributes) we could simply attempt to open target key with <code>KEY_WRITE</code> flag and check whether or not you receive an <code>Access Denied (5)</code> error.</p>
+<h3 id="example">Example</h3>
+<pre><code>// ...
+type
+  TAccessStatus = (
+    asTrue,
+    asFalse,
+    asError
+  );
+// ...
+
+function CheckCurrentUserKeyAccess(AKeyHive : HKEY; AKeyPath : String; var AStatus : TAccessStatus): Boolean;
+var AKey : HKEY;
+    ARet : Integer;
+begin
+  result := False;
+  AStatus := asError;
+  ///
+
+  ARet := RegOpenKeyExW(AKeyHive, PWideChar(AKeyPath), 0, KEY_WRITE, AKey);
+  try
+    result := ((ARet = ERROR_SUCCESS) or (ARet = ERROR_ACCESS_DENIED));
+    if NOT result then
+      Exit();
+
+    if (ARet = ERROR_ACCESS_DENIED) then
+      AStatus := asFalse
+    else
+      AStatus := asTrue;
+
+    ///
+    result := True;
+  finally
+    if (ARet = ERROR_SUCCESS) then
+      RegCloseKey(AKey);
+  end;
+end;
+
+// ...
+
+var AStatus : TAccessStatus;
+begin
+  try
+    if CheckCurrentUserKeyAccess(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Services\arcsas\', AStatus) then begin
+      case AStatus of
+        asTrue  : WriteLn('Access Granted');
+        asFalse : WriteLn('Access Denied');
+        asError : WriteLn('Could not determine access status');
+      end;
+    end;
+
+    // ...
+</code></pre><p>If you have any alternative in minds, just let me know ;)</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

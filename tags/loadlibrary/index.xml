@@ -13,10 +13,10 @@
     
     <item>
       <title>GetProcAddress API Alternative</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/getprocaddress-alternative/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/getprocaddress-alternative/</link>
       <pubDate>Sat, 14 Mar 2020 10:48:41 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/getprocaddress-alternative/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/getprocaddress-alternative/</guid>
       <description>In the past two days, I released examples about how to enumerate DLL export table through the PE Header.
 We will see one concreate example of using the UntEnumDLLExport.pas library to dynamically load API without using the famous Windows API &amp;gt; GetProcAddress()
 This technique is quite known and often used by some Malware, to mask which API&amp;rsquo;s they are dynamically loading and avoid Antivirus detection.

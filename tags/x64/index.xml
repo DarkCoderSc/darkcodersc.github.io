@@ -13,10 +13,10 @@
     
     <item>
       <title>Is Process 64bit</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/is-process-64/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/is-process-64/</link>
       <pubDate>Tue, 03 Mar 2020 12:58:16 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/is-process-64/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/is-process-64/</guid>
       <description>Tiny snippet to know whether or not target process id is running under 32bit or 64bit architecture.
 If result is True, target process is running under 64bit architecture.
 If result is False, target process is running under 32bit architecture.

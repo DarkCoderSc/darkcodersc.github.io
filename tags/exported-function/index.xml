@@ -13,10 +13,10 @@
     
     <item>
       <title>Get DLL Exported Function Address From Memory</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-dll-exported-function-address-from-mem/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/get-dll-exported-function-address-from-mem/</link>
       <pubDate>Wed, 18 Mar 2020 10:50:50 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-dll-exported-function-address-from-mem/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/get-dll-exported-function-address-from-mem/</guid>
       <description>As promised, we will adapt our previous code grab an exported function directly from memory.
 Serious advantage of this technique:
  We don&amp;rsquo;t have to use CreateToolHelp32Snapshot anymore to enumerate modules and catch target module base address. We don&amp;rsquo;t need to parse PE Header from disk anymore, we will parse PE Header directly from memory.  Notice, it is still necessary to use LoadLibrary API to load desired DLL in memory.</description>

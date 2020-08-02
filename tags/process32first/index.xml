@@ -13,10 +13,10 @@
     
     <item>
       <title>Enum Process Method 1</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/enum-process-method-1/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/enum-process-method-1/</link>
       <pubDate>Tue, 03 Mar 2020 14:32:22 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/enum-process-method-1/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/enum-process-method-1/</guid>
       <description>This is one of the most famous method to enumerate running process on Windows.
 If AFilterSameArch is set to True, only processes running with same architecture as current process will be listed.
 { Jean-Pierre LESUEUR (@DarkCoderSc) Example: ... var AProcessName : String; AProcessId : Cardinal; AProcessList : TDictionary&amp;lt;Integer, String&amp;gt;; begin AProcessList := EnumProcess(True); try for AProcessId in AProcessList.Keys do begin if NOT AProcessList.TryGetValue(AProcessId, AProcessName) then continue; /// ... end; finally if Assigned(AProcessList) then FreeAndNil(AProcessList); end; end; } //.</description>

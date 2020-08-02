@@ -13,10 +13,10 @@
     
     <item>
       <title>Get DLL Exported Function Address From Memory</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-dll-exported-function-address-from-mem/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/get-dll-exported-function-address-from-mem/</link>
       <pubDate>Wed, 18 Mar 2020 10:50:50 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-dll-exported-function-address-from-mem/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/get-dll-exported-function-address-from-mem/</guid>
       <description>As promised, we will adapt our previous code grab an exported function directly from memory.
 Serious advantage of this technique:
  We don&amp;rsquo;t have to use CreateToolHelp32Snapshot anymore to enumerate modules and catch target module base address. We don&amp;rsquo;t need to parse PE Header from disk anymore, we will parse PE Header directly from memory.  Notice, it is still necessary to use LoadLibrary API to load desired DLL in memory.</description>
@@ -24,10 +24,10 @@ Serious advantage of this technique:
     
     <item>
       <title>Get DLL Exported Function Address</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-dll-exported-function-address/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/get-dll-exported-function-address/</link>
       <pubDate>Sun, 15 Mar 2020 11:01:36 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-dll-exported-function-address/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/get-dll-exported-function-address/</guid>
       <description>This very small snippet is an adaptation of the previously released unit &amp;gt; UntEnumDLLExport.pas with just one goal, retrieve an exported function address by its name from any DLL (both 32 and 64bit).
 This adaptation is also interesting because it remove the need of having both heavy units Generics.Collections and SysUtils to have a smaller binary.
 Finally it is also quite interesting for tweaking our GetProcAddress alternative (you will find here) and only have the necesarry code.</description>
@@ -35,10 +35,10 @@ Finally it is also quite interesting for tweaking our GetProcAddress alternative
     
     <item>
       <title>GetProcAddress API Alternative</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/getprocaddress-alternative/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/getprocaddress-alternative/</link>
       <pubDate>Sat, 14 Mar 2020 10:48:41 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/getprocaddress-alternative/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/getprocaddress-alternative/</guid>
       <description>In the past two days, I released examples about how to enumerate DLL export table through the PE Header.
 We will see one concreate example of using the UntEnumDLLExport.pas library to dynamically load API without using the famous Windows API &amp;gt; GetProcAddress()
 This technique is quite known and often used by some Malware, to mask which API&amp;rsquo;s they are dynamically loading and avoid Antivirus detection.

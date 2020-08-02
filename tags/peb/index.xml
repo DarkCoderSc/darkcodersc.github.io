@@ -13,10 +13,10 @@
     
     <item>
       <title>Update PEB Debug Flag (Delphi)</title>
-      <link>https://www.phrozen.io/docs/windows/projects/opensource/update-peb-debug-delphi/</link>
+      <link>https://www.phrozen.io/docs/projects/windows/opensource/update-peb-debug-delphi/</link>
       <pubDate>Tue, 03 Mar 2020 14:52:51 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/projects/opensource/update-peb-debug-delphi/</guid>
+      <guid>https://www.phrozen.io/docs/projects/windows/opensource/update-peb-debug-delphi/</guid>
       <description>This project implement the unit UntPEBDebug.pas with a concreate example.
 Features Include  List process and their Debug status. (ReadProcessMemory / PEB method) Update process Debug flag. (WriteProcessMemory / PEB method) Support both 32bit and 64bit. Notice.  Notice regarding architecture:
  To target 32bit process, you must use the project compiled as 32bit executable. To target 64bit process, you must use the project compiled as 64bit executable.  Repository git clone https://github.</description>

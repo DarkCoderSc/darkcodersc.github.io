@@ -13,10 +13,10 @@
     
     <item>
       <title>Bruteforce Windows Logon (PoC)</title>
-      <link>https://www.phrozen.io/docs/windows/poc/bruteforce-windows-logon/</link>
+      <link>https://www.phrozen.io/docs/infosec/windows/bruteforce-windows-logon/</link>
       <pubDate>Fri, 15 May 2020 11:57:00 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/poc/bruteforce-windows-logon/</guid>
+      <guid>https://www.phrozen.io/docs/infosec/windows/bruteforce-windows-logon/</guid>
       <description>Weakness Description Microsoft Windows suffer from a serious lack of protection in their authentication mechanism which could led in privilege escalation.
 Indeed, in default installation of Windows (all version), the account lockdown policy is disabled plus authentication API&amp;rsquo;s doesn&amp;rsquo;t limit number of attempts per seconds which could led to a medium to fast brute-force attacks.
 Using our PoC and depending of the number of cores available in the target system you could test from few thousands to dozen of thousands of password per second.</description>
@@ -24,10 +24,10 @@ Using our PoC and depending of the number of cores available in the target syste
     
     <item>
       <title>Enum Attached Files</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/enum-attached-files/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/enum-attached-files/</link>
       <pubDate>Tue, 24 Mar 2020 14:29:21 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/enum-attached-files/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/enum-attached-files/</guid>
       <description>Above snippet demonstrate how to enumerate files openned by running programs on Windows.
 Some file unlocker use that technique to find where a specific file is attached and then force processes using that file to release it handle (via code injection techniques). I will write an example in a future snippet thread.
 Notice: At the bottom of that page, you will see a concreate example about how to use that unit.</description>
@@ -35,20 +35,20 @@ Notice: At the bottom of that page, you will see a concreate example about how t
     
     <item>
       <title>Enum DLL Exported Functions</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/enum-dll-exported-functions/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/enum-dll-exported-functions/</link>
       <pubDate>Thu, 12 Mar 2020 15:51:22 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/enum-dll-exported-functions/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/enum-dll-exported-functions/</guid>
       <description>This unit demonstrate how to enumerate DLL exported functions through PE Header manipulation.
 Features  Support both 32 and 64bit DLL&amp;rsquo;s. Identify exported function names. Identify exported function ordinal value. Support and resolve forwarded function. Identify export function address and relative address.  Unit Code (******************************************************************************* Author: -&amp;gt; Jean-Pierre LESUEUR (@DarkCoderSc) https://github.com/DarkCoderSc https://gist.github.com/DarkCoderSc https://www.phrozen.io/ License: -&amp;gt; MIT *******************************************************************************) unit UntEnumDLLExport; interface uses Classes, Windows, Generics.Collections, SysUtils; type TExportEntry = class private FName : String; FForwarded : Boolean; FForwardName : String; FRelativeAddr : Cardinal; FAddress : Int64; FOrdinal : Word; {@M} function GetFormatedAddress() : String; function GetFormatedRelativeAddr() : String; public {@C} constructor Create(); {@G/S} property Name : String read FName write FName; property Forwarded : Boolean read FForwarded write FForwarded; property ForwardName : String read FForwardName write FForwardName; property Address : Int64 read FAddress write FAddress; property RelativeAddr : Cardinal read FRelativeAddr write FRelativeAddr; property Ordinal : Word read FOrdinal write FOrdinal; {@G} property FormatedAddress : String read GetFormatedAddress; property FormatedRelativeAddress : String read GetFormatedRelativeAddr; end; TEnumDLLExport = class private FItems : TObjectList&amp;lt;TExportEntry&amp;gt;; FFileName : String; {@M} public {@C} constructor Create(AFileName : String); destructor Destroy(); override; {@M} function Enum() : Integer; {@G} property Items : TObjectList&amp;lt;TExportEntry&amp;gt; read FItems; property FileName : String read FFileName; end; implementation {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Local Functions +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++} function IntToHexF(AValue : Int64; APad : Word = 0 {0=Auto}) : String; begin if (APad = 0) then begin if (AValue &amp;lt;= High(Word)) then APad := 2 else if (AValue &amp;lt;= High(DWORD)) and (AValue &amp;gt; High(Word)) then APad := 8 else if (AValue &amp;lt;= High(Int64)) and (AValue &amp;gt; High(DWORD)) then APad := 16; end; result := &#39;0x&#39; + IntToHex(AValue, APad); end; {+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ TExportEntry +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++} constructor TExportEntry.</description>
     </item>
     
     <item>
       <title>Enum Modules Method 1</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/enum-modules-method-1/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/enum-modules-method-1/</link>
       <pubDate>Thu, 12 Mar 2020 15:40:35 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/enum-modules-method-1/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/enum-modules-method-1/</guid>
       <description>You will find below an example of how to enumerate process modules using the well known Windows API CreateToolHelp32Snapshot(), I will cover additional methods soon.
 You may notice that when using CreateToolHelp32Snapshot(), first result (row) is generally the Image Path of the process owning module. I ignore that row by checking the value of szExePath with owner process image path.
 GetProcessName() is compatible since Windows Vista. It is possible to support Windows XP and below but not in this example.</description>
@@ -56,10 +56,10 @@ GetProcessName() is compatible since Windows Vista. It is possible to support Wi
     
     <item>
       <title>Terminate Process Techniques</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/terminate-process-techniques/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/terminate-process-techniques/</link>
       <pubDate>Fri, 06 Mar 2020 14:44:08 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/terminate-process-techniques/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/terminate-process-techniques/</guid>
       <description>You will find below 4 different techniques to close/kill/terminate Windows process in pure WinAPI.
 Techniques  TerminateProcess() : Classic method. ExitProcess() : via Code Injection (32bit to 32bit ; 64bit to 64bit). Crash Process : Inject code that will crash the process (32bit to 32bit ; 64bit to 64bit). CTRL_CLOSE_EVENT / WM_CLOSE : Send &amp;ldquo;close&amp;rdquo; messages to target process windows.  TerminateAProcess() Method Kill target process id following desired method : tmpAll, tpmTerminateProcess, tpmExitProcess, tpmCrash, tpmMessage</description>
     </item>

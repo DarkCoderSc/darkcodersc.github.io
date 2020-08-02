@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="This very small snippet is an adaptation of the previously released unit &gt; UntEnumDLLExport.pas with just one goal, retrieve an exported function address by its name from any DLL (both 32 and 64bit).
+This adaptation is also interesting because it remove the need of having both heavy units Generics.Collections and SysUtils to have a smaller binary.
+Finally it is also quite interesting for tweaking our GetProcAddress alternative (you will find here) and only have the necesarry code."><meta property="og:title" content="Get DLL Exported Function Address" />
+<meta property="og:description" content="This very small snippet is an adaptation of the previously released unit &gt; UntEnumDLLExport.pas with just one goal, retrieve an exported function address by its name from any DLL (both 32 and 64bit).
+This adaptation is also interesting because it remove the need of having both heavy units Generics.Collections and SysUtils to have a smaller binary.
+Finally it is also quite interesting for tweaking our GetProcAddress alternative (you will find here) and only have the necesarry code." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.phrozen.io/docs/programming/windows/delphi/get-dll-exported-function-address/" />
+<meta property="article:published_time" content="2020-03-15T11:01:36+01:00" />
+<meta property="article:modified_time" content="2020-03-15T11:01:36+01:00" />
+<title>Get DLL Exported Function Address | Phrozen</title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
+<script defer src="/en.search.min.86e3cb1d1d29ddd8a3d2600962708437dcff21fc53cbdb40ba7f1f89e3ae2043.js" integrity="sha256-huPLHR0p3dij0mAJYnCEN9z/IfxTy9tAun8fieOuIEM="></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159560668-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="https://kit.fontawesome.com/8da36c42cc.js" crossorigin="anonymous"></script>
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/logo.svg" alt="Logo" /></a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/projects/" class="">Projects</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/projects/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/infosec/" class="">InfoSec</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/linux/" class="collapsed ">Linux</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/infosec/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="/docs/programming/" class="">Programming</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/" class="collapsed ">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/" class="collapsed ">Delphi</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-registry-key-security-descriptor/" class="">Get Registry Key DACL Security Descriptor</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-process-name-method-4-getprocessimagefilename/" class="">Get Process Name Method 4 GetProcessImageFileName</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-process-name-method-3-ntqueryinformationprocess/" class="">Get Process Name Method 3 NtQueryInformationProcess</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-process-name-method-2-getmappedfilename/" class="">Get Process Name Method 2 GetMappedFilename</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/enum-attached-files/" class="">Enum Attached Files</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-dll-exported-function-address-from-mem/" class="">Get DLL Exported Function Address From Memory</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-dll-exported-function-address/" class="active">Get DLL Exported Function Address</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/getprocaddress-alternative/" class="">GetProcAddress API Alternative</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/enum-dll-exported-functions/" class="">Enum DLL Exported Functions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/get-process-name-method-1/" class="">Get Process Name Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/enum-modules-method-1/" class="">Enum Modules Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/terminate-process-techniques/" class="">Terminate Process Techniques</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/update-peb-debug/" class="">Update PEB Debug Flag</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/enum-process-method-1/" class="">Enum Process Method 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/is-process-64/" class="">Is Process 64bit</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/windows/delphi/eof/" class="">Manipulation and Detection of EOF</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/programming/general/" class="collapsed ">General</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Social Networks
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="https://www.linkedin.com/in/jlesueur/" target="_blank" rel="noopener"><i class='fa fa-linkedin'></i>
+        Linkedin
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://www.twitter.com/darkcodersc" target="_blank" rel="noopener"><i class='fa fa-twitter'></i>
+        Twitter
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://github.com/DarkCoderSc" target="_blank" rel="noopener"><i class='fa fa-github'></i>
+        Github
+      </a>
+  </li>
+  
+  <li>
+    <a href="" target="_blank" rel="noopener"><strong>
+        Other Stuff
+      </strong></a>
+  </li>
+  
+  <li>
+    <a href="/disclaimer/disclaimer" target="_blank" rel="noopener">
+        Legal
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Get DLL Exported Function Address</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><p>This very small snippet is an adaptation of the previously released unit &gt; <a href="/docs/windows/snippets/delphi/enum-dll-exported-functions/">UntEnumDLLExport.pas</a> with just one goal, retrieve an exported function address by its name from any DLL (both 32 and 64bit).</p>
+<p>This adaptation is also interesting because it remove the need of having both heavy units <code>Generics.Collections</code> and <code>SysUtils</code> to have a smaller binary.</p>
+<p>Finally it is also quite interesting for tweaking our <code>GetProcAddress</code> alternative (you will find <a href="/docs/windows/snippets/delphi/getprocaddress-alternative/">here</a>) and only have the necesarry code.</p>
+<pre><code class="language-Pascal" data-lang="Pascal">// Jean-Pierre LESUEUR (@DarkCoderSc)
+
+//...
+uses Windows;
+//...
+
+function GetExportAddress(ADLLFile, AFuncName : String) : Cardinal;
+var hFile                   : THandle;
+    dwBytesRead             : Cardinal;
+    AImageDosHeader         : TImageDosHeader;
+    AImageNtHeaderSignature : DWORD;
+    x64Binary               : Boolean;
+    AImageFileHeader        : TImageFileHeader;
+
+    AImageOptionalHeader32  : TImageOptionalHeader32;
+    AImageOptionalHeader64  : TImageOptionalHeader64;
+
+    AExportAddr             : TImageDataDirectory;
+    AExportDir              : TImageExportDirectory;
+
+    I                       : Integer;
+    ACanCatchSection        : Boolean;
+    AOffset                 : Cardinal;
+
+    AExportName             : AnsiString;
+    ALen                    : Cardinal;
+    AOrdinal                : Word;
+    AFuncAddress            : Cardinal;
+
+    function RVAToFileOffset(ARVA : Cardinal) : Cardinal;
+    var I                   : Integer;
+        AImageSectionHeader : TImageSectionHeader;
+        ASectionsOffset     : Cardinal;
+    begin
+      result := 0;
+      ///
+
+      if (ARVA = 0) or (NOT ACanCatchSection) then
+        Exit();
+      ///
+
+      ASectionsOffset := (
+                            AImageDosHeader._lfanew +
+                            SizeOf(DWORD) +
+                            SizeOf(TImageFileHeader) +
+                            AImageFileHeader.SizeOfOptionalHeader
+      );
+      for I := 0 to (AImageFileHeader.NumberOfSections -1) do begin
+        SetFilePointer(hFile, ASectionsOffset + (I * SizeOf(TImageSectionHeader)), nil, FILE_BEGIN);
+
+        if NOT ReadFile(hFile, AImageSectionHeader, SizeOf(TImageSectionHeader), dwBytesRead, 0) then
+          continue;
+
+        if (ARVA &gt;= AImageSectionHeader.VirtualAddress) and (ARVA &lt; AImageSectionHeader.VirtualAddress + AImageSectionHeader.SizeOfRawData) then
+          result := (ARVA - AImageSectionHeader.VirtualAddress + AImageSectionHeader.PointerToRawData);
+      end;
+    end;
+
+    function GetStringLength(AStartAtPos : Cardinal) : Cardinal;
+    var ADummy : Byte;
+    begin
+      result := 0;
+      ///
+
+      if (hFile = INVALID_HANDLE_VALUE) then
+        Exit();
+
+      SetFilePointer(hFile, AStartAtPos, nil, FILE_BEGIN);
+
+      while True do begin
+        if NOT ReadFile(hFile, ADummy, SizeOf(Byte), dwBytesRead, nil) then
+          break;
+        ///
+
+        if (ADummy = 0) then
+          break;
+
+        Inc(result);
+      end;
+    end;
+
+    // Ripped from SysUtils.pas
+    function LowerCase(const S: string): string;
+    var
+      I, Len: Integer;
+      DstP, SrcP: PChar;
+      Ch: Char;
+    begin
+      Len := Length(S);
+      SetLength(Result, Len);
+      if Len &gt; 0 then
+      begin
+        DstP := PChar(Pointer(Result));
+        SrcP := PChar(Pointer(S));
+        for I := Len downto 1 do
+        begin
+          Ch := SrcP^;
+          case Ch of
+            'A'..'Z':
+              Ch := Char(Word(Ch) or $0020);
+          end;
+          DstP^ := Ch;
+          Inc(DstP);
+          Inc(SrcP);
+        end;
+      end;
+    end;
+begin
+  result := 0;
+  ///
+
+  ACanCatchSection := False;
+
+  AFuncName := LowerCase(AFuncName);
+
+  hFile := CreateFileW(PWideChar(ADLLFile), GENERIC_READ, FILE_SHARE_READ, nil, OPEN_EXISTING, 0, 0);
+  if hFile = INVALID_HANDLE_VALUE then
+    Exit;
+  ///
+  try
+    if NOT ReadFile(hFile, AImageDosHeader, SizeOf(TImageDosHeader), dwBytesRead, 0) then
+      Exit;
+    ///
+
+    if (AImageDosHeader.e_magic &lt;&gt; IMAGE_DOS_SIGNATURE) then
+      Exit;
+    ///
+
+    SetFilePointer(hFile, AImageDosHeader._lfanew, nil, FILE_BEGIN);
+    if NOT ReadFile(hFile, AImageNtHeaderSignature, SizeOf(DWORD), dwBytesRead, 0) then
+      Exit;
+    ///
+
+    if (AImageNTHeaderSignature &lt;&gt; IMAGE_NT_SIGNATURE) then
+      Exit;
+    ///
+
+    SetFilePointer(hFile, (AImageDosHeader._lfanew + sizeOf(DWORD)), nil, FILE_BEGIN);
+    if NOT ReadFile(hFile, AImageFileHeader, SizeOf(TImageFileHeader), dwBytesRead, 0) then
+      Exit;
+    ///
+
+    ACanCatchSection := True;
+
+    x64Binary := (AImageFileHeader.Machine = IMAGE_FILE_MACHINE_AMD64);
+    if x64Binary then begin
+      if NOT ReadFile(hFile, AImageOptionalHeader64, AImageFileHeader.SizeOfOptionalHeader, dwBytesRead, 0) then
+        Exit;
+    end else begin
+      if NOT ReadFile(hFile, AImageOptionalHeader32, AImageFileHeader.SizeOfOptionalHeader, dwBytesRead, 0) then
+        Exit;
+    end;
+    ///
+
+    AExportAddr.VirtualAddress := 0;
+    AExportAddr.Size := 0;
+
+    if x64Binary then
+      AExportAddr := AImageOptionalHeader64.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT]
+    else
+      AExportAddr := AImageOptionalHeader32.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT];
+
+    AOffset := RVAToFileOffset(AExportAddr.VirtualAddress);
+    if AOffset = 0 then
+      Exit;
+
+    SetFilePointer(hFile, AOffset, nil, FILE_BEGIN);
+    if NOT ReadFile(hFile, AExportDir, SizeOf(TImageExportDirectory), dwBytesRead, 0) then
+      Exit;
+    ///
+
+    if (AExportDir.NumberOfFunctions &lt;= 0) then
+      Exit;
+    ///
+
+    {
+      Enumerate Named Exported Functions
+    }
+    for I := 0 to AExportDir.NumberOfNames - 1 do begin
+      // Function Name
+      AOffset := RVAToFileOffset(AExportDir.AddressOfNames) + (I * SizeOf(Cardinal));
+
+      SetFilePointer(hFile, AOffset, nil, FILE_BEGIN);
+
+      if NOT ReadFile(hFile, AOffset, SizeOf(Cardinal), dwBytesRead, 0) then
+        continue;
+      ///
+
+      ALen := GetStringLength(RVAToFileOffset(AOffset));
+
+      SetLength(AExportName, ALen);
+
+      SetFilePointer(hFile, RVAToFileOffset(AOffset), nil, FILE_BEGIN);
+
+      if NOT ReadFile(hFile, AExportName[1], ALen, dwBytesRead, nil) then
+        continue;
+
+      {
+        Checking if we found requested function
+      }
+      if LowerCase(AExportName) &lt;&gt; AFuncName then
+        continue;
+
+      // Ordinal
+      AOffset := RVAToFileOffset(AExportDir.AddressOfNameOrdinals) + (I * SizeOf(Word));
+
+      SetFilePointer(hFile, AOffset, nil, FILE_BEGIN);
+
+      if NOT ReadFile(hFile, AOrdinal, SizeOf(Word), dwBytesRead, 0) then
+        continue;
+      ///
+
+      // Function Address
+      AOffset := RVAToFileOffset(AExportDir.AddressOfFunctions) + (AOrdinal * SizeOf(Cardinal));
+
+      SetFilePointer(hFile, AOffset, nil, FILE_BEGIN);
+
+      if NOT ReadFile(hFile, AFuncAddress, SizeOf(Cardinal), dwBytesRead, 0) then
+        continue;
+
+      ///
+      result := AFuncAddress;
+    end;
+  finally
+    CloseHandle(hFile);
+  end;
+end;
+</code></pre><h2 id="getprocaddress-alternative-without-untenumdllexportpas">GetProcAddress Alternative (Without <code>UntEnumDLLExport.pas</code>)</h2>
+<pre><code class="language-Pascal" data-lang="Pascal">function GetProcAddress_ALT(hModule : HMODULE; lpProcName : LPCSTR) : Pointer;
+var AFuncAddress : Cardinal;
+begin
+  result := nil;
+  ///
+
+  AFuncAddress := GetExportAddress(GetModuleImagePath(hModule), lpProcName);
+
+  if (AFuncAddress &gt; 0) then
+    result := Pointer(hModule + AFuncAddress);
+end;
+</code></pre><p>/!\ You will find the code of <code>GetModuleImagePath</code> function <a href="/snippets/2020/03/getprocaddress-api-alternative-delphi/">Here</a></p>
+<h2 id="what-about-the-future-">What about the future ?</h2>
+<p>I will adapat the function <code>GetExportAddress()</code> to catch export table directly from process memory instead of reading file on disk.</p>
+<p>This will remove the need of enumerating module to catch target module instance filename (function <code>GetModuleImagePath</code>).</p>
+<p>Less dependencies and API&rsquo;s you use and less likely your piece of code will get flagged. Especially while creating Malware while conducting red team exercice :-)</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "phrozen-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

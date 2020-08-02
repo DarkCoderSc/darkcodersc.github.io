@@ -13,10 +13,10 @@
     
     <item>
       <title>Get Process Name Method 1</title>
-      <link>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-1/</link>
+      <link>https://www.phrozen.io/docs/programming/windows/delphi/get-process-name-method-1/</link>
       <pubDate>Thu, 12 Mar 2020 15:46:57 +0100</pubDate>
       
-      <guid>https://www.phrozen.io/docs/windows/snippets/delphi/get-process-name-method-1/</guid>
+      <guid>https://www.phrozen.io/docs/programming/windows/delphi/get-process-name-method-1/</guid>
       <description>This one possible technique (through QueryFullProcessImageNameW) to get process image path from it id.
 This example support Windows Vista to latest Windows version (Actually Windows 10)
 I will cover other example progressively and compatible with Windows XP and below.
