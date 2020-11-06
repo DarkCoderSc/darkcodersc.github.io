@@ -188,17 +188,6 @@ To do so, we still need to use LoadLibrary() first to load a DLL in memory and r
     </item>
     
     <item>
-      <title>Assignment N°1 - Bindshell (NASM)</title>
-      <link>https://www.phrozen.io/docs/infosec/linux/slae32/ex1-bindshell/</link>
-      <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
-      
-      <guid>https://www.phrozen.io/docs/infosec/linux/slae32/ex1-bindshell/</guid>
-      <description>Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
-If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
-Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
-    </item>
-    
-    <item>
       <title>DLL Export Enum v1.0 (Open Source &#43; Signed Binary)</title>
       <link>https://www.phrozen.io/docs/projects/windows/opensource/dll-export-enum/</link>
       <pubDate>Fri, 13 Mar 2020 11:57:00 +0100</pubDate>
@@ -330,6 +319,17 @@ Some Antivirus Software using similar technique to flag some Malware generically
 EOF (End Of File) is often used by Malware authors to offer their Malware users a way to edit Malware payload configuration (Ex: C2 informations) without having access to source code.
 You often encounter such techniques in:
  Remote Access Tool/Trojan (RAT) File Wrapper / Binder Downloader Loader / Botnets  But not only.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://www.phrozen.io/docs/infosec/linux/slae32/ex1-bindshell/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.phrozen.io/docs/infosec/linux/slae32/ex1-bindshell/</guid>
+      <description>Assignment Goals &amp;ndash;warning&amp;ndash; This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself.</description>
     </item>
     
   </channel>

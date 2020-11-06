@@ -4,20 +4,19 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+<meta name="description" content="Assignment Goals &ndash;warning&ndash; This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
 If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
-Why? the goal of that certification is to practice and learn how to solve each assignment by yourself."><meta property="og:title" content="Assignment N°1 - Bindshell (NASM)" />
-<meta property="og:description" content="Assignment Goals This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
+Why? the goal of that certification is to practice and learn how to solve each assignment by yourself."><meta property="og:title" content="" />
+<meta property="og:description" content="Assignment Goals &ndash;warning&ndash; This paper is part of the certification process following the SLAE32 course (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.
 If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.
 Why? the goal of that certification is to practice and learn how to solve each assignment by yourself." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.phrozen.io/docs/infosec/linux/slae32/ex1-bindshell/" />
-<meta property="article:published_time" content="2020-03-13T11:57:00+01:00" />
-<meta property="article:modified_time" content="2020-03-13T11:57:00+01:00" />
-<title>Assignment N°1 - Bindshell (NASM) | Phrozen</title>
+
+<title>Ex1 Bindshell | Phrozen</title>
 <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.63abd10f627a7a06406140610b7ce76d028552de10d790fcb09f332349c39047.css" integrity="sha256-Y6vRD2J6egZAYUBhC3znbQKFUt4Q15D8sJ8zI0nDkEc=">
-<script defer src="/en.search.min.32cb2399362b19b310b7f05c213696caba1968e48a02e616f7c609c92a472511.js" integrity="sha256-MssjmTYrGbMQt/BcITaWyroZaOSKAuYW98YJySpHJRE="></script>
+<script defer src="/en.search.min.953fbfc7f71360b35212e7548f2da7a32b4e3de76420283f14b8ac5ee45a96cf.js" integrity="sha256-lT&#43;/x/cTYLNSEudUjy2noytOPedkICg/FLisXuRals8="></script>
 
 <script type="application/javascript">
 var doNotTrack = false;
@@ -237,7 +236,7 @@ if (!doNotTrack) {
         <li>
           
   
-    <a href="/docs/infosec/linux/slae32/ex1-bindshell/" class="active">Assignment N°1 - Bindshell (NASM)</a>
+    <a href="/docs/infosec/linux/slae32/ex1-bindshell/" class="active">Ex1 Bindshell</a>
   
 
         </li>
@@ -411,7 +410,7 @@ if (!doNotTrack) {
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Assignment N°1 - Bindshell (NASM)</strong>
+  <strong>Ex1 Bindshell</strong>
 
   <label for="toc-control">
     <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
@@ -427,14 +426,12 @@ if (!doNotTrack) {
       
   <article class="markdown"><h1 id="assignment-goals">Assignment Goals</h1>
 <p><img src="/images/202005/slae32-banner.png" alt="SLAE32" /></p>
-<blockquote class="book-hint warning">
-  <p>This paper is part of the certification process following the <a href="https://www.pentesteracademy.com/course?id=3">SLAE32 course</a> (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.</p>
+<p>&ndash;warning&ndash;
+This paper is part of the certification process following the <a href="https://www.pentesteracademy.com/course?id=3">SLAE32 course</a> (x86 Assembly Language and Shellcoding on Linux) intended to prepare me to become a future certified OSCE.</p>
 <p>If you are willing to pass the certification I really suggest you to wait until you finished your own certification process before reading that paper.</p>
 <p>Why? the goal of that certification is to practice and learn how to solve each assignment by yourself. If you read this paper you will get spoiled and seriously oriented to my personal solution and take the risk to abuse of some shortcuts.</p>
-<p>Student ID: <strong>SLAE-1530</strong></p>
-
-</blockquote>
-
+<p>Student ID: <strong>SLAE-1530</strong>
+&ndash;end&ndash;</p>
 <ol>
 <li>
 <p>Create a TCP Bindshell Shellcode for Linux x86-32.</p>
@@ -454,10 +451,9 @@ if (!doNotTrack) {
 <p>root@local:# <code>mknod /tmp/backpipe p &amp;&amp; /bin/sh 0&lt;/tmp/backpipe | nc -lvp 443 1&gt;/tmp/backpipe</code></p>
 <p>When you connect to port <code>443</code> (with any dumb client program ex: <code>Netcat</code>, <code>Telnet</code>) you will get remote control over shell instance.</p>
 <p>user@local:$ <code>nc 127.0.0.1 443</code></p>
-<blockquote class="book-hint warning">
-  On Linux, you must have root privilege or capability to listen on a port. Keep that in mind if you try to execute a Bindshell Shellcode on a program without sufficient privilege.
-</blockquote>
-
+<p>&ndash;warning&ndash;
+On Linux, you must have root privilege or capability to listen on a port. Keep that in mind if you try to execute a Bindshell Shellcode on a program without sufficient privilege.
+&ndash;end&ndash;</p>
 <h2 id="example-result">Example Result</h2>
 <p><img src="/images/202005/Screenshot-2020-05-07-at-10.11.16.png" alt="Bindshell Netcat" /></p>
 <h1 id="process">Process</h1>
@@ -554,12 +550,10 @@ if (!doNotTrack) {
 </table>
 <p>Steps are exactly the same as for classical method (see above) but this time only with three distinct syscalls to achieve the same result.</p>
 <p>We will replace <code>socket()</code>, <code>setsockopt()</code>, <code>bind()</code>, <code>listen()</code> and <code>accept()</code> only with <code>socketcall()</code> calls.</p>
-<blockquote class="book-hint warning">
-  <p>Quote from : <a href="http://man7.org/linux/man-pages/man2/socketcall.2.html">socketcall man page</a></p>
-<p>« &hellip; On a some architectures—for example, x86-64 and ARM—there is no socketcall() system call; instead socket(2), accept(2), bind(2), and so on really are implemented as separate system calls. &hellip; »</p>
-
-</blockquote>
-
+<p>&ndash;warning&ndash;
+Quote from : <a href="http://man7.org/linux/man-pages/man2/socketcall.2.html">socketcall man page</a></p>
+<p>« &hellip; On a some architectures—for example, x86-64 and ARM—there is no socketcall() system call; instead socket(2), accept(2), bind(2), and so on really are implemented as separate system calls. &hellip; »
+&ndash;end&ndash;</p>
 <h3 id="socketcall-usage-schema"><code>socketcall()</code> usage schema</h3>
 <p>It requires three registers: <code>eax</code>, <code>ebx</code> and <code>ecx</code></p>
 <ul>
@@ -755,10 +749,9 @@ if (!doNotTrack) {
 </table>
 <pre><code>*Debugging* : return value (eax register) must be non negative. Function returns a new client socket.
 </code></pre>
-<blockquote class="book-hint info">
-  Since by default we are using sockets in blocking mode, at this moment program will hang until a new client connects to our server (no panic, it is perfectly normal).
-</blockquote>
-
+<p>&ndash;info&ndash;
+Since by default we are using sockets in blocking mode, at this moment program will hang until a new client connects to our server (no panic, it is perfectly normal).
+&ndash;end&ndash;</p>
 <h4 id="part-iii---duplicate-file-descriptors">Part III - Duplicate File Descriptors</h4>
 <p>Our server is now willing to acquire new clients, we will now focus on &ldquo;binding&rdquo; acquired client socket with <code>stdin</code>(0), <code>stdout</code>(1) and <code>stderr</code>(2) file descriptors.</p>
 <p>To do so, we will use the function <code>dup2()</code> designated by the syscall <code>0x3f</code></p>
@@ -812,10 +805,9 @@ On success value is equal to value placed in `ecx` register.
 </table>
 <hr>
 <p>Our recipe is now finished we can &ldquo;safely&rdquo; enter in the best part as fun as frustrating.</p>
-<blockquote class="book-hint info">
-  If we were expected to create a regular program, we would take care of closing both server and client socket before gracefully exiting our program. When creating shellcode we are not always excepted to do that unless we want to be sure we would not crash the whole vulnerable application.
-</blockquote>
-
+<p>&ndash;info&ndash;
+If we were expected to create a regular program, we would take care of closing both server and client socket before gracefully exiting our program. When creating shellcode we are not always excepted to do that unless we want to be sure we would not crash the whole vulnerable application.
+&ndash;end&ndash;</p>
 <h3 id="tcp-bind-assembly-code-nasm">TCP Bind Assembly Code (NASM)</h3>
 <pre><code>;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Filename : bindshell.nasm                         ;
@@ -1013,10 +1005,9 @@ _dup2:
 </code></pre><h4 id="compile-and-test-our-payload">Compile and Test our Payload</h4>
 <p>user@local:$ <code>nasm -f elf32 -o bindshell.o bindshell.nasm</code></p>
 <p>user@local:$ <code>ld -o bindshell bindshell.o</code></p>
-<blockquote class="book-hint warning">
-  Remember, we must be root.
-</blockquote>
-
+<p>&ndash;warning&ndash;
+Remember, we must be root.
+&ndash;end&ndash;</p>
 <p>root@local:$ <code>./bindshell</code></p>
 <p><img src="/images/202005/Screenshot-2020-5-07-at-13.54.31.png" alt="TCP Bindshell (NASM)" /></p>
 <h1 id="final-payload-raw">Final Payload (Raw)</h1>
@@ -1067,10 +1058,9 @@ main()
 }
 </code></pre><p>user@local:$ <code>gcc shellcode.c -o shellcode -z execstack</code></p>
 <p>root@local:$ <code>./shellcode</code></p>
-<blockquote class="book-hint warning">
-  Remember(2), we must be root.
-</blockquote>
-
+<p>&ndash;warning&ndash;
+Remember(2), we must be root.
+&ndash;end&ndash;</p>
 <h1 id="shellcode-builder-python3">Shellcode Builder (Python3)</h1>
 <p>Last and not mandatory exercise goal is to propose a way to replace default TCP port number (in our case 443) with any ports from <code>0</code> to <code>65535</code>.</p>
 <p>This part is quite hard to explain so I wont promise it will be the clearer possible. Forgive me in advance.</p>
@@ -1110,10 +1100,9 @@ mov word [esp-0xe], ax
 <p>First we move the first byte to the <code>ah</code> register, then we move the second byte to <code>al</code> register.</p>
 <p>If we are using a port below <code>0x100</code>, we will singly remove from our raw shellcode instruction <code>mov al, ...</code> (designated by opcodes <code>\xb0\xb01</code>).</p>
 <h2 id="builder-code-python3">Builder Code (Python3)</h2>
-<blockquote class="book-hint info">
-  This technique is the first techniques that came in my mind, there are literally infinite ways of doing.
-</blockquote>
-
+<p>&ndash;info&ndash;
+This technique is the first techniques that came in my mind, there are literally infinite ways of doing.
+&ndash;end&ndash;</p>
 <pre><code>#!/usr/bin/python3
 
 '''

@@ -442,16 +442,6 @@
   </url>
   
   <url>
-    <loc>https://www.phrozen.io/docs/infosec/linux/slae32/ex1-bindshell/</loc>
-    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.phrozen.io/tags/bindshell/</loc>
-    <lastmod>2020-03-13T11:57:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://www.phrozen.io/tags/dll-export/</loc>
     <lastmod>2020-03-13T11:57:00+01:00</lastmod>
   </url>
@@ -674,6 +664,10 @@
   <url>
     <loc>https://www.phrozen.io/docs/programming/windows/delphi/eof/</loc>
     <lastmod>2020-03-02T12:21:49+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.phrozen.io/docs/infosec/linux/slae32/ex1-bindshell/</loc>
   </url>
   
   <url>
